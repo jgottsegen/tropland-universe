@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneLight Studios</title>
+  <meta name="description"
+    content="OneLight Studios is a full-service creative agency with 25+ years of experience in design, production, and brand strategy. Home of Tropland Universe, a character-driven wildlife media property reaching millions worldwide." />
+  <meta property="og:title" content="OneLight Studios" />
+  <meta property="og:description" content="Full-service creative agency. Home of Tropland Universe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://onelightstudios.com" />
+  <meta property="og:image" content="https://onelightstudios.com/og-share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OneLight Studios" />
+  <meta name="twitter:description" content="Full-service creative agency. Home of Tropland Universe." />
+  <meta name="twitter:image" content="https://onelightstudios.com/og-share.png" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23E85D3A'/></svg>">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "OneLight Studios",
+      "url": "https://www.onelightstudios.com",
+      "logo": "https://www.onelightstudios.com/logo.png",
+      "description": "Full-service creative agency specializing in brand strategy, production, and IP development. Home of Tropland Universe.",
+      "foundingDate": "2016",
+      "founder": {
+        "@type": "Person",
+        "name": "Josh Gottsegen",
+        "jobTitle": "Founder & Creative Director"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "josh@onelightstudios.com",
+        "contactType": "business inquiries"
+      },
+      "sameAs": [
+        "https://troplanduniverse.com",
+        "https://instagram.com/troplanduniverse"
+      ]
+    }
+    </script>
+
+  <!-- Google Fonts: Instrument Serif (editorial) + Plus Jakarta Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              deep: '#0D0A1A',
+              purple: '#1B0E36',
+              'purple-mid': '#2A1B52',
+              cream: '#F5F0EB',
+              'cream-dark': '#E8E0D6',
+              text: '#F0ECE4',
+              'dark-text': '#1A1A1A',
+              muted: '#888888',
+              'muted-light': '#666666',
+              accent: '#E85D3A',
+              'accent-hover': '#FF6B45',
+              border: '#2A2040',
+              'border-light': '#D6CFC6',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'fade-up': 'fadeUp 0.8s ease-out forwards',
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-reverse': 'marqueeReverse 35s linear infinite',
+            'marquee-slow': 'marquee 60s linear infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            marqueeReverse: {
+              '0%': { transform: 'translateX(-50%)' },
+              '100%': { transform: 'translateX(0)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: #0D0A1A;
+      color: #F0ECE4;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0D0A1A;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2A1B52;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3D2E6B;
+    }
+
+    ::selection {
+      background: #E85D3A;
+      color: #0D0A1A;
+    }
+
+    /* Glassmorphism utility */
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-light {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

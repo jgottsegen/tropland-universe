@@ -1,0 +1,216 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, Instagram, Award, Globe, ImageIcon, Zap } from 'lucide-react';
+
+const metrics = [
+  { end: 2, suffix: '.5M+', label: 'Social Media Following', icon: Instagram },
+  { end: 265, suffix: 'M', label: 'Single Viral Piece', icon: Zap },
+  { end: 50, suffix: 'K+', label: 'Original Artworks', icon: ImageIcon },
+  { end: 50, suffix: '+', label: 'Countries Reached', icon: Globe },
+];
+
+const galleryRow1 = [
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/home003.jpg',
+  'https://troplanduniverse.com/wp-content/uploads/2025/10/lion-peace-1.png',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/home1.png',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/IMG_2051.jpg',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/home004.jpg',
+  'https://troplanduniverse.com/wp-content/uploads/2025/10/jag-shaka-1.png',
+];
+
+const galleryRow2 = [
+  'https://troplanduniverse.com/wp-content/uploads/2025/10/gorilla-thumb.png',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/lion-love-2.png',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/11home005.jpg',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/home2.png',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/11home001.jpg',
+  'https://troplanduniverse.com/wp-content/uploads/2025/01/home010-2.png',
+];
+
+const books = [
+  { src: '/images/book-rockford.jpg', title: 'The Adventures of Rockford T. Honeypot', subtitle: 'Amazon #1 Bestseller', url: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075' },
+  { src: '/images/book-snackbook.jpg', title: 'Snackbook Adventures', subtitle: "Joosh's Juice Bar", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/' },
+  { src: '/images/book-teeoff.jpg', title: 'The Tropland Tee-Off', subtitle: "Joosh's Juice Bar", url: 'https://www.amazon.com/gp/product/1500736082' },
+  { src: '/images/book-banana.jpg', title: 'Banana Berry Adventures', subtitle: "Joosh's Juice Bar", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848' },
+];
+
+function AnimatedMetric({ end, suffix, isVisible }: { end: number; suffix: string; isVisible: boolean }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!isVisible) return;
+    let current = 0;
+    const step = end / 40;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, 25);
+    return () => clearInterval(timer);
+  }, [isVisible, end]);
+  return <>{count.toLocaleString()}{suffix}</>;
+}
+
+const Portfolio: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.05 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const fade = (delay: number) =>
+    `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
+
+  return (
+    <section id="tropland" ref={sectionRef} className="relative bg-brand-cream py-24 md:py-32">
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+
+        <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
+          <span className="inline-flex items-center gap-3 text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4 block">
+            <span className="w-10 h-[2px] bg-brand-accent"></span>
+            Flagship Venture
+          </span>
+        </div>
+
+        <h2 className={`font-serif text-5xl sm:text-6xl md:text-[6rem] lg:text-[8rem] leading-[0.9] tracking-tight text-brand-dark-text mb-4 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
+          Tropland <span className="italic text-brand-purple">Universe</span>
+        </h2>
+
+        <div className={`flex flex-wrap items-center gap-3 mb-12 ${fade(1)}`} style={{ transitionDelay: '150ms' }}>
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-sans font-semibold">
+            <Award size={12} />
+            #1 AI Artist Influencer, Feedspot 2025 & 2026
+          </span>
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-sans font-semibold">
+            Represented by All American Licensing
+          </span>
+        </div>
+
+        {/* Description + Metrics */}
+        <div className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 mb-16 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
+          <div className="lg:col-span-3">
+            <p className="text-lg md:text-xl text-brand-muted-light font-sans font-light leading-relaxed mb-4">
+              A character-driven wildlife media property founded in 2013. What started as a
+              publishing IP with original novels has grown into a global digital animal kingdom
+              spanning books, cinematic AI art, and licensing-ready IP.
+            </p>
+            <p className="text-sm text-brand-muted font-sans leading-relaxed mb-8">
+              Tropland blends human creativity with AI-native visual storytelling, producing
+              photorealistic wildlife content viewed over a billion times across 50+ countries.
+              Brand partners include Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://troplanduniverse.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-purple text-white font-sans font-semibold text-xs hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
+              >
+                troplanduniverse.com
+                <ArrowUpRight size={14} />
+              </a>
+              <a
+                href="https://instagram.com/troplanduniverse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-xs hover:bg-brand-cream-dark transition-all duration-300"
+              >
+                <Instagram size={14} />
+                @troplanduniverse
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            <div className="grid grid-cols-2 gap-0 border border-brand-border-light rounded-2xl overflow-hidden bg-white">
+              {metrics.map((m, i) => {
+                const Icon = m.icon;
+                return (
+                  <div
+                    key={m.label}
+                    className={`p-5 md:p-6 ${i < 2 ? 'border-b border-brand-border-light' : ''} ${i % 2 === 0 ? 'border-r border-brand-border-light' : ''}`}
+                  >
+                    <Icon size={14} className="text-brand-accent mb-2" />
+                    <div className="text-3xl md:text-4xl font-serif text-brand-dark-text leading-none mb-1">
+                      <AnimatedMetric end={m.end} suffix={m.suffix} isVisible={isVisible} />
+                    </div>
+                    <div className="text-[10px] font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
+                      {m.label}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scrolling gallery row 1 - continuous, no hover pause */}
+      <div className="overflow-hidden mb-3">
+        <div className="animate-marquee flex gap-3 w-max">
+          {[...galleryRow1, ...galleryRow1].map((src, i) => (
+            <div key={i} className="w-64 md:w-80 h-64 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden">
+              <img src={src} alt="Tropland content" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Scrolling gallery row 2 (reverse) - continuous, no hover pause */}
+      <div className="overflow-hidden mb-20">
+        <div className="animate-marquee-reverse flex gap-3 w-max">
+          {[...galleryRow2, ...galleryRow2].map((src, i) => (
+            <div key={i} className="w-64 md:w-80 h-64 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden">
+              <img src={src} alt="Tropland content" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Published Works - Featured Section */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className={`mb-10 ${fade(3)}`} style={{ transitionDelay: '300ms' }}>
+          <span className="inline-flex items-center gap-3 text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4 block">
+            <span className="w-10 h-[2px] bg-brand-accent"></span>
+            Published Works
+          </span>
+          <h3 className="font-serif text-3xl md:text-5xl tracking-tight text-brand-dark-text leading-[1.1]">
+            Original books, <span className="italic text-brand-purple">original worlds.</span>
+          </h3>
+          <p className="text-sm text-brand-muted font-sans mt-3 max-w-xl">
+            Four published titles spanning adventure fiction and children's wellness.
+            Written, illustrated, and produced by Josh Gottsegen. Rockford T. Honeypot
+            hit #1 on Amazon and is in development for animated adaptation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          {books.map((book) => (
+            <a key={book.title} href={book.url} target="_blank" rel="noopener noreferrer" className="group">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 bg-white">
+                <img src={book.src} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              </div>
+              <div className="mt-4">
+                <h4 className="font-sans text-sm font-bold text-brand-dark-text group-hover:text-brand-accent transition-colors leading-tight">
+                  {book.title}
+                </h4>
+                <p className="text-xs text-brand-muted font-sans mt-1">{book.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Portfolio;
