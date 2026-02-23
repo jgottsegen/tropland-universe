@@ -1,28 +1,33 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Portfolio from './components/Portfolio';
-import Ventures from './components/Ventures';
-import Services from './components/Services';
-import About from './components/About';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import AboutPage from './pages/About';
+import RockfordPage from './pages/Rockford';
+import JooshPage from './pages/Joosh';
+import ContactPage from './pages/Contact';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="min-h-screen relative">
-      <Navbar />
-      <main>
-        <Hero />
-        <Portfolio />
-        <Ventures />
-        <Services />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen font-sans text-brand-text bg-brand-deep flex flex-col">
+        <Navbar />
+
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/rockford" element={<RockfordPage />} />
+            <Route path="/joosh" element={<JooshPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

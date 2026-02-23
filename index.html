@@ -4,33 +4,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OneLight Studios</title>
+  <title>Tropland Universe - The Digital Animal Kingdom</title>
   <meta name="description"
-    content="OneLight Studios is a full-service creative agency with 25+ years of experience in design, production, and brand strategy. Home of Tropland Universe, a character-driven wildlife media property reaching millions worldwide." />
-  <meta property="og:title" content="OneLight Studios" />
-  <meta property="og:description" content="Full-service creative agency. Home of Tropland Universe." />
+    content="Tropland Universe is a character-driven wildlife media property blending AI-native storytelling, original IP, and global distribution. Ranked #1 AI Art Influencer 2025 & 2026." />
+  <meta property="og:title" content="Tropland Universe - The Digital Animal Kingdom" />
+  <meta property="og:description"
+    content="Character-driven wildlife media property. AI-native storytelling. Billion+ views worldwide." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://onelightstudios.com" />
-  <meta property="og:image" content="https://onelightstudios.com/og-share.png" />
+  <meta property="og:url" content="https://troplanduniverse.com" />
+  <meta property="og:image" content="/images/hero-lion.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="OneLight Studios" />
-  <meta name="twitter:description" content="Full-service creative agency. Home of Tropland Universe." />
-  <meta name="twitter:image" content="https://onelightstudios.com/og-share.png" />
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23E85D3A'/></svg>">
+  <meta name="twitter:title" content="Tropland Universe - The Digital Animal Kingdom" />
+  <meta name="twitter:description"
+    content="Character-driven wildlife media property. AI-native storytelling. Billion+ views worldwide." />
+  <meta name="twitter:image" content="/images/hero-lion.png" />
+  <link rel="icon" type="image/png" href="/images/tropland-logo.png">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "OneLight Studios",
-      "url": "https://www.onelightstudios.com",
-      "logo": "https://www.onelightstudios.com/logo.png",
-      "description": "Full-service creative agency specializing in brand strategy, production, and IP development. Home of Tropland Universe.",
-      "foundingDate": "2016",
+      "name": "Tropland Universe",
+      "url": "https://troplanduniverse.com",
+      "logo": "/images/tropland-logo.png",
+      "description": "Character-driven wildlife media property blending AI-native storytelling, original IP, and global distribution. Ranked #1 AI Art Influencer.",
       "founder": {
         "@type": "Person",
         "name": "Josh Gottsegen",
@@ -44,12 +44,13 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "josh@onelightstudios.com",
+        "email": "partnerships@troplanduniverse.com",
         "contactType": "business inquiries"
       },
       "sameAs": [
-        "https://troplanduniverse.com",
-        "https://instagram.com/troplanduniverse"
+        "https://instagram.com/troplanduniverse",
+        "https://facebook.com/troplanduniverse",
+        "https://youtube.com/@troplanduniverse"
       ]
     }
     </script>
@@ -94,6 +95,7 @@
             'marquee': 'marquee 40s linear infinite',
             'marquee-reverse': 'marqueeReverse 35s linear infinite',
             'marquee-slow': 'marquee 60s linear infinite',
+            'border-shine': 'borderShine 3s linear infinite',
           },
           keyframes: {
             fadeIn: {
@@ -111,6 +113,10 @@
             marqueeReverse: {
               '0%': { transform: 'translateX(-50%)' },
               '100%': { transform: 'translateX(0)' },
+            },
+            borderShine: {
+              '0%': { '--shine-angle': '0deg' },
+              '100%': { '--shine-angle': '360deg' },
             },
           }
         }
@@ -168,6 +174,78 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Animated border shine effect */
+    @property --shine-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    .border-shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .border-shine::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(from var(--shine-angle),
+          transparent 0%,
+          transparent 30%,
+          rgba(232, 93, 58, 0.5) 45%,
+          rgba(255, 180, 120, 0.7) 50%,
+          rgba(232, 93, 58, 0.5) 55%,
+          transparent 70%,
+          transparent 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      animation: borderShine 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes borderShine {
+      0% {
+        --shine-angle: 0deg;
+      }
+
+      100% {
+        --shine-angle: 360deg;
+      }
+    }
+
+    /* Subtle variant for light backgrounds */
+    .border-shine-light::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(from var(--shine-angle),
+          transparent 0%,
+          transparent 25%,
+          rgba(27, 14, 54, 0.3) 40%,
+          rgba(232, 93, 58, 0.5) 50%,
+          rgba(27, 14, 54, 0.3) 60%,
+          transparent 75%,
+          transparent 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      animation: borderShine 4s linear infinite;
+      pointer-events: none;
+    }
+
+    .border-shine-light {
+      position: relative;
+      overflow: hidden;
     }
   </style>
 </head>

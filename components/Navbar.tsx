@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { NavItem } from '../types';
+import { Link } from 'react-router-dom';
 
-const navItems: NavItem[] = [
-  { label: 'Tropland', href: '#tropland' },
-  { label: 'Ventures', href: '#ventures' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+const navItems = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Rockford', path: '/rockford' },
+  { label: "Joosh's", path: '/joosh' },
 ];
 
 const Navbar: React.FC = () => {
@@ -22,36 +21,38 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-brand-deep/95 backdrop-blur-lg border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
-          : ''
-      }`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-brand-deep/95 backdrop-blur-lg border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+        : 'bg-gradient-to-b from-black/60 to-transparent'
+        }`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="hover:opacity-80 transition-opacity"
+          <Link
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="hover:opacity-80 transition-opacity flex items-center gap-3"
           >
-            <img src="/logo.png" alt="OneLight Studios" className="h-8 invert" />
-          </a>
+            <img src="/images/tropland-logo.png" alt="Tropland Universe" className="h-8" />
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
-                className="text-sm font-sans font-medium text-white/50 hover:text-white transition-colors duration-200"
+                to={item.path}
+                className="text-sm font-sans font-medium text-white/75 hover:text-white transition-colors duration-200"
+                style={{ textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="text-sm font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+              onClick={() => window.scrollTo(0, 0)}
             >
-              Start a Project
-            </a>
+              Partner With Us
+            </Link>
           </div>
 
           <button
@@ -67,22 +68,28 @@ const Navbar: React.FC = () => {
         <div className="fixed inset-0 z-40 bg-brand-deep pt-24 px-8 md:hidden">
           <div className="flex flex-col gap-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.path}
                 className="text-3xl font-sans font-bold text-white/50 hover:text-white transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="text-lg font-sans font-semibold px-6 py-3 rounded-full bg-brand-accent text-white text-center mt-4"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}
             >
-              Start a Project
-            </a>
+              Partner With Us
+            </Link>
           </div>
         </div>
       )}

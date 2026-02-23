@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Handshake, ShieldCheck, Globe, ArrowRight } from 'lucide-react';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,23 +18,73 @@ const About: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 md:py-32 bg-brand-deep relative overflow-hidden">
+    <section id="licensing" ref={sectionRef} className="py-24 md:py-32 bg-brand-cream relative overflow-hidden">
 
-      <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
-        <h2 className={`font-serif text-4xl md:text-6xl tracking-tight text-brand-text leading-[1.1] mb-8 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-          Josh <span className="italic text-brand-muted">Gottsegen</span>
+        <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
+          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
+            Partnerships & Licensing
+          </p>
+        </div>
+
+        <h2 className={`font-serif text-4xl md:text-6xl tracking-tight text-brand-dark-text leading-[1.1] mb-4 ${fade(0)}`} style={{ transitionDelay: '50ms' }}>
+          Built for <span className="italic text-brand-purple">partnership.</span>
         </h2>
 
-        <div className={`max-w-3xl ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
-          <p className="text-base md:text-lg text-white/60 font-sans font-light leading-relaxed">
-            Josh Gottsegen is a creative director, published author, and producer with over 25 years
-            in design, production, and brand strategy. His client work spans Universal Studios, Disney,
-            Warner Bros, Sony Pictures, the NFL, Ferrari, IMG Worldwide, and the Vatican Museums. He
-            served as VP of Production at Cinsay, Inc., where he led a creative and marketing team of
-            150+. In 2013 he created Tropland Universe, now a billion-view wildlife media property
-            represented by All American Licensing. He founded OneLight Studios in 2016.
-          </p>
+        <p className={`text-base md:text-lg text-brand-muted-light font-sans font-light leading-relaxed max-w-2xl mb-12 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
+          Tropland Universe partners with select brands, studios, and organizations on
+          co-branded content, campaigns, and licensing. A proven viral IP with massive
+          cross-platform reach, seamlessly translatable across physical and digital categories.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {[
+            {
+              icon: Handshake,
+              title: 'Brand Partnerships',
+              description: 'Content collaborations with leading tech, entertainment, and consumer brands. Adobe, Meta, OpenAI, and more.',
+            },
+            {
+              icon: ShieldCheck,
+              title: 'Licensing',
+              description: 'Represented by All American Licensing. Character IP ready for apparel, lifestyle, home décor, and media.',
+            },
+            {
+              icon: Globe,
+              title: 'Global Distribution',
+              description: 'Billion+ cumulative views across 50+ countries. Proven audience engagement across all key global markets.',
+            },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className={`group p-8 rounded-2xl bg-white border border-brand-border-light border-shine-light hover:border-brand-accent/30 hover:shadow-xl transition-all duration-500 ${fade(i + 2)}`}
+                style={{ transitionDelay: `${(i + 2) * 100}ms` }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 group-hover:scale-110 transition-all duration-300">
+                  <Icon size={22} className="text-brand-accent" strokeWidth={1.5} />
+                </div>
+                <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-brand-muted font-sans text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={`text-center ${fade(5)}`} style={{ transitionDelay: '500ms' }}>
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-purple text-white font-sans font-semibold text-sm hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
+          >
+            Get in Touch
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </section>
