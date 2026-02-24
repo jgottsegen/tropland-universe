@@ -39,8 +39,9 @@ const Contact: React.FC = () => {
       {/* Comet animation */}
       <CometBackground density={2} speed={0.6} />
 
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-accent/10 rounded-full blur-[250px] pointer-events-none"></div>
+      {/* Animated ambient glows */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-accent/10 rounded-full blur-[250px] pointer-events-none ambient-glow"></div>
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-brand-purple/20 rounded-full blur-[200px] pointer-events-none ambient-glow" style={{ animationDelay: '3s' }}></div>
 
       <div className="max-w-3xl mx-auto px-6 md:px-12 relative z-10">
         <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">

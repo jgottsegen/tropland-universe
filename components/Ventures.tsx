@@ -19,7 +19,7 @@ const Ventures: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 md:py-32 bg-brand-deep relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="py-24 md:py-36 bg-brand-deep relative overflow-hidden">
 
       {/* Comet animation */}
       <CometBackground density={3} speed={0.8} />
@@ -34,17 +34,17 @@ const Ventures: React.FC = () => {
           {/* Left: Heading + Bio */}
           <div>
             <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-              <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
+              <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
                 About the Creator
               </p>
             </div>
 
-            <h2 className={`font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight text-brand-text leading-[1.1] mb-6 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
+            <h2 className={`font-serif text-4xl md:text-5xl lg:text-[4.5rem] tracking-tight text-brand-text leading-[1.05] mb-6 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
               Josh <span className="italic text-brand-accent">Gottsegen</span>
             </h2>
 
             <div className={`${fade(2)}`} style={{ transitionDelay: '200ms' }}>
-              <p className="text-white/70 font-sans text-lg leading-relaxed">
+              <p className="text-white/65 font-sans text-lg leading-relaxed">
                 Josh Gottsegen is a creative entrepreneur and the founder of Tropland Universe,
                 with over 25 years of experience in design, marketing, and production. His
                 industry credits include campaigns for NBC Universal, Warner Bros, Disney,

@@ -26,7 +26,7 @@ const Services: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="books" ref={sectionRef} className="py-24 md:py-32 bg-brand-purple relative overflow-hidden">
+    <section id="books" ref={sectionRef} className="py-24 md:py-36 bg-brand-purple relative overflow-hidden">
 
       {/* Comet animation */}
       <CometBackground density={3} speed={0.7} />
@@ -34,7 +34,7 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={`mb-16 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-muted mb-4">
+          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-muted mb-4">
             Published Works
           </p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight text-brand-text leading-[1.1]">
@@ -51,9 +51,9 @@ const Services: React.FC = () => {
         {/* Featured: Rockford T. Honeypot */}
         <div className={`group glass border-shine rounded-3xl p-8 md:p-10 mb-8 hover:border-brand-accent/20 transition-all duration-500 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-            <div className="md:col-span-2">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto md:mx-0">
-                <img src="/images/book-rockford.jpg" alt="The Adventures of Rockford T. Honeypot" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div className="md:col-span-2 book-cover">
+              <div className="book-inner aspect-[3/4] rounded-2xl overflow-hidden max-w-xs mx-auto md:mx-0 relative">
+                <img src="/images/book-rockford.jpg" alt="The Adventures of Rockford T. Honeypot" className="w-full h-full object-cover" />
               </div>
             </div>
             <div className="md:col-span-3">
@@ -104,8 +104,10 @@ const Services: React.FC = () => {
               className={`group glass border-shine rounded-2xl p-6 hover:border-brand-accent/20 transition-all duration-500 ${fade(i + 3)}`}
               style={{ transitionDelay: `${(i + 3) * 100}ms` }}
             >
-              <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-lg mb-4 bg-white/5">
-                <img src={book.src} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div className="book-cover mb-4">
+                <div className="book-inner aspect-[3/4] rounded-xl overflow-hidden bg-white/5 relative">
+                  <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
               </div>
               <h4 className="font-sans text-base font-bold text-white group-hover:text-brand-accent transition-colors leading-tight mb-1">
                 {book.title}

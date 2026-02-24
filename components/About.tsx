@@ -18,12 +18,12 @@ const About: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="licensing" ref={sectionRef} className="py-24 md:py-32 bg-brand-cream relative overflow-hidden">
+    <section id="licensing" ref={sectionRef} className="py-24 md:py-36 bg-brand-cream relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
+          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
             Partnerships & Licensing
           </p>
         </div>
@@ -60,18 +60,23 @@ const About: React.FC = () => {
             return (
               <div
                 key={item.title}
-                className={`group p-8 rounded-2xl bg-white border border-brand-border-light border-shine-light hover:border-brand-accent/30 hover:shadow-xl transition-all duration-500 ${fade(i + 2)}`}
+                className={`group relative p-8 rounded-2xl bg-white border border-brand-border-light border-shine-light hover:border-brand-accent/30 hover:shadow-[0_8px_30px_rgba(232,93,58,0.08)] hover:-translate-y-1 transition-all duration-500 ${fade(i + 2)}`}
                 style={{ transitionDelay: `${(i + 2) * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 group-hover:scale-110 transition-all duration-300">
-                  <Icon size={22} className="text-brand-accent" strokeWidth={1.5} />
+                {/* Hover glow overlay */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-accent/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 group-hover:scale-110 transition-all duration-300">
+                    <Icon size={22} className="text-brand-accent" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-brand-muted font-sans text-sm leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-brand-muted font-sans text-sm leading-relaxed">
-                  {item.description}
-                </p>
               </div>
             );
           })}

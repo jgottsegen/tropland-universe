@@ -63,12 +63,12 @@ const Portfolio: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="universe" ref={sectionRef} className="relative bg-brand-cream py-24 md:py-32">
+    <section id="universe" ref={sectionRef} className="relative bg-brand-cream py-24 md:py-36">
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
+          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
             The Collection
           </p>
         </div>

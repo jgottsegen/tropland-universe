@@ -176,6 +176,29 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
+    /* Cream section texture — adds organic grain so light sections aren't flat */
+    .cream-texture {
+      position: relative;
+    }
+
+    .cream-texture::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      mix-blend-mode: multiply;
+    }
+
+    /* Ensure content inside cream-texture sections stays above the grain */
+    .cream-texture>* {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Animated border shine effect */
     @property --shine-angle {
       syntax: '<angle>';
@@ -246,6 +269,128 @@
     .border-shine-light {
       position: relative;
       overflow: hidden;
+    }
+
+    /* 3D Book Cover Effect */
+    .book-cover {
+      perspective: 800px;
+    }
+
+    .book-cover .book-inner {
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+      transform-style: preserve-3d;
+      box-shadow:
+        6px 6px 20px rgba(0, 0, 0, 0.4),
+        1px 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .book-cover:hover .book-inner {
+      transform: rotateY(-8deg) translateY(-4px) scale(1.02);
+      box-shadow:
+        12px 12px 30px rgba(0, 0, 0, 0.5),
+        2px 2px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Simulated page edge on the right side */
+    .book-cover .book-inner::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: -5px;
+      bottom: 4px;
+      width: 5px;
+      background: linear-gradient(to right,
+          rgba(200, 190, 180, 0.6),
+          rgba(180, 170, 160, 0.3));
+      border-radius: 0 2px 2px 0;
+      transition: opacity 0.6s ease;
+      opacity: 0;
+    }
+
+    .book-cover:hover .book-inner::after {
+      opacity: 1;
+    }
+
+    /* Ambient glow pulse for dark sections */
+    @keyframes ambientGlow {
+
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+    }
+
+    .ambient-glow {
+      animation: ambientGlow 6s ease-in-out infinite;
+    }
+
+    /* Image float animation */
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      40% { transform: translateY(-14px) rotate(0.4deg); }
+      70% { transform: translateY(-7px) rotate(-0.3deg); }
+    }
+
+    .img-float {
+      animation: floatY 7s ease-in-out infinite;
+    }
+
+    .img-float-2 {
+      animation: floatY 8.5s ease-in-out infinite;
+      animation-delay: -2.5s;
+    }
+
+    .img-float-3 {
+      animation: floatY 6.5s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+
+    /* Ghost shell cell animations */
+    @keyframes ghostPulseBorder {
+      0%, 100% { border-color: rgba(255, 255, 255, 0.05); }
+      50% { border-color: rgba(232, 93, 58, 0.18); }
+    }
+
+    @keyframes ghostScanLine {
+      0% { top: -30%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 120%; opacity: 0; }
+    }
+
+    @keyframes ghostCross {
+      0%, 100% { opacity: 0.06; }
+      50% { opacity: 0.14; }
+    }
+
+    .ghost-pulse {
+      animation: ghostPulseBorder 3.5s ease-in-out infinite;
+    }
+
+    .ghost-scan {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(232, 93, 58, 0.04) 40%,
+        rgba(232, 93, 58, 0.04) 60%,
+        transparent 100%
+      );
+      animation: ghostScanLine 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .ghost-cross {
+      animation: ghostCross 3.5s ease-in-out infinite;
     }
   </style>
 </head>
