@@ -180,145 +180,56 @@ const AboutPage: React.FC = () => {
 
             {/* ═══════════════════════════════════════════════════════════
                 ACT II — THE MYTHOLOGY
+                Split: text left / live 3D forest right
             ═══════════════════════════════════════════════════════════ */}
             <section ref={secMythos.ref as any}
-                className="py-24 md:py-36 bg-brand-cream relative overflow-hidden cream-texture">
+                className="py-16 md:py-24 bg-brand-cream relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-6 md:px-12">
 
-                    {/* Top row: Quote left + Botanical illustration right */}
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-8 lg:gap-12 mb-16 md:mb-20 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-10 lg:gap-16 items-start">
 
-                        {/* Quote */}
-                        <div className={secMythos.fade()} style={{ transitionDelay: '0ms' }}>
-                            <p className="font-serif italic text-brand-dark-text leading-[1.1] tracking-tight"
-                                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.75rem)' }}>
-                                "Every great kingdom<br className="hidden md:block" />
-                                begins with a forest."
+                        {/* Left: label + quote + body */}
+                        <div>
+                            <div className={secMythos.fade()} style={{ transitionDelay: '0ms' }}>
+                                <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
+                                    The Mythology
+                                </p>
+                            </div>
+
+                            <div className={secMythos.fade()} style={{ transitionDelay: '80ms' }}>
+                                <p className="font-serif italic text-brand-dark-text leading-[1.08] tracking-tight mb-8"
+                                    style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
+                                    "Every great kingdom<br />
+                                    begins with a forest."
+                                </p>
+                            </div>
+
+                            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${secMythos.fade()}`}
+                                style={{ transitionDelay: '180ms' }}>
+                                <p className="text-brand-muted-light font-sans text-base leading-relaxed">
+                                    Tropland Universe is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
+                                </p>
+                                <p className="text-brand-muted-light font-sans text-base leading-relaxed">
+                                    The Tropland Rainforest is not a location. It is a mythology — populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Right: live 3D forest panel — tall card */}
+                        <div className={`${secMythos.fade()} hidden lg:block sticky top-24`} style={{ transitionDelay: '220ms' }}>
+                            <div className="relative rounded-3xl overflow-hidden border border-black/[0.06]"
+                                style={{ aspectRatio: '4/5' }}>
+                                <ForestScene />
+                                {/* Cream edge fades — subtle, let the forest breathe */}
+                                <div className="absolute inset-0 pointer-events-none rounded-3xl"
+                                    style={{ boxShadow: 'inset 0 0 32px 12px #F5F0EB' }} />
+                            </div>
+                            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-brand-accent/50 text-center mt-3">
+                                Live 3D · The Tropland Rainforest
                             </p>
                         </div>
 
-                        {/* Botanical SVG — rainforest palm, ink on cream */}
-                        <div className={`${secMythos.fade()} hidden lg:flex items-center justify-center`}
-                            style={{ transitionDelay: '120ms' }}>
-                            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                style={{ width: '100%', maxWidth: '340px', opacity: 0.18 }}
-                                aria-hidden="true">
-                                {/* Central trunk */}
-                                <path d="M 160 275 C 160 250 160 230 160 210 C 160 188 158 168 160 145 C 162 118 165 92 160 65"
-                                    stroke="#1E160A" strokeWidth="2.2" strokeLinecap="round" />
-                                {/* Upper canopy — main arching fronds */}
-                                <path d="M 160 118 C 138 98 110 82 88 72 C 68 63 48 58 32 54"
-                                    stroke="#1E160A" strokeWidth="1.8" strokeLinecap="round" />
-                                <path d="M 160 118 C 182 98 210 82 232 72 C 252 63 272 58 288 54"
-                                    stroke="#1E160A" strokeWidth="1.8" strokeLinecap="round" />
-                                <path d="M 160 108 C 148 84 136 58 130 33 C 124 13 122 4 118 0"
-                                    stroke="#1E160A" strokeWidth="1.5" strokeLinecap="round" />
-                                <path d="M 160 108 C 172 84 184 58 190 33 C 196 13 198 4 202 0"
-                                    stroke="#1E160A" strokeWidth="1.5" strokeLinecap="round" />
-                                <path d="M 160 115 C 130 102 104 94 80 92"
-                                    stroke="#1E160A" strokeWidth="1.3" strokeLinecap="round" opacity="0.8"/>
-                                <path d="M 160 115 C 190 102 216 94 240 92"
-                                    stroke="#1E160A" strokeWidth="1.3" strokeLinecap="round" opacity="0.8"/>
-                                {/* Leaflet detail lines off main fronds */}
-                                <path d="M 116 86 C 104 76 90 70 74 68" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 98 76 C 86 66 72 60 56 58" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.55"/>
-                                <path d="M 80 67 C 68 58 54 53 38 52" stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" opacity="0.45"/>
-                                <path d="M 204 86 C 216 76 230 70 246 68" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 222 76 C 234 66 248 60 264 58" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.55"/>
-                                <path d="M 240 67 C 252 58 266 53 282 52" stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" opacity="0.45"/>
-                                {/* Sweeping lower fronds */}
-                                <path d="M 160 178 C 136 160 106 148 78 142 C 56 138 34 138 18 135"
-                                    stroke="#1E160A" strokeWidth="1.6" strokeLinecap="round" />
-                                <path d="M 160 178 C 184 160 214 148 242 142 C 264 138 286 138 302 135"
-                                    stroke="#1E160A" strokeWidth="1.6" strokeLinecap="round" />
-                                <path d="M 160 195 C 140 182 116 175 90 172"
-                                    stroke="#1E160A" strokeWidth="1.2" strokeLinecap="round" opacity="0.7"/>
-                                <path d="M 160 195 C 180 182 204 175 230 172"
-                                    stroke="#1E160A" strokeWidth="1.2" strokeLinecap="round" opacity="0.7"/>
-                                {/* Lower leaflets */}
-                                <path d="M 118 155 C 104 148 88 145 70 146" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 96 148 C 82 140 66 138 50 140" stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
-                                <path d="M 202 155 C 216 148 232 145 250 146" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 224 148 C 238 140 254 138 270 140" stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
-                                {/* Hanging vines / tendrils */}
-                                <path d="M 88 70 C 80 92 76 118 80 144 C 84 165 92 178 88 198"
-                                    stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" strokeDasharray="3 5" opacity="0.35"/>
-                                <path d="M 232 70 C 240 92 244 118 240 144 C 236 165 228 178 232 198"
-                                    stroke="#1E160A" strokeWidth="0.8" strokeLinecap="round" strokeDasharray="3 5" opacity="0.35"/>
-                                {/* Ground ferns — left */}
-                                <path d="M 55 275 C 66 260 72 244 64 230" stroke="#1E160A" strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 64 230 C 52 224 40 222 28 224" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.5"/>
-                                <path d="M 64 230 C 66 218 70 210 76 204" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.5"/>
-                                <path d="M 55 275 C 43 264 32 250 22 242" stroke="#1E160A" strokeWidth="1" strokeLinecap="round" opacity="0.45"/>
-                                {/* Ground ferns — right */}
-                                <path d="M 265 275 C 254 260 248 244 256 230" stroke="#1E160A" strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
-                                <path d="M 256 230 C 268 224 280 222 292 224" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.5"/>
-                                <path d="M 256 230 C 254 218 250 210 244 204" stroke="#1E160A" strokeWidth="0.9" strokeLinecap="round" opacity="0.5"/>
-                                <path d="M 265 275 C 277 264 288 250 298 242" stroke="#1E160A" strokeWidth="1" strokeLinecap="round" opacity="0.45"/>
-                                {/* Small details — seed pods / berries */}
-                                <circle cx="88" cy="200" r="2.5" fill="#1E160A" opacity="0.28"/>
-                                <circle cx="94" cy="208" r="1.8" fill="#1E160A" opacity="0.22"/>
-                                <circle cx="232" cy="200" r="2.5" fill="#1E160A" opacity="0.28"/>
-                                <circle cx="226" cy="208" r="1.8" fill="#1E160A" opacity="0.22"/>
-                                <circle cx="160" cy="60" r="3.2" fill="#1E160A" opacity="0.22"/>
-                            </svg>
-                        </div>
                     </div>
-
-                    {/* Body copy */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
-                        <div className={secMythos.fade()} style={{ transitionDelay: '180ms' }}>
-                            <p className="text-brand-muted-light font-sans text-lg leading-relaxed">
-                                Tropland Universe is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth, with over a billion views across platforms.
-                            </p>
-                        </div>
-                        <div className={secMythos.fade()} style={{ transitionDelay: '290ms' }}>
-                            <p className="text-brand-muted-light font-sans text-lg leading-relaxed">
-                                The Tropland Rainforest is not a location. It is a mythology — populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated. It can only grow.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════
-                ACT III — THE FOREST (3D standalone scene)
-            ═══════════════════════════════════════════════════════════ */}
-            <section className="relative overflow-hidden bg-brand-deep"
-                style={{ height: '88vh', minHeight: '560px' }}>
-
-                {/* R3F canvas — fills the section */}
-                <div className="absolute inset-0">
-                    <ForestScene />
-                </div>
-
-                {/* Fade from cream above */}
-                <div className="absolute inset-x-0 top-0 h-28 pointer-events-none z-10"
-                    style={{ background: 'linear-gradient(to bottom, #F5F0EB 0%, transparent 100%)' }} />
-
-                {/* Fade to deep below */}
-                <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none z-10"
-                    style={{ background: 'linear-gradient(to top, #0D0A1A 0%, transparent 100%)' }} />
-
-                {/* Radial vignette for cinematic depth */}
-                <div className="absolute inset-0 pointer-events-none z-10"
-                    style={{ background: 'radial-gradient(ellipse at center, transparent 25%, rgba(7,4,15,0.55) 100%)' }} />
-
-                {/* Text overlay — centered */}
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-                    <p className="text-[11px] font-sans font-semibold uppercase tracking-[0.38em] text-brand-accent mb-5"
-                        style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}>
-                        The Tropland Rainforest
-                    </p>
-                    <h2 className="font-serif italic text-white leading-[1.0] tracking-tight"
-                        style={{
-                            fontSize: 'clamp(3rem, 8vw, 7rem)',
-                            textShadow: '0 2px 40px rgba(0,0,0,0.9)',
-                        }}>
-                        A mythology<br />in motion.
-                    </h2>
-                    <div className="w-10 h-px mt-8 mb-0"
-                        style={{ background: 'rgba(232,93,58,0.6)' }} />
                 </div>
             </section>
 
