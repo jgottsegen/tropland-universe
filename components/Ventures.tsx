@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ImageIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import CometBackground from './CometBackground';
 
 const Ventures: React.FC = () => {
@@ -21,56 +22,139 @@ const Ventures: React.FC = () => {
   return (
     <section id="about" ref={sectionRef} className="py-24 md:py-36 bg-brand-deep relative overflow-hidden">
 
-      {/* Comet animation */}
-      <CometBackground density={3} speed={0.8} />
+      <CometBackground density={2} speed={0.7} />
 
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-purple/30 rounded-full blur-[300px] pointer-events-none"></div>
+      {/* Background ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-purple/25 rounded-full blur-[300px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      {/* Ghost letterform backdrop */}
+      <div className="absolute right-0 top-0 font-serif select-none pointer-events-none leading-[0.8] overflow-hidden"
+        style={{ fontSize: 'min(38vw, 480px)', color: 'rgba(255,255,255,0.015)' }}>
+        JG
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
 
-          {/* Left: Heading + Bio */}
-          <div>
-            <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-              <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
-                About the Creator
-              </p>
-            </div>
-
-            <h2 className={`font-serif text-4xl md:text-5xl lg:text-[4.5rem] tracking-tight text-brand-text leading-[1.05] mb-6 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
-              Josh <span className="italic text-brand-accent">Gottsegen</span>
+          {/* Left: Bio + stats */}
+          <div className={`lg:col-span-5 lg:pt-6 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
+            <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
+              The Visionary
+            </p>
+            <h2 className="font-serif tracking-tight leading-[0.9] text-white mb-9"
+              style={{ fontSize: 'clamp(3rem, 5.5vw, 5rem)' }}>
+              Josh<br />
+              <span className="italic text-brand-accent">Gottsegen</span>
             </h2>
 
-            <div className={`${fade(2)}`} style={{ transitionDelay: '200ms' }}>
-              <p className="text-white/65 font-sans text-lg leading-relaxed">
-                Josh Gottsegen is a creative entrepreneur and the founder of Tropland Universe,
-                with over 25 years of experience in design, marketing, and production. His
-                industry credits include campaigns for NBC Universal, Warner Bros, Disney,
-                Sony Pictures, Ferrari, and the Vatican Museums. He developed Tropland as a
-                publishing IP before expanding it into the global Digital Animal Kingdom.
+            <div className="space-y-5 text-white/55 font-sans text-base leading-relaxed mb-10">
+              <p>
+                Twenty-five years across design, film production, and entertainment. Credits with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
+              </p>
+              <p>
+                He built Tropland from a picture book to a billion-view global IP — not by following a playbook, but by refusing to write in anyone else's world.
               </p>
             </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-5 pt-8 border-t border-white/[0.07] mb-10">
+              {[
+                { num: '25+', label: 'Years in\nentertainment' },
+                { num: '1B+', label: 'Content\nviews' },
+                { num: '#1', label: 'AI Art Influencer\n2025 & 2026' },
+              ].map(({ num, label }) => (
+                <div key={num}>
+                  <p className="font-serif text-white leading-none mb-2"
+                    style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}>
+                    {num}
+                  </p>
+                  <p className="text-white/30 font-sans text-[10px] leading-snug tracking-wide whitespace-pre-line">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              to="/about"
+              onClick={() => window.scrollTo(0, 0)}
+              className="group inline-flex items-center gap-2 text-sm font-sans font-semibold text-white/50 hover:text-white transition-colors duration-200"
+            >
+              Full Story
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
-          {/* Right: Josh photo */}
-          <div className={`${fade(3)} flex justify-center`} style={{ transitionDelay: '350ms' }}>
-            <div className="relative group max-w-xs w-full">
-              {/* Glow ring behind the image */}
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-brand-accent/20 via-brand-purple/30 to-transparent blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          {/* Right: Portrait with floating chips */}
+          <div className={`lg:col-span-7 ${fade(0)}`} style={{ transitionDelay: '160ms' }}>
+            <div className="relative">
 
-              <div className="relative aspect-square rounded-3xl overflow-hidden glass border-white/10 hover:border-brand-accent/20 transition-all duration-500">
+              {/* Warm glow behind portrait */}
+              <div className="absolute rounded-3xl pointer-events-none"
+                style={{
+                  inset: '-10%',
+                  background: 'radial-gradient(ellipse at 55% 35%, rgba(232,93,58,0.2) 0%, rgba(212,133,26,0.08) 35%, transparent 65%)',
+                  filter: 'blur(48px)',
+                }} />
+
+              {/* Portrait */}
+              <div className="group relative rounded-2xl overflow-hidden border border-white/[0.07]"
+                style={{ aspectRatio: '4/5' }}>
                 <img
                   src="/images/josh-gottsegen.png"
-                  alt="Josh Gottsegen - Founder of Tropland Universe"
-                  className="w-full h-full object-cover"
+                  alt="Josh Gottsegen, Founder of Tropland Universe"
+                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                 />
-
-                {/* Decorative corner accents */}
-                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-brand-accent/30 rounded-tl-lg"></div>
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-brand-accent/30 rounded-br-lg"></div>
+                {/* Bottom vignette */}
+                <div className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.6) 50%, transparent 100%)' }} />
+                {/* Hover warm wash */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.1) 0%, transparent 55%)' }} />
+                {/* Caption */}
+                <div className="absolute bottom-0 left-0 p-5 md:p-7">
+                  <p className="font-sans text-white/40 text-xs tracking-[0.15em] uppercase">
+                    Founder, Tropland Universe
+                  </p>
+                </div>
               </div>
+
+              {/* Floating chip: top-left */}
+              <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-4 py-3 shadow-2xl"
+                style={{
+                  top: '-1rem',
+                  left: '-1.5rem',
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}>
+                <p className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-1">
+                  #1 Ranked
+                </p>
+                <p className="text-white font-sans font-semibold text-sm leading-tight">
+                  AI Art Influencer
+                </p>
+                <p className="text-white/30 text-[9px] font-sans mt-0.5">
+                  Feedspot · 2025 &amp; 2026
+                </p>
+              </div>
+
+              {/* Floating chip: bottom-right */}
+              <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-5 py-4 shadow-2xl text-right"
+                style={{
+                  bottom: '-1rem',
+                  right: '-1.5rem',
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}>
+                <p className="font-serif text-white leading-none"
+                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}>
+                  1B+
+                </p>
+                <p className="text-white/30 text-[9px] font-sans tracking-[0.15em] uppercase mt-1">
+                  Content Views
+                </p>
+              </div>
+
             </div>
           </div>
         </div>

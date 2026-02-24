@@ -34,12 +34,12 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={`mb-16 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-muted mb-4">
+          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent/70 mb-4">
             Published Works
           </p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight text-brand-text leading-[1.1]">
             Original books,<br />
-            <span className="italic text-brand-muted">original worlds.</span>
+            <span className="italic text-brand-accent">original worlds.</span>
           </h2>
           <p className="text-base text-white/50 font-sans mt-4 max-w-2xl leading-relaxed">
             Four published titles spanning adventure fiction and children's wellness,
@@ -88,10 +88,15 @@ const Services: React.FC = () => {
         </div>
 
         {/* Joosh's Juice Bar Series */}
-        <div className={`mb-6 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
+        <div className={`flex items-center justify-between mb-6 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
           <span className="text-sm font-sans font-bold text-brand-accent uppercase tracking-[0.2em]">
             Joosh's Juice Bar Series
           </span>
+          <a href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
+            target="_blank" rel="noopener noreferrer"
+            className="text-xs font-sans text-white/30 hover:text-white/60 transition-colors flex items-center gap-1">
+            View All <ArrowUpRight size={11} />
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

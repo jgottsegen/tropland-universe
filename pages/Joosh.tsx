@@ -38,26 +38,49 @@ const JooshPage: React.FC = () => {
         <div className="bg-brand-deep min-h-screen">
 
             {/* ═══════════════════════════════════════════════════════════
-                HERO — Series intro
+                HERO — Cinematic full-bleed series intro
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative py-32 md:py-44 overflow-hidden">
+            <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '640px' }}>
                 <CometBackground density={3} speed={0.9} />
-                <div className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] bg-brand-purple/15 rounded-full blur-[250px] pointer-events-none"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-brand-accent/10 rounded-full blur-[200px] pointer-events-none"></div>
 
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
-                    <p className={`text-xs font-sans font-bold uppercase tracking-[0.3em] text-brand-accent mb-6 ${heroFade()}`} style={{ transitionDelay: '200ms' }}>
-                        The Original Series
-                    </p>
+                {/* Hero backdrop */}
+                <div className="absolute inset-0">
+                    <img
+                        src="https://troplanduniverse.com/wp-content/uploads/2025/10/jag-shaka-1.png"
+                        alt="Joosh's Juice Bar – Tropland Universe"
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 30%' }}
+                    />
+                </div>
 
-                    <h1 className={`font-serif text-5xl md:text-6xl lg:text-[7.5rem] leading-[0.9] tracking-tight text-white mb-6 ${heroFade()}`} style={{ transitionDelay: '400ms' }}>
-                        Joosh's Juice <span className="italic text-brand-accent">Bar</span>
-                    </h1>
+                {/* Gradient overlays */}
+                <div className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.55) 35%, rgba(13,10,26,0.15) 70%, transparent 100%)' }} />
+                <div className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to right, rgba(13,10,26,0.8) 0%, rgba(13,10,26,0.25) 55%, transparent 100%)' }} />
 
-                    <p className={`text-xl md:text-2xl text-white/60 font-sans font-light leading-relaxed mb-8 max-w-2xl mx-auto ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
-                        A vibrant children's book series blending wellness, friendship, and adventure.
-                        The foundational stories that established the creative DNA of Tropland Universe.
-                    </p>
+                {/* Text anchored to bottom-left */}
+                <div className="absolute inset-0 flex flex-col justify-end">
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 w-full pb-14 md:pb-20">
+                        <p className={`text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroFade()}`}
+                            style={{ transitionDelay: '200ms' }}>
+                            The Original Series
+                        </p>
+                        <h1 className={heroFade()} style={{ transitionDelay: '400ms' }}>
+                            <span className="block font-serif leading-[0.88] tracking-tight text-white"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                                Joosh's Juice
+                            </span>
+                            <span className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                                Bar.
+                            </span>
+                        </h1>
+                        <p className={`mt-8 text-base md:text-lg text-white/60 font-sans font-light leading-relaxed max-w-sm ${heroFade()}`}
+                            style={{ transitionDelay: '700ms' }}>
+                            A vibrant children's book series blending wellness, friendship, and adventure.
+                        </p>
+                    </div>
                 </div>
             </section>
 

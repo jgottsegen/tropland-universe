@@ -331,17 +331,18 @@ const AboutPage: React.FC = () => {
 
                         {/* ── Chapter II: Digital Evolution — left half ── */}
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
-                            {/* Subtle atmospheric ghost */}
-                            <div className="absolute inset-0 opacity-35">
-                                <GhostShell className="w-full h-full rounded-none" delay="0.3s" />
-                            </div>
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/55 mb-4">
                                     Chapter II
                                 </p>
-                                {/* Image placeholder */}
+                                {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
-                                    <GhostShell className="w-full h-full rounded-none" delay="0.5s" label="Image Coming" />
+                                    <img
+                                        src="https://troplanduniverse.com/wp-content/uploads/2025/10/gorilla-thumb.png"
+                                        alt="Digital Evolution – Tropland Universe"
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
                                     <span className="block font-serif leading-none mb-2 select-none"
@@ -360,17 +361,19 @@ const AboutPage: React.FC = () => {
 
                         {/* ── Chapter III: The Kingdom — right half ── */}
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
-                            {/* Subtle atmospheric ghost */}
-                            <div className="absolute inset-0 opacity-35">
-                                <GhostShell className="w-full h-full rounded-none" delay="0.8s" />
-                            </div>
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/55 mb-4">
                                     Chapter III
                                 </p>
-                                {/* Image placeholder */}
+                                {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
-                                    <GhostShell className="w-full h-full rounded-none" delay="1.1s" label="Image Coming" />
+                                    <img
+                                        src="https://troplanduniverse.com/wp-content/uploads/2025/10/lion-peace-1.png"
+                                        alt="The Kingdom – Tropland Universe"
+                                        className="w-full h-full object-cover"
+                                        style={{ objectPosition: 'center 25%' }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
                                     <span className="block font-serif leading-none mb-2 select-none"

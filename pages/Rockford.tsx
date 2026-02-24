@@ -42,11 +42,26 @@ const RockfordPage: React.FC = () => {
         <div className="bg-brand-deep min-h-screen">
 
             {/* ═══════════════════════════════════════════════════════════
-                HERO — Cinematic book showcase
+                HERO — Cinematic book showcase with atmospheric backdrop
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative py-32 md:py-40 overflow-hidden">
+            <section className="relative min-h-screen flex items-center overflow-hidden">
                 <CometBackground density={3} speed={0.8} />
-                <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-brand-accent/10 rounded-full blur-[200px] pointer-events-none"></div>
+                {/* Atmospheric backdrop — Tropland forest world */}
+                <div className="absolute inset-0">
+                    <img
+                        src="https://troplanduniverse.com/wp-content/uploads/2025/01/home003.jpg"
+                        alt=""
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 40%' }}
+                        aria-hidden="true"
+                    />
+                </div>
+                {/* Heavy dark overlays for text legibility + brand palette */}
+                <div className="absolute inset-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(13,10,26,0.96) 0%, rgba(13,10,26,0.82) 45%, rgba(13,10,26,0.65) 100%)' }} />
+                <div className="absolute inset-0"
+                    style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(232,93,58,0.08) 0%, transparent 65%)' }} />
+                <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-brand-accent/8 rounded-full blur-[200px] pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-brand-purple/15 rounded-full blur-[180px] pointer-events-none"></div>
 
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
