@@ -52,7 +52,7 @@ const Ventures: React.FC = () => {
                 Twenty-five years across design, film production, and entertainment. Credits with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
               </p>
               <p>
-                He built Tropland from a picture book to a billion-view global IP — not by following a playbook, but by refusing to write in anyone else's world.
+                He built Tropland from a picture book to a billion-view global IP, not by following a playbook, but by refusing to write in anyone else's world.
               </p>
             </div>
 

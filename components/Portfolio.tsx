@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Instagram, Award, Globe, ImageIcon, Zap } from 'lucide-react';
+import { ArrowUpRight, Award, Globe, ImageIcon, Zap } from 'lucide-react';
 
 const metrics = [
   { end: 4, suffix: '', label: 'Published Books', icon: Award },
@@ -101,15 +101,6 @@ const Portfolio: React.FC = () => {
               Trusted by Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="https://instagram.com/troplanduniverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-purple text-white font-sans font-semibold text-xs hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
-              >
-                <Instagram size={14} />
-                @troplanduniverse
-              </a>
               <a
                 href="https://facebook.com/troplanduniverse"
                 target="_blank"

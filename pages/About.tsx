@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import CometBackground from '../components/CometBackground';
 import { GlowingEffect } from '../components/GlowingEffect';
-import { ForestScene } from '../components/ForestScene';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -40,6 +39,88 @@ const GhostShell: React.FC<{ className?: string; delay?: string; label?: string 
         )}
     </div>
 );
+
+/* ── Mythology panel — ghost shell with cursor tilt microinteraction ── */
+const ForestGhostPanel: React.FC = () => {
+    const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+    const [cursor, setCursor] = useState({ x: 50, y: 50 });
+    const panelRef = useRef<HTMLDivElement>(null);
+
+    const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = panelRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        const nx = (e.clientX - rect.left) / rect.width;
+        const ny = (e.clientY - rect.top) / rect.height;
+        setTilt({ rx: (ny - 0.5) * -10, ry: (nx - 0.5) * 10 });
+        setCursor({ x: nx * 100, y: ny * 100 });
+    };
+
+    const onLeave = () => {
+        setTilt({ rx: 0, ry: 0 });
+        setCursor({ x: 50, y: 50 });
+    };
+
+    const isResting = tilt.rx === 0 && tilt.ry === 0;
+
+    return (
+        <div
+            ref={panelRef}
+            onMouseMove={onMove}
+            onMouseLeave={onLeave}
+            className="relative rounded-3xl overflow-hidden border border-brand-dark-text/[0.08] select-none"
+            style={{
+                aspectRatio: '4/5',
+                cursor: 'crosshair',
+                background: 'linear-gradient(150deg, rgba(232,93,58,0.05) 0%, rgba(245,240,235,0) 55%, rgba(27,14,54,0.04) 100%)',
+                transform: `perspective(700px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+                transition: isResting
+                    ? 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)'
+                    : 'transform 0.08s linear',
+            }}
+        >
+            {/* Subtle grid */}
+            <div className="absolute inset-0 pointer-events-none" style={{
+                backgroundImage: 'linear-gradient(rgba(27,14,54,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(27,14,54,0.04) 1px, transparent 1px)',
+                backgroundSize: '52px 52px',
+            }} />
+
+            {/* Corner marks */}
+            <div className="absolute top-5 left-5 w-5 h-5 border-t border-l border-brand-dark-text/[0.14] pointer-events-none" />
+            <div className="absolute top-5 right-5 w-5 h-5 border-t border-r border-brand-dark-text/[0.14] pointer-events-none" />
+            <div className="absolute bottom-5 left-5 w-5 h-5 border-b border-l border-brand-dark-text/[0.14] pointer-events-none" />
+            <div className="absolute bottom-5 right-5 w-5 h-5 border-b border-r border-brand-dark-text/[0.14] pointer-events-none" />
+
+            {/* Cursor-tracking reticle */}
+            <div
+                className="absolute pointer-events-none"
+                style={{
+                    left: `${cursor.x}%`,
+                    top: `${cursor.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    transition: isResting ? 'left 0.65s cubic-bezier(0.34,1.56,0.64,1), top 0.65s cubic-bezier(0.34,1.56,0.64,1)' : 'none',
+                }}
+            >
+                <div className="relative w-8 h-8">
+                    <div className="absolute top-1/2 left-0 w-full h-px" style={{ background: 'rgba(27,14,54,0.2)' }} />
+                    <div className="absolute top-0 left-1/2 w-px h-full" style={{ background: 'rgba(27,14,54,0.2)' }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border" style={{ borderColor: 'rgba(27,14,54,0.2)' }} />
+                </div>
+            </div>
+
+            {/* Bottom label */}
+            <div className="absolute bottom-5 inset-x-0 text-center pointer-events-none">
+                <span className="text-[8px] font-sans font-semibold uppercase tracking-[0.3em]"
+                    style={{ color: 'rgba(27,14,54,0.25)' }}>
+                    Image Coming
+                </span>
+            </div>
+
+            {/* Cream inset edge fade */}
+            <div className="absolute inset-0 pointer-events-none rounded-3xl"
+                style={{ boxShadow: 'inset 0 0 32px 12px #F5F0EB' }} />
+        </div>
+    );
+};
 
 /* ── Chapter card with GlowingEffect border ── */
 const ChapterCard: React.FC<{
@@ -210,22 +291,16 @@ const AboutPage: React.FC = () => {
                                     Tropland Universe is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
                                 </p>
                                 <p className="text-brand-muted-light font-sans text-base leading-relaxed">
-                                    The Tropland Rainforest is not a location. It is a mythology — populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
+                                    The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right: live 3D forest panel — tall card */}
+                        {/* Right: ghost shell panel with cursor tilt microinteraction */}
                         <div className={`${secMythos.fade()} hidden lg:block sticky top-24`} style={{ transitionDelay: '220ms' }}>
-                            <div className="relative rounded-3xl overflow-hidden border border-black/[0.06]"
-                                style={{ aspectRatio: '4/5' }}>
-                                <ForestScene />
-                                {/* Cream edge fades — subtle, let the forest breathe */}
-                                <div className="absolute inset-0 pointer-events-none rounded-3xl"
-                                    style={{ boxShadow: 'inset 0 0 32px 12px #F5F0EB' }} />
-                            </div>
+                            <ForestGhostPanel />
                             <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-brand-accent/50 text-center mt-3">
-                                Live 3D · The Tropland Rainforest
+                                The Tropland Rainforest
                             </p>
                         </div>
 
@@ -267,31 +342,14 @@ const AboutPage: React.FC = () => {
                             area="md:col-span-12"
                             className="bg-gradient-to-br from-brand-accent/[0.08] via-white/[0.02] to-transparent"
                         >
-                            <div className="flex flex-col md:flex-row" style={{ minHeight: '21rem' }}>
+                            <div className="flex flex-col md:flex-row" style={{ minHeight: '22rem' }}>
 
-                                {/* LEFT: Book covers with warm stage-light bg */}
-                                <div className="md:w-[38%] flex-shrink-0 relative flex items-center justify-center p-8 md:p-10">
-                                    {/* Gradient wash */}
+                                {/* LEFT: Image — wider shell, ready for hero image */}
+                                <div className="md:w-[55%] flex-shrink-0 relative overflow-hidden rounded-tl-2xl rounded-bl-2xl" style={{ minHeight: '14rem' }}>
+                                    <GhostShell className="absolute inset-0 rounded-none" delay="0s" label="Image coming" />
+                                    {/* Warm accent overlay */}
                                     <div className="absolute inset-0 pointer-events-none"
-                                        style={{ background: 'linear-gradient(135deg, rgba(232,93,58,0.11) 0%, rgba(212,133,26,0.05) 55%, transparent 100%)' }} />
-                                    {/* Warm glow orb */}
-                                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full pointer-events-none"
-                                        style={{ background: 'rgba(232,93,58,0.09)', filter: 'blur(44px)' }} />
-                                    {/* Books */}
-                                    <div className="relative z-10 flex items-end gap-4">
-                                        <div className="book-cover" style={{ width: '108px' }}>
-                                            <div className="book-inner rounded-lg overflow-hidden" style={{ aspectRatio: '2/3' }}>
-                                                <img src="/images/book-banana.jpg" alt="Joosh's Juice Bar"
-                                                    className="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div className="book-cover -mb-4" style={{ width: '126px' }}>
-                                            <div className="book-inner rounded-lg overflow-hidden" style={{ aspectRatio: '2/3' }}>
-                                                <img src="/images/book-rockford.jpg" alt="The Adventures of Rockford T. Honeypot"
-                                                    className="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                        style={{ background: 'linear-gradient(135deg, rgba(232,93,58,0.06) 0%, transparent 60%)' }} />
                                 </div>
 
                                 {/* RIGHT: Text — separated by a subtle vertical rule */}
@@ -300,12 +358,12 @@ const AboutPage: React.FC = () => {
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/55 mb-1">
-                                                    Chapter I · 2013
+                                                <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                                    Chapter I · Series Origin
                                                 </p>
-                                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.22em]"
-                                                    style={{ color: 'rgba(232,93,58,0.65)' }}>
-                                                    Series Origin
+                                                <p className="font-serif text-white leading-none"
+                                                    style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)' }}>
+                                                    2013
                                                 </p>
                                             </div>
                                             <span className="font-serif select-none"
@@ -321,7 +379,7 @@ const AboutPage: React.FC = () => {
                                             The World Was Written First.
                                         </h3>
                                         <p className="text-white/65 font-sans text-sm md:text-[0.9rem] leading-relaxed max-w-md">
-                                            The Joosh's Juice Bar series launched the Tropland mythology across three volumes plus a coloring book. <span className="text-white/82">The Adventures of Rockford T. Honeypot</span> followed in 2016 — a second original IP rooted in the same universe.
+                                            The Joosh's Juice Bar series launched the Tropland mythology across three volumes plus a coloring book. <span className="text-white/82">The Adventures of Rockford T. Honeypot</span> followed in 2016, a second original IP rooted in the same universe.
                                         </p>
                                     </div>
                                 </div>
@@ -332,9 +390,15 @@ const AboutPage: React.FC = () => {
                         {/* ── Chapter II: Digital Evolution — left half ── */}
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
-                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/55 mb-4">
-                                    Chapter II
-                                </p>
+                                <div className="mb-4">
+                                    <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                        Chapter II
+                                    </p>
+                                    <p className="font-serif text-white leading-none"
+                                        style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
+                                        2022
+                                    </p>
+                                </div>
                                 {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
                                     <img
@@ -345,15 +409,11 @@ const AboutPage: React.FC = () => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
-                                    <span className="block font-serif leading-none mb-2 select-none"
-                                        style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: 'rgba(232,93,58,0.28)' }}>
-                                        2022
-                                    </span>
                                     <h3 className="font-sans text-base font-bold text-white mb-2">
                                         Digital Evolution
                                     </h3>
                                     <p className="text-white/65 font-sans text-sm leading-relaxed">
-                                        Tropland goes AI-native. The characters find a new cinematic visual language — reaching millions daily across every major platform.
+                                        Tropland goes AI-native. The characters find a new cinematic visual language, reaching millions daily across every major platform.
                                     </p>
                                 </div>
                             </div>
@@ -362,9 +422,15 @@ const AboutPage: React.FC = () => {
                         {/* ── Chapter III: The Kingdom — right half ── */}
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
-                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/55 mb-4">
-                                    Chapter III
-                                </p>
+                                <div className="mb-4">
+                                    <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                        Chapter III
+                                    </p>
+                                    <p className="font-serif text-white leading-none"
+                                        style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
+                                        2026
+                                    </p>
+                                </div>
                                 {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
                                     <img
@@ -376,10 +442,6 @@ const AboutPage: React.FC = () => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
-                                    <span className="block font-serif leading-none mb-2 select-none"
-                                        style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: 'rgba(232,93,58,0.28)' }}>
-                                        2026
-                                    </span>
                                     <h3 className="font-sans text-base font-bold text-white mb-2">
                                         The Kingdom
                                     </h3>
@@ -400,7 +462,7 @@ const AboutPage: React.FC = () => {
                 Two floating glass chips. Stats row. Ghost "JG" backdrop.
             ═══════════════════════════════════════════════════════════ */}
             <section ref={secVisionary.ref as any}
-                className="py-24 md:py-36 bg-brand-deep text-white relative overflow-hidden">
+                className="py-16 md:py-24 bg-brand-deep text-white relative overflow-hidden">
                 <CometBackground density={2} speed={0.45} />
 
                 {/* Ghost letterforms — decorative backdrop */}
@@ -413,8 +475,8 @@ const AboutPage: React.FC = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
 
-                        {/* LEFT: Bio + Stats */}
-                        <div className={`lg:col-span-5 lg:pt-6 ${secVisionary.fade()}`}>
+                        {/* LEFT: Bio */}
+                        <div className={`lg:col-span-8 lg:pt-6 ${secVisionary.fade()}`}>
                             <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
                                 The Visionary
                             </p>
@@ -429,112 +491,40 @@ const AboutPage: React.FC = () => {
                                     Twenty-five years across design, film production, and entertainment. Collaborations with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
                                 </p>
                                 <p>
-                                    He built Tropland from a picture book to a billion-view global IP — not by following a playbook, but by refusing to write in anyone else's world.
+                                    He built Tropland from a picture book to a billion-view global IP, not by following a playbook, but by refusing to write in anyone else's world.
                                 </p>
                             </div>
 
-                            {/* Stats */}
-                            <div className="grid grid-cols-3 gap-5 pt-8 border-t border-white/[0.07]">
-                                {[
-                                    { num: '25+', label: 'Years in\nentertainment' },
-                                    { num: '1B+',  label: 'Content\nviews' },
-                                    { num: '#1',   label: 'AI Art Influencer\n2025 & 2026' },
-                                ].map(({ num, label }) => (
-                                    <div key={num}>
-                                        <p className="font-serif text-white leading-none mb-2"
-                                            style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>
-                                            {num}
-                                        </p>
-                                        <p className="text-white/35 font-sans text-[10px] leading-snug tracking-wide whitespace-pre-line">
-                                            {label}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Credits */}
-                            <div className="mt-10 pt-8 border-t border-white/[0.05]">
-                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/25 mb-3">
-                                    Credited with
-                                </p>
-                                <p className="text-white/30 font-sans text-sm leading-relaxed">
-                                    Universal Studios · Disney · Fox · IMG<br />
-                                    NFL · IndyCar · Ferrari · Vatican Museums
-                                </p>
-                            </div>
                         </div>
 
-                        {/* RIGHT: Portrait + floating chips */}
-                        <div className={`lg:col-span-7 ${secVisionary.fade()}`}
+                        {/* RIGHT: Portrait */}
+                        <div className={`lg:col-span-4 ${secVisionary.fade()}`}
                             style={{ transitionDelay: '160ms' }}>
 
-                            {/* Outer wrapper — no overflow hidden, so chips can escape */}
                             <div className="relative">
 
                                 {/* Warm radial glow behind portrait */}
                                 <div className="absolute rounded-3xl pointer-events-none"
                                     style={{
                                         inset: '-10%',
-                                        background: 'radial-gradient(ellipse at 55% 35%, rgba(232,93,58,0.24) 0%, rgba(212,133,26,0.1) 35%, transparent 65%)',
-                                        filter: 'blur(48px)',
+                                        background: 'radial-gradient(ellipse at 55% 35%, rgba(232,93,58,0.2) 0%, rgba(212,133,26,0.08) 35%, transparent 65%)',
+                                        filter: 'blur(40px)',
                                     }} />
 
-                                {/* Portrait frame — overflow hidden keeps image contained */}
+                                {/* Portrait */}
                                 <div className="group relative rounded-2xl overflow-hidden border border-white/[0.08]"
-                                    style={{ aspectRatio: '4/5' }}>
+                                    style={{ aspectRatio: '3/4' }}>
                                     <img
                                         src="/images/josh-gottsegen.png"
                                         alt="Josh Gottsegen, Founder of Tropland Universe"
-                                        className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                                        className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                                     />
-                                    {/* Bottom vignette fading to page bg */}
-                                    <div className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
-                                        style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.65) 45%, transparent 100%)' }} />
+                                    {/* Bottom vignette */}
+                                    <div className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+                                        style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.5) 50%, transparent 100%)' }} />
                                     {/* Hover warm wash */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                                        style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.12) 0%, transparent 55%)' }} />
-                                    {/* Caption at base */}
-                                    <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                                        <p className="font-sans text-white/50 text-xs tracking-[0.15em] uppercase">
-                                            Founder, Tropland Universe
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* ── Floating chip: top-left ── */}
-                                <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-4 py-3 shadow-2xl"
-                                    style={{
-                                        top: '-1rem',
-                                        left: '-1.5rem',
-                                        background: 'rgba(255,255,255,0.07)',
-                                        border: '1px solid rgba(255,255,255,0.13)',
-                                    }}>
-                                    <p className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-1">
-                                        #1 Ranked
-                                    </p>
-                                    <p className="text-white font-sans font-semibold text-sm leading-tight">
-                                        AI Art Influencer
-                                    </p>
-                                    <p className="text-white/35 text-[9px] font-sans mt-0.5">
-                                        Feedspot · 2025 &amp; 2026
-                                    </p>
-                                </div>
-
-                                {/* ── Floating chip: bottom-right ── */}
-                                <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-5 py-4 shadow-2xl text-right"
-                                    style={{
-                                        bottom: '-1rem',
-                                        right: '-1.5rem',
-                                        background: 'rgba(255,255,255,0.07)',
-                                        border: '1px solid rgba(255,255,255,0.13)',
-                                    }}>
-                                    <p className="font-serif text-white leading-none"
-                                        style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>
-                                        1B+
-                                    </p>
-                                    <p className="text-white/35 text-[9px] font-sans tracking-[0.15em] uppercase mt-1">
-                                        Content Views
-                                    </p>
+                                        style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.1) 0%, transparent 55%)' }} />
                                 </div>
 
                             </div>

@@ -98,8 +98,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className={`text-base md:text-lg text-white/70 font-sans font-light leading-relaxed max-w-xl mb-10 ${fade(2)}`} style={{ transitionDelay: '600ms', textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
-          Where nature meets imagination. A character-driven wildlife media brand<br className="hidden md:block" />
-          blending cinematic AI art, original IP, and viral storytelling.
+          Where nature meets imagination. A character-driven wildlife media brand<br className="hidden md:block" />{' '}blending cinematic AI art, original IP, and viral storytelling.
         </p>
 
         {/* Stats */}
