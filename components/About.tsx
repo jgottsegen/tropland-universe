@@ -73,7 +73,7 @@ const About: React.FC = () => {
                   <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-brand-muted font-sans text-sm leading-relaxed">
+                  <p className="text-brand-dark-text/55 font-sans text-sm leading-relaxed">
                     {item.description}
                   </p>
                 </div>

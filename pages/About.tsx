@@ -479,17 +479,17 @@ const AboutPage: React.FC = () => {
                                 </p>
                                 <div className="space-y-3">
                                     {['Brand partnerships', 'Character licensing', 'Content distribution'].map((item) => (
-                                        <div key={item} className="flex items-center gap-3 text-brand-muted font-sans text-sm">
+                                        <div key={item} className="flex items-center gap-3 text-brand-dark-text/60 font-sans text-sm">
                                             <div className="w-1 h-1 rounded-full shrink-0" style={{ background: 'rgba(232,93,58,0.6)' }} />
                                             {item}
                                         </div>
                                     ))}
                                 </div>
                                 <div className="mt-14 pt-10 border-t border-brand-dark-text/[0.07]">
-                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-brand-muted mb-3">
+                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/40 mb-3">
                                         Trusted by
                                     </p>
-                                    <p className="text-brand-dark-text/40 font-sans text-sm leading-relaxed">
+                                    <p className="text-brand-dark-text/60 font-sans text-sm leading-relaxed">
                                         Adobe · Meta · OpenAI<br />Topaz Labs · Kling AI
                                     </p>
                                 </div>
@@ -511,31 +511,31 @@ const AboutPage: React.FC = () => {
                                     style={{ transitionDelay: '100ms' }}>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div>
-                                            <label className="block text-[10px] font-sans font-semibold text-brand-muted uppercase tracking-[0.2em] mb-2">
+                                            <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
                                                 Name
                                             </label>
                                             <input type="text" required value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.12] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-muted focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
+                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
                                                 placeholder="Your name" />
                                         </div>
                                         <div>
-                                            <label className="block text-[10px] font-sans font-semibold text-brand-muted uppercase tracking-[0.2em] mb-2">
+                                            <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
                                                 Email
                                             </label>
                                             <input type="email" required value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.12] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-muted focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
+                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
                                                 placeholder="Your email" />
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-sans font-semibold text-brand-muted uppercase tracking-[0.2em] mb-2">
+                                        <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
                                             Message
                                         </label>
                                         <textarea required rows={6} value={message}
                                             onChange={(e) => setMessage(e.target.value)}
-                                            className="w-full rounded-xl border border-brand-dark-text/[0.12] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-muted focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors resize-none"
+                                            className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors resize-none"
                                             placeholder="Tell us about your project or inquiry" />
                                     </div>
 

@@ -9,15 +9,41 @@ const navItems = [
   { label: "Joosh's", path: '/joosh' },
 ];
 
+/* Walk up the DOM from a point and return the luminance (0-1) of the
+   first element that has a non-transparent background color. */
+function getBgLuminance(el: Element | null): number {
+  let cur: Element | null = el;
+  while (cur && cur !== document.body) {
+    const bg = window.getComputedStyle(cur as HTMLElement).backgroundColor;
+    if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+      const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (m) return (0.299 * +m[1] + 0.587 * +m[2] + 0.114 * +m[3]) / 255;
+    }
+    cur = cur.parentElement;
+  }
+  return 0;
+}
+
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLight, setIsLight] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const check = () => {
+      const scrolled = window.scrollY > 80;
+      setIsScrolled(scrolled);
+      if (scrolled) {
+        const el = document.elementFromPoint(window.innerWidth / 2, 40);
+        setIsLight(getBgLuminance(el) > 0.55);
+      } else {
+        setIsLight(false);
+      }
+    };
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    return () => window.removeEventListener('scroll', check);
   }, []);
 
   // Close mobile menu on route change
@@ -26,12 +52,15 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  const navBg = isScrolled
+    ? isLight
+      ? 'bg-white/95 backdrop-blur-xl border-b border-black/[0.07] shadow-[0_2px_20px_rgba(0,0,0,0.07)]'
+      : 'bg-brand-deep/96 backdrop-blur-xl border-b border-white/[0.05] shadow-[0_2px_40px_rgba(0,0,0,0.4)]'
+    : 'bg-gradient-to-b from-black/50 to-transparent';
+
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-brand-deep/96 backdrop-blur-xl border-b border-white/[0.05] shadow-[0_2px_40px_rgba(0,0,0,0.4)]'
-        : 'bg-gradient-to-b from-black/50 to-transparent'
-        }`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
 
           {/* Logo */}
@@ -39,7 +68,12 @@ const Navbar: React.FC = () => {
             to="/"
             className="hover:opacity-80 transition-opacity flex items-center gap-3 group"
           >
-            <img src="/images/tropland-logo.png" alt="Tropland Universe" className="h-9 transition-transform duration-300 group-hover:scale-[1.03]" />
+            <img
+              src="/images/tropland-logo.png"
+              alt="Tropland Universe"
+              className="h-9 transition-all duration-300 group-hover:scale-[1.03]"
+              style={{ filter: isLight ? 'brightness(0)' : undefined }}
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -52,10 +86,12 @@ const Navbar: React.FC = () => {
                   to={item.path}
                   className={`relative px-4 py-2 text-[13px] font-sans font-medium transition-colors duration-200 rounded-full ${
                     isActive
-                      ? 'text-white'
-                      : 'text-white/55 hover:text-white/90'
+                      ? isLight ? 'text-brand-deep' : 'text-white'
+                      : isLight
+                        ? 'text-brand-deep/50 hover:text-brand-deep'
+                        : 'text-white/55 hover:text-white/90'
                   }`}
-                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                  style={isLight ? undefined : { textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
                 >
                   {item.label}
                   {isActive && (
@@ -77,7 +113,9 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
+              className={`md:hidden p-2 transition-colors ${
+                isLight ? 'text-brand-deep/60 hover:text-brand-deep' : 'text-white/70 hover:text-white'
+              }`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
