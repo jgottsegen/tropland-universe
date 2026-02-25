@@ -68,7 +68,7 @@ const Portfolio: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
+          <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
             The Collection
           </p>
         </div>
@@ -135,7 +135,7 @@ const Portfolio: React.FC = () => {
                     <div className="text-3xl md:text-4xl font-serif text-brand-dark-text leading-none mb-1">
                       <AnimatedMetric end={m.end} suffix={m.suffix} isVisible={isVisible} />
                     </div>
-                    <div className="text-[11px] font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
+                    <div className="text-xs font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
                       {m.label}
                     </div>
                   </div>

@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Name</label>
+                <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
                 <input
                   type="text"
                   required
@@ -78,7 +78,7 @@ const Contact: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Email</label>
+                <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
                 <input
                   type="email"
                   required
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Message</label>
+              <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Message</label>
               <textarea
                 required
                 rows={5}
@@ -126,8 +126,8 @@ const Contact: React.FC = () => {
 
         {/* Direct email fallback */}
         <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-3">
-          <Mail size={16} className="text-white/30" />
-          <p className="text-white/30 font-sans text-sm">
+          <Mail size={16} className="text-white/45" />
+          <p className="text-white/55 font-sans text-sm">
             Or email directly:{' '}
             <a href="mailto:partnerships@troplanduniverse.com" className="text-white/60 hover:text-brand-accent transition-colors underline">
               partnerships@troplanduniverse.com

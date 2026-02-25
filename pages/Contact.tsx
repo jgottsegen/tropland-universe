@@ -64,7 +64,7 @@ const ContactPage: React.FC = () => {
 
                             <div className={`space-y-4 mb-10 ${fade()}`} style={{ transitionDelay: '700ms' }}>
                                 <div className="flex items-center gap-3">
-                                    <Mail size={16} className="text-white/30" />
+                                    <Mail size={16} className="text-white/45" />
                                     <a href="mailto:partnerships@troplanduniverse.com" className="text-white/50 hover:text-brand-accent transition-colors font-sans text-sm underline underline-offset-2">
                                         partnerships@troplanduniverse.com
                                     </a>
@@ -84,7 +84,7 @@ const ContactPage: React.FC = () => {
                                             href={social.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/30 hover:text-white hover:border-brand-accent/30 transition-all duration-300"
+                                            className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-white hover:border-brand-accent/30 transition-all duration-300"
                                             aria-label={social.label}
                                         >
                                             <Icon size={16} />
@@ -106,7 +106,7 @@ const ContactPage: React.FC = () => {
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Name</label>
+                                            <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
                                             <input
                                                 type="text"
                                                 required
@@ -117,7 +117,7 @@ const ContactPage: React.FC = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Email</label>
+                                            <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
                                             <input
                                                 type="email"
                                                 required
@@ -129,7 +129,7 @@ const ContactPage: React.FC = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-sans font-semibold text-white/30 uppercase tracking-[0.15em] mb-2">Message</label>
+                                        <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Message</label>
                                         <textarea
                                             required
                                             rows={6}

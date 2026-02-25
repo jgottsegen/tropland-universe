@@ -34,14 +34,14 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={`mb-16 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent/70 mb-4">
+          <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent/80 mb-4">
             Published Works
           </p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight text-brand-text leading-[1.1]">
             Original books,<br />
             <span className="italic text-brand-accent">original worlds.</span>
           </h2>
-          <p className="text-base text-white/50 font-sans mt-4 max-w-2xl leading-relaxed">
+          <p className="text-base text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
             Four published titles spanning adventure fiction and children's wellness,
             written, illustrated, and produced by Josh Gottsegen. The foundational story
             worlds behind Tropland Universe.
@@ -62,7 +62,7 @@ const Services: React.FC = () => {
                   <Award size={14} />
                   Amazon #1 Bestseller
                 </span>
-                <span className="text-xs font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/10 text-white/50 backdrop-blur-sm bg-white/5">
+                <span className="text-xs font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/15 text-white/65 backdrop-blur-sm bg-white/5">
                   Fantasy / Adventure
                 </span>
               </div>
@@ -94,7 +94,7 @@ const Services: React.FC = () => {
           </span>
           <a href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
             target="_blank" rel="noopener noreferrer"
-            className="text-xs font-sans text-white/30 hover:text-white/60 transition-colors flex items-center gap-1">
+            className="text-xs font-sans text-white/50 hover:text-white/80 transition-colors flex items-center gap-1">
             View All <ArrowUpRight size={11} />
           </a>
         </div>
@@ -117,7 +117,7 @@ const Services: React.FC = () => {
               <h4 className="font-sans text-base font-bold text-white group-hover:text-brand-accent transition-colors leading-tight mb-1">
                 {book.title}
               </h4>
-              <p className="text-sm text-white/40 font-sans">{book.genre}</p>
+              <p className="text-sm text-white/60 font-sans">{book.genre}</p>
             </a>
           ))}
         </div>

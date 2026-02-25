@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               className="flex items-center gap-3 mb-5 hover:opacity-80 transition-opacity w-fit">
               <img src="/images/tropland-logo.png" alt="Tropland Universe" className="h-7" />
             </Link>
-            <p className="text-white/30 font-sans text-sm leading-relaxed max-w-xs mb-6">
+            <p className="text-white/45 font-sans text-sm leading-relaxed max-w-xs mb-6">
               The Digital Animal Kingdom. A character-driven wildlife media brand blending original IP, cinematic AI art, and global storytelling.
             </p>
             <div className="flex items-center gap-2">
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-white/25 hover:text-white border border-white/[0.06] hover:border-brand-accent/30 hover:bg-brand-accent/10 transition-all duration-300"
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white border border-white/[0.08] hover:border-brand-accent/30 hover:bg-brand-accent/10 transition-all duration-300"
                     aria-label={social.label}
                   >
                     <Icon size={15} />
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
 
           {/* Explore column */}
           <div className="md:col-span-2">
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/25 mb-5">
+            <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-5">
               Explore
             </p>
             <ul className="space-y-3">
@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
 
           {/* Universe column */}
           <div className="md:col-span-2">
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/25 mb-5">
+            <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-5">
               The Universe
             </p>
             <ul className="space-y-3">
@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
 
           {/* Contact column */}
           <div className="md:col-span-3">
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/25 mb-5">
+            <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-5">
               Work With Us
             </p>
             <p className="text-white/35 font-sans text-sm leading-relaxed mb-5">
@@ -133,16 +133,16 @@ const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className="py-6 border-t border-white/[0.05] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">
-            <p className="text-[11px] text-white/15 font-sans">
+            <p className="text-[11px] text-white/35 font-sans">
               © {new Date().getFullYear()} Tropland Universe / OneLight Studios LLC. All rights reserved.
             </p>
-            <p className="text-[11px] text-white/15 font-sans">
+            <p className="text-[11px] text-white/35 font-sans">
               Est. 2013 · Los Angeles, CA
             </p>
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white/20 hover:text-white border border-white/[0.05] hover:border-brand-accent/30 hover:bg-brand-accent/10 transition-all duration-300 self-start sm:self-auto"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white/35 hover:text-white border border-white/[0.08] hover:border-brand-accent/30 hover:bg-brand-accent/10 transition-all duration-300 self-start sm:self-auto"
             aria-label="Back to top"
           >
             <ArrowUp size={13} />

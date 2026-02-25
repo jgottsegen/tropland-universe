@@ -62,7 +62,7 @@ const JooshPage: React.FC = () => {
                 {/* Text anchored to bottom-left */}
                 <div className="absolute inset-0 flex flex-col justify-end">
                     <div className="max-w-7xl mx-auto px-6 md:px-12 w-full pb-14 md:pb-20">
-                        <p className={`text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroFade()}`}
+                        <p className={`text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroFade()}`}
                             style={{ transitionDelay: '200ms' }}>
                             The Original Series
                         </p>
@@ -148,7 +148,7 @@ const JooshPage: React.FC = () => {
                                 <h3 className="font-serif text-2xl text-white group-hover:text-brand-accent transition-colors leading-tight mb-2 text-center">
                                     {book.title}
                                 </h3>
-                                <p className="text-sm font-sans font-semibold text-white/40 uppercase tracking-widest text-center">
+                                <p className="text-sm font-sans font-semibold text-white/60 uppercase tracking-widest text-center">
                                     {book.genre}
                                 </p>
                             </a>

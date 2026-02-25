@@ -111,7 +111,7 @@ const Hero: React.FC = () => {
               <div className="text-3xl md:text-5xl font-serif text-white leading-none drop-shadow-lg">
                 <AnimatedCounter end={stat.end} suffix={stat.suffix} isVisible={loaded} />
               </div>
-              <div className="text-[10px] font-sans font-semibold text-white/40 uppercase tracking-[0.2em] mt-2">
+              <div className="text-xs font-sans font-semibold text-white/60 uppercase tracking-[0.2em] mt-2">
                 {stat.label}
               </div>
             </div>
@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
             <div className="text-3xl md:text-5xl font-serif text-white leading-none drop-shadow-lg">
               50+
             </div>
-            <div className="text-[10px] font-sans font-semibold text-white/40 uppercase tracking-[0.2em] mt-2">
+            <div className="text-xs font-sans font-semibold text-white/60 uppercase tracking-[0.2em] mt-2">
               Countries Reached
             </div>
           </div>
@@ -151,7 +151,7 @@ const Hero: React.FC = () => {
             {partnersTriple.map((partner, i) => (
               <span
                 key={`${partner}-${i}`}
-                className="text-sm md:text-base lg:text-lg font-sans font-bold text-white/25 tracking-tight cursor-default select-none uppercase"
+                className="text-sm md:text-base lg:text-lg font-sans font-bold text-white/55 tracking-tight cursor-default select-none uppercase"
               >
                 {partner}
               </span>

@@ -236,7 +236,7 @@ const AboutPage: React.FC = () => {
 
                 <div className="absolute inset-0 flex flex-col justify-end">
                     <div className="max-w-7xl mx-auto px-6 md:px-12 w-full pb-14 md:pb-20">
-                        <p className={`text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroReveal()}`}
+                        <p className={`text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroReveal()}`}
                             style={{ transitionDelay: '200ms' }}>
                             Est. 2013 · Los Angeles
                         </p>
@@ -271,7 +271,7 @@ const AboutPage: React.FC = () => {
                         {/* Left: label + quote + body */}
                         <div>
                             <div className={secMythos.fade()} style={{ transitionDelay: '0ms' }}>
-                                <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
+                                <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
                                     The Mythology
                                 </p>
                             </div>
@@ -319,7 +319,7 @@ const AboutPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
                     <div className={`mb-12 ${secOrigin.fade()}`}>
-                        <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
+                        <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
                             Origin
                         </p>
                         <h2 className="font-serif tracking-tight leading-[1]"
@@ -357,7 +357,7 @@ const AboutPage: React.FC = () => {
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                                     Chapter I · Series Origin
                                                 </p>
                                                 <p className="font-serif text-white leading-none"
@@ -390,7 +390,7 @@ const AboutPage: React.FC = () => {
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <div className="mb-4">
-                                    <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter II
                                     </p>
                                     <p className="font-serif text-white leading-none"
@@ -422,7 +422,7 @@ const AboutPage: React.FC = () => {
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <div className="mb-4">
-                                    <p className="text-[9px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-2">
+                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter III
                                     </p>
                                     <p className="font-serif text-white leading-none"
@@ -466,7 +466,7 @@ const AboutPage: React.FC = () => {
                         {/* Left: invitation copy */}
                         <div className="lg:col-span-5">
                             <div className={secContact.fade()}>
-                                <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
+                                <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
                                     Enter the Kingdom
                                 </p>
                                 <h2 className="font-serif tracking-tight leading-[1] mb-8 text-brand-dark-text"
@@ -486,7 +486,7 @@ const AboutPage: React.FC = () => {
                                     ))}
                                 </div>
                                 <div className="mt-14 pt-10 border-t border-brand-dark-text/[0.07]">
-                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/40 mb-3">
+                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/55 mb-3">
                                         Trusted by
                                     </p>
                                     <p className="text-brand-dark-text/60 font-sans text-sm leading-relaxed">

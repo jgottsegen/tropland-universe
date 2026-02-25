@@ -74,7 +74,7 @@ const RockfordPage: React.FC = () => {
                                     <Award size={14} />
                                     Amazon #1 Bestseller
                                 </span>
-                                <span className="text-xs font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/10 text-white/50 bg-white/5">
+                                <span className="text-xs font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/15 text-white/65 bg-white/5">
                                     Fantasy / Adventure
                                 </span>
                             </div>
@@ -161,7 +161,7 @@ const RockfordPage: React.FC = () => {
                     <div className={`text-center mb-16 ${sec3.fade()}`}>
                         <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">Visual World</p>
                         <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">The World of <span className="italic text-brand-accent">Tropland</span></h2>
-                        <p className="text-white/50 font-sans text-lg max-w-xl mx-auto">Visual development from the Tropland Universe, the world that began with Rockford T. Honeypot.</p>
+                        <p className="text-white/65 font-sans text-lg max-w-xl mx-auto">Visual development from the Tropland Universe, the world that began with Rockford T. Honeypot.</p>
                     </div>
 
                     <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 ${sec3.fade()}`} style={{ transitionDelay: '100ms' }}>
