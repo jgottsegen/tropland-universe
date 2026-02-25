@@ -179,10 +179,9 @@ const AboutPage: React.FC = () => {
         return () => clearTimeout(t);
     }, []);
 
-    const secMythos    = useFadeIn();
-    const secOrigin    = useFadeIn();
-    const secVisionary = useFadeIn();
-    const secContact   = useFadeIn();
+    const secMythos  = useFadeIn();
+    const secOrigin  = useFadeIn();
+    const secContact = useFadeIn();
 
     const heroReveal = () =>
         `transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
@@ -453,83 +452,6 @@ const AboutPage: React.FC = () => {
                         </ChapterCard>
 
                     </ul>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════
-                ACT IV — THE VISIONARY
-                Dark editorial. Warm glow behind portrait.
-                Two floating glass chips. Stats row. Ghost "JG" backdrop.
-            ═══════════════════════════════════════════════════════════ */}
-            <section ref={secVisionary.ref as any}
-                className="py-16 md:py-24 bg-brand-deep text-white relative overflow-hidden">
-                <CometBackground density={2} speed={0.45} />
-
-                {/* Ghost letterforms — decorative backdrop */}
-                <div className="absolute right-0 top-0 font-serif select-none pointer-events-none leading-[0.8] tracking-tighter overflow-hidden"
-                    style={{ fontSize: 'min(42vw, 520px)', color: 'rgba(255,255,255,0.016)' }}>
-                    JG
-                </div>
-
-                <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
-
-                        {/* LEFT: Bio */}
-                        <div className={`lg:col-span-8 lg:pt-6 ${secVisionary.fade()}`}>
-                            <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
-                                The Visionary
-                            </p>
-                            <h2 className="font-serif tracking-tight leading-[0.9] text-white mb-9"
-                                style={{ fontSize: 'clamp(3.2rem, 6vw, 5.5rem)' }}>
-                                Josh<br />
-                                <span className="italic text-brand-accent">Gottsegen</span>
-                            </h2>
-
-                            <div className="space-y-5 text-white/60 font-sans text-base md:text-lg leading-relaxed mb-10">
-                                <p>
-                                    Twenty-five years across design, film production, and entertainment. Collaborations with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
-                                </p>
-                                <p>
-                                    He built Tropland from a picture book to a billion-view global IP, not by following a playbook, but by refusing to write in anyone else's world.
-                                </p>
-                            </div>
-
-                        </div>
-
-                        {/* RIGHT: Portrait */}
-                        <div className={`lg:col-span-4 ${secVisionary.fade()}`}
-                            style={{ transitionDelay: '160ms' }}>
-
-                            <div className="relative">
-
-                                {/* Warm radial glow behind portrait */}
-                                <div className="absolute rounded-3xl pointer-events-none"
-                                    style={{
-                                        inset: '-10%',
-                                        background: 'radial-gradient(ellipse at 55% 35%, rgba(232,93,58,0.2) 0%, rgba(212,133,26,0.08) 35%, transparent 65%)',
-                                        filter: 'blur(40px)',
-                                    }} />
-
-                                {/* Portrait */}
-                                <div className="group relative rounded-2xl overflow-hidden border border-white/[0.08]"
-                                    style={{ aspectRatio: '3/4' }}>
-                                    <img
-                                        src="/images/josh-gottsegen.png"
-                                        alt="Josh Gottsegen, Founder of Tropland Universe"
-                                        className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                                    />
-                                    {/* Bottom vignette */}
-                                    <div className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
-                                        style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.5) 50%, transparent 100%)' }} />
-                                    {/* Hover warm wash */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                                        style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.1) 0%, transparent 55%)' }} />
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 

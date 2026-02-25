@@ -119,41 +119,6 @@ const Ventures: React.FC = () => {
                 </div>
               </div>
 
-              {/* Floating chip: top-left */}
-              <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-4 py-3 shadow-2xl"
-                style={{
-                  top: '-1rem',
-                  left: '-1.5rem',
-                  background: 'rgba(255,255,255,0.07)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                }}>
-                <p className="text-[9px] font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-1">
-                  #1 Ranked
-                </p>
-                <p className="text-white font-sans font-semibold text-sm leading-tight">
-                  AI Art Influencer
-                </p>
-                <p className="text-white/30 text-[9px] font-sans mt-0.5">
-                  Feedspot · 2025 &amp; 2026
-                </p>
-              </div>
-
-              {/* Floating chip: bottom-right */}
-              <div className="absolute z-20 backdrop-blur-xl rounded-2xl px-5 py-4 shadow-2xl text-right"
-                style={{
-                  bottom: '-1rem',
-                  right: '-1.5rem',
-                  background: 'rgba(255,255,255,0.07)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                }}>
-                <p className="font-serif text-white leading-none"
-                  style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}>
-                  1B+
-                </p>
-                <p className="text-white/30 text-[9px] font-sans tracking-[0.15em] uppercase mt-1">
-                  Content Views
-                </p>
-              </div>
 
             </div>
           </div>
