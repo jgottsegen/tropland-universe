@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Award } from 'lucide-react';
 import CometBackground from './CometBackground';
 import TextReveal from './TextReveal';
-import MagneticButton from './MagneticButton';
 
 const books = [
   { src: '/images/rth.png', title: 'The Adventures of Rockford T. Honeypot', subtitle: 'Amazon #1 Bestseller', genre: 'Fantasy / Adventure', url: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075', featured: true },
@@ -77,17 +76,15 @@ const Services: React.FC = () => {
                 one of the core story worlds within the Tropland canon. The property is currently being
                 developed for expansion into animated and digital formats.
               </p>
-              <MagneticButton>
-                <a
-                  href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
-                >
-                  View on Amazon
-                  <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </a>
-              </MagneticButton>
+              <a
+                href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+              >
+                View on Amazon
+                <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
@@ -139,17 +136,15 @@ const Services: React.FC = () => {
               <p className="text-white/60 font-sans text-[17px] leading-relaxed mb-6 max-w-lg">
                 A trilogy of children's books teaching healthy eating through colorful storytelling. Joosh and his friends explore a world of vibrant flavors, wholesome ingredients, and imagination — instilling lifelong wellness habits in young readers through joyful adventure.
               </p>
-              <MagneticButton>
-                <a
-                  href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
-                >
-                  View on Amazon
-                  <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </a>
-              </MagneticButton>
+              <a
+                href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+              >
+                View on Amazon
+                <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </a>
             </div>
           </div>
         </div>

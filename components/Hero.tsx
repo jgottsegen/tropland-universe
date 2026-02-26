@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import CometBackground from './CometBackground';
 import TextReveal from './TextReveal';
-import MagneticButton from './MagneticButton';
 
 const partners = [
   'Adobe', 'Meta', 'OpenAI', 'Topaz Labs', 'Kling AI', 'SORA',
@@ -132,23 +131,19 @@ const Hero: React.FC = () => {
 
         {/* CTAs */}
         <div className={`flex flex-col sm:flex-row gap-4 mb-16 ${fade(4)}`} style={{ transitionDelay: '1000ms' }}>
-          <MagneticButton>
-            <a
-              href="#universe"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-            >
-              Explore the Universe
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </MagneticButton>
-          <MagneticButton>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-[15px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
-            >
-              Partner With Us
-            </a>
-          </MagneticButton>
+          <a
+            href="#universe"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+          >
+            Explore the Universe
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-[15px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
+          >
+            Partner With Us
+          </a>
         </div>
       </div>
 

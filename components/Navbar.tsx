@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import MagneticButton from './MagneticButton';
 
 const navItems = [
   { label: 'Home', path: '/' },
@@ -105,14 +104,12 @@ const Navbar: React.FC = () => {
 
           {/* Right: CTA + mobile toggle */}
           <div className="flex items-center gap-4">
-            <MagneticButton className="hidden md:inline-flex" strength={0.25}>
-              <Link
-                to="/contact"
-                className="text-[15px] font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,93,58,0.35)]"
-              >
-                Partner With Us
-              </Link>
-            </MagneticButton>
+            <Link
+              to="/contact"
+              className="hidden md:inline-flex text-[15px] font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,93,58,0.35)]"
+            >
+              Partner With Us
+            </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

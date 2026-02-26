@@ -3,7 +3,6 @@ import { ArrowUpRight, ArrowRight, Award, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
 import TextReveal from '../components/TextReveal';
-import MagneticButton from '../components/MagneticButton';
 
 const characters = [
     { src: '/images/rocky-rock1.png', name: 'Green Hut 39' },
@@ -130,17 +129,15 @@ const RockfordPage: React.FC = () => {
                             </div>
 
                             <div className={`flex flex-wrap items-center gap-4 ${heroFade()}`} style={{ transitionDelay: '800ms' }}>
-                                <MagneticButton>
-                                    <a
-                                        href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
-                                    >
-                                        Buy on Amazon
-                                        <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                    </a>
-                                </MagneticButton>
+                                <a
+                                    href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
+                                >
+                                    Buy on Amazon
+                                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </a>
                             </div>
                         </div>
 
@@ -446,17 +443,15 @@ const RockfordPage: React.FC = () => {
                             <p className="mt-4"><span className="italic text-white">The Adventures of Rockford T. Honeypot</span> is available now on Amazon.</p>
                         </div>
 
-                        <MagneticButton>
-                            <a
-                                href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                            >
-                                Buy on Amazon
-                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </a>
-                        </MagneticButton>
+                        <a
+                            href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                        >
+                            Buy on Amazon
+                            <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
                     </div>
                 </div>
             </section>

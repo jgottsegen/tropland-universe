@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Globe, Tv, ShoppingBag, Gamepad2, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import MagneticButton from '../components/MagneticButton';
 
 // ─── Utility hook ──────────────────────────────────────────────────────────
 function useFadeIn(threshold = 0.08) {
@@ -154,27 +153,23 @@ const LicensingPage: React.FC = () => {
 
                     {/* CTA buttons */}
                     <div className={`flex flex-col sm:flex-row gap-4 justify-center ${introFade()}`} style={{ transitionDelay: '720ms' }}>
-                        <MagneticButton>
-                            <Link
-                                to="/contact"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                            >
-                                Inquire About Licensing
-                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </Link>
-                        </MagneticButton>
-                        <MagneticButton>
-                            <a
-                                href="https://allamericanlicensing.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                            >
-                                Visit All American Licensing
-                                <ArrowUpRight size={16} />
-                            </a>
-                        </MagneticButton>
+                        <Link
+                            to="/contact"
+                            onClick={() => window.scrollTo(0, 0)}
+                            className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                        >
+                            Inquire About Licensing
+                            <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                        <a
+                            href="https://allamericanlicensing.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                        >
+                            Visit All American Licensing
+                            <ArrowUpRight size={16} />
+                        </a>
                     </div>
 
                     {/* Trusted by */}
@@ -273,24 +268,20 @@ const LicensingPage: React.FC = () => {
                             reach out to our partnerships team directly.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <MagneticButton>
-                                <Link
-                                    to="/contact"
-                                    onClick={() => window.scrollTo(0, 0)}
-                                    className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
-                                >
-                                    Contact Partnerships
-                                    <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                </Link>
-                            </MagneticButton>
-                            <MagneticButton>
-                                <a
-                                    href="mailto:partnerships@troplanduniverse.com"
-                                    className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-dark-text/20 text-brand-dark-text font-sans font-semibold text-lg hover:bg-brand-dark-text/5 hover:border-brand-dark-text/40 transition-all duration-300"
-                                >
-                                    partnerships@troplanduniverse.com
-                                </a>
-                            </MagneticButton>
+                            <Link
+                                to="/contact"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
+                            >
+                                Contact Partnerships
+                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </Link>
+                            <a
+                                href="mailto:partnerships@troplanduniverse.com"
+                                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-dark-text/20 text-brand-dark-text font-sans font-semibold text-lg hover:bg-brand-dark-text/5 hover:border-brand-dark-text/40 transition-all duration-300"
+                            >
+                                partnerships@troplanduniverse.com
+                            </a>
                         </div>
                     </div>
 

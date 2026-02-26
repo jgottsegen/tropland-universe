@@ -3,7 +3,6 @@ import { ArrowUpRight, ArrowRight, BookOpen, Heart, Leaf, Star } from 'lucide-re
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
 import TextReveal from '../components/TextReveal';
-import MagneticButton from '../components/MagneticButton';
 
 // ─── Book data ─────────────────────────────────────────────────────────────
 const books = [
@@ -254,17 +253,15 @@ const JooshPage: React.FC = () => {
                             </div>
 
                             <div className={`flex flex-wrap items-center gap-4 ${heroFade()}`} style={{ transitionDelay: '800ms' }}>
-                                <MagneticButton>
-                                    <a
-                                        href="https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_24px_rgba(232,93,58,0.45)]"
-                                    >
-                                        View on Amazon
-                                        <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                    </a>
-                                </MagneticButton>
+                                <a
+                                    href="https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_24px_rgba(232,93,58,0.45)]"
+                                >
+                                    View on Amazon
+                                    <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </a>
                                 <a
                                     href="#books"
                                     className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
@@ -420,17 +417,15 @@ const JooshPage: React.FC = () => {
                                             {book.description}
                                         </p>
 
-                                        <MagneticButton>
-                                            <a
-                                                href={book.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group/btn inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
-                                            >
-                                                View on Amazon
-                                                <ArrowUpRight size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                                            </a>
-                                        </MagneticButton>
+                                        <a
+                                            href={book.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group/btn inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
+                                        >
+                                            View on Amazon
+                                            <ArrowUpRight size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -464,26 +459,22 @@ const JooshPage: React.FC = () => {
                     </div>
 
                     <div className={`flex flex-col sm:flex-row gap-4 justify-center ${sec4.fade()}`} style={{ transitionDelay: '280ms' }}>
-                        <MagneticButton>
-                            <Link
-                                to="/contact"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                            >
-                                Partner With Us
-                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </Link>
-                        </MagneticButton>
-                        <MagneticButton>
-                            <Link
-                                to="/rockford"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-border text-brand-dark-text font-sans font-semibold text-lg hover:opacity-80 transition-all duration-300"
-                            >
-                                Rockford T. Honeypot
-                                <ArrowRight size={18} />
-                            </Link>
-                        </MagneticButton>
+                        <Link
+                            to="/contact"
+                            onClick={() => window.scrollTo(0, 0)}
+                            className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                        >
+                            Partner With Us
+                            <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                        <Link
+                            to="/rockford"
+                            onClick={() => window.scrollTo(0, 0)}
+                            className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-border text-brand-dark-text font-sans font-semibold text-lg hover:opacity-80 transition-all duration-300"
+                        >
+                            Rockford T. Honeypot
+                            <ArrowRight size={18} />
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -506,25 +497,21 @@ const JooshPage: React.FC = () => {
                             From a children's juice bar in 2013 to over a billion content views worldwide. The Tropland Universe keeps growing.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <MagneticButton>
-                                <Link
-                                    to="/"
-                                    onClick={() => window.scrollTo(0, 0)}
-                                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                                >
-                                    Back to Home
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </MagneticButton>
-                            <MagneticButton>
-                                <Link
-                                    to="/contact"
-                                    onClick={() => window.scrollTo(0, 0)}
-                                    className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                                >
-                                    Partner With Us
-                                </Link>
-                            </MagneticButton>
+                            <Link
+                                to="/"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                            >
+                                Back to Home
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                            <Link
+                                to="/contact"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                            >
+                                Partner With Us
+                            </Link>
                         </div>
                     </div>
                 </div>
