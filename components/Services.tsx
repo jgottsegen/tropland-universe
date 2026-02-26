@@ -3,10 +3,10 @@ import { ArrowUpRight, Award } from 'lucide-react';
 import CometBackground from './CometBackground';
 
 const books = [
-  { src: '/images/book-rockford.jpg', title: 'The Adventures of Rockford T. Honeypot', subtitle: 'Amazon #1 Bestseller', genre: 'Fantasy / Adventure', url: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075', featured: true },
-  { src: '/images/book-snackbook.jpg', title: 'Snackbook Adventures', subtitle: "Joosh's Juice Bar", genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/', featured: false },
-  { src: '/images/book-teeoff.jpg', title: 'The Tropland Tee-Off', subtitle: "Joosh's Juice Bar", genre: "Children's / Adventure", url: 'https://www.amazon.com/gp/product/1500736082', featured: false },
-  { src: '/images/book-banana.jpg', title: 'Banana Berry Adventures', subtitle: "Joosh's Juice Bar", genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848', featured: false },
+  { src: '/images/rth.png', title: 'The Adventures of Rockford T. Honeypot', subtitle: 'Amazon #1 Bestseller', genre: 'Fantasy / Adventure', url: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075', featured: true },
+  { src: '/images/jjb-01.png', title: 'Snackbook Adventures', subtitle: "Joosh's Juice Bar", genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/', featured: false },
+  { src: '/images/jjb-02.png', title: 'The Tropland Tee-Off', subtitle: "Joosh's Juice Bar", genre: "Children's / Adventure", url: 'https://www.amazon.com/gp/product/1500736082', featured: false },
+  { src: '/images/jjb-03.png', title: 'Banana Berry Adventures', subtitle: "Joosh's Juice Bar", genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848', featured: false },
 ];
 
 const Services: React.FC = () => {
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
             <div className="md:col-span-2 book-cover">
               <div className="book-inner aspect-[3/4] rounded-2xl overflow-hidden max-w-xs mx-auto md:mx-0 relative">
-                <img src="/images/book-rockford.jpg" alt="The Adventures of Rockford T. Honeypot" className="w-full h-full object-cover" />
+                <img src="/images/rth.png" alt="The Adventures of Rockford T. Honeypot" className="w-full h-full object-cover" />
               </div>
             </div>
             <div className="md:col-span-3">

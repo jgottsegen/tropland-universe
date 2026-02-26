@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
 
 const books = [
-    { src: '/images/book-snackbook.jpg', title: 'Snackbook Adventures', genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/' },
-    { src: '/images/book-teeoff.jpg', title: 'The Tropland Tee-Off', genre: "Children's / Adventure", url: 'https://www.amazon.com/gp/product/1500736082' },
-    { src: '/images/book-banana.jpg', title: 'Banana Berry Adventures', genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848' },
+    { src: '/images/jjb-01.png', title: 'Snackbook Adventures', genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/' },
+    { src: '/images/jjb-02.png', title: 'The Tropland Tee-Off', genre: "Children's / Adventure", url: 'https://www.amazon.com/gp/product/1500736082' },
+    { src: '/images/jjb-03.png', title: 'Banana Berry Adventures', genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848' },
 ];
 
 function useFadeIn(threshold = 0.08) {

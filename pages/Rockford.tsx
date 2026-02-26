@@ -106,7 +106,7 @@ const RockfordPage: React.FC = () => {
                                 <div className="absolute -inset-4 rounded-3xl bg-brand-accent/20 blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 <div className="book-cover">
                                     <div className="book-inner relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                                        <img src="/images/book-rockford.jpg" alt="Rockford T. Honeypot Cover" className="w-full h-full object-cover" />
+                                        <img src="/images/rth.png" alt="Rockford T. Honeypot Cover" className="w-full h-full object-cover" />
                                     </div>
                                 </div>
                             </div>

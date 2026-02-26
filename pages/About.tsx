@@ -347,10 +347,10 @@ const AboutPage: React.FC = () => {
                                 <div className="md:w-[55%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px] bg-gradient-to-br from-brand-accent/[0.06] to-transparent" style={{ minHeight: '14rem' }}>
                                     <div className="absolute inset-0 flex items-center justify-center gap-2 p-3 md:p-6">
                                         {[
-                                            { src: '/images/book-banana.jpg', alt: "Joosh's Juice Bar: Blue Banana Berry" },
-                                            { src: '/images/book-snackbook.jpg', alt: "Joosh's Juice Bar: Snack Book" },
-                                            { src: '/images/book-teeoff.jpg', alt: "Joosh's Juice Bar: Tee Off" },
-                                            { src: '/images/book-rockford.jpg', alt: 'The Adventures of Rockford T. Honeypot' },
+                                            { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
+                                            { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
+                                            { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
+                                            { src: '/images/rth.png', alt: 'The Adventures of Rockford T. Honeypot' },
                                         ].map((book, i) => (
                                             <img
                                                 key={book.src}

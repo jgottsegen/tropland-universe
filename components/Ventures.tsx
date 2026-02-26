@@ -37,7 +37,7 @@ const Ventures: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
 
           {/* Left: Bio + stats */}
-          <div className={`lg:col-span-5 lg:pt-6 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
+          <div className={`lg:col-span-7 lg:pt-6 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
             <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
               The Visionary
             </p>
@@ -49,10 +49,13 @@ const Ventures: React.FC = () => {
 
             <div className="space-y-5 text-white/55 font-sans text-[17px] leading-relaxed mb-10">
               <p>
-                Twenty-five years across design, film production, and entertainment. Credits with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
+                Josh Gottsegen is the founder of Tropland Universe, the Digital Animal Kingdom, and the creative force behind OneLight Studios.
               </p>
               <p>
-                He built Tropland from a picture book to a billion-view global IP, not by following a playbook, but by refusing to write in anyone else's world.
+                With twenty five years across design, film production, and entertainment, his work includes collaborations with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
+              </p>
+              <p>
+                He built Tropland from a children's picture book into a billion view global IP by treating artificial intelligence as a creative tool, not a gimmick, and by building original worlds instead of borrowing from existing ones.
               </p>
             </div>
 
@@ -85,9 +88,9 @@ const Ventures: React.FC = () => {
             </Link>
           </div>
 
-          {/* Right: Portrait with floating chips */}
-          <div className={`lg:col-span-7 ${fade(0)}`} style={{ transitionDelay: '160ms' }}>
-            <div className="relative">
+          {/* Right: Portrait */}
+          <div className={`lg:col-span-5 ${fade(0)}`} style={{ transitionDelay: '160ms' }}>
+            <div className="relative max-w-[340px] mx-auto lg:ml-auto lg:mr-0">
 
               {/* Warm glow behind portrait */}
               <div className="absolute rounded-3xl pointer-events-none"
@@ -98,27 +101,17 @@ const Ventures: React.FC = () => {
                 }} />
 
               {/* Portrait */}
-              <div className="group relative rounded-2xl overflow-hidden border border-white/[0.07]"
+              <div className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 transition-all duration-700 shadow-lg hover:shadow-[0_24px_80px_rgba(232,93,58,0.18)]"
                 style={{ aspectRatio: '4/5' }}>
                 <img
                   src="/images/josh-gottsegen.png"
                   alt="Josh Gottsegen, Founder of Tropland Universe"
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                {/* Bottom vignette */}
-                <div className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.6) 50%, transparent 100%)' }} />
                 {/* Hover warm wash */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.1) 0%, transparent 55%)' }} />
-                {/* Caption */}
-                <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                  <p className="font-sans text-white/40 text-[13px] tracking-[0.15em] uppercase">
-                    Founder, Tropland Universe
-                  </p>
-                </div>
+                  style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.15) 0%, transparent 60%)' }} />
               </div>
-
 
             </div>
           </div>
