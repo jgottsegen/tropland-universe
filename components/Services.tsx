@@ -45,7 +45,7 @@ const Services: React.FC = () => {
             <TextReveal className="italic text-brand-accent" delay={0.28} wordDelay={0.09}>original worlds.</TextReveal>
           </h2>
           <p className="text-[17px] text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
-            Four published titles spanning adventure fiction and children's wellness,
+            Five published titles spanning adventure fiction and children's wellness,
             written, illustrated, and produced by Josh Gottsegen. The foundational story
             worlds behind Tropland Universe.
           </p>
@@ -92,39 +92,66 @@ const Services: React.FC = () => {
           </div>
         </div>
 
-        {/* Joosh's Juice Bar Series */}
-        <div className={`flex items-center justify-between mb-6 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
-          <span className="text-[15px] font-sans font-bold text-brand-accent uppercase tracking-[0.2em]">
-            Joosh's Juice Bar Series
-          </span>
-          <a href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
-            target="_blank" rel="noopener noreferrer"
-            className="text-sm font-sans text-white/50 hover:text-white/80 transition-colors flex items-center gap-1">
-            View All <ArrowUpRight size={11} />
-          </a>
-        </div>
+        {/* Joosh's Juice Bar Series — full featured card */}
+        <div className={`group glass border-shine rounded-3xl p-8 md:p-10 hover:border-brand-accent/20 transition-all duration-500 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            {/* Left: three book covers */}
+            <div className="flex items-center justify-center py-10 min-h-[30rem] overflow-hidden">
+              {books.filter(b => !b.featured).map((book, i) => {
+                const isCenter = i === 1;
+                return (
+                  <div
+                    key={book.src}
+                    className="book-cover flex-shrink-0 relative hover:z-50 group/book cursor-pointer"
+                    style={{
+                      width: '58%',
+                      marginLeft: i === 0 ? '0' : '-28%',
+                      zIndex: isCenter ? 10 : 5 - i,
+                      transform: `rotate(${(i - 1) * 9}deg) translateY(${Math.abs(i - 1) * 16}px)`,
+                      transition: 'z-index 0s, margin 0.5s ease',
+                    }}
+                  >
+                    <div
+                      className="book-inner rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative border border-white/10 transition-all duration-500 group-hover/book:-translate-y-6 group-hover/book:scale-110 group-hover/book:shadow-[0_40px_60px_rgba(232,93,58,0.3)]"
+                      style={{ aspectRatio: '3/4', transformOrigin: 'center bottom' }}
+                    >
+                      <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-white/5 to-transparent pointer-events-none opacity-0 group-hover/book:opacity-100 transition-opacity duration-500" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {books.filter(b => !b.featured).map((book, i) => (
-            <a
-              key={book.title}
-              href={book.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group glass border-shine rounded-2xl p-6 hover:border-brand-accent/20 transition-all duration-500 ${fade(i + 3)}`}
-              style={{ transitionDelay: `${(i + 3) * 100}ms` }}
-            >
-              <div className="book-cover mb-4">
-                <div className="book-inner aspect-[3/4] rounded-xl overflow-hidden bg-white/5 relative">
-                  <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
-                </div>
+            {/* Right: text */}
+            <div className="md:pl-4">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-[15px] font-sans font-semibold backdrop-blur-sm border border-brand-accent/20">
+                  Book Trilogy
+                </span>
+                <span className="text-[13px] font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/15 text-white/65 backdrop-blur-sm bg-white/5">
+                  Children's / Wellness
+                </span>
               </div>
-              <h4 className="font-sans text-[17px] font-bold text-white group-hover:text-brand-accent transition-colors leading-tight mb-1">
-                {book.title}
-              </h4>
-              <p className="text-[15px] text-white/60 font-sans">{book.genre}</p>
-            </a>
-          ))}
+              <h3 className="font-serif text-3xl md:text-4xl text-white mb-3 leading-tight">
+                Joosh's <span className="italic text-brand-accent">Juice Bar</span>
+              </h3>
+              <p className="text-white/60 font-sans text-[17px] leading-relaxed mb-6 max-w-lg">
+                A trilogy of children's books teaching healthy eating through colorful storytelling. Joosh and his friends explore a world of vibrant flavors, wholesome ingredients, and imagination — instilling lifelong wellness habits in young readers through joyful adventure.
+              </p>
+              <MagneticButton>
+                <a
+                  href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+                >
+                  View on Amazon
+                  <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </a>
+              </MagneticButton>
+            </div>
+          </div>
         </div>
       </div>
     </section>

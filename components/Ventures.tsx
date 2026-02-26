@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import CometBackground from './CometBackground';
 import TextReveal from './TextReveal';
 
@@ -21,7 +19,7 @@ const Ventures: React.FC = () => {
     `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 md:py-36 bg-brand-deep relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="py-20 md:py-28 bg-brand-deep relative overflow-hidden">
 
       <CometBackground density={2} speed={0.7} />
 
@@ -35,12 +33,12 @@ const Ventures: React.FC = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
           {/* Left: Bio + stats */}
           <div className={`lg:col-span-7 lg:pt-6 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
             <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
-              The Visionary
+              Creator &amp; Founder
             </p>
             <h2 className="font-serif tracking-tight leading-[0.9] text-white mb-9"
               style={{ fontSize: 'clamp(3rem, 5.5vw, 5rem)' }}>
@@ -80,18 +78,10 @@ const Ventures: React.FC = () => {
               ))}
             </div>
 
-            <Link
-              to="/about"
-              onClick={() => window.scrollTo(0, 0)}
-              className="group inline-flex items-center gap-2 text-[15px] font-sans font-semibold text-white/50 hover:text-white transition-colors duration-200"
-            >
-              Full Story
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
           </div>
 
           {/* Right: Portrait */}
-          <div className={`lg:col-span-5 ${fade(0)}`} style={{ transitionDelay: '160ms' }}>
+          <div className={`lg:col-span-5 flex items-center ${fade(0)}`} style={{ transitionDelay: '160ms' }}>
             <div className="relative max-w-[340px] mx-auto lg:ml-auto lg:mr-0">
 
               {/* Warm glow behind portrait */}

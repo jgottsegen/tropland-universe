@@ -180,8 +180,8 @@ const AboutPage: React.FC = () => {
         return () => clearTimeout(t);
     }, []);
 
-    const secMythos  = useFadeIn();
-    const secOrigin  = useFadeIn();
+    const secMythos = useFadeIn();
+    const secOrigin = useFadeIn();
     const secContact = useFadeIn();
 
     const heroReveal = () =>
@@ -223,7 +223,7 @@ const AboutPage: React.FC = () => {
 
                 <div className="absolute inset-0">
                     <img
-                        src="/images/hero-lion.png"
+                        src="/images/about-hero.png"
                         alt="Tropland Universe"
                         className="w-full h-full object-cover"
                         style={{ objectPosition: 'center 15%' }}
@@ -295,21 +295,24 @@ const AboutPage: React.FC = () => {
 
                             <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${secMythos.fade()}`}
                                 style={{ transitionDelay: '180ms' }}>
-                                <p className="text-brand-muted-light font-sans text-base leading-relaxed">
+                                <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
                                     Tropland Universe is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
                                 </p>
-                                <p className="text-brand-muted-light font-sans text-base leading-relaxed">
+                                <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
                                     The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right: ghost shell panel with cursor tilt microinteraction */}
+                        {/* Right: rainforest image panel */}
                         <div className={`${secMythos.fade()} hidden lg:block sticky top-24`} style={{ transitionDelay: '220ms' }}>
-                            <ForestGhostPanel />
-                            <p className="text-xs font-sans font-semibold uppercase tracking-[0.28em] text-brand-accent/50 text-center mt-3">
-                                The Tropland Rainforest
-                            </p>
+                            <div className="relative rounded-3xl overflow-hidden border border-brand-dark-text/[0.08]" style={{ aspectRatio: '4/5' }}>
+                                <img
+                                    src="/images/trop-forest.png"
+                                    alt="The Tropland Rainforest"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                         </div>
 
                     </div>
@@ -346,69 +349,129 @@ const AboutPage: React.FC = () => {
                     <ul className={`grid grid-cols-1 gap-4 md:grid-cols-12 ${secOrigin.fade()}`}
                         style={{ transitionDelay: '120ms' }}>
 
-                        {/* ── Chapter I: Full-width horizontal card ── */}
+                        {/* ── Chapter I: Full-width horizontal card — PREMIUM REDESIGN ── */}
                         <ChapterCard
                             area="md:col-span-12"
-                            className="bg-gradient-to-br from-brand-accent/[0.08] via-white/[0.02] to-transparent"
+                            className="bg-gradient-to-br from-brand-accent/[0.10] via-white/[0.02] to-brand-purple/[0.04]"
                         >
-                            <div className="flex flex-col md:flex-row" style={{ minHeight: '22rem' }}>
+                            <div className="flex flex-col md:flex-row" style={{ minHeight: '30rem' }}>
 
-                                {/* LEFT: Book covers grid */}
-                                <div className="md:w-[55%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px] bg-gradient-to-br from-brand-accent/[0.06] to-transparent" style={{ minHeight: '14rem' }}>
-                                    <div className="absolute inset-0 flex items-center justify-center gap-2 p-3 md:p-6">
-                                        {[
-                                            { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
-                                            { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
-                                            { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
-                                            { src: '/images/rth.png', alt: 'The Adventures of Rockford T. Honeypot' },
-                                        ].map((book, i) => (
-                                            <img
-                                                key={book.src}
-                                                src={book.src}
-                                                alt={book.alt}
-                                                className="h-[92%] md:h-[78%] max-h-[340px] md:max-h-[220px] w-auto rounded-lg shadow-2xl shadow-black/40 object-cover"
-                                                style={{
-                                                    transform: `rotate(${(i - 1.5) * 3}deg) translateY(${Math.abs(i - 1.5) * 6}px)`,
-                                                    transition: 'transform 0.4s ease',
-                                                }}
-                                            />
-                                        ))}
-                                    </div>
-                                    {/* Warm accent overlay */}
+                                {/* LEFT: Dramatic book showcase */}
+                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '22rem' }}>
+                                    {/* Rich warm-dark backdrop */}
+                                    <div className="absolute inset-0"
+                                        style={{ background: 'linear-gradient(145deg, rgba(232,93,58,0.18) 0%, rgba(13,10,26,0.85) 55%, rgba(27,14,54,0.9) 100%)' }} />
+                                    {/* Subtle grid texture */}
+                                    <div className="absolute inset-0 pointer-events-none opacity-20"
+                                        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+                                    {/* Radial accent spotlight */}
                                     <div className="absolute inset-0 pointer-events-none"
-                                        style={{ background: 'linear-gradient(135deg, rgba(232,93,58,0.06) 0%, transparent 60%)' }} />
+                                        style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,58,0.18) 0%, transparent 65%)' }} />
+
+                                    {/* Books — large fan display */}
+                                    <div className="absolute inset-0 flex items-end justify-center pb-4 md:pb-6" style={{ perspective: '900px' }}>
+                                        <div className="flex items-end justify-center w-full h-full px-4 md:px-8 gap-0">
+                                            {[
+                                                { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry", rot: -14, tx: '8px', ty: '-8px', z: 1 },
+                                                { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book", rot: -5, tx: '2px', ty: '-18px', z: 2 },
+                                                { src: '/images/rth.png', alt: 'Rockford T. Honeypot', rot: 4, tx: '-2px', ty: '-22px', z: 3 },
+                                                { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off", rot: 13, tx: '-8px', ty: '-10px', z: 1 },
+                                            ].map((book, i) => (
+                                                <div
+                                                    key={book.src}
+                                                    className="relative flex-shrink-0 group"
+                                                    style={{
+                                                        transform: `rotate(${book.rot}deg) translateX(${book.tx}) translateY(${book.ty})`,
+                                                        transition: 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)',
+                                                        zIndex: book.z,
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={book.src}
+                                                        alt={book.alt}
+                                                        className="w-auto object-cover rounded-lg"
+                                                        style={{
+                                                            height: 'clamp(200px, 30vh, 320px)',
+                                                            boxShadow: '0 32px 64px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5), 4px 0 16px rgba(0,0,0,0.4)',
+                                                        }}
+                                                    />
+                                                    {/* Spine highlight */}
+                                                    <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-sm pointer-events-none"
+                                                        style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.05))' }} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom label */}
+                                    <div className="absolute bottom-0 inset-x-0 pointer-events-none"
+                                        style={{ background: 'linear-gradient(to top, rgba(13,10,26,0.7) 0%, transparent 100%)', height: '5rem' }} />
+                                    <p className="absolute bottom-4 inset-x-0 text-center text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/35 pointer-events-none">
+                                        Four Original Volumes · 2013–2016
+                                    </p>
                                 </div>
 
-                                {/* RIGHT: Text — separated by a subtle vertical rule */}
-                                <div className="flex-1 flex flex-col justify-between p-7 md:p-9 border-t md:border-t-0 md:border-l border-white/[0.07]">
-                                    {/* Top: label + numeral */}
+                                {/* RIGHT: Editorial text column */}
+                                <div className="flex-1 flex flex-col justify-between p-8 md:p-10 border-t md:border-t-0 md:border-l border-white/[0.07]">
+
+                                    {/* Top: chapter label + numeral */}
                                     <div>
-                                        <div className="flex items-start justify-between mb-4">
+                                        <div className="flex items-start justify-between mb-5">
                                             <div>
-                                                <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
+                                                <p className="text-[10px] font-sans font-bold uppercase tracking-[0.35em] text-brand-accent/70 mb-2">
                                                     Chapter I · Series Origin
                                                 </p>
                                                 <p className="font-serif text-white leading-none"
-                                                    style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)' }}>
+                                                    style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)' }}>
                                                     2013
                                                 </p>
                                             </div>
-                                            <span className="font-serif select-none"
-                                                style={{ fontSize: '4.5rem', color: 'rgba(232,93,58,0.18)', lineHeight: 1, marginTop: '-0.5rem' }}>
+                                            <span className="font-serif select-none hidden md:block"
+                                                style={{ fontSize: '5.5rem', color: 'rgba(232,93,58,0.14)', lineHeight: 1, marginTop: '-0.75rem' }}>
                                                 I
                                             </span>
                                         </div>
-                                        <div className="w-8 h-px mb-0" style={{ background: 'rgba(232,93,58,0.5)' }} />
+                                        {/* Accent rule */}
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="h-px flex-1" style={{ background: 'linear-gradient(to right, rgba(232,93,58,0.6), transparent)' }} />
+                                        </div>
                                     </div>
-                                    {/* Bottom: heading + body */}
-                                    <div>
-                                        <h3 className="font-serif text-xl md:text-2xl text-white mb-3 leading-tight">
-                                            The World Was Written First.
+
+                                    {/* Middle: heading + body */}
+                                    <div className="flex-1 mb-7">
+                                        <h3 className="font-serif text-2xl md:text-3xl text-white mb-4 leading-[1.15]">
+                                            The World Was<br />
+                                            <span className="italic text-brand-accent">Written First.</span>
                                         </h3>
-                                        <p className="text-white/65 font-sans text-[15px] leading-relaxed max-w-md">
-                                            The Joosh's Juice Bar series launched the Tropland mythology across three volumes plus a coloring book. <span className="text-white/82">The Adventures of Rockford T. Honeypot</span> followed in 2016, a second original IP rooted in the same universe.
+                                        <p className="text-white/65 font-sans text-[15px] leading-relaxed">
+                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the canon and introduced Tropland beyond picture books.
                                         </p>
                                     </div>
+
+                                    {/* Bottom: chapter timeline strip */}
+                                    <div className="pt-5 border-t border-white/[0.07]">
+                                        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/30 mb-4">The Three Chapters</p>
+                                        <div className="flex items-stretch gap-0">
+                                            {[
+                                                { year: '2013', label: 'Books &\u00a0Print', active: true },
+                                                { year: '2022', label: 'Digital\u00a0Era', active: false },
+                                                { year: '2026', label: 'The\u00a0Kingdom', active: false },
+                                            ].map((ch, i) => (
+                                                <div key={ch.year} className="flex items-stretch gap-0 flex-1">
+                                                    <div className={`flex-1 rounded-xl px-4 py-3 ${ch.active ? 'bg-brand-accent/15 border border-brand-accent/30' : 'border border-white/[0.07]'}`}>
+                                                        <p className={`font-serif text-xl leading-none mb-1 ${ch.active ? 'text-brand-accent' : 'text-white/40'}`}>{ch.year}</p>
+                                                        <p className="text-[11px] font-sans font-medium text-white/35 uppercase tracking-[0.15em]">{ch.label}</p>
+                                                    </div>
+                                                    {i < 2 && (
+                                                        <div className="flex items-center px-2">
+                                                            <div className="h-px w-3 bg-white/15" />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -504,7 +567,7 @@ const AboutPage: React.FC = () => {
                                     <span className="italic text-brand-accent">Tropland.</span>
                                 </h2>
                                 <p className="text-brand-muted-light font-sans text-base leading-relaxed mb-10">
-                                    For licensing inquiries, brand partnerships, and creative collaboration. We respond within 48 hours.
+                                    For licensing inquiries, brand partnerships, and creative collaboration.
                                 </p>
                                 <div className="space-y-3">
                                     {['Brand partnerships', 'Character licensing', 'Content distribution'].map((item) => (
@@ -514,14 +577,7 @@ const AboutPage: React.FC = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="mt-14 pt-10 border-t border-brand-dark-text/[0.07]">
-                                    <p className="text-[13px] font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/55 mb-3">
-                                        Trusted by
-                                    </p>
-                                    <p className="text-brand-dark-text/60 font-sans text-[15px] leading-relaxed">
-                                        Adobe · Meta · OpenAI<br />Topaz Labs · Kling AI
-                                    </p>
-                                </div>
+
                             </div>
                         </div>
 

@@ -7,6 +7,7 @@ import AboutPage from './pages/About';
 import RockfordPage from './pages/Rockford';
 import JooshPage from './pages/Joosh';
 import ContactPage from './pages/Contact';
+import LicensingPage from './pages/Licensing';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
             <Route path="/rockford" element={<RockfordPage />} />
             <Route path="/joosh" element={<JooshPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/licensing" element={<LicensingPage />} />
           </Routes>
         </div>
 

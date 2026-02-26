@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-brand-deep relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-28 bg-brand-deep relative overflow-hidden">
 
       {/* Comet animation */}
       <CometBackground density={2} speed={0.6} />
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
           Get in <span className="italic text-brand-accent">touch.</span>
         </h2>
 
-        <p className="text-[15px] text-white/40 font-sans mb-12 max-w-xl leading-relaxed">
+        <p className="text-[15px] text-white/65 font-sans mb-12 max-w-xl leading-relaxed">
           For licensing inquiries, brand partnerships, and collaboration opportunities.
           We typically respond within 48 hours.
         </p>
@@ -67,36 +67,36 @@ const Contact: React.FC = () => {
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[13px] font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
+                <label className="block text-[13px] font-sans font-semibold text-white/70 uppercase tracking-[0.15em] mb-2">Name</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/35 focus:outline-none focus:border-brand-accent/40 transition-colors"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label className="block text-[13px] font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
+                <label className="block text-[13px] font-sans font-semibold text-white/70 uppercase tracking-[0.15em] mb-2">Email</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/35 focus:outline-none focus:border-brand-accent/40 transition-colors"
                   placeholder="Your email"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Message</label>
+              <label className="block text-xs font-sans font-semibold text-white/70 uppercase tracking-[0.15em] mb-2">Message</label>
               <textarea
                 required
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
+                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/35 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
                 placeholder="Tell us about your project or inquiry"
               />
             </div>

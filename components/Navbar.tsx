@@ -7,7 +7,8 @@ const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Rockford', path: '/rockford' },
-  { label: "Joosh's", path: '/joosh' },
+  { label: 'Joosh', path: '/joosh' },
+  { label: 'Licensing', path: '/licensing' },
 ];
 
 /* Walk up the DOM from a point and return the luminance (0-1) of the
@@ -37,7 +38,7 @@ const Navbar: React.FC = () => {
       setIsScrolled(scrolled);
       if (scrolled) {
         const el = document.elementFromPoint(window.innerWidth / 2, 40);
-        setIsLight(getBgLuminance(el) > 0.55);
+        setIsLight(getBgLuminance(el) > 0.45);
       } else {
         setIsLight(false);
       }
@@ -85,14 +86,13 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`relative px-4 py-2 text-[15px] font-sans font-medium transition-colors duration-200 rounded-full ${
-                    isActive
-                      ? isLight ? 'text-brand-deep' : 'text-white'
-                      : isLight
-                        ? 'text-brand-deep/50 hover:text-brand-deep'
-                        : 'text-white/55 hover:text-white/90'
-                  }`}
-                  style={isLight ? undefined : { textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}
+                  className={`relative px-4 py-2 text-[15px] font-sans font-medium transition-colors duration-200 rounded-full ${isActive
+                    ? isLight ? 'text-brand-deep' : 'text-white'
+                    : isLight
+                      ? 'text-brand-deep/75 hover:text-brand-deep'
+                      : 'text-white/80 hover:text-white'
+                    }`}
+                  style={isLight ? undefined : { textShadow: '0 1px 6px rgba(0,0,0,0.75), 0 2px 12px rgba(0,0,0,0.5)' }}
                 >
                   {item.label}
                   {isActive && (
@@ -116,9 +116,8 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 transition-colors ${
-                isLight ? 'text-brand-deep/60 hover:text-brand-deep' : 'text-white/70 hover:text-white'
-              }`}
+              className={`md:hidden p-2 transition-colors ${isLight ? 'text-brand-deep/60 hover:text-brand-deep' : 'text-white/70 hover:text-white'
+                }`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -128,9 +127,8 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-brand-deep/98 backdrop-blur-xl md:hidden transition-all duration-300 ${
-        isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}>
+      <div className={`fixed inset-0 z-40 bg-brand-deep/98 backdrop-blur-xl md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}>
         <div className="flex flex-col h-full pt-24 px-8 pb-10">
           <nav className="flex flex-col gap-1 flex-1">
             {navItems.map((item) => {
@@ -139,9 +137,8 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`text-4xl font-serif tracking-tight py-3 transition-colors ${
-                    isActive ? 'text-white' : 'text-white/30 hover:text-white'
-                  }`}
+                  className={`text-4xl font-serif tracking-tight py-3 transition-colors ${isActive ? 'text-white' : 'text-white/30 hover:text-white'
+                    }`}
                 >
                   {item.label}
                   {isActive && <span className="inline-block ml-3 w-1.5 h-1.5 rounded-full bg-brand-accent align-middle" />}

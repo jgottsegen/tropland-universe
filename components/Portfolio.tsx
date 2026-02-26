@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Award, Globe, ImageIcon, Zap } from 'lucide-react';
 
 const metrics = [
-  { end: 4, suffix: '', label: 'Published Books', icon: Award },
+  { end: 5, suffix: '', label: 'Published Books', icon: Award },
   { end: 265, suffix: 'M', label: 'Single Viral Piece', icon: Zap },
   { end: 50, suffix: 'K+', label: 'Original Artworks', icon: ImageIcon },
   { end: 12, suffix: '+', label: 'Years of Storytelling', icon: Globe },
@@ -158,7 +158,7 @@ const Portfolio: React.FC = () => {
       </div>
 
       {/* Scrolling gallery row 2 (reverse) */}
-      <div className="overflow-hidden mb-20">
+      <div className="overflow-hidden mb-8">
         <div className="animate-marquee-reverse flex gap-3 w-max">
           {[...galleryRow2, ...galleryRow2].map((src, i) => (
             <div key={i} className="w-64 md:w-80 h-64 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden">
