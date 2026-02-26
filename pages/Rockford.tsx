@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ArrowRight, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
+import TextReveal from '../components/TextReveal';
+import MagneticButton from '../components/MagneticButton';
 
 const galleryImages = [
     'https://troplanduniverse.com/wp-content/uploads/2025/10/lion-peace-1.png',
@@ -79,8 +81,11 @@ const RockfordPage: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h1 className={`font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-white mb-6 ${heroFade()}`} style={{ transitionDelay: '400ms' }}>
-                                The Adventures of<br />Rockford T. <span className="italic text-brand-accent">Honeypot</span>
+                            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6">
+                                <TextReveal className="text-white" delay={0.4} wordDelay={0.1}>The Adventures of</TextReveal>
+                                <br />
+                                <TextReveal className="text-white" delay={0.58} wordDelay={0.1}>Rockford T.</TextReveal>
+                                {' '}<TextReveal className="italic text-brand-accent" delay={0.72} wordDelay={0.1}>Honeypot</TextReveal>
                             </h1>
 
                             <p className={`text-xl text-white/70 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
@@ -88,15 +93,17 @@ const RockfordPage: React.FC = () => {
                             </p>
 
                             <div className={`flex flex-wrap items-center gap-4 ${heroFade()}`} style={{ transitionDelay: '800ms' }}>
-                                <a
-                                    href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
-                                >
-                                    Buy the Book on Amazon
-                                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                </a>
+                                <MagneticButton>
+                                    <a
+                                        href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
+                                    >
+                                        Buy the Book on Amazon
+                                        <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    </a>
+                                </MagneticButton>
                             </div>
                         </div>
 
@@ -185,21 +192,25 @@ const RockfordPage: React.FC = () => {
                         Discover more of the <span className="italic text-brand-accent">Universe.</span>
                     </h2>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link
-                            to="/joosh"
-                            onClick={() => window.scrollTo(0, 0)}
-                            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                        >
-                            Joosh's Juice Bar
-                            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                        <Link
-                            to="/contact"
-                            onClick={() => window.scrollTo(0, 0)}
-                            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                        >
-                            Partner With Us
-                        </Link>
+                        <MagneticButton>
+                            <Link
+                                to="/joosh"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                            >
+                                Joosh's Juice Bar
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <Link
+                                to="/contact"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                            >
+                                Partner With Us
+                            </Link>
+                        </MagneticButton>
                     </div>
                 </div>
             </section>

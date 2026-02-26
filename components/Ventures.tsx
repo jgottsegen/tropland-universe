@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from './CometBackground';
+import TextReveal from './TextReveal';
 
 const Ventures: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,8 +44,9 @@ const Ventures: React.FC = () => {
             </p>
             <h2 className="font-serif tracking-tight leading-[0.9] text-white mb-9"
               style={{ fontSize: 'clamp(3rem, 5.5vw, 5rem)' }}>
-              Josh<br />
-              <span className="italic text-brand-accent">Gottsegen</span>
+              <TextReveal delay={0.05} wordDelay={0.12}>Josh</TextReveal>
+              <br />
+              <TextReveal className="italic text-brand-accent" delay={0.2} wordDelay={0.12}>Gottsegen</TextReveal>
             </h2>
 
             <div className="space-y-5 text-white/55 font-sans text-[17px] leading-relaxed mb-10">

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import CometBackground from '../components/CometBackground';
 import { GlowingEffect } from '../components/GlowingEffect';
+import TextReveal from '../components/TextReveal';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -240,15 +241,23 @@ const AboutPage: React.FC = () => {
                             style={{ transitionDelay: '200ms' }}>
                             Est. 2013 · Los Angeles
                         </p>
-                        <h1 className={heroReveal()} style={{ transitionDelay: '400ms' }}>
-                            <span className="block font-serif leading-[0.88] tracking-tight text-white"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                        <h1>
+                            <TextReveal
+                                className="block font-serif leading-[0.88] tracking-tight text-white"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
+                                delay={0.4}
+                                wordDelay={0.12}
+                            >
                                 The Story
-                            </span>
-                            <span className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                            </TextReveal>
+                            <TextReveal
+                                className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
+                                delay={0.58}
+                                wordDelay={0.12}
+                            >
                                 Behind It All.
-                            </span>
+                            </TextReveal>
                         </h1>
                         <p className={`mt-8 text-base md:text-lg text-white/60 font-sans font-light leading-relaxed max-w-sm ${heroReveal()}`}
                             style={{ transitionDelay: '700ms' }}>
@@ -324,8 +333,9 @@ const AboutPage: React.FC = () => {
                         </p>
                         <h2 className="font-serif tracking-tight leading-[1]"
                             style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
-                            How a rainforest<br />
-                            <span className="italic text-brand-accent">became a kingdom.</span>
+                            <TextReveal delay={0.1} wordDelay={0.1}>How a rainforest</TextReveal>
+                            <br />
+                            <TextReveal className="italic text-brand-accent" delay={0.38} wordDelay={0.1}>became a kingdom.</TextReveal>
                         </h2>
                     </div>
 

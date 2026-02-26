@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Award } from 'lucide-react';
 import CometBackground from './CometBackground';
+import TextReveal from './TextReveal';
+import MagneticButton from './MagneticButton';
 
 const books = [
   { src: '/images/rth.png', title: 'The Adventures of Rockford T. Honeypot', subtitle: 'Amazon #1 Bestseller', genre: 'Fantasy / Adventure', url: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075', featured: true },
@@ -38,8 +40,9 @@ const Services: React.FC = () => {
             Published Works
           </p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight text-brand-text leading-[1.1]">
-            Original books,<br />
-            <span className="italic text-brand-accent">original worlds.</span>
+            <TextReveal delay={0.05} wordDelay={0.09}>Original books,</TextReveal>
+            <br />
+            <TextReveal className="italic text-brand-accent" delay={0.28} wordDelay={0.09}>original worlds.</TextReveal>
           </h2>
           <p className="text-[17px] text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
             Four published titles spanning adventure fiction and children's wellness,
@@ -74,15 +77,17 @@ const Services: React.FC = () => {
                 one of the core story worlds within the Tropland canon. The property is currently being
                 developed for expansion into animated and digital formats.
               </p>
-              <a
-                href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
-              >
-                View on Amazon
-                <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-              </a>
+              <MagneticButton>
+                <a
+                  href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+                >
+                  View on Amazon
+                  <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </a>
+              </MagneticButton>
             </div>
           </div>
         </div>

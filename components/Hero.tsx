@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import CometBackground from './CometBackground';
+import TextReveal from './TextReveal';
+import MagneticButton from './MagneticButton';
 
 const partners = [
   'Adobe', 'Meta', 'OpenAI', 'Topaz Labs', 'Kling AI',
@@ -82,19 +84,21 @@ const Hero: React.FC = () => {
           </p>
         </div>
 
-        <h1 className={`mb-6 ${fade(1)}`} style={{ transitionDelay: '400ms' }}>
-          <span
+        <h1 className="mb-6">
+          <TextReveal
             className="block font-serif text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] leading-[0.9] tracking-tight text-white"
-            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 4px 25px rgba(0,0,0,0.4)' }}
+            delay={0.3}
+            wordDelay={0.12}
           >
             Tropland
-          </span>
-          <span
+          </TextReveal>
+          <TextReveal
             className="block font-serif italic text-5xl sm:text-6xl md:text-[7rem] lg:text-[9rem] leading-[0.9] tracking-tight text-brand-accent"
-            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 4px 25px rgba(0,0,0,0.4)' }}
+            delay={0.45}
+            wordDelay={0.12}
           >
             Universe.
-          </span>
+          </TextReveal>
         </h1>
 
         <p className={`text-lg md:text-xl text-white/70 font-sans font-light leading-relaxed max-w-xl mb-10 ${fade(2)}`} style={{ transitionDelay: '600ms', textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
@@ -128,19 +132,23 @@ const Hero: React.FC = () => {
 
         {/* CTAs */}
         <div className={`flex flex-col sm:flex-row gap-4 mb-16 ${fade(4)}`} style={{ transitionDelay: '1000ms' }}>
-          <a
-            href="#universe"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-          >
-            Explore the Universe
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-[15px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
-          >
-            Partner With Us
-          </a>
+          <MagneticButton>
+            <a
+              href="#universe"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+            >
+              Explore the Universe
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-[15px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
+            >
+              Partner With Us
+            </a>
+          </MagneticButton>
         </div>
       </div>
 

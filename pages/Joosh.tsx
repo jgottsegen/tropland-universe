@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
+import TextReveal from '../components/TextReveal';
+import MagneticButton from '../components/MagneticButton';
 
 const books = [
     { src: '/images/jjb-01.png', title: 'Snackbook Adventures', genre: "Children's / Wellness", url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/' },
@@ -66,15 +68,23 @@ const JooshPage: React.FC = () => {
                             style={{ transitionDelay: '200ms' }}>
                             The Original Series
                         </p>
-                        <h1 className={heroFade()} style={{ transitionDelay: '400ms' }}>
-                            <span className="block font-serif leading-[0.88] tracking-tight text-white"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                        <h1>
+                            <TextReveal
+                                className="block font-serif leading-[0.88] tracking-tight text-white"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
+                                delay={0.4}
+                                wordDelay={0.12}
+                            >
                                 Joosh's Juice
-                            </span>
-                            <span className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}>
+                            </TextReveal>
+                            <TextReveal
+                                className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
+                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
+                                delay={0.58}
+                                wordDelay={0.12}
+                            >
                                 Bar.
-                            </span>
+                            </TextReveal>
                         </h1>
                         <p className={`mt-8 text-base md:text-lg text-white/60 font-sans font-light leading-relaxed max-w-sm ${heroFade()}`}
                             style={{ transitionDelay: '700ms' }}>
@@ -161,21 +171,25 @@ const JooshPage: React.FC = () => {
                             Explore the rest of the <span className="italic text-brand-accent">Universe.</span>
                         </h3>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link
-                                to="/rockford"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                            >
-                                Rockford T. Honeypot
-                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            <Link
-                                to="/contact"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                            >
-                                Partner With Us
-                            </Link>
+                            <MagneticButton>
+                                <Link
+                                    to="/rockford"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+                                >
+                                    Rockford T. Honeypot
+                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </MagneticButton>
+                            <MagneticButton>
+                                <Link
+                                    to="/contact"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                                >
+                                    Partner With Us
+                                </Link>
+                            </MagneticButton>
                         </div>
                     </div>
                 </div>
