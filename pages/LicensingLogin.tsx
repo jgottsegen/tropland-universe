@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { supabase, isConfigured } from '../lib/supabase';
 import { Lock, Mail, AlertCircle } from 'lucide-react';
 
 const LicensingLogin: React.FC = () => {
@@ -14,6 +14,12 @@ const LicensingLogin: React.FC = () => {
         e.preventDefault();
         setLoading(true);
         setError('');
+
+        if (!isConfigured) {
+            setError('Portal is currently being configured. Please try again later.');
+            setLoading(false);
+            return;
+        }
 
         const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
 

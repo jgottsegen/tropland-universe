@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tropland-licensing/
 
-Sitemap: https://www.onelightstudios.com/sitemap.xml
+Sitemap: https://troplanduniverse.com/sitemap.xml
