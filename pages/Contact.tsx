@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Send, CheckCircle, AlertCircle, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
 import CometBackground from '../components/CometBackground';
 
@@ -32,6 +33,13 @@ const ContactPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-brand-deep">
+            <Helmet>
+                <title>Contact — Tropland Universe</title>
+                <meta name="description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
+                <meta property="og:title" content="Contact — Tropland Universe" />
+                <meta property="og:description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
+                <meta property="og:url" content="https://troplanduniverse.com/contact" />
+            </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
                 CONTACT — Split layout: info + form
@@ -59,7 +67,6 @@ const ContactPage: React.FC = () => {
 
                             <p className={`text-lg text-white/50 font-sans font-light leading-relaxed mb-10 max-w-lg ${fade()}`} style={{ transitionDelay: '600ms' }}>
                                 For licensing inquiries, brand partnerships, and collaboration opportunities.
-                                We typically respond within 48 hours.
                             </p>
 
                             <div className={`space-y-4 mb-10 ${fade()}`} style={{ transitionDelay: '700ms' }}>

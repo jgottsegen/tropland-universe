@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Facebook, Youtube, ArrowUp, ArrowUpRight } from 'lucide-react';
+import { Instagram, Facebook, Youtube, ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -50,10 +50,10 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Spacer */}
-          <div className="hidden md:block md:col-span-1" />
+          <div className="hidden md:block md:col-span-2" />
 
           {/* Explore column */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <p className="text-[13px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-5">
               Explore
             </p>
@@ -72,36 +72,6 @@ const Footer: React.FC = () => {
                   >
                     {item.label}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Universe column */}
-          <div className="md:col-span-2">
-            <p className="text-[13px] font-sans font-semibold uppercase tracking-[0.3em] text-white/40 mb-5">
-              The Universe
-            </p>
-            <ul className="space-y-3">
-              {[
-                { label: 'Digital Animal Kingdom', href: 'https://instagram.com/troplanduniverse' },
-                { label: 'Published Books', href: 'https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075' },
-                { label: 'Licensing', href: '/about' },
-                { label: 'Brand Partnerships', href: '/contact' },
-              ].map(item => (
-                <li key={item.label}>
-                  {'href' in item && item.href.startsWith('http') ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer"
-                      className="text-white/40 hover:text-white font-sans text-[15px] transition-colors duration-200 inline-flex items-center gap-1 group">
-                      {item.label}
-                      <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-60 transition-opacity" />
-                    </a>
-                  ) : (
-                    <Link to={item.href as string} onClick={() => window.scrollTo(0, 0)}
-                      className="text-white/40 hover:text-white font-sans text-[15px] transition-colors duration-200">
-                      {item.label}
-                    </Link>
-                  )}
                 </li>
               ))}
             </ul>

@@ -48,7 +48,7 @@ const About: React.FC = () => {
             {
               icon: ShieldCheck,
               title: 'Licensing',
-              description: 'Represented by All American Licensing. Character IP ready for apparel, lifestyle, home décor, and media.',
+              description: 'Represented by All-American Licensing. Character IP ready for apparel, lifestyle, home décor, and media.',
             },
             {
               icon: Globe,
