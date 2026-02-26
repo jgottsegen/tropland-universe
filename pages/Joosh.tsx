@@ -38,7 +38,7 @@ const books = [
     },
     {
         number: 'Companion',
-        src: '/images/jjb-03.png',
+        src: '/images/jjb-04.png',
         title: 'Mandala Coloring Book',
         tagline: 'Activity · Companion',
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Coloring-Book/dp/0990927083',
@@ -55,87 +55,6 @@ const themes = [
     { icon: Star, label: 'Family-First', desc: 'Written for young readers but designed to resonate across generations' },
 ];
 
-// ─── Book cover with tilt + glow micro-interaction ─────────────────────────
-const TiltBookCover: React.FC<{ src: string; alt: string; accent: string }> = ({ src, alt, accent }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-    const [tilt, setTilt] = useState({ x: 0, y: 0 });
-    const [hovered, setHovered] = useState(false);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const el = cardRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / (rect.width / 2);
-        const dy = (e.clientY - cy) / (rect.height / 2);
-        setTilt({ x: -dy * 14, y: dx * 14 });
-    };
-
-    const handleMouseLeave = () => {
-        setTilt({ x: 0, y: 0 });
-        setHovered(false);
-    };
-
-    return (
-        <div
-            ref={cardRef}
-            className="relative max-w-[220px] w-full mx-auto cursor-pointer"
-            style={{ perspective: '900px' }}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={handleMouseLeave}
-        >
-            {/* Ambient glow — unique color per book */}
-            <div
-                className="absolute -inset-6 rounded-3xl blur-2xl pointer-events-none"
-                style={{
-                    background: accent,
-                    opacity: hovered ? 1 : 0,
-                    transition: 'opacity 0.5s ease',
-                }}
-            />
-
-            {/* 3D tilt card */}
-            <div
-                className="relative rounded-2xl overflow-hidden border border-white/10"
-                style={{
-                    aspectRatio: '3/4',
-                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${hovered ? 'translateY(-8px) scale(1.03)' : 'translateY(0) scale(1)'}`,
-                    transition: hovered ? 'transform 0.1s ease-out' : 'transform 0.6s cubic-bezier(0.23,1,0.32,1)',
-                    boxShadow: hovered
-                        ? '0 70px 100px -20px rgba(0,0,0,0.85), 0 30px 60px rgba(0,0,0,0.6)'
-                        : '0 40px 80px -10px rgba(0,0,0,0.8), 0 20px 40px rgba(0,0,0,0.5)',
-                    borderColor: hovered ? 'rgba(232,93,58,0.3)' : 'rgba(255,255,255,0.1)',
-                }}
-            >
-                <img
-                    src={src}
-                    alt={alt}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    style={{
-                        transform: hovered ? 'scale(1.04)' : 'scale(1)',
-                        transition: 'transform 0.6s ease',
-                    }}
-                />
-
-                {/* Specular shimmer that follows tilt */}
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background: `radial-gradient(ellipse at ${50 + tilt.y * 3}% ${50 - tilt.x * 3}%, rgba(255,255,255,0.18) 0%, transparent 60%)`,
-                        opacity: hovered ? 1 : 0,
-                        transition: 'opacity 0.3s ease',
-                    }}
-                />
-                {/* Static sheen */}
-                <div className="absolute inset-0 pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%)' }} />
-            </div>
-        </div>
-    );
-};
 
 // ─── Utility hook ──────────────────────────────────────────────────────────
 function useFadeIn(threshold = 0.08) {
@@ -194,7 +113,7 @@ const JooshPage: React.FC = () => {
                 <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-brand-accent/6 rounded-full blur-[200px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-brand-purple/15 rounded-full blur-[180px] pointer-events-none" />
 
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 py-28 md:py-0 w-full">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 pt-36 md:pt-36 pb-16 md:pb-24 w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                         {/* Left: Text */}
@@ -211,7 +130,7 @@ const JooshPage: React.FC = () => {
 
                             {/* Title — one line, no period */}
                             <h1 className={`font-serif leading-[0.95] tracking-tight mb-8 ${heroFade()}`}
-                                style={{ fontSize: 'clamp(3.8rem, 7.5vw, 7.5rem)', transitionDelay: '320ms', whiteSpace: 'nowrap' }}>
+                                style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)', transitionDelay: '320ms', whiteSpace: 'nowrap' }}>
                                 <TextReveal className="text-white inline" delay={0.4} wordDelay={0.06}>
                                     Joosh's
                                 </TextReveal>
@@ -229,7 +148,7 @@ const JooshPage: React.FC = () => {
                                 The original publishing IP of Tropland Universe. A children's book series that started it all.
                             </p>
                             <p className={`text-xl text-white/70 font-sans leading-relaxed mb-12 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
-                                First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe — years before the Digital Animal Kingdom reached a billion views.
+                                First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe, years before the Digital Animal Kingdom reached a billion views.
                             </p>
 
                             {/* Stats — larger, more readable */}
@@ -252,24 +171,6 @@ const JooshPage: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className={`flex flex-wrap items-center gap-4 ${heroFade()}`} style={{ transitionDelay: '800ms' }}>
-                                <a
-                                    href="https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_24px_rgba(232,93,58,0.45)]"
-                                >
-                                    View on Amazon
-                                    <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                </a>
-                                <a
-                                    href="#books"
-                                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                                >
-                                    Explore the Series
-                                    <ArrowRight size={18} />
-                                </a>
-                            </div>
                         </div>
 
                         {/* Right: Fanned books — enlarged */}
@@ -393,9 +294,13 @@ const JooshPage: React.FC = () => {
                                 style={{ transitionDelay: `${i * 80}ms` }}
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
-                                    {/* Book cover — 3D tilt */}
+                                    {/* Book cover */}
                                     <div className={`md:col-span-2 flex justify-center ${i % 2 !== 0 ? 'md:order-2' : ''}`}>
-                                        <TiltBookCover src={book.src} alt={book.title} accent={book.accent} />
+                                        <div className="relative max-w-[180px] w-full mx-auto">
+                                            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_80px_-10px_rgba(0,0,0,0.8)]" style={{ aspectRatio: '3/4' }}>
+                                                <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     {/* Text */}
@@ -451,10 +356,7 @@ const JooshPage: React.FC = () => {
 
                     <div className={`space-y-6 text-xl md:text-2xl text-brand-dark-text/80 font-sans leading-relaxed mb-14 ${sec4.fade()}`} style={{ transitionDelay: '160ms' }}>
                         <p>
-                            Joosh's Juice Bar is part of the broader Tropland Universe IP, a publishing and media brand trusted by global partners including Adobe, Meta, and represented by All American Licensing.
-                        </p>
-                        <p>
-                            The series' themes of wellness, childhood positivity, and animal-based characters make it a strong fit for consumer products, educational content, and brand partnerships targeting families and young audiences.
+                            Joosh's Juice Bar is part of the broader Tropland Universe IP, a publishing and media brand trusted by global partners.
                         </p>
                     </div>
 

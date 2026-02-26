@@ -45,7 +45,7 @@ const Services: React.FC = () => {
           </h2>
           <p className="text-[17px] text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
             Five published titles spanning adventure fiction and children's wellness,
-            written, illustrated, and produced by Josh Gottsegen. The foundational story
+            Developed, written, and produced by Josh Gottsegen. The foundational story
             worlds behind Tropland Universe.
           </p>
         </div>
@@ -73,7 +73,7 @@ const Services: React.FC = () => {
               </h3>
               <p className="text-white/60 font-sans text-[17px] leading-relaxed mb-6 max-w-lg">
                 Originally published as a fantasy-adventure novel, Rockford T. Honeypot established
-                one of the core story worlds within the Tropland canon. The property is currently being
+                one of the core story worlds within the Tropland ecosystem. The property is currently being
                 developed for expansion into animated and digital formats.
               </p>
               <a

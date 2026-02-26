@@ -71,7 +71,7 @@ const Ventures: React.FC = () => {
                     style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}>
                     {num}
                   </p>
-                  <p className="text-white/30 font-sans text-xs leading-snug tracking-wide whitespace-pre-line">
+                  <p className="text-white/65 font-sans text-xs leading-snug tracking-wide whitespace-pre-line">
                     {label}
                   </p>
                 </div>
