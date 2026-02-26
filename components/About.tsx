@@ -23,7 +23,7 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
+          <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
             Partnerships & Licensing
           </p>
         </div>
@@ -73,7 +73,7 @@ const About: React.FC = () => {
                   <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-brand-dark-text/55 font-sans text-sm leading-relaxed">
+                  <p className="text-brand-dark-text/55 font-sans text-[15px] leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -85,7 +85,7 @@ const About: React.FC = () => {
         <div className={`text-center ${fade(5)}`} style={{ transitionDelay: '500ms' }}>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-purple text-white font-sans font-semibold text-sm hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-purple text-white font-sans font-semibold text-[15px] hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
           >
             Get in Touch
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

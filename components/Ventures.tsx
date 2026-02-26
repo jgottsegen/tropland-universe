@@ -38,7 +38,7 @@ const Ventures: React.FC = () => {
 
           {/* Left: Bio + stats */}
           <div className={`lg:col-span-5 lg:pt-6 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-            <p className="text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
+            <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
               The Visionary
             </p>
             <h2 className="font-serif tracking-tight leading-[0.9] text-white mb-9"
@@ -47,7 +47,7 @@ const Ventures: React.FC = () => {
               <span className="italic text-brand-accent">Gottsegen</span>
             </h2>
 
-            <div className="space-y-5 text-white/55 font-sans text-base leading-relaxed mb-10">
+            <div className="space-y-5 text-white/55 font-sans text-[17px] leading-relaxed mb-10">
               <p>
                 Twenty-five years across design, film production, and entertainment. Credits with Universal Studios, Disney, Fox, IMG, the NFL, IndyCar, Ferrari, and the Vatican Museums.
               </p>
@@ -68,7 +68,7 @@ const Ventures: React.FC = () => {
                     style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}>
                     {num}
                   </p>
-                  <p className="text-white/30 font-sans text-[10px] leading-snug tracking-wide whitespace-pre-line">
+                  <p className="text-white/30 font-sans text-xs leading-snug tracking-wide whitespace-pre-line">
                     {label}
                   </p>
                 </div>
@@ -78,7 +78,7 @@ const Ventures: React.FC = () => {
             <Link
               to="/about"
               onClick={() => window.scrollTo(0, 0)}
-              className="group inline-flex items-center gap-2 text-sm font-sans font-semibold text-white/50 hover:text-white transition-colors duration-200"
+              className="group inline-flex items-center gap-2 text-[15px] font-sans font-semibold text-white/50 hover:text-white transition-colors duration-200"
             >
               Full Story
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -113,7 +113,7 @@ const Ventures: React.FC = () => {
                   style={{ background: 'linear-gradient(to top, rgba(232,93,58,0.1) 0%, transparent 55%)' }} />
                 {/* Caption */}
                 <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                  <p className="font-sans text-white/40 text-xs tracking-[0.15em] uppercase">
+                  <p className="font-sans text-white/40 text-[13px] tracking-[0.15em] uppercase">
                     Founder, Tropland Universe
                   </p>
                 </div>

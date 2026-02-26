@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`relative px-4 py-2 text-[13px] font-sans font-medium transition-colors duration-200 rounded-full ${
+                  className={`relative px-4 py-2 text-[15px] font-sans font-medium transition-colors duration-200 rounded-full ${
                     isActive
                       ? isLight ? 'text-brand-deep' : 'text-white'
                       : isLight
@@ -106,7 +106,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-4">
             <Link
               to="/contact"
-              className="hidden md:inline-flex text-[13px] font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,93,58,0.35)] hover:scale-[1.02]"
+              className="hidden md:inline-flex text-[15px] font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,93,58,0.35)] hover:scale-[1.02]"
             >
               Partner With Us
             </Link>
@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
             >
               Partner With Us
             </Link>
-            <p className="text-center text-[10px] font-sans text-white/15 uppercase tracking-[0.3em]">
+            <p className="text-center text-xs font-sans text-white/15 uppercase tracking-[0.3em]">
               The Digital Animal Kingdom
             </p>
           </div>

@@ -34,14 +34,14 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
         <div className={`mb-16 ${fade(0)}`} style={{ transitionDelay: '0ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent/80 mb-4">
+          <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent/80 mb-4">
             Published Works
           </p>
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight text-brand-text leading-[1.1]">
             Original books,<br />
             <span className="italic text-brand-accent">original worlds.</span>
           </h2>
-          <p className="text-base text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
+          <p className="text-[17px] text-white/65 font-sans mt-4 max-w-2xl leading-relaxed">
             Four published titles spanning adventure fiction and children's wellness,
             written, illustrated, and produced by Josh Gottsegen. The foundational story
             worlds behind Tropland Universe.
@@ -58,18 +58,18 @@ const Services: React.FC = () => {
             </div>
             <div className="md:col-span-3">
               <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-sm font-sans font-semibold backdrop-blur-sm border border-brand-accent/20">
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-[15px] font-sans font-semibold backdrop-blur-sm border border-brand-accent/20">
                   <Award size={14} />
                   Amazon #1 Bestseller
                 </span>
-                <span className="text-xs font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/15 text-white/65 backdrop-blur-sm bg-white/5">
+                <span className="text-[13px] font-sans font-semibold uppercase tracking-wider px-4 py-2 rounded-full border border-white/15 text-white/65 backdrop-blur-sm bg-white/5">
                   Fantasy / Adventure
                 </span>
               </div>
               <h3 className="font-serif text-3xl md:text-4xl text-white mb-3 leading-tight">
                 The Adventures of<br />Rockford T. <span className="italic text-brand-accent">Honeypot</span>
               </h3>
-              <p className="text-white/60 font-sans text-base leading-relaxed mb-6 max-w-lg">
+              <p className="text-white/60 font-sans text-[17px] leading-relaxed mb-6 max-w-lg">
                 Originally published as a fantasy-adventure novel, Rockford T. Honeypot established
                 one of the core story worlds within the Tropland canon. The property is currently being
                 developed for expansion into animated and digital formats.
@@ -78,7 +78,7 @@ const Services: React.FC = () => {
                 href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
+                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.3)]"
               >
                 View on Amazon
                 <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -89,12 +89,12 @@ const Services: React.FC = () => {
 
         {/* Joosh's Juice Bar Series */}
         <div className={`flex items-center justify-between mb-6 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
-          <span className="text-sm font-sans font-bold text-brand-accent uppercase tracking-[0.2em]">
+          <span className="text-[15px] font-sans font-bold text-brand-accent uppercase tracking-[0.2em]">
             Joosh's Juice Bar Series
           </span>
           <a href="https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/"
             target="_blank" rel="noopener noreferrer"
-            className="text-xs font-sans text-white/50 hover:text-white/80 transition-colors flex items-center gap-1">
+            className="text-sm font-sans text-white/50 hover:text-white/80 transition-colors flex items-center gap-1">
             View All <ArrowUpRight size={11} />
           </a>
         </div>
@@ -114,10 +114,10 @@ const Services: React.FC = () => {
                   <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
                 </div>
               </div>
-              <h4 className="font-sans text-base font-bold text-white group-hover:text-brand-accent transition-colors leading-tight mb-1">
+              <h4 className="font-sans text-[17px] font-bold text-white group-hover:text-brand-accent transition-colors leading-tight mb-1">
                 {book.title}
               </h4>
-              <p className="text-sm text-white/60 font-sans">{book.genre}</p>
+              <p className="text-[15px] text-white/60 font-sans">{book.genre}</p>
             </a>
           ))}
         </div>

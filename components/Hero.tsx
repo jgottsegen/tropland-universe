@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full pb-8 pt-40">
 
         <div className={fade(0)} style={{ transitionDelay: '200ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-6">
+          <p className="text-[13px] font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-6">
             The Digital Animal Kingdom
           </p>
         </div>
@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
           </span>
         </h1>
 
-        <p className={`text-base md:text-lg text-white/70 font-sans font-light leading-relaxed max-w-xl mb-10 ${fade(2)}`} style={{ transitionDelay: '600ms', textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
+        <p className={`text-lg md:text-xl text-white/70 font-sans font-light leading-relaxed max-w-xl mb-10 ${fade(2)}`} style={{ transitionDelay: '600ms', textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>
           Where nature meets imagination. A character-driven wildlife media brand<br className="hidden md:block" />{' '}blending cinematic AI art, original IP, and viral storytelling.
         </p>
 
@@ -111,7 +111,7 @@ const Hero: React.FC = () => {
               <div className="text-3xl md:text-5xl font-serif text-white leading-none drop-shadow-lg">
                 <AnimatedCounter end={stat.end} suffix={stat.suffix} isVisible={loaded} />
               </div>
-              <div className="text-xs font-sans font-semibold text-white/60 uppercase tracking-[0.2em] mt-2">
+              <div className="text-[13px] font-sans font-semibold text-white/60 uppercase tracking-[0.2em] mt-2">
                 {stat.label}
               </div>
             </div>
@@ -130,14 +130,14 @@ const Hero: React.FC = () => {
         <div className={`flex flex-col sm:flex-row gap-4 mb-16 ${fade(4)}`} style={{ transitionDelay: '1000ms' }}>
           <a
             href="#universe"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
           >
             Explore the Universe
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-[15px] hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
           >
             Partner With Us
           </a>

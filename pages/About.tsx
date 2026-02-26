@@ -110,7 +110,7 @@ const ForestGhostPanel: React.FC = () => {
             {/* Bottom label */}
             <div className="absolute bottom-5 inset-x-0 text-center pointer-events-none">
                 <span className="text-[8px] font-sans font-semibold uppercase tracking-[0.3em]"
-                    style={{ color: 'rgba(27,14,54,0.25)' }}>
+                    style={{ color: 'rgba(27,14,54,0.25)', fontSize: '11px' }}>
                     Image Coming
                 </span>
             </div>
@@ -236,7 +236,7 @@ const AboutPage: React.FC = () => {
 
                 <div className="absolute inset-0 flex flex-col justify-end">
                     <div className="max-w-7xl mx-auto px-6 md:px-12 w-full pb-14 md:pb-20">
-                        <p className={`text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroReveal()}`}
+                        <p className={`text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroReveal()}`}
                             style={{ transitionDelay: '200ms' }}>
                             Est. 2013 · Los Angeles
                         </p>
@@ -271,7 +271,7 @@ const AboutPage: React.FC = () => {
                         {/* Left: label + quote + body */}
                         <div>
                             <div className={secMythos.fade()} style={{ transitionDelay: '0ms' }}>
-                                <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
+                                <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
                                     The Mythology
                                 </p>
                             </div>
@@ -298,7 +298,7 @@ const AboutPage: React.FC = () => {
                         {/* Right: ghost shell panel with cursor tilt microinteraction */}
                         <div className={`${secMythos.fade()} hidden lg:block sticky top-24`} style={{ transitionDelay: '220ms' }}>
                             <ForestGhostPanel />
-                            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-brand-accent/50 text-center mt-3">
+                            <p className="text-xs font-sans font-semibold uppercase tracking-[0.28em] text-brand-accent/50 text-center mt-3">
                                 The Tropland Rainforest
                             </p>
                         </div>
@@ -319,7 +319,7 @@ const AboutPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
                     <div className={`mb-12 ${secOrigin.fade()}`}>
-                        <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
+                        <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
                             Origin
                         </p>
                         <h2 className="font-serif tracking-tight leading-[1]"
@@ -343,9 +343,27 @@ const AboutPage: React.FC = () => {
                         >
                             <div className="flex flex-col md:flex-row" style={{ minHeight: '22rem' }}>
 
-                                {/* LEFT: Image — wider shell, ready for hero image */}
-                                <div className="md:w-[55%] flex-shrink-0 relative overflow-hidden rounded-tl-2xl rounded-bl-2xl" style={{ minHeight: '14rem' }}>
-                                    <GhostShell className="absolute inset-0 rounded-none" delay="0s" label="Image coming" />
+                                {/* LEFT: Book covers grid */}
+                                <div className="md:w-[55%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px] bg-gradient-to-br from-brand-accent/[0.06] to-transparent" style={{ minHeight: '14rem' }}>
+                                    <div className="absolute inset-0 flex items-center justify-center gap-2 p-3 md:p-6">
+                                        {[
+                                            { src: '/images/book-banana.jpg', alt: "Joosh's Juice Bar: Blue Banana Berry" },
+                                            { src: '/images/book-snackbook.jpg', alt: "Joosh's Juice Bar: Snack Book" },
+                                            { src: '/images/book-teeoff.jpg', alt: "Joosh's Juice Bar: Tee Off" },
+                                            { src: '/images/book-rockford.jpg', alt: 'The Adventures of Rockford T. Honeypot' },
+                                        ].map((book, i) => (
+                                            <img
+                                                key={book.src}
+                                                src={book.src}
+                                                alt={book.alt}
+                                                className="h-[92%] md:h-[78%] max-h-[340px] md:max-h-[220px] w-auto rounded-lg shadow-2xl shadow-black/40 object-cover"
+                                                style={{
+                                                    transform: `rotate(${(i - 1.5) * 3}deg) translateY(${Math.abs(i - 1.5) * 6}px)`,
+                                                    transition: 'transform 0.4s ease',
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
                                     {/* Warm accent overlay */}
                                     <div className="absolute inset-0 pointer-events-none"
                                         style={{ background: 'linear-gradient(135deg, rgba(232,93,58,0.06) 0%, transparent 60%)' }} />
@@ -357,7 +375,7 @@ const AboutPage: React.FC = () => {
                                     <div>
                                         <div className="flex items-start justify-between mb-4">
                                             <div>
-                                                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
+                                                <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                                     Chapter I · Series Origin
                                                 </p>
                                                 <p className="font-serif text-white leading-none"
@@ -377,7 +395,7 @@ const AboutPage: React.FC = () => {
                                         <h3 className="font-serif text-xl md:text-2xl text-white mb-3 leading-tight">
                                             The World Was Written First.
                                         </h3>
-                                        <p className="text-white/65 font-sans text-sm md:text-[0.9rem] leading-relaxed max-w-md">
+                                        <p className="text-white/65 font-sans text-[15px] leading-relaxed max-w-md">
                                             The Joosh's Juice Bar series launched the Tropland mythology across three volumes plus a coloring book. <span className="text-white/82">The Adventures of Rockford T. Honeypot</span> followed in 2016, a second original IP rooted in the same universe.
                                         </p>
                                     </div>
@@ -390,7 +408,7 @@ const AboutPage: React.FC = () => {
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <div className="mb-4">
-                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
+                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter II
                                     </p>
                                     <p className="font-serif text-white leading-none"
@@ -401,17 +419,18 @@ const AboutPage: React.FC = () => {
                                 {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
                                     <img
-                                        src="https://troplanduniverse.com/wp-content/uploads/2025/10/gorilla-thumb.png"
+                                        src="/images/chapter2.png"
                                         alt="Digital Evolution – Tropland Universe"
                                         className="w-full h-full object-cover"
+                                        style={{ objectPosition: 'center 20%' }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
-                                    <h3 className="font-sans text-base font-bold text-white mb-2">
+                                    <h3 className="font-sans text-[17px] font-bold text-white mb-2">
                                         Digital Evolution
                                     </h3>
-                                    <p className="text-white/65 font-sans text-sm leading-relaxed">
+                                    <p className="text-white/65 font-sans text-[15px] leading-relaxed">
                                         Tropland goes AI-native. The characters find a new cinematic visual language, reaching millions daily across every major platform.
                                     </p>
                                 </div>
@@ -422,7 +441,7 @@ const AboutPage: React.FC = () => {
                         <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
                             <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
                                 <div className="mb-4">
-                                    <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
+                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter III
                                     </p>
                                     <p className="font-serif text-white leading-none"
@@ -433,18 +452,18 @@ const AboutPage: React.FC = () => {
                                 {/* Image */}
                                 <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
                                     <img
-                                        src="https://troplanduniverse.com/wp-content/uploads/2025/10/lion-peace-1.png"
+                                        src="/images/chapter3.png"
                                         alt="The Kingdom – Tropland Universe"
                                         className="w-full h-full object-cover"
-                                        style={{ objectPosition: 'center 25%' }}
+                                        style={{ objectPosition: 'center 20%' }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                                 </div>
                                 <div className="mt-auto">
-                                    <h3 className="font-sans text-base font-bold text-white mb-2">
+                                    <h3 className="font-sans text-[17px] font-bold text-white mb-2">
                                         The Kingdom
                                     </h3>
-                                    <p className="text-white/65 font-sans text-sm leading-relaxed">
+                                    <p className="text-white/65 font-sans text-[15px] leading-relaxed">
                                         Over a billion views. Licensed by All American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.
                                     </p>
                                 </div>
@@ -466,7 +485,7 @@ const AboutPage: React.FC = () => {
                         {/* Left: invitation copy */}
                         <div className="lg:col-span-5">
                             <div className={secContact.fade()}>
-                                <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
+                                <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
                                     Enter the Kingdom
                                 </p>
                                 <h2 className="font-serif tracking-tight leading-[1] mb-8 text-brand-dark-text"
@@ -479,17 +498,17 @@ const AboutPage: React.FC = () => {
                                 </p>
                                 <div className="space-y-3">
                                     {['Brand partnerships', 'Character licensing', 'Content distribution'].map((item) => (
-                                        <div key={item} className="flex items-center gap-3 text-brand-dark-text/60 font-sans text-sm">
+                                        <div key={item} className="flex items-center gap-3 text-brand-dark-text/60 font-sans text-[15px]">
                                             <div className="w-1 h-1 rounded-full shrink-0" style={{ background: 'rgba(232,93,58,0.6)' }} />
                                             {item}
                                         </div>
                                     ))}
                                 </div>
                                 <div className="mt-14 pt-10 border-t border-brand-dark-text/[0.07]">
-                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/55 mb-3">
+                                    <p className="text-[13px] font-sans font-semibold uppercase tracking-[0.3em] text-brand-dark-text/55 mb-3">
                                         Trusted by
                                     </p>
-                                    <p className="text-brand-dark-text/60 font-sans text-sm leading-relaxed">
+                                    <p className="text-brand-dark-text/60 font-sans text-[15px] leading-relaxed">
                                         Adobe · Meta · OpenAI<br />Topaz Labs · Kling AI
                                     </p>
                                 </div>
@@ -503,7 +522,7 @@ const AboutPage: React.FC = () => {
                                     style={{ transitionDelay: '100ms' }}>
                                     <CheckCircle size={36} className="text-brand-accent mx-auto mb-5" />
                                     <h3 className="font-serif text-2xl text-brand-dark-text mb-2">Message received.</h3>
-                                    <p className="text-brand-muted font-sans text-sm">We'll be in touch within 48 hours.</p>
+                                    <p className="text-brand-muted font-sans text-[15px]">We'll be in touch within 48 hours.</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit}
@@ -511,21 +530,21 @@ const AboutPage: React.FC = () => {
                                     style={{ transitionDelay: '100ms' }}>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div>
-                                            <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
+                                            <label className="block text-[13px] font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
                                                 Name
                                             </label>
                                             <input type="text" required value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
+                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
                                                 placeholder="Your name" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
+                                            <label className="block text-[13px] font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
                                                 Email
                                             </label>
                                             <input type="email" required value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
+                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
                                                 placeholder="Your email" />
                                         </div>
                                     </div>
@@ -535,7 +554,7 @@ const AboutPage: React.FC = () => {
                                         </label>
                                         <textarea required rows={6} value={message}
                                             onChange={(e) => setMessage(e.target.value)}
-                                            className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-sm placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors resize-none"
+                                            className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors resize-none"
                                             placeholder="Tell us about your project or inquiry" />
                                     </div>
 
@@ -554,7 +573,7 @@ const AboutPage: React.FC = () => {
 
                                     <div className="pt-2">
                                         <button type="submit" disabled={formStatus === 'submitting'}
-                                            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_40px_rgba(232,93,58,0.4)]">
+                                            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_40px_rgba(232,93,58,0.4)]">
                                             {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
                                             <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                         </button>

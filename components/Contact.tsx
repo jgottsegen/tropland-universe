@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-brand-purple/20 rounded-full blur-[200px] pointer-events-none ambient-glow" style={{ animationDelay: '3s' }}></div>
 
       <div className="max-w-3xl mx-auto px-6 md:px-12 relative z-10">
-        <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
+        <p className="text-[13px] font-sans font-semibold tracking-[0.25em] uppercase text-brand-accent mb-4">
           Contact
         </p>
 
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
           Get in <span className="italic text-brand-accent">touch.</span>
         </h2>
 
-        <p className="text-sm text-white/40 font-sans mb-12 max-w-xl leading-relaxed">
+        <p className="text-[15px] text-white/40 font-sans mb-12 max-w-xl leading-relaxed">
           For licensing inquiries, brand partnerships, and collaboration opportunities.
           We typically respond within 48 hours.
         </p>
@@ -67,24 +67,24 @@ const Contact: React.FC = () => {
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
+                <label className="block text-[13px] font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
+                <label className="block text-[13px] font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                  className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
                   placeholder="Your email"
                 />
               </div>
@@ -96,7 +96,7 @@ const Contact: React.FC = () => {
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
+                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-[15px] bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
                 placeholder="Tell us about your project or inquiry"
               />
             </div>
@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
             >
               {status === 'submitting' ? 'Sending...' : 'Send Message'}
               <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
         {/* Direct email fallback */}
         <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-3">
           <Mail size={16} className="text-white/45" />
-          <p className="text-white/55 font-sans text-sm">
+          <p className="text-white/55 font-sans text-[15px]">
             Or email directly:{' '}
             <a href="mailto:partnerships@troplanduniverse.com" className="text-white/60 hover:text-brand-accent transition-colors underline">
               partnerships@troplanduniverse.com

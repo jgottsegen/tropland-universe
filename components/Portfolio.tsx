@@ -68,7 +68,7 @@ const Portfolio: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
+          <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
             The Collection
           </p>
         </div>
@@ -78,11 +78,11 @@ const Portfolio: React.FC = () => {
         </h2>
 
         <div className={`flex flex-wrap items-center gap-3 mb-12 ${fade(1)}`} style={{ transitionDelay: '150ms' }}>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-sm font-sans font-semibold">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-[15px] font-sans font-semibold">
             <Award size={14} />
             #1 AI Artist Influencer, Feedspot 2025 & 2026
           </span>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 text-brand-purple text-sm font-sans font-semibold">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 text-brand-purple text-[15px] font-sans font-semibold">
             Represented by All American Licensing
           </span>
         </div>
@@ -95,7 +95,7 @@ const Portfolio: React.FC = () => {
               has grown into a global digital animal kingdom, connecting imagination and
               nature through books, cinematic AI art, and licensing-ready IP.
             </p>
-            <p className="text-base text-brand-muted font-sans leading-relaxed mb-8">
+            <p className="text-[17px] text-brand-muted font-sans leading-relaxed mb-8">
               Every image and video is crafted for emotional impact and global brand scalability.
               Photorealistic wildlife content viewed over a billion times across 50+ countries.
               Trusted by Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
@@ -105,7 +105,7 @@ const Portfolio: React.FC = () => {
                 href="https://facebook.com/troplanduniverse"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-xs hover:bg-brand-cream-dark transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
               >
                 Facebook
                 <ArrowUpRight size={14} />
@@ -114,7 +114,7 @@ const Portfolio: React.FC = () => {
                 href="https://youtube.com/@troplanduniverse"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-xs hover:bg-brand-cream-dark transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
               >
                 YouTube
                 <ArrowUpRight size={14} />
@@ -135,7 +135,7 @@ const Portfolio: React.FC = () => {
                     <div className="text-3xl md:text-4xl font-serif text-brand-dark-text leading-none mb-1">
                       <AnimatedMetric end={m.end} suffix={m.suffix} isVisible={isVisible} />
                     </div>
-                    <div className="text-xs font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
+                    <div className="text-[13px] font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
                       {m.label}
                     </div>
                   </div>
