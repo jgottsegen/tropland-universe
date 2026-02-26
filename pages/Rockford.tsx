@@ -80,7 +80,7 @@ const RockfordPage: React.FC = () => {
                 <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-brand-accent/8 rounded-full blur-[200px] pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-brand-purple/15 rounded-full blur-[180px] pointer-events-none"></div>
 
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 py-24 md:py-0">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 pt-36 md:pt-40 pb-24">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                         {/* Text */}
@@ -95,7 +95,7 @@ const RockfordPage: React.FC = () => {
                                 </span>
                             </div>
 
-                            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6">
+                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6">
                                 <TextReveal className="text-white" delay={0.4} wordDelay={0.1}>The Adventures of</TextReveal>
                                 <br />
                                 <TextReveal className="text-white" delay={0.58} wordDelay={0.1}>Rockford T.</TextReveal>
@@ -106,7 +106,7 @@ const RockfordPage: React.FC = () => {
                                 A fantasy adventure set within the Tropland Universe. Explore a distinctive animal world built on curiosity, tension, and discovery.
                             </p>
                             <p className={`text-lg text-white/80 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
-                                Rockford's journey established the modern Tropland canon, laying the foundation for animation, digital media, and long form storytelling.
+                                Rockford's journey established the modern Tropland ecosystem, laying the foundation for animation, digital media, and long form storytelling.
                             </p>
 
                             {/* Quick stats */}
@@ -114,7 +114,7 @@ const RockfordPage: React.FC = () => {
                                 {[
                                     { icon: Award, label: 'Amazon #1', sub: 'Bestseller' },
                                     { icon: BookOpen, label: 'Middle-Grade', sub: 'Novel' },
-                                    { icon: Star, label: 'Tropland', sub: 'Canon #1' },
+                                    { icon: Star, label: 'Tropland', sub: 'Origin Story' },
                                 ].map(({ icon: Icon, label, sub }) => (
                                     <div key={label} className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-xl bg-brand-accent/15 border border-brand-accent/20 flex items-center justify-center flex-shrink-0">
@@ -147,7 +147,7 @@ const RockfordPage: React.FC = () => {
                                 ref={bookRef}
                                 onMouseMove={onBookMove}
                                 onMouseLeave={onBookLeave}
-                                className="relative group max-w-md w-full cursor-pointer"
+                                className="relative group max-w-xs md:max-w-md w-full cursor-pointer"
                                 style={{
                                     perspective: '1000px',
                                 }}
@@ -227,7 +227,7 @@ const RockfordPage: React.FC = () => {
                     </h2>
 
                     <div className={`space-y-8 text-left md:text-center ${sec2.fade()}`} style={{ transitionDelay: '160ms' }}>
-                        <p className="text-2xl md:text-3xl font-sans font-medium text-brand-dark-text leading-relaxed">
+                        <p className="text-xl md:text-2xl font-sans font-medium text-brand-dark-text leading-relaxed">
                             Set deep within the Tropland Universe, <span className="italic">The Adventures of Rockford T. Honeypot</span> is a fantasy adventure novel that established the narrative foundation of the broader franchise.
                         </p>
 

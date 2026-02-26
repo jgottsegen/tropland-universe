@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Award, Globe, ImageIcon, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const metrics = [
   { end: 5, suffix: '', label: 'Published Books', icon: Award },
@@ -82,9 +83,6 @@ const Portfolio: React.FC = () => {
             <Award size={14} />
             #1 AI Artist Influencer, Feedspot 2025 & 2026
           </span>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 text-brand-purple text-[15px] font-sans font-semibold">
-            Represented by All American Licensing
-          </span>
         </div>
 
         {/* Description + Metrics */}
@@ -95,12 +93,21 @@ const Portfolio: React.FC = () => {
               has grown into a global digital animal kingdom, connecting imagination and
               nature through books, cinematic AI art, and licensing-ready IP.
             </p>
-            <p className="text-[17px] text-brand-muted font-sans leading-relaxed mb-8">
+            <p className="text-xl md:text-2xl text-brand-muted font-sans leading-relaxed mb-8">
               Every image and video is crafted for emotional impact and global brand scalability.
               Photorealistic wildlife content viewed over a billion times across 50+ countries.
               Trusted by Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
             </p>
             <div className="flex flex-wrap gap-3">
+              <a
+                href="https://instagram.com/troplanduniverse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
+              >
+                Instagram
+                <ArrowUpRight size={14} />
+              </a>
               <a
                 href="https://facebook.com/troplanduniverse"
                 target="_blank"
@@ -110,16 +117,13 @@ const Portfolio: React.FC = () => {
                 Facebook
                 <ArrowUpRight size={14} />
               </a>
-              <a
-                href="https://youtube.com/@troplanduniverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
-              >
-                YouTube
-                <ArrowUpRight size={14} />
-              </a>
             </div>
+            <p className="mt-4 text-sm font-sans text-brand-muted">
+              Licensing Inquiries:{' '}
+              <Link to="/licensing" className="text-brand-dark-text font-semibold hover:text-brand-accent transition-colors">
+                All American Licensing
+              </Link>
+            </p>
           </div>
 
           <div className="lg:col-span-2">

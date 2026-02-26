@@ -22,8 +22,8 @@ function useFadeIn(threshold = 0.08) {
 const stats = [
     { value: '1B+', label: 'Content Views Worldwide' },
     { value: '#1', label: 'AI Art Influencer 2025 & 2026' },
-    { value: '10M+', label: 'Monthly Social Impressions' },
-    { value: '200+', label: 'Original Characters' },
+    { value: '~40M', label: 'Monthly Social Impressions' },
+    { value: '50K+', label: 'Image & Video Library' },
 ];
 
 // ─── Product categories ────────────────────────────────────────────────────
@@ -127,8 +127,8 @@ const LicensingPage: React.FC = () => {
 
                     <p className={`text-2xl md:text-3xl text-white/80 font-sans font-medium leading-relaxed max-w-3xl mx-auto mb-6 ${introFade()}`}
                         style={{ transitionDelay: '480ms' }}>
-                        Tropland Universe is a character-driven wildlife media property with over a billion content views,
-                        200+ original characters, and a global audience that spans all ages.
+                        Tropland Universe™ is a character-driven wildlife media property with over a billion content views,
+                        a 50K+ image and video library, and a global audience that spans all ages.
                     </p>
 
                     <p className={`text-xl text-white/60 font-sans leading-relaxed max-w-2xl mx-auto mb-16 ${introFade()}`}
@@ -162,7 +162,7 @@ const LicensingPage: React.FC = () => {
                             <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </Link>
                         <a
-                            href="https://allamericanlicensing.com"
+                            href="https://www.aalmg.com"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
@@ -172,19 +172,6 @@ const LicensingPage: React.FC = () => {
                         </a>
                     </div>
 
-                    {/* Trusted by */}
-                    <div className={`mt-20 ${introFade()}`} style={{ transitionDelay: '800ms' }}>
-                        <p className="text-sm font-sans font-semibold uppercase tracking-[0.25em] text-white/30 mb-6">
-                            Trusted by
-                        </p>
-                        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-                            {['Adobe', 'Meta', 'OpenAI', 'Spotify', 'HBO', 'Amazon'].map(name => (
-                                <span key={name} className="font-sans text-white/40 font-semibold text-lg tracking-wide hover:text-white/70 transition-colors duration-300 cursor-default">
-                                    {name}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -231,7 +218,7 @@ const LicensingPage: React.FC = () => {
                                     Original IP. Global reach. <span className="italic text-brand-accent">Values-driven.</span>
                                 </h3>
                                 <p className="font-sans text-lg text-brand-dark-text/75 leading-relaxed mb-6">
-                                    Tropland Universe is built on a foundation of original storytelling, beginning with published
+                                    Tropland Universe™ is built on a foundation of original storytelling, beginning with published
                                     children's books in 2013 and evolving into a billion-view digital brand. Every character,
                                     narrative, and visual asset is wholly owned by OneLight Studios.
                                 </p>

@@ -369,7 +369,7 @@ const AboutPage: React.FC = () => {
                                         style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,58,0.18) 0%, transparent 65%)' }} />
 
                                     {/* Books — large fan display */}
-                                    <div className="absolute inset-0 flex items-end justify-center pb-4 md:pb-6" style={{ perspective: '900px' }}>
+                                    <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '900px' }}>
                                         <div className="flex items-end justify-center w-full h-full px-4 md:px-8 gap-0">
                                             {[
                                                 { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry", rot: -14, tx: '8px', ty: '-8px', z: 1 },
@@ -444,7 +444,7 @@ const AboutPage: React.FC = () => {
                                             <span className="italic text-brand-accent">Written First.</span>
                                         </h3>
                                         <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the canon and introduced Tropland beyond picture books.
+                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem and introduced Tropland beyond picture books.
                                         </p>
                                     </div>
 
@@ -459,7 +459,7 @@ const AboutPage: React.FC = () => {
                                             ].map((ch, i) => (
                                                 <div key={ch.year} className="flex items-stretch gap-0 flex-1">
                                                     <div className={`flex-1 rounded-xl px-4 py-3 ${ch.active ? 'bg-brand-accent/15 border border-brand-accent/30' : 'border border-white/[0.07]'}`}>
-                                                        <p className={`font-serif text-xl leading-none mb-1 ${ch.active ? 'text-brand-accent' : 'text-white/40'}`}>{ch.year}</p>
+                                                        <p className="font-serif text-xl leading-none mb-1 text-brand-accent">{ch.year}</p>
                                                         <p className="text-[11px] font-sans font-medium text-white/35 uppercase tracking-[0.15em]">{ch.label}</p>
                                                     </div>
                                                     {i < 2 && (
@@ -484,7 +484,7 @@ const AboutPage: React.FC = () => {
                                     <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter II
                                     </p>
-                                    <p className="font-serif text-white leading-none"
+                                    <p className="font-serif text-brand-accent leading-none"
                                         style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
                                         2022
                                     </p>
@@ -517,7 +517,7 @@ const AboutPage: React.FC = () => {
                                     <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
                                         Chapter III
                                     </p>
-                                    <p className="font-serif text-white leading-none"
+                                    <p className="font-serif text-brand-accent leading-none"
                                         style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
                                         2026
                                     </p>

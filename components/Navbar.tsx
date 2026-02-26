@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
       const scrolled = window.scrollY > 80;
       setIsScrolled(scrolled);
       if (scrolled) {
-        const el = document.elementFromPoint(window.innerWidth / 2, 40);
+        const el = document.elementFromPoint(window.innerWidth / 2, 90);
         setIsLight(getBgLuminance(el) > 0.45);
       } else {
         setIsLight(false);

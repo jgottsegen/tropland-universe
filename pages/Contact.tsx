@@ -112,7 +112,7 @@ const ContactPage: React.FC = () => {
                                                 required
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors"
                                                 placeholder="Your name"
                                             />
                                         </div>
@@ -123,7 +123,7 @@ const ContactPage: React.FC = () => {
                                                 required
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors"
+                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors"
                                                 placeholder="Your email"
                                             />
                                         </div>
@@ -135,7 +135,7 @@ const ContactPage: React.FC = () => {
                                             rows={6}
                                             value={message}
                                             onChange={(e) => setMessage(e.target.value)}
-                                            className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/20 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
+                                            className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
                                             placeholder="Tell us about your project or inquiry"
                                         />
                                     </div>
