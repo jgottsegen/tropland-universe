@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { ArrowUpRight, ArrowRight, BookOpen, Heart, Leaf, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
@@ -87,6 +88,13 @@ const JooshPage: React.FC = () => {
 
     return (
         <div className="bg-brand-deep min-h-screen">
+            <Helmet>
+                <title>Joosh's Juice Bar Book Series | Tropland Universe</title>
+                <meta name="description" content="The original Tropland Universe IP — a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
+                <meta property="og:title" content="Joosh's Juice Bar Book Series | Tropland Universe" />
+                <meta property="og:description" content="The original Tropland Universe IP — a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
+                <meta property="og:url" content="https://troplanduniverse.com/joosh" />
+            </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
                 HERO — Full-bleed cinematic
@@ -144,10 +152,10 @@ const JooshPage: React.FC = () => {
                                 </TextReveal>
                             </h1>
 
-                            <p className={`text-2xl md:text-3xl text-white/90 font-sans font-medium leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
+                            <p className={`text-xl text-white/70 font-sans leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
                                 The original publishing IP of Tropland Universe. A children's book series that started it all.
                             </p>
-                            <p className={`text-xl text-white/70 font-sans leading-relaxed mb-12 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
+                            <p className={`text-xl text-white/70 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
                                 First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe, years before the Digital Animal Kingdom reached a billion views.
                             </p>
 
@@ -239,14 +247,8 @@ const JooshPage: React.FC = () => {
                     </h2>
 
                     <div className={`space-y-8 ${sec2.fade()}`} style={{ transitionDelay: '160ms' }}>
-                        <p className="text-2xl md:text-3xl font-sans font-medium text-brand-dark-text leading-relaxed">
-                            Before the billion views, before the Digital Animal Kingdom, there was a juice bar in the forest.
-                        </p>
                         <p className="text-xl md:text-2xl text-brand-dark-text/80 font-sans leading-relaxed max-w-3xl mx-auto">
                             Joosh's Juice Bar is a children's book series created by Josh Gottsegen, the original narrative foundation of the Tropland Universe. First introduced in 2013, the series uses playful animal characters and imaginative storytelling to explore themes of health, curiosity, and positive habits.
-                        </p>
-                        <p className="text-xl md:text-2xl text-brand-dark-text/80 font-sans leading-relaxed max-w-3xl mx-auto">
-                            Set within the Tropland Forest, these books established the characters, tone, and values that later expanded into the broader Digital Animal Kingdom, a global media brand now trusted by Adobe, Meta, OpenAI, and viewed over a billion times worldwide.
                         </p>
                     </div>
 
@@ -282,7 +284,7 @@ const JooshPage: React.FC = () => {
                             Four books, <span className="italic text-brand-accent">one forest.</span>
                         </h2>
                         <p className="text-xl text-white/60 font-sans mt-5 max-w-2xl leading-relaxed">
-                            Written and produced by Josh Gottsegen, illustrated by Serene Shahzad. The foundational story world behind Tropland Universe.
+                            Written and produced by Josh Gottsegen, illustrated by Sehreen Shahzad. The foundational story world behind Tropland Universe.
                         </p>
                     </div>
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { ArrowUpRight, ArrowRight, Award, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CometBackground from '../components/CometBackground';
@@ -56,6 +57,13 @@ const RockfordPage: React.FC = () => {
 
     return (
         <div className="bg-brand-deep min-h-screen">
+            <Helmet>
+                <title>The Adventures of Rockford T. Honeypot | Tropland Universe</title>
+                <meta name="description" content="Amazon #1 bestselling fantasy-adventure novel. The cornerstone book of the Tropland Universe, by Josh Gottsegen." />
+                <meta property="og:title" content="The Adventures of Rockford T. Honeypot | Tropland Universe" />
+                <meta property="og:description" content="Amazon #1 bestselling fantasy-adventure novel. The cornerstone book of the Tropland Universe, by Josh Gottsegen." />
+                <meta property="og:url" content="https://troplanduniverse.com/rockford" />
+            </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
                 HERO — Rockford forest world backdrop
@@ -102,10 +110,10 @@ const RockfordPage: React.FC = () => {
                                 {' '}<TextReveal className="italic text-brand-accent" delay={0.72} wordDelay={0.1}>Honeypot</TextReveal>
                             </h1>
 
-                            <p className={`text-2xl text-white/90 font-sans font-medium leading-relaxed mb-6 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
+                            <p className={`text-lg text-white/75 font-sans leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
                                 A fantasy adventure set within the Tropland Universe. Explore a distinctive animal world built on curiosity, tension, and discovery.
                             </p>
-                            <p className={`text-lg text-white/80 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
+                            <p className={`text-lg text-white/75 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
                                 Rockford's journey established the modern Tropland ecosystem, laying the foundation for animation, digital media, and long form storytelling.
                             </p>
 
@@ -227,7 +235,7 @@ const RockfordPage: React.FC = () => {
                     </h2>
 
                     <div className={`space-y-8 text-left md:text-center ${sec2.fade()}`} style={{ transitionDelay: '160ms' }}>
-                        <p className="text-xl md:text-2xl font-sans font-medium text-brand-dark-text leading-relaxed">
+                        <p className="text-xl md:text-2xl font-sans text-brand-dark-text leading-relaxed">
                             Set deep within the Tropland Universe, <span className="italic">The Adventures of Rockford T. Honeypot</span> is a fantasy adventure novel that established the narrative foundation of the broader franchise.
                         </p>
 
@@ -310,7 +318,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 1 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "When the book is good, you keep reading until the very last sentence. Now that’s a good book!"
                             </p>
                             <div className="flex items-center gap-3">
@@ -324,7 +332,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 2 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "The world building was one of my favourite parts of this book—Josh Gottsegen definitely had a great vision."
                             </p>
                             <div className="flex items-center gap-3">
@@ -338,7 +346,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 3 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl md:text-2xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "This whimsical tale captures the spirit of adventure and the joy of discovery."
                             </p>
                             <div className="flex items-center gap-3">
@@ -352,7 +360,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 4 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "This easy reading but fast-paced book earns a place in your family's book collection and I know you'll love it as much as we did."
                             </p>
                             <div className="flex items-center gap-3">
@@ -366,7 +374,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 5 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "Gottsegen has created a very empathetic novel that strives to teach its target audience values of love, compassion, understanding, and forgiveness."
                             </p>
                             <div className="flex items-center gap-3">
@@ -380,7 +388,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 6 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "A wonderful book that, honestly... captivated me completely."
                             </p>
                             <div className="flex items-center gap-3">
@@ -394,7 +402,7 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 7 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "An epic story of a chipmunk who discovered meaning and purpose while pursuing his ambitious dreams to change the forest forever."
                             </p>
                             <div className="flex items-center gap-3">
@@ -408,13 +416,128 @@ const RockfordPage: React.FC = () => {
                         {/* Quote 8 */}
                         <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
                             <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
-                            <p className="font-sans text-xl font-medium text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
                                 "The timeless classic story of the underdog hero persevering through obstacles to change his life and those he loves is depicted beautifully in this adventure story."
                             </p>
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">S</div>
                                 <div>
                                     <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Goodreads</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 9 — Dr. Jan Pol */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Holy Moses! Awesome adventure story for young readers and a great lesson in never giving up for everyone!"
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">P</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Dr. Jan Pol</p>
+                                    <p className="font-sans text-xs text-brand-muted">NatGeo Wild's The Incredible Dr. Pol</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 10 — BookLife Reviews (long) */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Rockford's stories introduce a menagerie of vibrant one-of-a-kind characters who are perfectly suited for older children, with gentle lessons to be learned from every interaction... Parents waiting for their children to be old enough for The Hobbit or Redwall will find this the perfect stopgap, with plenty of thrills as well as moral quandaries, somber loss, and emotional growth."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">B</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">BookLife Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 11 — Onlinebookclub */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Creativity knows no bounds within this whimsical story."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">O</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Onlinebookclub</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 12 — Dr. Gabby Wild */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Heart-touching and soul-warming, The Adventures of Rockford T. Honeypot provide kids the sweetness of the sought-after adventure with a relatable, adorable protagonist. A wonderful inspirational book to share with the fantasy-loving middle school reader!"
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">G</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Dr. Gabby Wild</p>
+                                    <p className="font-sans text-xs text-brand-muted">Veterinarian · NatGeo Kids Educator · Animal Jam</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 13 — Reedsy Reviews */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "An old-fashioned, relentlessly charming middle-grade rags-to-riches animal tale."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">R</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Reedsy Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 14 — Readers Favorite */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Grab your favorite nuts or snacks before going on an amazing journey. Gottsegen has earned my admiration for creating such a remarkable story. The Adventures of Rockford T. Honeypot will become a treasured book for children and adults."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">★</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Readers Favorite</p>
+                                    <p className="font-sans text-xs text-brand-muted">Official 5 Stars Seal</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 15 — BookLife Reviews */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "Without stinting the action, Gottsegen delivers a powerful message about the importance of being brave, honest, and true to oneself."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">B</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">BookLife Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote 16 — Tessa Smith */}
+                        <div className="break-inside-avoid bg-white/60 p-8 rounded-3xl border border-brand-accent/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+                            <div className="absolute -top-3 -left-1 text-5xl text-brand-accent/20 font-serif leading-none">"</div>
+                            <p className="font-sans text-lg font-normal text-brand-dark-text leading-relaxed relative z-10 italic mb-6">
+                                "From the very first chapter, we were all hooked! Rockford T. Honeypot quickly became our favorite book."
+                            </p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center font-serif font-bold text-brand-accent">T</div>
+                                <div>
+                                    <p className="font-sans font-bold text-sm text-brand-dark-text leading-tight">Tessa Smith</p>
                                 </div>
                             </div>
                         </div>

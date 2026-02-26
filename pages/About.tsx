@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Send, CheckCircle, AlertCircle, Instagram, Facebook, ArrowUpRight } from 'lucide-react';
 import CometBackground from '../components/CometBackground';
 import { GlowingEffect } from '../components/GlowingEffect';
 import TextReveal from '../components/TextReveal';
@@ -212,6 +213,13 @@ const AboutPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-brand-deep">
+            <Helmet>
+                <title>About Tropland Universe</title>
+                <meta name="description" content="The story behind Tropland Universe — 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta property="og:title" content="About Tropland Universe" />
+                <meta property="og:description" content="The story behind Tropland Universe — 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta property="og:url" content="https://troplanduniverse.com/about" />
+            </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
                 ACT I — HERO
@@ -370,7 +378,7 @@ const AboutPage: React.FC = () => {
 
                                     {/* Books — large fan display */}
                                     <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '900px' }}>
-                                        <div className="flex items-end justify-center w-full h-full px-4 md:px-8 gap-0">
+                                        <div className="flex items-center justify-center w-full h-full px-4 md:px-8 gap-0">
                                             {[
                                                 { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry", rot: -14, tx: '8px', ty: '-8px', z: 1 },
                                                 { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book", rot: -5, tx: '2px', ty: '-18px', z: 2 },
@@ -537,13 +545,57 @@ const AboutPage: React.FC = () => {
                                         The Kingdom
                                     </h3>
                                     <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                        Over a billion views. Licensed by All American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.
+                                        Over a billion views. Licensed by All-American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.
                                     </p>
                                 </div>
                             </div>
                         </ChapterCard>
 
                     </ul>
+                </div>
+            </section>
+
+            {/* ═══════════════════════════════════════════════════════════
+                SOCIAL PRESENCE
+            ═══════════════════════════════════════════════════════════ */}
+            <section className="py-16 bg-brand-cream border-t border-brand-border-light">
+                <div className="max-w-5xl mx-auto px-6 md:px-12">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div>
+                            <p className="text-[11px] font-sans font-bold uppercase tracking-[0.3em] text-brand-accent mb-2">
+                                Follow the Kingdom
+                            </p>
+                            <h3 className="font-serif text-3xl md:text-4xl text-brand-dark-text">
+                                The world of Tropland <span className="italic text-brand-accent">lives on social.</span>
+                            </h3>
+                            <p className="text-brand-muted font-sans text-lg mt-3 max-w-md">
+                                Over a billion content views. Follow the journey on Instagram and Facebook.
+                            </p>
+                        </div>
+                        <div className="flex gap-3 flex-shrink-0">
+                            <a
+                                href="https://instagram.com/troplanduniverse"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-300"
+                                style={{ background: 'linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1), rgba(252,176,69,0.1))', border: '1px solid rgba(200,100,200,0.3)', color: 'rgba(180,80,180,0.9)' }}
+                            >
+                                <Instagram size={14} />
+                                Instagram
+                                <ArrowUpRight size={12} />
+                            </a>
+                            <a
+                                href="https://facebook.com/troplanduniverse"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2]/15 border border-[#1877F2]/30 text-[#4a9bf5] font-sans font-semibold text-sm hover:bg-[#1877F2]/25 transition-all duration-300"
+                            >
+                                <Facebook size={14} />
+                                Facebook
+                                <ArrowUpRight size={12} />
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 

@@ -5,7 +5,7 @@ import TextReveal from './TextReveal';
 
 const partners = [
   'Adobe', 'Meta', 'OpenAI', 'Topaz Labs', 'Kling AI', 'SORA',
-  'All American Licensing',
+  'All-American Licensing',
 ];
 const partnersTriple = [...partners, ...partners, ...partners];
 

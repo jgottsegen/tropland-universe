@@ -93,13 +93,13 @@ const Services: React.FC = () => {
         <div className={`group glass border-shine rounded-3xl p-8 md:p-10 hover:border-brand-accent/20 transition-all duration-500 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             {/* Left: three book covers */}
-            <div className="flex items-center justify-center py-10 min-h-[30rem] overflow-hidden">
+            <div className="group flex items-center justify-center py-10 min-h-[30rem] overflow-hidden">
               {books.filter(b => !b.featured).map((book, i) => {
                 const isCenter = i === 1;
                 return (
                   <div
                     key={book.src}
-                    className="book-cover flex-shrink-0 relative hover:z-50 group/book cursor-pointer"
+                    className="flex-shrink-0 relative"
                     style={{
                       width: '58%',
                       marginLeft: i === 0 ? '0' : '-28%',
@@ -109,11 +109,10 @@ const Services: React.FC = () => {
                     }}
                   >
                     <div
-                      className="book-inner rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative border border-white/10 transition-all duration-500 group-hover/book:-translate-y-6 group-hover/book:scale-110 group-hover/book:shadow-[0_40px_60px_rgba(232,93,58,0.3)]"
+                      className="book-inner rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative border border-white/10 transition-transform duration-700 group-hover:scale-[1.02]"
                       style={{ aspectRatio: '3/4', transformOrigin: 'center bottom' }}
                     >
                       <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-white/5 to-transparent pointer-events-none opacity-0 group-hover/book:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
                 );

@@ -54,7 +54,6 @@ const Contact: React.FC = () => {
 
         <p className="text-[15px] text-white/65 font-sans mb-12 max-w-xl leading-relaxed">
           For licensing inquiries, brand partnerships, and collaboration opportunities.
-          We typically respond within 48 hours.
         </p>
 
         {status === 'success' ? (

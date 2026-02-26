@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Award, Globe, ImageIcon, Zap } from 'lucide-react';
+import { ArrowUpRight, Award, Globe, ImageIcon, Zap, Instagram, Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const metrics = [
   { end: 5, suffix: '', label: 'Published Books', icon: Award },
   { end: 265, suffix: 'M', label: 'Single Viral Piece', icon: Zap },
   { end: 50, suffix: 'K+', label: 'Original Artworks', icon: ImageIcon },
-  { end: 12, suffix: '+', label: 'Years of Storytelling', icon: Globe },
+  { end: 13, suffix: '+', label: 'Years of Tropland Storytelling', icon: Globe },
 ];
 
 const galleryRow1 = [
@@ -93,7 +93,7 @@ const Portfolio: React.FC = () => {
               has grown into a global digital animal kingdom, connecting imagination and
               nature through books, cinematic AI art, and licensing-ready IP.
             </p>
-            <p className="text-xl md:text-2xl text-brand-muted font-sans leading-relaxed mb-8">
+            <p className="text-xl md:text-2xl text-brand-muted font-sans font-light leading-relaxed mb-8">
               Every image and video is crafted for emotional impact and global brand scalability.
               Photorealistic wildlife content viewed over a billion times across 50+ countries.
               Trusted by Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
@@ -103,27 +103,32 @@ const Portfolio: React.FC = () => {
                 href="https://instagram.com/troplanduniverse"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-300"
+                style={{ background: 'linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1), rgba(252,176,69,0.1))', border: '1px solid rgba(200,100,200,0.3)', color: 'rgba(180,80,180,0.9)' }}
               >
+                <Instagram size={14} />
                 Instagram
-                <ArrowUpRight size={14} />
+                <ArrowUpRight size={12} />
               </a>
               <a
                 href="https://facebook.com/troplanduniverse"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-border-light text-brand-dark-text font-sans font-semibold text-sm hover:bg-brand-cream-dark transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2]/15 border border-[#1877F2]/30 text-[#4a9bf5] font-sans font-semibold text-sm hover:bg-[#1877F2]/25 transition-all duration-300"
               >
+                <Facebook size={14} />
                 Facebook
-                <ArrowUpRight size={14} />
+                <ArrowUpRight size={12} />
               </a>
-            </div>
-            <p className="mt-4 text-sm font-sans text-brand-muted">
-              Licensing Inquiries:{' '}
-              <Link to="/licensing" className="text-brand-dark-text font-semibold hover:text-brand-accent transition-colors">
-                All American Licensing
+              <Link
+                to="/licensing"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent font-sans font-semibold text-sm hover:bg-brand-accent/20 transition-all duration-300"
+              >
+                <Award size={13} />
+                Licensing Inquiries · All-American Licensing
+                <ArrowUpRight size={12} />
               </Link>
-            </p>
+            </div>
           </div>
 
           <div className="lg:col-span-2">
@@ -140,7 +145,7 @@ const Portfolio: React.FC = () => {
                       <AnimatedMetric end={m.end} suffix={m.suffix} isVisible={isVisible} />
                     </div>
                     <div className="text-[13px] font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
-                      {m.label}
+                      {m.icon === Globe ? <>Years of <em>Tropland</em><br />Storytelling</> : m.label}
                     </div>
                   </div>
                 );

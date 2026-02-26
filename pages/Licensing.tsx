@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { ArrowUpRight, Globe, Tv, ShoppingBag, Gamepad2, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -67,6 +68,13 @@ const LicensingPage: React.FC = () => {
 
     return (
         <div className="bg-brand-deep min-h-screen">
+            <Helmet>
+                <title>Licensing — Tropland Universe</title>
+                <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, ~40M monthly impressions. Represented by All-American Licensing." />
+                <meta property="og:title" content="Licensing — Tropland Universe" />
+                <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, ~40M monthly impressions. Represented by All-American Licensing." />
+                <meta property="og:url" content="https://troplanduniverse.com/licensing" />
+            </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
                 SECTION 1 — Scrolling image background + glass overlay
@@ -125,7 +133,7 @@ const LicensingPage: React.FC = () => {
                         Bring Tropland to <span className="italic text-brand-accent">your brand.</span>
                     </h1>
 
-                    <p className={`text-2xl md:text-3xl text-white/80 font-sans font-medium leading-relaxed max-w-3xl mx-auto mb-6 ${introFade()}`}
+                    <p className={`text-xl text-white/60 font-sans leading-relaxed max-w-3xl mx-auto mb-6 ${introFade()}`}
                         style={{ transitionDelay: '480ms' }}>
                         Tropland Universe™ is a character-driven wildlife media property with over a billion content views,
                         a 50K+ image and video library, and a global audience that spans all ages.
@@ -133,7 +141,7 @@ const LicensingPage: React.FC = () => {
 
                     <p className={`text-xl text-white/60 font-sans leading-relaxed max-w-2xl mx-auto mb-16 ${introFade()}`}
                         style={{ transitionDelay: '560ms' }}>
-                        Licensing is managed exclusively by <strong className="text-white/90 font-semibold">All American Licensing</strong>,
+                        Licensing is managed exclusively by All-American Licensing,
                         representing the property across consumer products, publishing, digital media, and entertainment worldwide.
                     </p>
 
@@ -167,10 +175,17 @@ const LicensingPage: React.FC = () => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
                         >
-                            Visit All American Licensing
+                            Visit All-American Licensing
                             <ArrowUpRight size={16} />
                         </a>
                     </div>
+
+                    <p className={`text-white/25 font-sans text-xs text-center mt-8 ${introFade()}`} style={{ transitionDelay: '760ms' }}>
+                        Current licensees:{' '}
+                        <Link to="/tropland-licensing/login" className="hover:text-white/50 transition-colors underline">
+                            Access the Licensee Portal
+                        </Link>
+                    </p>
 
                 </div>
             </section>
@@ -251,7 +266,7 @@ const LicensingPage: React.FC = () => {
                     {/* Contact CTA */}
                     <div className={`text-center ${sec2.fade()}`} style={{ transitionDelay: '400ms' }}>
                         <p className="font-sans text-xl text-brand-dark-text/70 mb-8 leading-relaxed max-w-2xl mx-auto">
-                            For licensing inquiries, contact <strong className="text-brand-dark-text font-semibold">All American Licensing</strong> or
+                            For licensing inquiries, contact <strong className="text-brand-dark-text font-semibold">All-American Licensing</strong> or
                             reach out to our partnerships team directly.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
