@@ -18,10 +18,10 @@ const ContactPage: React.FC = () => {
         e.preventDefault();
         setStatus('submitting');
         try {
-            const response = await fetch('https://formsubmit.co/ajax/partnerships@troplanduniverse.com', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({ name, email, message, _subject: `New Tropland inquiry from ${name}` }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message, source: 'Contact Page' }),
             });
             if (response.ok) { setStatus('success'); setName(''); setEmail(''); setMessage(''); }
             else setStatus('error');
