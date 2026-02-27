@@ -359,10 +359,10 @@ const AboutPage: React.FC = () => {
                             area="md:col-span-12"
                             className="bg-gradient-to-br from-brand-accent/[0.10] via-white/[0.02] to-brand-purple/[0.04]"
                         >
-                            <div className="flex flex-col md:flex-row" style={{ minHeight: '30rem' }}>
+                            <div className="flex flex-col md:flex-row" style={{ minHeight: '26rem' }}>
 
                                 {/* LEFT: Dramatic book showcase */}
-                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '22rem' }}>
+                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '26rem' }}>
                                     {/* Rich warm-dark backdrop */}
                                     <div className="absolute inset-0"
                                         style={{ background: 'linear-gradient(145deg, rgba(232,93,58,0.18) 0%, rgba(13,10,26,0.85) 55%, rgba(27,14,54,0.9) 100%)' }} />
@@ -374,8 +374,8 @@ const AboutPage: React.FC = () => {
                                         style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,58,0.18) 0%, transparent 65%)' }} />
 
                                     {/* Books — large fan display */}
-                                    <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: '900px' }}>
-                                        <div className="flex items-center justify-center w-full h-full px-4 md:px-8 gap-0">
+                                    <div className="absolute inset-0 flex items-end justify-center pb-8" style={{ perspective: '900px' }}>
+                                        <div className="flex items-end justify-center w-full px-4 md:px-8 gap-0">
                                             {[
                                                 { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry", rot: -14, tx: '8px', ty: '-8px', z: 1 },
                                                 { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book", rot: -5, tx: '2px', ty: '-18px', z: 2 },
@@ -396,7 +396,7 @@ const AboutPage: React.FC = () => {
                                                         alt={book.alt}
                                                         className="w-auto object-cover rounded-lg"
                                                         style={{
-                                                            height: 'clamp(200px, 30vh, 320px)',
+                                                            height: 'clamp(260px, 52vh, 440px)',
                                                             boxShadow: '0 32px 64px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5), 4px 0 16px rgba(0,0,0,0.4)',
                                                         }}
                                                     />
@@ -449,7 +449,7 @@ const AboutPage: React.FC = () => {
                                             <span className="italic text-brand-accent">Written First.</span>
                                         </h3>
                                         <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem and introduced Tropland beyond picture books.
+                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-brand-accent font-semibold">2022</span>, Tropland went AI-native. By <span className="text-brand-accent font-semibold">2026</span>, it became the Digital Animal Kingdom.
                                         </p>
                                     </div>
 
