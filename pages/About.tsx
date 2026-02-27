@@ -359,10 +359,10 @@ const AboutPage: React.FC = () => {
                             area="md:col-span-12"
                             className="bg-gradient-to-br from-brand-accent/[0.10] via-white/[0.02] to-brand-purple/[0.04]"
                         >
-                            <div className="flex flex-col md:flex-row" style={{ minHeight: '26rem' }}>
+                            <div className="flex flex-col md:flex-row" style={{ minHeight: '32rem' }}>
 
                                 {/* LEFT: Dramatic book showcase */}
-                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '26rem' }}>
+                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '32rem' }}>
                                     {/* Rich warm-dark backdrop */}
                                     <div className="absolute inset-0"
                                         style={{ background: 'linear-gradient(145deg, rgba(232,93,58,0.18) 0%, rgba(13,10,26,0.85) 55%, rgba(27,14,54,0.9) 100%)' }} />
@@ -373,36 +373,26 @@ const AboutPage: React.FC = () => {
                                     <div className="absolute inset-0 pointer-events-none"
                                         style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,58,0.18) 0%, transparent 65%)' }} />
 
-                                    {/* Books — large fan display */}
-                                    <div className="absolute inset-0 flex items-end justify-center pb-8" style={{ perspective: '900px' }}>
-                                        <div className="flex items-end justify-center w-full px-4 md:px-8 gap-0">
+                                    {/* Books — 2×2 grid */}
+                                    <div className="absolute inset-0 p-4 md:p-5 pb-10">
+                                        <div className="grid grid-cols-2 grid-rows-2 gap-2.5 h-full">
                                             {[
-                                                { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry", rot: -14, tx: '8px', ty: '-8px', z: 1 },
-                                                { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book", rot: -5, tx: '2px', ty: '-18px', z: 2 },
-                                                { src: '/images/rth.png', alt: 'Rockford T. Honeypot', rot: 4, tx: '-2px', ty: '-22px', z: 3 },
-                                                { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off", rot: 13, tx: '-8px', ty: '-10px', z: 1 },
-                                            ].map((book, i) => (
+                                                { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
+                                                { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
+                                                { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
+                                                { src: '/images/rth.png', alt: 'Rockford T. Honeypot' },
+                                            ].map((book) => (
                                                 <div
                                                     key={book.src}
-                                                    className="relative flex-shrink-0 group"
-                                                    style={{
-                                                        transform: `rotate(${book.rot}deg) translateX(${book.tx}) translateY(${book.ty})`,
-                                                        transition: 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)',
-                                                        zIndex: book.z,
-                                                    }}
+                                                    className="relative flex items-center justify-center overflow-hidden rounded-xl"
+                                                    style={{ filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.65))' }}
                                                 >
                                                     <img
                                                         src={book.src}
                                                         alt={book.alt}
-                                                        className="w-auto object-cover rounded-lg"
-                                                        style={{
-                                                            height: 'clamp(260px, 52vh, 440px)',
-                                                            boxShadow: '0 32px 64px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.5), 4px 0 16px rgba(0,0,0,0.4)',
-                                                        }}
+                                                        className="h-full w-auto object-contain"
+                                                        style={{ maxWidth: '100%' }}
                                                     />
-                                                    {/* Spine highlight */}
-                                                    <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-sm pointer-events-none"
-                                                        style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(255,255,255,0.05))' }} />
                                                 </div>
                                             ))}
                                         </div>
