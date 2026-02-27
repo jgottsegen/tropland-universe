@@ -637,7 +637,7 @@ const AboutPage: React.FC = () => {
                                     style={{ transitionDelay: '100ms' }}>
                                     <CheckCircle size={36} className="text-brand-accent mx-auto mb-5" />
                                     <h3 className="font-serif text-2xl text-brand-dark-text mb-2">Message received.</h3>
-                                    <p className="text-brand-muted font-sans text-[15px]">We'll be in touch within 48 hours.</p>
+                                    <p className="text-brand-muted font-sans text-[15px]">We'll be in touch shortly.</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit}
