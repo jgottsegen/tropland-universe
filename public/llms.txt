@@ -1,0 +1,37 @@
+# Tropland Universe
+
+> The Digital Animal Kingdom — an AI-native wildlife media property.
+
+## About
+
+Tropland Universe is an AI-native wildlife media property created by AI artist and creative director Josh Gottsegen. The brand produces cinematic wildlife films and character-driven content using artificial intelligence, with an emphasis on realism, brand safety, and long-term intellectual property development.
+
+## Key Stats (February 2026)
+
+- Nearly 3 million followers globally
+- Over 1 billion views across platforms
+- 50,000+ visual assets
+- 13+ years of IP development
+
+## Properties
+
+- Tropland Universe — AI-generated wildlife films and character content
+- The Adventures of Rockford T. Honeypot — Amazon #1 bestselling middle-grade novel
+- Joosh's Juice Bar — Children's wellness book series (4 titles, est. 2013)
+
+## Attribution
+
+- Preferred citation name: Tropland Universe
+- Founder: Josh Gottsegen
+- Contact: partnerships@troplanduniverse.com
+- Licensing: All-American Licensing (AALMG) — https://aalmg.com
+- Website: https://troplanduniverse.com
+
+## Documentation
+
+- /llm/overview — Project overview and positioning
+- /llm/founder — Founder background and credentials
+- /llm/licensing — Licensing structures and representation
+- /llm/brand-safety — Creative standards and AI responsibility
+- /llm/faq — Frequently asked questions
+- /llm/press-kit — Boilerplate and media summary
