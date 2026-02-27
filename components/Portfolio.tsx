@@ -10,21 +10,21 @@ const metrics = [
 ];
 
 const galleryRow1 = [
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/home003.jpg',
-  'https://troplanduniverse.com/wp-content/uploads/2025/10/lion-peace-1.png',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/home1.png',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/IMG_2051.jpg',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/home004.jpg',
-  'https://troplanduniverse.com/wp-content/uploads/2025/10/jag-shaka-1.png',
+  '/images/gallery/home003.jpg',
+  '/images/gallery/lion-peace-1.jpg',
+  '/images/gallery/home1.jpg',
+  '/images/gallery/IMG_2051.jpg',
+  '/images/gallery/home004.jpg',
+  '/images/gallery/jag-shaka-1.jpg',
 ];
 
 const galleryRow2 = [
-  'https://troplanduniverse.com/wp-content/uploads/2025/10/gorilla-thumb.png',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/lion-love-2.png',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/11home005.jpg',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/home2.png',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/11home001.jpg',
-  'https://troplanduniverse.com/wp-content/uploads/2025/01/home010-2.png',
+  '/images/gallery/gorilla-thumb.jpg',
+  '/images/gallery/lion-love-2.jpg',
+  '/images/gallery/11home005.jpg',
+  '/images/gallery/home2.jpg',
+  '/images/gallery/11home001.jpg',
+  '/images/gallery/home010-2.jpg',
 ];
 
 function AnimatedMetric({ end, suffix, isVisible }: { end: number; suffix: string; isVisible: boolean }) {
