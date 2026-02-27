@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-brand-deep/98 backdrop-blur-xl md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      <div className={`fixed inset-0 z-40 bg-brand-deep backdrop-blur-xl md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}>
         <div className="flex flex-col h-full pt-24 px-8 pb-10">
           <nav className="flex flex-col gap-1 flex-1">
@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`text-4xl font-serif tracking-tight py-3 transition-colors ${isActive ? 'text-white' : 'text-white/30 hover:text-white'
+                  className={`text-4xl font-serif tracking-tight py-3 transition-colors ${isActive ? 'text-white' : 'text-white/55 hover:text-white'
                     }`}
                 >
                   {item.label}

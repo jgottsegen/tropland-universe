@@ -70,7 +70,7 @@ const Portfolio: React.FC = () => {
 
         <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
           <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
-            The Collection
+            Tropland Universe™
           </p>
         </div>
 

@@ -347,6 +347,31 @@ const AboutPage: React.FC = () => {
                         </h2>
                     </div>
 
+                    {/* Three Chapters — standalone row above the bento */}
+                    <div className={`mb-8 bg-white/[0.03] rounded-2xl px-5 py-4 ${secOrigin.fade()}`}
+                        style={{ transitionDelay: '300ms' }}>
+                        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/30 mb-4">The Three Chapters</p>
+                        <div className="flex flex-wrap items-stretch gap-y-2">
+                            {[
+                                { year: '2013', label: 'Books\u00a0&\u00a0Print', active: true },
+                                { year: '2022', label: 'Digital\u00a0Era', active: false },
+                                { year: '2026', label: 'The\u00a0Kingdom', active: false },
+                            ].map((ch, i) => (
+                                <div key={ch.year} className="flex items-stretch flex-1">
+                                    <div className={`flex-1 rounded-xl px-4 py-3 ${ch.active ? 'bg-brand-accent/15 border border-brand-accent/30' : 'border border-white/[0.07]'}`}>
+                                        <p className="font-serif text-xl leading-none mb-1 text-brand-accent">{ch.year}</p>
+                                        <p className="text-[11px] font-sans font-medium text-white/35 uppercase tracking-[0.15em]">{ch.label}</p>
+                                    </div>
+                                    {i < 2 && (
+                                        <div className="flex items-center px-2">
+                                            <div className="h-px w-3 bg-white/15" />
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Chapter bento:
                         Row 1 — Chapter I: full width, horizontal split (books left / text right)
                         Row 2 — Chapter II + III: equal halves side by side
@@ -441,30 +466,6 @@ const AboutPage: React.FC = () => {
                                         <p className="text-white/65 font-sans text-[15px] leading-relaxed">
                                             It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-brand-accent font-semibold">2022</span>, Tropland went AI-native. By <span className="text-brand-accent font-semibold">2026</span>, it became the Digital Animal Kingdom.
                                         </p>
-                                    </div>
-
-                                    {/* Bottom: chapter timeline strip */}
-                                    <div className="pt-5 border-t border-white/[0.07]">
-                                        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/30 mb-4">The Three Chapters</p>
-                                        <div className="flex items-stretch gap-0">
-                                            {[
-                                                { year: '2013', label: 'Books &\u00a0Print', active: true },
-                                                { year: '2022', label: 'Digital\u00a0Era', active: false },
-                                                { year: '2026', label: 'The\u00a0Kingdom', active: false },
-                                            ].map((ch, i) => (
-                                                <div key={ch.year} className="flex items-stretch gap-0 flex-1">
-                                                    <div className={`flex-1 rounded-xl px-4 py-3 ${ch.active ? 'bg-brand-accent/15 border border-brand-accent/30' : 'border border-white/[0.07]'}`}>
-                                                        <p className="font-serif text-xl leading-none mb-1 text-brand-accent">{ch.year}</p>
-                                                        <p className="text-[11px] font-sans font-medium text-white/35 uppercase tracking-[0.15em]">{ch.label}</p>
-                                                    </div>
-                                                    {i < 2 && (
-                                                        <div className="flex items-center px-2">
-                                                            <div className="h-px w-3 bg-white/15" />
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
                                     </div>
 
                                 </div>
