@@ -180,11 +180,11 @@ const LicensingPage: React.FC = () => {
                         </a>
                     </div>
 
-                    <p className={`text-white/25 font-sans text-xs text-center mt-8 ${introFade()}`} style={{ transitionDelay: '760ms' }}>
+                    <p className={`text-white/40 font-sans text-sm text-center mt-8 ${introFade()}`} style={{ transitionDelay: '760ms' }}>
                         Current licensees:{' '}
-                        <Link to="/tropland-licensing/login" className="hover:text-white/50 transition-colors underline">
+                        <a href="https://tropland-portal.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors underline">
                             Access the Licensee Portal
-                        </Link>
+                        </a>
                     </p>
 
                 </div>
