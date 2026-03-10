@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
         <div className={`flex gap-10 md:gap-16 mb-10 ${fade(3)}`} style={{ transitionDelay: '800ms' }}>
           {[
             { end: 1, suffix: 'B+', label: 'Content Views' },
-            { end: 2.5, suffix: 'M+', label: 'Social Followers' },
+            { end: 2.8, suffix: 'M+', label: 'Social Followers' },
           ].map((stat) => (
             <div key={stat.label}>
               <div className="text-3xl md:text-5xl font-serif text-white leading-none drop-shadow-lg">
