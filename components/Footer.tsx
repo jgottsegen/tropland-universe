@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
         <div className="py-6 border-t border-white/[0.05] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">
             <p className="text-xs text-white/35 font-sans">
-              © {new Date().getFullYear()} Tropland Universe / OneLight Studios LLC. All rights reserved.
+              © {new Date().getFullYear()} Tropland Universe / <a href="http://www.onelightstudios.com" target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors duration-200">OneLight Studios LLC.</a> All rights reserved.
             </p>
             <p className="text-xs text-white/35 font-sans">
               Est. 2013 · Los Angeles, CA
