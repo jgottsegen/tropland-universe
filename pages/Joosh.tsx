@@ -153,7 +153,7 @@ const JooshPage: React.FC = () => {
                             </h1>
 
                             <p className={`text-xl text-white/70 font-sans leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
-                                The original publishing IP of Tropland Universe. A children's book series that started it all.
+                                The original publishing IP of Tropland Universe™. A children's book series that started it all.
                             </p>
                             <p className={`text-xl text-white/70 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
                                 First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe, years before the Digital Animal Kingdom reached a billion views.

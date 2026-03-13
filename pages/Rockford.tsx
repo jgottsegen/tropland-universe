@@ -111,7 +111,7 @@ const RockfordPage: React.FC = () => {
                             </h1>
 
                             <p className={`text-lg text-white/75 font-sans leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
-                                A fantasy adventure set within the Tropland Universe. Explore a distinctive animal world built on curiosity, tension, and discovery.
+                                A fantasy adventure set within the Tropland Universe™. Explore a distinctive animal world built on curiosity, tension, and discovery.
                             </p>
                             <p className={`text-lg text-white/75 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
                                 Rockford's journey established the modern Tropland ecosystem, laying the foundation for animation, digital media, and long form storytelling.

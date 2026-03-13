@@ -90,7 +90,7 @@ const TroplandLibrary: React.FC = () => {
                         Welcome
                     </p>
                     <h1 className="font-serif text-4xl md:text-5xl text-white mb-4 leading-tight">
-                        Tropland Universe <span className="italic text-brand-accent">Library.</span>
+                        Tropland Universe™ <span className="italic text-brand-accent">Library.</span>
                     </h1>
                     <p className="text-white/50 font-sans text-lg max-w-2xl leading-relaxed">
                         Licensed assets, brand materials, and usage guidelines for authorized partners.

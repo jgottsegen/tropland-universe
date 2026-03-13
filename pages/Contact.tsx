@@ -34,9 +34,9 @@ const ContactPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-brand-deep">
             <Helmet>
-                <title>Contact — Tropland Universe</title>
+                <title>Contact — Tropland Universe™</title>
                 <meta name="description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
-                <meta property="og:title" content="Contact — Tropland Universe" />
+                <meta property="og:title" content="Contact — Tropland Universe™" />
                 <meta property="og:description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
                 <meta property="og:url" content="https://troplanduniverse.com/contact" />
             </Helmet>

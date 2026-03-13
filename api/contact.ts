@@ -16,10 +16,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await resend.emails.send({
-      from: 'Tropland Universe <noreply@troplanduniverse.com>',
+      from: 'Tropland Universe™ <noreply@troplanduniverse.com>',
       to: 'partnerships@troplanduniverse.com',
       replyTo: email,
-      subject: `New inquiry from ${name} — Tropland Universe`,
+      subject: `New inquiry from ${name} — Tropland Universe™`,
       html: `
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           <tr>
             <td style="padding:0 0 32px 0;">
               <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#E85D3A;">
-                Tropland Universe
+                Tropland Universe™
               </p>
             </td>
           </tr>

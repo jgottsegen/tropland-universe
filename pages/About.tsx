@@ -301,7 +301,7 @@ const AboutPage: React.FC = () => {
                             <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${secMythos.fade()}`}
                                 style={{ transitionDelay: '180ms' }}>
                                 <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
-                                    Tropland Universe is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
+                                    Tropland Universe™ is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
                                 </p>
                                 <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
                                     The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
