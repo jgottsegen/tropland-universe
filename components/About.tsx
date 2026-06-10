@@ -34,7 +34,7 @@ const About: React.FC = () => {
       <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
         <Reveal>
-          <SectionTag index="05" label="Partnership" className="mb-12 md:mb-16" />
+          <SectionTag index="06" label="Partnership" className="mb-12 md:mb-16" />
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-20">

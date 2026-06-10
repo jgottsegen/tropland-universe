@@ -25,7 +25,7 @@ const Ventures: React.FC = () => {
       <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
         <Reveal>
-          <SectionTag index="03" label="The Founder" className="mb-12 md:mb-16" />
+          <SectionTag index="04" label="The Founder" className="mb-12 md:mb-16" />
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -93,7 +93,7 @@ const Ventures: React.FC = () => {
               </div>
               {/* Caption rail */}
               <div className="flex items-center justify-between mt-3">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35 uppercase">Fig. 03 — The operator</span>
+                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35 uppercase">Fig. 04 — The operator</span>
                 <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35">EST. 2003</span>
               </div>
             </div>
