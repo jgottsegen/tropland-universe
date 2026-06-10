@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: #0D0A1A;
-  color: #F0ECE4;
+  background-color: #0C0B09;
+  color: #F2EEE5;
   overflow-x: hidden;
 }
 
@@ -23,21 +23,21 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0D0A1A;
+  background: #0C0B09;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2A1B52;
+  background: #2E2A24;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3D2E6B;
+  background: #45403A;
 }
 
 ::selection {
-  background: #E85D3A;
-  color: #0D0A1A;
+  background: #FF4D1C;
+  color: #0C0B09;
 }
 
 /* Glassmorphism utility */
@@ -270,4 +270,164 @@ html {
 @keyframes scrollR {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   REDESIGN 2026 — "Field Lab" system
+   Bricolage Grotesque / Fraunces / Spline Sans Mono
+   ════════════════════════════════════════════════════════════ */
+
+/* Hide native cursor only when the custom cursor is mounted */
+@media (pointer: fine) {
+  body:has([data-tu-cursor]),
+  body:has([data-tu-cursor]) a,
+  body:has([data-tu-cursor]) button,
+  body:has([data-tu-cursor]) [role="button"] {
+    cursor: none;
+  }
+  body:has([data-tu-cursor]) input,
+  body:has([data-tu-cursor]) textarea {
+    cursor: text;
+  }
+}
+
+/* Film grain overlay */
+.tu-grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: tuGrainShift 0.9s steps(4) infinite;
+}
+@keyframes tuGrainShift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1.5%); }
+  50% { transform: translate(1.5%, -1%); }
+  75% { transform: translate(-1%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Hairline rules */
+.tu-rule-dark { background: rgba(255, 255, 255, 0.09); }
+.tu-rule-light { background: rgba(12, 11, 9, 0.12); }
+
+/* Marquee: pause on hover */
+.tu-marquee-pause:hover .animate-marquee,
+.tu-marquee-pause:hover .animate-marquee-reverse,
+.tu-marquee-pause:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
+
+/* Link underline sweep */
+.tu-link {
+  position: relative;
+}
+.tu-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tu-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Gallery card: image zoom + caption slide */
+.tu-frame {
+  position: relative;
+  overflow: hidden;
+}
+.tu-frame img {
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tu-frame:hover img {
+  transform: scale(1.06);
+}
+.tu-frame .tu-frame-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateY(102%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tu-frame:hover .tu-frame-meta {
+  transform: translateY(0);
+}
+
+/* Corner ticks (lab-frame registration marks) */
+.tu-ticks::before,
+.tu-ticks::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+}
+.tu-ticks::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+.tu-ticks::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+.tu-ticks:hover::before,
+.tu-ticks:hover::after {
+  opacity: 1;
+}
+
+/* Outlined display type (footer wordmark) */
+.tu-outline-type {
+  -webkit-text-stroke: 1px rgba(242, 238, 229, 0.22);
+  color: transparent;
+  transition: color 0.6s ease, -webkit-text-stroke-color 0.6s ease;
+}
+.tu-outline-type:hover {
+  color: rgba(255, 77, 28, 0.95);
+  -webkit-text-stroke-color: rgba(255, 77, 28, 0);
+}
+
+/* Intro reveal */
+@keyframes tuIntroSweep {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+@keyframes tuIntroFade {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* Slow drift for hero scanline */
+@keyframes tuScan {
+  0% { transform: translateY(-10vh); opacity: 0; }
+  8% { opacity: 0.5; }
+  92% { opacity: 0.5; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+.tu-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 77, 28, 0.35), transparent);
+  animation: tuScan 9s linear infinite;
+  pointer-events: none;
 }

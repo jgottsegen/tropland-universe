@@ -1,96 +1,101 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Handshake, ShieldCheck, Globe, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import SectionTag from './fx/SectionTag';
+import Scramble from './fx/Scramble';
+import Reveal from './fx/Reveal';
+import MagneticButton from './MagneticButton';
+
+const offers = [
+  {
+    index: '01',
+    title: 'Brand Partnerships',
+    desc: 'Co-branded content and campaigns with leading tech, entertainment, and consumer brands. Paid campaigns delivered for Adobe and Meta.',
+    readout: 'MODE · CAMPAIGN',
+  },
+  {
+    index: '02',
+    title: 'Licensing',
+    desc: 'Represented by All-American Licensing. Character IP ready for apparel, lifestyle, home décor, publishing, and media.',
+    readout: 'MODE · LICENSE',
+  },
+  {
+    index: '03',
+    title: 'Global Distribution',
+    desc: '1.3 billion cumulative views across 50+ countries. A proven audience engine across every key global market.',
+    readout: 'MODE · REACH',
+  },
+];
 
 const About: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const fade = (delay: number) =>
-    `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-
   return (
-    <section id="licensing" ref={sectionRef} className="py-24 md:py-36 bg-brand-cream relative overflow-hidden">
+    <section id="licensing" className="py-24 md:py-36 bg-ink relative overflow-hidden">
+      <div className="tu-scanline hidden md:block" style={{ animationDelay: '-7s' }} />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
-        <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
-            Partnerships & Licensing
-          </p>
+        <Reveal>
+          <SectionTag index="05" label="Partnership" className="mb-12 md:mb-16" />
+        </Reveal>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-20">
+          <Reveal className="lg:col-span-7">
+            <h2 className="font-display font-extrabold text-[10vw] md:text-[4.6vw] leading-[0.95] tracking-[-0.02em] text-bone uppercase">
+              IP that
+              <span className="font-edit italic font-light normal-case text-ember tracking-normal"> travels.</span>
+            </h2>
+          </Reveal>
+          <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
+            <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-md">
+              Tropland partners with select brands, studios, and organizations.
+              One proven viral universe, translatable across physical and digital
+              categories.
+            </p>
+          </Reveal>
         </div>
 
-        <h2 className={`font-serif text-4xl md:text-6xl tracking-tight text-brand-dark-text leading-[1.1] mb-4 ${fade(0)}`} style={{ transitionDelay: '50ms' }}>
-          Built for <span className="italic text-brand-purple">partnership.</span>
-        </h2>
-
-        <p className={`text-base md:text-lg text-brand-muted-light font-sans font-light leading-relaxed max-w-2xl mb-12 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
-          Tropland Universe partners with select brands, studios, and organizations on
-          co-branded content, campaigns, and licensing. A proven viral IP with massive
-          cross-platform reach, seamlessly translatable across physical and digital categories.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: Handshake,
-              title: 'Brand Partnerships',
-              description: 'Content collaborations with leading tech, entertainment, and consumer brands. Adobe, Meta, OpenAI, and more.',
-            },
-            {
-              icon: ShieldCheck,
-              title: 'Licensing',
-              description: 'Represented by All-American Licensing. Character IP ready for apparel, lifestyle, home décor, and media.',
-            },
-            {
-              icon: Globe,
-              title: 'Global Distribution',
-              description: 'Billion+ cumulative views across 50+ countries. Proven audience engagement across all key global markets.',
-            },
-          ].map((item, i) => {
-            const Icon = item.icon;
-            return (
+        {/* Offer ledger */}
+        <div className="border-t border-bone/12 mb-16">
+          {offers.map((offer, i) => (
+            <Reveal key={offer.title} delay={i * 0.08}>
               <div
-                key={item.title}
-                className={`group relative p-8 rounded-2xl bg-white border border-brand-border-light border-shine-light hover:border-brand-accent/30 hover:shadow-[0_8px_30px_rgba(232,93,58,0.08)] hover:-translate-y-1 transition-all duration-500 ${fade(i + 2)}`}
-                style={{ transitionDelay: `${(i + 2) * 100}ms` }}
+                className="group grid grid-cols-12 gap-4 items-center py-8 md:py-10 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500 px-2 md:px-6"
+                data-cursor
               >
-                {/* Hover glow overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-accent/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 group-hover:scale-110 transition-all duration-300">
-                    <Icon size={22} className="text-brand-accent" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-sans text-lg font-bold text-brand-dark-text mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-brand-dark-text/55 font-sans text-[15px] leading-relaxed">
-                    {item.description}
-                  </p>
+                <span className="col-span-2 md:col-span-1 font-mono text-[11px] tracking-[0.2em] text-ember">
+                  {offer.index}
+                </span>
+                <h3 className="col-span-10 md:col-span-4 font-display font-bold text-2xl md:text-[2rem] text-bone tracking-tight group-hover:translate-x-2 transition-transform duration-500">
+                  {offer.title}
+                </h3>
+                <p className="col-span-12 col-start-3 md:col-span-5 md:col-start-6 font-display font-light text-[15px] text-bone/55 leading-relaxed max-w-lg">
+                  {offer.desc}
+                </p>
+                <div className="hidden md:flex md:col-span-2 justify-end">
+                  <Scramble
+                    className="font-mono text-[10px] tracking-[0.18em] text-bone/35 group-hover:text-ember transition-colors duration-300"
+                    rescrambleOnHover
+                  >
+                    {offer.readout}
+                  </Scramble>
                 </div>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
 
-        <div className={`text-center ${fade(5)}`} style={{ transitionDelay: '500ms' }}>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-purple text-white font-sans font-semibold text-[15px] hover:bg-brand-purple-mid transition-all duration-300 hover:shadow-lg"
-          >
-            Get in Touch
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
+        <Reveal delay={0.1}>
+          <div className="flex justify-center">
+            <MagneticButton>
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 px-10 py-5 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
+              >
+                Start the Conversation
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </MagneticButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
