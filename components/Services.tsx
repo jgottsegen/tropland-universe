@@ -38,7 +38,7 @@ const Services: React.FC = () => {
         <Reveal>
           <div className="group border border-ink/15 bg-bone-dark/40 hover:bg-bone-dark/70 transition-colors duration-700 mb-8">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center p-8 md:p-12">
-              <div className="md:col-span-2 book-cover" data-cursor data-cursor-label="Read">
+              <div className="md:col-span-2 book-cover">
                 <div className="book-inner aspect-[3/4] overflow-hidden max-w-xs mx-auto md:mx-0 relative">
                   <img src="/images/rth.png" alt="The Adventures of Rockford T. Honeypot" className="w-full h-full object-cover" />
                 </div>
@@ -80,7 +80,7 @@ const Services: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-8 md:p-12">
 
               {/* Fanned covers */}
-              <div className="flex items-center justify-center py-8 min-h-[24rem] md:min-h-[28rem]" data-cursor data-cursor-label="Read">
+              <div className="flex items-center justify-center py-8 min-h-[24rem] md:min-h-[28rem]">
                 {jjbBooks.map((book, i) => {
                   const isCenter = i === 1;
                   return (

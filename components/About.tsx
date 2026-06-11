@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import SectionTag from './fx/SectionTag';
-import Scramble from './fx/Scramble';
 import Reveal from './fx/Reveal';
 import MagneticButton from './MagneticButton';
 
@@ -29,7 +28,6 @@ const offers = [
 const About: React.FC = () => {
   return (
     <section id="licensing" className="py-24 md:py-36 bg-ink relative overflow-hidden">
-      <div className="tu-scanline hidden md:block" style={{ animationDelay: '-7s' }} />
 
       <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
@@ -59,7 +57,6 @@ const About: React.FC = () => {
             <Reveal key={offer.title} delay={i * 0.08}>
               <div
                 className="group grid grid-cols-12 gap-4 items-center py-8 md:py-10 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500 px-2 md:px-6"
-                data-cursor
               >
                 <span className="col-span-2 md:col-span-1 font-mono text-[11px] tracking-[0.2em] text-ember">
                   {offer.index}
@@ -71,12 +68,9 @@ const About: React.FC = () => {
                   {offer.desc}
                 </p>
                 <div className="hidden md:flex md:col-span-2 justify-end">
-                  <Scramble
-                    className="font-mono text-[10px] tracking-[0.18em] text-bone/35 group-hover:text-ember transition-colors duration-300"
-                    rescrambleOnHover
-                  >
+                  <span className="font-mono text-[10px] tracking-[0.18em] text-bone/35 group-hover:text-ember transition-colors duration-300">
                     {offer.readout}
-                  </Scramble>
+                  </span>
                 </div>
               </div>
             </Reveal>

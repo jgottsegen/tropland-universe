@@ -1,13 +1,6 @@
 import React from 'react';
 import SectionTag from './fx/SectionTag';
-import Odometer from './fx/Odometer';
 import Reveal from './fx/Reveal';
-
-const founderStats = [
-  { value: '25+', label: 'Years in entertainment' },
-  { value: '1.3B+', label: 'Content views' },
-  { value: '#1', label: 'AI Artist · Feedspot 2025 + 2026' },
-];
 
 const Ventures: React.FC = () => {
   return (
@@ -58,18 +51,14 @@ const Ventures: React.FC = () => {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="grid grid-cols-3 border-t border-bone/10">
-                {founderStats.map((stat, i) => (
-                  <div key={stat.label} className={`pt-7 pr-4 ${i > 0 ? 'border-l border-bone/10 pl-6' : ''}`}>
-                    <p className="font-display font-extrabold text-bone leading-none mb-2.5 text-[clamp(1.6rem,3.2vw,2.6rem)] tracking-tight">
-                      <Odometer value={stat.value} />
-                    </p>
-                    <p className="font-mono text-[10px] text-bone/45 uppercase tracking-[0.18em] leading-relaxed">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <blockquote className="border-t border-bone/10 pt-8 max-w-2xl">
+                <p className="font-edit italic font-light text-2xl md:text-[2rem] text-bone leading-snug">
+                  “AI is my creative medium.”
+                </p>
+                <cite className="not-italic block mt-4 font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45">
+                  Josh Gottsegen · 25 years in entertainment
+                </cite>
+              </blockquote>
             </Reveal>
           </div>
 
@@ -79,7 +68,6 @@ const Ventures: React.FC = () => {
               <div
                 className="tu-frame tu-ticks text-bone/60 relative overflow-hidden border border-bone/10"
                 style={{ aspectRatio: '4/5' }}
-                data-cursor
               >
                 <img
                   src="/images/josh-gottsegen.png"

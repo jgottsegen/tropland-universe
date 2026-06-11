@@ -14,34 +14,26 @@ const metrics = [
 ];
 
 const galleryRow1 = [
-  { src: '/images/gallery/home003.jpg', tag: 'TU·F-014' },
-  { src: '/images/gallery/lion-peace-1.jpg', tag: 'TU·F-022' },
-  { src: '/images/gallery/home1.jpg', tag: 'TU·F-031' },
-  { src: '/images/gallery/IMG_2051.jpg', tag: 'TU·F-008' },
-  { src: '/images/gallery/home004.jpg', tag: 'TU·F-047' },
-  { src: '/images/gallery/jag-shaka-1.jpg', tag: 'TU·F-053' },
+  '/images/gallery/home003.jpg',
+  '/images/gallery/lion-peace-1.jpg',
+  '/images/gallery/home1.jpg',
+  '/images/gallery/IMG_2051.jpg',
+  '/images/gallery/home004.jpg',
+  '/images/gallery/jag-shaka-1.jpg',
 ];
 
 const galleryRow2 = [
-  { src: '/images/gallery/gorilla-thumb.jpg', tag: 'TU·F-061' },
-  { src: '/images/gallery/lion-love-2.jpg', tag: 'TU·F-019' },
-  { src: '/images/gallery/11home005.jpg', tag: 'TU·F-027' },
-  { src: '/images/gallery/home2.jpg', tag: 'TU·F-035' },
-  { src: '/images/gallery/11home001.jpg', tag: 'TU·F-042' },
-  { src: '/images/gallery/home010-2.jpg', tag: 'TU·F-058' },
+  '/images/gallery/gorilla-thumb.jpg',
+  '/images/gallery/lion-love-2.jpg',
+  '/images/gallery/11home005.jpg',
+  '/images/gallery/home2.jpg',
+  '/images/gallery/11home001.jpg',
+  '/images/gallery/home010-2.jpg',
 ];
 
-const GalleryCell: React.FC<{ src: string; tag: string }> = ({ src, tag }) => (
-  <div
-    className="tu-frame w-64 md:w-80 h-64 md:h-80 flex-shrink-0 bg-ink-2"
-    data-cursor
-    data-cursor-label="View"
-  >
+const GalleryCell: React.FC<{ src: string }> = ({ src }) => (
+  <div className="tu-frame w-64 md:w-80 h-64 md:h-80 flex-shrink-0 bg-ink-2">
     <img src={src} alt="Tropland original artwork" className="w-full h-full object-cover" loading="lazy" />
-    <div className="tu-frame-meta bg-ink/80 backdrop-blur-md px-4 py-3 flex items-center justify-between">
-      <span className="font-mono text-[10px] tracking-[0.2em] text-white/70">{tag}</span>
-      <span className="font-mono text-[10px] tracking-[0.2em] text-ember">ORIGINAL · 4K</span>
-    </div>
   </div>
 );
 
@@ -101,15 +93,15 @@ const Portfolio: React.FC = () => {
       <div className="tu-marquee-pause">
         <div className="overflow-hidden mb-3">
           <div className="animate-marquee flex gap-3 w-max">
-            {[...galleryRow1, ...galleryRow1].map((item, i) => (
-              <GalleryCell key={i} {...item} />
+            {[...galleryRow1, ...galleryRow1].map((src, i) => (
+              <GalleryCell key={i} src={src} />
             ))}
           </div>
         </div>
         <div className="overflow-hidden">
           <div className="animate-marquee-reverse flex gap-3 w-max">
-            {[...galleryRow2, ...galleryRow2].map((item, i) => (
-              <GalleryCell key={i} {...item} />
+            {[...galleryRow2, ...galleryRow2].map((src, i) => (
+              <GalleryCell key={i} src={src} />
             ))}
           </div>
         </div>

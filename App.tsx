@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
-import Cursor from './components/fx/Cursor';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import AboutPage from './pages/About';
@@ -38,7 +37,6 @@ const AppLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen font-sans text-brand-text bg-ink flex flex-col">
-      {!isPortal && <Cursor />}
       {!isPortal && <div className="tu-grain" aria-hidden="true" />}
       {!isPortal && <Navbar />}
 

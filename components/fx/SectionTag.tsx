@@ -1,5 +1,4 @@
 import React from 'react';
-import Scramble from './Scramble';
 
 interface SectionTagProps {
   index: string;   // "01"
@@ -14,14 +13,11 @@ const SectionTag: React.FC<SectionTagProps> = ({ index, label, dark = true, clas
     <span className={`font-mono text-[11px] tracking-[0.22em] ${dark ? 'text-ember' : 'text-ember-deep'}`}>
       TU·{index}
     </span>
-    <Scramble
-      className={`font-mono text-[11px] tracking-[0.3em] uppercase ${dark ? 'text-white/50' : 'text-ink/50'}`}
-      rescrambleOnHover
-    >
+    <span className={`font-mono text-[11px] tracking-[0.3em] uppercase ${dark ? 'text-white/50' : 'text-ink/50'}`}>
       {label}
-    </Scramble>
+    </span>
     <span className={`flex-1 h-px max-w-[120px] ${dark ? 'bg-white/15' : 'bg-ink/15'}`} />
   </div>
-);
+)
 
 export default SectionTag;

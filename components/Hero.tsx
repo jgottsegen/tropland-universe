@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-import Scramble from './fx/Scramble';
 import Odometer from './fx/Odometer';
 
 const partners = [
@@ -60,22 +59,6 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/65 via-transparent to-transparent" />
 
-      {/* Drifting scanline */}
-      <div className="tu-scanline hidden md:block" />
-
-      {/* Mono telemetry rail — top right, under nav */}
-      <motion.div
-        className="absolute top-24 right-6 md:right-12 hidden lg:flex flex-col items-end gap-1.5 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
-      >
-        {['EST. 2013 · LOS ANGELES', '34.0522°N / 118.2437°W', 'ORIGINAL IP · WORLDS NOT BORROWED'].map(line => (
-          <Scramble key={line} className="font-mono text-[10px] tracking-[0.2em] text-white/45" speed={18}>
-            {line}
-          </Scramble>
-        ))}
-      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1480px] mx-auto px-6 md:px-12 w-full pb-6 pt-36 md:pt-44">
@@ -88,9 +71,9 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.25, duration: 0.9, ease }}
         >
           <span className="w-10 h-px bg-ember" />
-          <Scramble className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember" speed={22}>
+          <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
             The Digital Animal Kingdom
-          </Scramble>
+          </span>
         </motion.div>
 
         {/* Display headline */}
@@ -197,7 +180,7 @@ const Hero: React.FC = () => {
                 <span className="font-mono text-[12px] md:text-[13px] uppercase tracking-[0.28em] text-white/55 hover:text-ember transition-colors duration-300 cursor-default select-none">
                   {partner}
                 </span>
-                <span className="mx-8 md:mx-12 text-ember/70 text-[9px]">✦</span>
+                <span className="mx-8 md:mx-12 text-ember/60 text-[10px] font-mono">/</span>
               </span>
             ))}
           </div>

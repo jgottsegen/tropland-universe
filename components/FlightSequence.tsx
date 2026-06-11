@@ -1,142 +1,141 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
-import Scramble from './fx/Scramble';
+import { motion, AnimatePresence } from 'motion/react';
+import { RotateCcw } from 'lucide-react';
 
 /**
  * TU·02 — The Flight.
- * Pinned, scroll-scrubbed flythrough: reef → fire → sky → the artist's pen.
- * Scroll drives video.currentTime; mono telemetry mirrors the timecode.
+ * Full-screen autoplaying flythrough: reef → fire → sky → the artist's pen.
+ * Plays once when it enters the viewport, holds on the final frame.
  */
 const FlightSequence: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [duration, setDuration] = useState(0);
+  const [phase, setPhase] = useState(0); // 0 reef, 1 flight, 2 the pen
   const [timecode, setTimecode] = useState('00:00:00');
-  const [phase, setPhase] = useState(0); // 0 reef, 1 fire, 2 landing
+  const [progress, setProgress] = useState(0);
+  const [ended, setEnded] = useState(false);
+  const startedRef = useRef(false);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  // Buffer the video only when the section approaches the viewport
   useEffect(() => {
-    const el = containerRef.current;
+    const el = sectionRef.current;
     const video = videoRef.current;
     if (!el || !video) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.35) {
           video.preload = 'auto';
-          video.load();
-          observer.disconnect();
+          if (!reducedMotion && !ended) {
+            if (!startedRef.current) startedRef.current = true;
+            video.play().catch(() => {});
+          }
+        } else {
+          video.pause();
         }
       },
-      { rootMargin: '120% 0px' }
+      { threshold: [0, 0.35] }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [ended]);
 
-  useMotionValueEvent(scrollYProgress, 'change', (p) => {
+  const handleTime = () => {
     const video = videoRef.current;
-    if (!video || !duration) return;
-    const t = Math.min(p, 0.999) * duration;
-    // Throttle seeks to ~half-frame granularity to keep scrubbing smooth
-    if (Math.abs(video.currentTime - t) > 0.02) {
-      video.currentTime = t;
-    }
-    const total = Math.floor(t * 24);
-    const s = Math.floor(t);
-    const f = total % 24;
+    if (!video || !video.duration) return;
+    const p = video.currentTime / video.duration;
+    setProgress(p);
+    setPhase(p < 0.4 ? 0 : p < 0.86 ? 1 : 2);
+    const s = Math.floor(video.currentTime);
+    const f = Math.floor(video.currentTime * 24) % 24;
     setTimecode(
       `00:${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}:${String(f).padStart(2, '0')}`
     );
-    setPhase(p < 0.38 ? 0 : p < 0.8 ? 1 : 2);
-  });
+  };
 
-  const progressX = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const replay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    setEnded(false);
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  };
 
-  const phases = [
-    { tag: 'SEQ A · THE REEF', line: 'One unbroken shot through the kingdom.' },
-    { tag: 'SEQ B · THE FIRE', line: 'Generated end to end. No cuts, no cameras.' },
-    { tag: 'SEQ C · THE PEN', line: 'Every world leads back to the pen.' },
+  const lines = [
+    'One unbroken shot through the kingdom.',
+    'Generated end to end. No cuts, no cameras.',
   ];
 
   return (
-    <section id="flight" ref={containerRef} className="relative bg-ink" style={{ height: '320vh' }}>
-      <div className="sticky top-0 h-screen overflow-hidden">
+    <section id="flight" ref={sectionRef} className="relative h-screen bg-ink overflow-hidden">
 
-        {/* Scrubbed footage */}
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/video/tu-flight.mp4"
-          poster="/video/tu-flight-poster.jpg"
-          preload="metadata"
-          muted
-          playsInline
-          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-        />
+      {/* Footage */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/video/tu-flight.mp4"
+        poster="/video/tu-flight-poster.jpg"
+        preload="metadata"
+        muted
+        playsInline
+        onTimeUpdate={handleTime}
+        onEnded={() => setEnded(true)}
+      />
 
-        {/* Cinematic grade */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-ink/70 pointer-events-none" />
+      {/* Cinematic grade */}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-ink/60 pointer-events-none" />
 
-        {/* Top rail: section tag + timecode */}
-        <div className="absolute top-0 left-0 right-0 pt-24 px-6 md:px-12 flex items-start justify-between pointer-events-none">
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[11px] tracking-[0.22em] text-ember">TU·02</span>
-            <Scramble className="font-mono text-[11px] tracking-[0.3em] uppercase text-white/60">
-              The Flight
-            </Scramble>
-          </div>
-          <div className="hidden md:flex flex-col items-end gap-1.5">
-            <span className="font-mono text-[11px] tracking-[0.18em] text-white/70 tabular-nums">
-              TC {timecode}
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.18em] text-white/40 uppercase">
-              Scroll to fly · 1 seamless take
-            </span>
-          </div>
+      {/* Top rail */}
+      <div className="absolute top-0 left-0 right-0 pt-24 px-6 md:px-12 flex items-start justify-between">
+        <div className="flex items-center gap-4">
+          <span className="font-mono text-[11px] tracking-[0.22em] text-ember">TU·02</span>
+          <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-white/60">The Flight</span>
         </div>
+        <span className="hidden md:block font-mono text-[11px] tracking-[0.18em] text-white/60 tabular-nums">
+          TC {timecode}
+        </span>
+      </div>
 
-        {/* Phase readout — bottom left */}
-        <div className="absolute bottom-0 left-0 right-0 pb-10 px-6 md:px-12 pointer-events-none">
-          <div className="flex flex-col gap-4 max-w-4xl">
-            <motion.span
-              key={`tag-${phase}`}
-              className="font-mono text-[10px] md:text-[11px] tracking-[0.26em] uppercase text-ember"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {phases[phase].tag}
-            </motion.span>
+      {/* Bottom: caption + progress */}
+      <div className="absolute bottom-0 left-0 right-0 pb-10 px-6 md:px-12">
+        <div className="flex flex-col gap-5 max-w-4xl">
+
+          <AnimatePresence mode="wait">
             <motion.p
-              key={`line-${phase}`}
+              key={phase === 2 || ended ? 'pen' : `line-${phase}`}
               className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone text-[8.5vw] md:text-[4.2vw]"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {phase === 2 ? (
+              {phase === 2 || ended ? (
                 <>Every world leads back to <span className="font-edit italic font-light normal-case text-ember tracking-normal">the pen.</span></>
               ) : (
-                phases[phase].line
+                lines[phase]
               )}
             </motion.p>
+          </AnimatePresence>
 
-            {/* Progress hairline */}
-            <div className="mt-4 h-px w-full bg-white/15 relative overflow-hidden">
-              <motion.div className="absolute inset-y-0 left-0 bg-ember" style={{ width: progressX }} />
+          <div className="flex items-center gap-5">
+            {/* Playback hairline */}
+            <div className="h-px flex-1 bg-white/15 relative overflow-hidden">
+              <div className="absolute inset-y-0 left-0 bg-ember" style={{ width: `${progress * 100}%` }} />
             </div>
-            <div className="flex justify-between font-mono text-[9px] tracking-[0.2em] text-white/35 uppercase">
-              <span>Reef</span>
-              <span>Fire</span>
-              <span>Sky</span>
-              <span>The pen</span>
-            </div>
+            <button
+              onClick={replay}
+              className={`flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase transition-all duration-500 ${ended ? 'text-bone hover:text-ember opacity-100' : 'opacity-0 pointer-events-none'}`}
+              aria-label="Replay the flight"
+            >
+              <RotateCcw size={11} />
+              Replay
+            </button>
           </div>
+
+          <span className="font-mono text-[9px] tracking-[0.2em] text-white/35 uppercase">
+            One seamless generated take · Reef to the artist's table
+          </span>
         </div>
       </div>
     </section>

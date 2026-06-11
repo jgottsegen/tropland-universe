@@ -50,7 +50,7 @@ const Contact: React.FC = () => {
       <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
         <Reveal>
-          <SectionTag index="07" label="Transmission" className="mb-12 md:mb-16" />
+          <SectionTag index="07" label="Contact" className="mb-12 md:mb-16" />
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
@@ -88,7 +88,7 @@ const Contact: React.FC = () => {
                   <CheckCircle size={44} className="text-ember mx-auto mb-5" />
                   <h3 className="font-display font-bold text-2xl text-bone mb-2">Message received.</h3>
                   <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-bone/45">
-                    Transmission confirmed — we'll get back to you shortly
+                    We'll get back to you shortly
                   </p>
                 </div>
               </Reveal>
@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
                       disabled={status === 'submitting'}
                       className="group inline-flex items-center gap-3 px-10 py-5 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {status === 'submitting' ? 'Transmitting…' : 'Send Message'}
+                      {status === 'submitting' ? 'Sending…' : 'Send Message'}
                       <Send size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </button>
                   </MagneticButton>

@@ -277,20 +277,6 @@ html {
    Bricolage Grotesque / Fraunces / Spline Sans Mono
    ════════════════════════════════════════════════════════════ */
 
-/* Hide native cursor only when the custom cursor is mounted */
-@media (pointer: fine) {
-  body:has([data-tu-cursor]),
-  body:has([data-tu-cursor]) a,
-  body:has([data-tu-cursor]) button,
-  body:has([data-tu-cursor]) [role="button"] {
-    cursor: none;
-  }
-  body:has([data-tu-cursor]) input,
-  body:has([data-tu-cursor]) textarea {
-    cursor: text;
-  }
-}
-
 /* Film grain overlay */
 .tu-grain {
   position: fixed;
@@ -415,19 +401,3 @@ html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* Slow drift for hero scanline */
-@keyframes tuScan {
-  0% { transform: translateY(-10vh); opacity: 0; }
-  8% { opacity: 0.5; }
-  92% { opacity: 0.5; }
-  100% { transform: translateY(110vh); opacity: 0; }
-}
-.tu-scanline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255, 77, 28, 0.35), transparent);
-  animation: tuScan 9s linear infinite;
-  pointer-events: none;
-}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import SectionTag from './fx/SectionTag';
-import Scramble from './fx/Scramble';
 import Reveal from './fx/Reveal';
 
 const stages = [
@@ -45,7 +44,6 @@ const Pipeline: React.FC = () => {
           backgroundSize: '72px 72px',
         }}
       />
-      <div className="tu-scanline hidden md:block" style={{ animationDelay: '-4s' }} />
 
       <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
@@ -80,18 +78,14 @@ const Pipeline: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: i * 0.12, ease }}
-              data-cursor
             >
               <div className="flex items-start justify-between">
                 <span className="font-mono text-[11px] tracking-[0.2em] text-ember">
                   {stage.id}·{String(i + 1).padStart(2, '0')}
                 </span>
-                <Scramble
-                  className="font-mono text-[10px] tracking-[0.18em] text-bone/40 group-hover:text-bone/70 transition-colors duration-300"
-                  rescrambleOnHover
-                >
+                <span className="font-mono text-[10px] tracking-[0.18em] text-bone/40 group-hover:text-bone/70 transition-colors duration-300">
                   {stage.readout}
-                </Scramble>
+                </span>
               </div>
               <div>
                 <h3 className="font-display font-bold text-2xl md:text-[1.7rem] text-bone mb-3 tracking-tight">
