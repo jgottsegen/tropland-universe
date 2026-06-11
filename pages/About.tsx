@@ -1,192 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'motion/react';
 import { Send, CheckCircle, AlertCircle, Instagram, Facebook, ArrowUpRight } from 'lucide-react';
-import CometBackground from '../components/CometBackground';
-import { GlowingEffect } from '../components/GlowingEffect';
-import TextReveal from '../components/TextReveal';
+import SectionTag from '../components/fx/SectionTag';
+import Reveal from '../components/fx/Reveal';
+import MagneticButton from '../components/MagneticButton';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-/* ── Ghost shell placeholder ── */
-const GhostShell: React.FC<{ className?: string; delay?: string; label?: string }> = ({
-    className = '',
-    delay = '0s',
-    label,
-}) => (
-    <div
-        className={`ghost-pulse relative overflow-hidden rounded-xl bg-white/[0.02] border border-white/[0.05] ${className}`}
-        style={{ animationDelay: delay }}
-    >
-        <div className="ghost-scan" style={{ animationDelay: delay }} />
-        <div className="ghost-cross absolute top-3 left-3 w-4 h-4" style={{ animationDelay: delay }}>
-            <div className="absolute top-0 left-0 w-full h-px bg-white/15" />
-            <div className="absolute top-0 left-0 w-px h-full bg-white/15" />
-        </div>
-        <div className="ghost-cross absolute bottom-3 right-3 w-4 h-4"
-            style={{ animationDelay: `calc(${delay} + 1.75s)` }}>
-            <div className="absolute bottom-0 right-0 w-full h-px bg-white/15" />
-            <div className="absolute bottom-0 right-0 w-px h-full bg-white/15" />
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-            <div className="ghost-cross w-7 h-7 relative" style={{ animationDelay: `calc(${delay} + 0.8s)` }}>
-                <div className="absolute top-1/2 left-0 w-full h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
-                <div className="absolute top-0 left-1/2 w-px h-full" style={{ background: 'rgba(255,255,255,0.08)' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full border border-white/10" />
-            </div>
-        </div>
-        {label && (
-            <span className="absolute bottom-3 left-0 right-0 text-center text-[8px] font-sans font-semibold uppercase tracking-[0.25em] text-white/20">
-                {label}
-            </span>
-        )}
-    </div>
-);
+const ease = [0.16, 1, 0.3, 1] as const;
 
-/* ── Mythology panel — ghost shell with cursor tilt microinteraction ── */
-const ForestGhostPanel: React.FC = () => {
-    const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
-    const [cursor, setCursor] = useState({ x: 50, y: 50 });
-    const panelRef = useRef<HTMLDivElement>(null);
+const inputClass =
+    'w-full bg-transparent border-b border-bone/20 px-0 py-4 text-bone font-display text-lg placeholder-bone/30 focus:outline-none focus:border-ember transition-colors duration-300';
 
-    const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = panelRef.current?.getBoundingClientRect();
-        if (!rect) return;
-        const nx = (e.clientX - rect.left) / rect.width;
-        const ny = (e.clientY - rect.top) / rect.height;
-        setTilt({ rx: (ny - 0.5) * -10, ry: (nx - 0.5) * 10 });
-        setCursor({ x: nx * 100, y: ny * 100 });
-    };
+const chapters = [
+    { year: '2013', label: 'Books & Print', active: true },
+    { year: '2022', label: 'Digital Era', active: false },
+    { year: '2026', label: 'The Kingdom', active: false },
+];
 
-    const onLeave = () => {
-        setTilt({ rx: 0, ry: 0 });
-        setCursor({ x: 50, y: 50 });
-    };
-
-    const isResting = tilt.rx === 0 && tilt.ry === 0;
-
-    return (
-        <div
-            ref={panelRef}
-            onMouseMove={onMove}
-            onMouseLeave={onLeave}
-            className="relative rounded-3xl overflow-hidden border border-brand-dark-text/[0.08] select-none"
-            style={{
-                aspectRatio: '4/5',
-                cursor: 'crosshair',
-                background: 'linear-gradient(150deg, rgba(232,93,58,0.05) 0%, rgba(245,240,235,0) 55%, rgba(27,14,54,0.04) 100%)',
-                transform: `perspective(700px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
-                transition: isResting
-                    ? 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)'
-                    : 'transform 0.08s linear',
-            }}
-        >
-            {/* Subtle grid */}
-            <div className="absolute inset-0 pointer-events-none" style={{
-                backgroundImage: 'linear-gradient(rgba(27,14,54,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(27,14,54,0.04) 1px, transparent 1px)',
-                backgroundSize: '52px 52px',
-            }} />
-
-            {/* Corner marks */}
-            <div className="absolute top-5 left-5 w-5 h-5 border-t border-l border-brand-dark-text/[0.14] pointer-events-none" />
-            <div className="absolute top-5 right-5 w-5 h-5 border-t border-r border-brand-dark-text/[0.14] pointer-events-none" />
-            <div className="absolute bottom-5 left-5 w-5 h-5 border-b border-l border-brand-dark-text/[0.14] pointer-events-none" />
-            <div className="absolute bottom-5 right-5 w-5 h-5 border-b border-r border-brand-dark-text/[0.14] pointer-events-none" />
-
-            {/* Cursor-tracking reticle */}
-            <div
-                className="absolute pointer-events-none"
-                style={{
-                    left: `${cursor.x}%`,
-                    top: `${cursor.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    transition: isResting ? 'left 0.65s cubic-bezier(0.34,1.56,0.64,1), top 0.65s cubic-bezier(0.34,1.56,0.64,1)' : 'none',
-                }}
-            >
-                <div className="relative w-8 h-8">
-                    <div className="absolute top-1/2 left-0 w-full h-px" style={{ background: 'rgba(27,14,54,0.2)' }} />
-                    <div className="absolute top-0 left-1/2 w-px h-full" style={{ background: 'rgba(27,14,54,0.2)' }} />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border" style={{ borderColor: 'rgba(27,14,54,0.2)' }} />
-                </div>
-            </div>
-
-            {/* Bottom label */}
-            <div className="absolute bottom-5 inset-x-0 text-center pointer-events-none">
-                <span className="text-[8px] font-sans font-semibold uppercase tracking-[0.3em]"
-                    style={{ color: 'rgba(27,14,54,0.25)', fontSize: '11px' }}>
-                    Image Coming
-                </span>
-            </div>
-
-            {/* Cream inset edge fade */}
-            <div className="absolute inset-0 pointer-events-none rounded-3xl"
-                style={{ boxShadow: 'inset 0 0 32px 12px #F5F0EB' }} />
-        </div>
-    );
-};
-
-/* ── Chapter card with GlowingEffect border ── */
-const ChapterCard: React.FC<{
-    area?: string;
-    children: React.ReactNode;
-    className?: string;
-}> = ({ area, children, className = '' }) => (
-    <li className={`list-none ${area ?? ''}`}>
-        <div className="relative h-full rounded-3xl border border-white/[0.07] p-[3px]"
-            style={{ background: 'rgba(255,255,255,0.02)' }}>
-            <GlowingEffect
-                spread={50}
-                glow={true}
-                disabled={false}
-                proximity={80}
-                inactiveZone={0.01}
-                borderWidth={2}
-            />
-            <div className={`relative h-full rounded-[22px] overflow-hidden backdrop-blur-sm ${className}`}>
-                {children}
-            </div>
-        </div>
-    </li>
-);
-
-/* ── Intersection fade hook ── */
-function useFadeIn(threshold = 0.08) {
-    const ref = useRef<HTMLElement>(null);
-    const [visible, setVisible] = useState(false);
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(
-            ([e]) => { if (e.isIntersecting) setVisible(true); },
-            { threshold }
-        );
-        obs.observe(el);
-        return () => obs.disconnect();
-    }, [threshold]);
-    const fade = () =>
-        `transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-    return { ref, visible, fade };
-}
-
-/* ══════════════════════════════════════════════════════════════════ */
+const chapterBooks = [
+    { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
+    { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
+    { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
+    { src: '/images/rth.png', alt: 'Rockford T. Honeypot' },
+];
 
 const AboutPage: React.FC = () => {
-    const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [formStatus, setFormStatus] = useState<FormStatus>('idle');
-
-    useEffect(() => {
-        const t = setTimeout(() => setLoaded(true), 200);
-        return () => clearTimeout(t);
-    }, []);
-
-    const secMythos = useFadeIn();
-    const secOrigin = useFadeIn();
-    const secContact = useFadeIn();
-
-    const heroReveal = () =>
-        `transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -209,7 +53,7 @@ const AboutPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-brand-deep">
+        <div className="min-h-screen bg-ink">
             <Helmet>
                 <title>About Tropland Universe</title>
                 <meta name="description" content="The story behind Tropland Universe — 13 years of original IP, from children's books to a global digital wildlife brand." />
@@ -219,472 +63,403 @@ const AboutPage: React.FC = () => {
             </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
-                ACT I — HERO
-                Swap src when Josh provides the new hero image.
-                Currently: hero-lion.png
+                HERO
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '640px' }}>
-                <CometBackground density={3} speed={0.7} />
-
+            <section className="relative flex flex-col justify-end overflow-hidden bg-ink" style={{ minHeight: '92svh' }}>
                 <div className="absolute inset-0">
-                    <img
+                    <motion.img
                         src="/images/about-hero.png"
                         alt="Tropland Universe"
                         className="w-full h-full object-cover"
                         style={{ objectPosition: 'center 15%' }}
+                        initial={{ scale: 1.06, filter: 'brightness(0.7)' }}
+                        animate={{ scale: 1, filter: 'brightness(1)' }}
+                        transition={{ duration: 2, ease }}
                     />
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/25" />
+                <div className="absolute inset-0 bg-gradient-to-r from-ink/65 via-transparent to-transparent" />
 
-                <div className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, #0D0A1A 0%, rgba(13,10,26,0.55) 35%, rgba(13,10,26,0.1) 70%, transparent 100%)' }} />
-                <div className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to right, rgba(13,10,26,0.75) 0%, rgba(13,10,26,0.2) 50%, transparent 100%)' }} />
-
-                <div className="absolute inset-0 flex flex-col justify-end">
-                    <div className="max-w-7xl mx-auto px-6 md:px-12 w-full pb-14 md:pb-20">
-                        <p className={`text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5 ${heroReveal()}`}
-                            style={{ transitionDelay: '200ms' }}>
+                <div className="relative z-10 max-w-[1480px] mx-auto px-6 md:px-12 w-full pb-14 md:pb-20 pt-36 md:pt-44">
+                    <motion.div
+                        className="flex items-center gap-4 mb-7"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.9, ease }}
+                    >
+                        <span className="w-10 h-px bg-ember" />
+                        <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
                             Est. 2013 · Los Angeles
-                        </p>
-                        <h1>
-                            <TextReveal
-                                className="block font-serif leading-[0.88] tracking-tight text-white"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
-                                delay={0.4}
-                                wordDelay={0.12}
+                        </span>
+                    </motion.div>
+
+                    <h1 className="mb-7 select-none">
+                        <span className="block overflow-hidden">
+                            <motion.span
+                                className="block font-display font-extrabold uppercase text-white tracking-[-0.02em] leading-[0.9] text-[13vw] md:text-[8.5vw] lg:text-[7.5vw]"
+                                initial={{ y: '108%' }}
+                                animate={{ y: 0 }}
+                                transition={{ delay: 0.3, duration: 1.1, ease }}
                             >
                                 The Story
-                            </TextReveal>
-                            <TextReveal
-                                className="block font-serif italic leading-[0.88] tracking-tight text-brand-accent"
-                                style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
-                                delay={0.58}
-                                wordDelay={0.12}
+                            </motion.span>
+                        </span>
+                        <span className="block overflow-hidden">
+                            <motion.span
+                                className="block font-edit italic font-light text-ember leading-[1.02] text-[11vw] md:text-[7vw] lg:text-[6.2vw]"
+                                initial={{ y: '108%' }}
+                                animate={{ y: 0 }}
+                                transition={{ delay: 0.45, duration: 1.1, ease }}
                             >
                                 Behind It All.
-                            </TextReveal>
-                        </h1>
-                        <p className={`mt-8 text-base md:text-lg text-white/60 font-sans font-light leading-relaxed max-w-sm ${heroReveal()}`}
-                            style={{ transitionDelay: '700ms' }}>
-                            A world that began in a rainforest and grew into a kingdom.
-                        </p>
-                    </div>
+                            </motion.span>
+                        </span>
+                    </h1>
+
+                    <motion.p
+                        className="text-lg md:text-xl text-white/75 font-display font-light leading-snug max-w-sm"
+                        style={{ textShadow: '0 1px 10px rgba(0,0,0,0.45)' }}
+                        initial={{ opacity: 0, y: 22 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7, duration: 1, ease }}
+                    >
+                        A world that began in a rainforest and grew into a kingdom.
+                    </motion.p>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════
-                ACT II — THE MYTHOLOGY
-                Split: text left / live 3D forest right
+                THE MYTHOLOGY
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={secMythos.ref as any}
-                className="py-16 md:py-24 bg-brand-cream relative overflow-hidden">
-                <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <section className="py-24 md:py-36 bg-bone relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-10 lg:gap-16 items-start">
+                    <Reveal>
+                        <SectionTag index="01" label="The Mythology" dark={false} className="mb-12 md:mb-16" />
+                    </Reveal>
 
-                        {/* Left: label + quote + body */}
-                        <div>
-                            <div className={secMythos.fade()} style={{ transitionDelay: '0ms' }}>
-                                <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
-                                    The Mythology
-                                </p>
-                            </div>
-
-                            <div className={secMythos.fade()} style={{ transitionDelay: '80ms' }}>
-                                <p className="font-serif italic text-brand-dark-text leading-[1.08] tracking-tight mb-8"
-                                    style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                        <div className="lg:col-span-7">
+                            <Reveal>
+                                <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-ink mb-12 text-[9.5vw] md:text-[4.2vw]">
                                     "Every great kingdom<br />
-                                    begins with a forest."
-                                </p>
-                            </div>
+                                    begins with a{' '}
+                                    <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">forest.</span>"
+                                </h2>
+                            </Reveal>
 
-                            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${secMythos.fade()}`}
-                                style={{ transitionDelay: '180ms' }}>
-                                <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
-                                    Tropland Universe™ is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
-                                </p>
-                                <p className="text-brand-dark-text/80 font-sans text-lg leading-relaxed">
-                                    The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
-                                </p>
-                            </div>
+                            <Reveal delay={0.1}>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl">
+                                    <p className="font-display font-light text-[17px] md:text-lg text-ink/70 leading-relaxed">
+                                        Tropland Universe™ is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
+                                    </p>
+                                    <p className="font-display font-light text-[17px] md:text-lg text-ink/70 leading-relaxed">
+                                        The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
+                                    </p>
+                                </div>
+                            </Reveal>
                         </div>
 
-                        {/* Right: rainforest image panel */}
-                        <div className={`${secMythos.fade()} hidden lg:block sticky top-24`} style={{ transitionDelay: '220ms' }}>
-                            <div className="relative rounded-3xl overflow-hidden border border-brand-dark-text/[0.08]" style={{ aspectRatio: '4/5' }}>
-                                <img
-                                    src="/images/trop-forest.png"
-                                    alt="The Tropland Rainforest"
-                                    className="w-full h-full object-cover"
-                                />
+                        <Reveal className="lg:col-span-5" delay={0.15}>
+                            <div className="relative max-w-[420px] mx-auto lg:ml-auto lg:mr-0">
+                                <div className="tu-frame tu-ticks text-ink/50 relative overflow-hidden border border-ink/10" style={{ aspectRatio: '4/5' }}>
+                                    <img
+                                        src="/images/trop-forest.png"
+                                        alt="The Tropland Rainforest"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
                             </div>
-                        </div>
-
+                        </Reveal>
                     </div>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════
-                ACT IV — THE ORIGIN
-                Chapter I: book covers, warm accent bg, stands out.
-                Chapters II + III: image ghost shells + text.
+                THE ORIGIN
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={secOrigin.ref as any}
-                className="py-24 md:py-32 bg-brand-deep text-white relative overflow-hidden">
-                <CometBackground density={2} speed={0.5} />
+            <section className="py-24 md:py-36 bg-ink relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                    <Reveal>
+                        <SectionTag index="02" label="Origin" className="mb-12 md:mb-16" />
+                    </Reveal>
 
-                    <div className={`mb-12 ${secOrigin.fade()}`}>
-                        <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
-                            Origin
-                        </p>
-                        <h2 className="font-serif tracking-tight leading-[1]"
-                            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
-                            <TextReveal delay={0.1} wordDelay={0.1}>How a rainforest</TextReveal>
-                            <br />
-                            <TextReveal className="italic text-brand-accent" delay={0.38} wordDelay={0.1}>became a kingdom.</TextReveal>
+                    <Reveal>
+                        <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone mb-14 md:mb-20 text-[10vw] md:text-[4.6vw]">
+                            How a rainforest<br />
+                            became a{' '}
+                            <span className="font-edit italic font-light normal-case text-ember tracking-normal">kingdom.</span>
                         </h2>
-                    </div>
+                    </Reveal>
 
-                    {/* Three Chapters — standalone row above the bento */}
-                    <div className={`mb-8 bg-white/[0.03] rounded-2xl px-5 py-4 ${secOrigin.fade()}`}
-                        style={{ transitionDelay: '300ms' }}>
-                        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/30 mb-4">The Three Chapters</p>
-                        <div className="flex flex-wrap items-stretch gap-y-2">
-                            {[
-                                { year: '2013', label: 'Books\u00a0&\u00a0Print', active: true },
-                                { year: '2022', label: 'Digital\u00a0Era', active: false },
-                                { year: '2026', label: 'The\u00a0Kingdom', active: false },
-                            ].map((ch, i) => (
-                                <div key={ch.year} className="flex items-stretch flex-1">
-                                    <div className={`flex-1 rounded-xl px-4 py-3 ${ch.active ? 'bg-brand-accent/15 border border-brand-accent/30' : 'border border-white/[0.07]'}`}>
-                                        <p className="font-serif text-xl leading-none mb-1 text-brand-accent">{ch.year}</p>
-                                        <p className="text-[11px] font-sans font-medium text-white/35 uppercase tracking-[0.15em]">{ch.label}</p>
+                    {/* The Three Chapters */}
+                    <Reveal delay={0.05}>
+                        <div className="mb-12 md:mb-16">
+                            <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-bone/40 mb-4">The Three Chapters</p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 border border-bone/12">
+                                {chapters.map((ch, i) => (
+                                    <div
+                                        key={ch.year}
+                                        className={`px-6 py-5 md:py-6 ${i > 0 ? 'border-t md:border-t-0 md:border-l border-bone/12' : ''} ${ch.active ? 'bg-bone/[0.04]' : ''}`}
+                                    >
+                                        <p className="font-display font-extrabold text-2xl md:text-3xl text-ember leading-none mb-2">{ch.year}</p>
+                                        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-bone/45">{ch.label}</p>
                                     </div>
-                                    {i < 2 && (
-                                        <div className="flex items-center px-2">
-                                            <div className="h-px w-3 bg-white/15" />
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </Reveal>
 
-                    {/* Chapter bento:
-                        Row 1 — Chapter I: full width, horizontal split (books left / text right)
-                        Row 2 — Chapter II + III: equal halves side by side
-                    */}
-                    <ul className={`grid grid-cols-1 gap-4 md:grid-cols-12 ${secOrigin.fade()}`}
-                        style={{ transitionDelay: '120ms' }}>
+                    {/* Chapter I — full-width split */}
+                    <Reveal delay={0.05}>
+                        <div className="border border-bone/12 mb-4 md:mb-5">
+                            <div className="grid grid-cols-1 md:grid-cols-2">
 
-                        {/* ── Chapter I: Full-width horizontal card — PREMIUM REDESIGN ── */}
-                        <ChapterCard
-                            area="md:col-span-12"
-                            className="bg-gradient-to-br from-brand-accent/[0.10] via-white/[0.02] to-brand-purple/[0.04]"
-                        >
-                            <div className="flex flex-col md:flex-row" style={{ minHeight: '32rem' }}>
-
-                                {/* LEFT: Dramatic book showcase */}
-                                <div className="md:w-[52%] flex-shrink-0 relative overflow-hidden rounded-tl-[22px] rounded-bl-[22px]" style={{ minHeight: '32rem' }}>
-                                    {/* Rich warm-dark backdrop */}
-                                    <div className="absolute inset-0"
-                                        style={{ background: 'linear-gradient(145deg, rgba(232,93,58,0.18) 0%, rgba(13,10,26,0.85) 55%, rgba(27,14,54,0.9) 100%)' }} />
-                                    {/* Subtle grid texture */}
-                                    <div className="absolute inset-0 pointer-events-none opacity-20"
-                                        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
-                                    {/* Radial accent spotlight */}
-                                    <div className="absolute inset-0 pointer-events-none"
-                                        style={{ background: 'radial-gradient(ellipse at 50% 60%, rgba(232,93,58,0.18) 0%, transparent 65%)' }} />
-
-                                    {/* Books — 2×2 grid */}
-                                    <div className="absolute inset-0 p-4 md:p-5 pb-10">
-                                        <div className="grid grid-cols-2 grid-rows-2 gap-2.5 h-full">
-                                            {[
-                                                { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
-                                                { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
-                                                { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
-                                                { src: '/images/rth.png', alt: 'Rockford T. Honeypot' },
-                                            ].map((book) => (
-                                                <div
-                                                    key={book.src}
-                                                    className="relative flex items-center justify-center overflow-hidden rounded-xl"
-                                                    style={{ filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.65))' }}
-                                                >
-                                                    <img
-                                                        src={book.src}
-                                                        alt={book.alt}
-                                                        className="h-full w-auto object-contain"
-                                                        style={{ maxWidth: '100%' }}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
+                                {/* Books */}
+                                <div className="relative bg-ink-2 p-5 md:p-8 pb-12 md:pb-14 border-b md:border-b-0 md:border-r border-bone/12">
+                                    <div className="grid grid-cols-2 gap-3 md:gap-4">
+                                        {chapterBooks.map((book) => (
+                                            <div key={book.src} className="tu-frame overflow-hidden" style={{ aspectRatio: '3/4' }}>
+                                                <img src={book.src} alt={book.alt} className="w-full h-full object-cover" loading="lazy" />
+                                            </div>
+                                        ))}
                                     </div>
-
-                                    {/* Bottom label */}
-                                    <div className="absolute bottom-0 inset-x-0 pointer-events-none"
-                                        style={{ background: 'linear-gradient(to top, rgba(13,10,26,0.7) 0%, transparent 100%)', height: '5rem' }} />
-                                    <p className="absolute bottom-4 inset-x-0 text-center text-[10px] font-sans font-semibold uppercase tracking-[0.28em] text-white/35 pointer-events-none">
+                                    <p className="absolute bottom-4 inset-x-0 text-center font-mono text-[10px] tracking-[0.28em] uppercase text-bone/40">
                                         Four Original Volumes · 2013–2016
                                     </p>
                                 </div>
 
-                                {/* RIGHT: Editorial text column */}
-                                <div className="flex-1 flex flex-col justify-between p-8 md:p-10 border-t md:border-t-0 md:border-l border-white/[0.07]">
-
-                                    {/* Top: chapter label + numeral */}
-                                    <div>
-                                        <div className="flex items-start justify-between mb-5">
-                                            <div>
-                                                <p className="text-[10px] font-sans font-bold uppercase tracking-[0.35em] text-brand-accent/70 mb-2">
-                                                    Chapter I · Series Origin
-                                                </p>
-                                                <p className="font-serif text-white leading-none"
-                                                    style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)' }}>
-                                                    2013
-                                                </p>
-                                            </div>
-                                            <span className="font-serif select-none hidden md:block"
-                                                style={{ fontSize: '5.5rem', color: 'rgba(232,93,58,0.14)', lineHeight: 1, marginTop: '-0.75rem' }}>
-                                                I
-                                            </span>
-                                        </div>
-                                        {/* Accent rule */}
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="h-px flex-1" style={{ background: 'linear-gradient(to right, rgba(232,93,58,0.6), transparent)' }} />
-                                        </div>
-                                    </div>
-
-                                    {/* Middle: heading + body */}
-                                    <div className="flex-1 mb-7">
-                                        <h3 className="font-serif text-2xl md:text-3xl text-white mb-4 leading-[1.15]">
-                                            The World Was<br />
-                                            <span className="italic text-brand-accent">Written First.</span>
-                                        </h3>
-                                        <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                            It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-white/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-brand-accent font-semibold">2022</span>, Tropland went AI-native. By <span className="text-brand-accent font-semibold">2026</span>, it became the Digital Animal Kingdom.
-                                        </p>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </ChapterCard>
-
-                        {/* ── Chapter II: Digital Evolution — left half ── */}
-                        <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
-                            <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
-                                <div className="mb-4">
-                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
-                                        Chapter II
+                                {/* Text */}
+                                <div className="p-7 md:p-12 flex flex-col justify-center tu-ticks text-bone/35 relative">
+                                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-ember mb-3">
+                                        Chapter I · Series Origin
+                                    </span>
+                                    <p className="font-display font-extrabold text-bone leading-none mb-8 text-5xl md:text-[4.5rem]">
+                                        2013
                                     </p>
-                                    <p className="font-serif text-brand-accent leading-none"
-                                        style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
-                                        2022
-                                    </p>
-                                </div>
-                                {/* Image */}
-                                <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
-                                    <img
-                                        src="/images/chapter2.png"
-                                        alt="Digital Evolution – Tropland Universe"
-                                        className="w-full h-full object-cover"
-                                        style={{ objectPosition: 'center 20%' }}
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-                                </div>
-                                <div className="mt-auto">
-                                    <h3 className="font-sans text-[17px] font-bold text-white mb-2">
-                                        Digital Evolution
+                                    <h3 className="font-display font-bold text-2xl md:text-[1.9rem] text-bone leading-[1.1] tracking-tight mb-5">
+                                        The World Was<br />
+                                        <span className="font-edit italic font-light text-ember">Written First.</span>
                                     </h3>
-                                    <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                        Tropland goes AI-native. The characters find a new cinematic visual language, reaching millions daily across every major platform.
+                                    <p className="font-display font-light text-[15px] md:text-base text-bone/55 leading-relaxed max-w-lg">
+                                        It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-bone/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-ember font-medium">2022</span>, Tropland went AI-native. By <span className="text-ember font-medium">2026</span>, it became the Digital Animal Kingdom.
                                     </p>
                                 </div>
                             </div>
-                        </ChapterCard>
+                        </div>
+                    </Reveal>
 
-                        {/* ── Chapter III: The Kingdom — right half ── */}
-                        <ChapterCard area="md:col-span-6" className="bg-white/[0.025]">
-                            <div className="relative z-10 flex flex-col p-7 md:p-8" style={{ minHeight: '21rem' }}>
-                                <div className="mb-4">
-                                    <p className="text-xs font-sans font-semibold uppercase tracking-[0.3em] text-white/50 mb-2">
-                                        Chapter III
-                                    </p>
-                                    <p className="font-serif text-brand-accent leading-none"
-                                        style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
-                                        2026
-                                    </p>
-                                </div>
-                                {/* Image */}
-                                <div className="relative rounded-xl overflow-hidden mb-5" style={{ aspectRatio: '16/9' }}>
-                                    <img
-                                        src="/images/chapter3.png"
-                                        alt="The Kingdom – Tropland Universe"
-                                        className="w-full h-full object-cover"
-                                        style={{ objectPosition: 'center 20%' }}
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-                                </div>
-                                <div className="mt-auto">
-                                    <h3 className="font-sans text-[17px] font-bold text-white mb-2">
-                                        The Kingdom
+                    {/* Chapters II + III */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                        {[
+                            {
+                                chapter: 'Chapter II',
+                                year: '2022',
+                                src: '/images/chapter2.png',
+                                alt: 'Digital Evolution – Tropland Universe',
+                                title: 'Digital Evolution',
+                                body: 'Tropland goes AI-native. The characters find a new cinematic visual language, reaching millions daily across every major platform.',
+                            },
+                            {
+                                chapter: 'Chapter III',
+                                year: '2026',
+                                src: '/images/chapter3.png',
+                                alt: 'The Kingdom – Tropland Universe',
+                                title: 'The Kingdom',
+                                body: 'Over a billion views. Licensed by All-American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.',
+                            },
+                        ].map((ch, i) => (
+                            <Reveal key={ch.year} delay={0.05 + i * 0.08}>
+                                <div className="border border-bone/12 p-7 md:p-8 h-full flex flex-col hover:bg-bone/[0.03] transition-colors duration-500">
+                                    <div className="flex items-baseline justify-between mb-6">
+                                        <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-bone/45">{ch.chapter}</span>
+                                        <span className="font-display font-extrabold text-2xl md:text-3xl text-ember leading-none">{ch.year}</span>
+                                    </div>
+                                    <div className="tu-frame overflow-hidden mb-6" style={{ aspectRatio: '16/9' }}>
+                                        <img
+                                            src={ch.src}
+                                            alt={ch.alt}
+                                            className="w-full h-full object-cover"
+                                            style={{ objectPosition: 'center 20%' }}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h3 className="font-display font-bold text-xl md:text-2xl text-bone tracking-tight mb-3">
+                                        {ch.title}
                                     </h3>
-                                    <p className="text-white/65 font-sans text-[15px] leading-relaxed">
-                                        Over a billion views. Licensed by All-American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.
+                                    <p className="font-display font-light text-[15px] text-bone/55 leading-relaxed">
+                                        {ch.body}
                                     </p>
                                 </div>
-                            </div>
-                        </ChapterCard>
-
-                    </ul>
+                            </Reveal>
+                        ))}
+                    </div>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════
                 SOCIAL PRESENCE
             ═══════════════════════════════════════════════════════════ */}
-            <section className="py-16 bg-brand-cream border-t border-brand-border-light">
-                <div className="max-w-5xl mx-auto px-6 md:px-12">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div>
-                            <p className="text-[11px] font-sans font-bold uppercase tracking-[0.3em] text-brand-accent mb-2">
-                                Follow the Kingdom
-                            </p>
-                            <h3 className="font-serif text-3xl md:text-4xl text-brand-dark-text">
-                                The world of Tropland <span className="italic text-brand-accent">lives on social.</span>
-                            </h3>
-                            <p className="text-brand-muted font-sans text-lg mt-3 max-w-md">
-                                Over a billion content views. Follow the journey on Instagram and Facebook.
-                            </p>
+            <section className="py-16 md:py-24 bg-bone border-t border-ink/10">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12">
+                    <Reveal>
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+                            <div>
+                                <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-ember-deep mb-5">
+                                    Follow the Kingdom
+                                </p>
+                                <h3 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[1] text-ink text-3xl md:text-[2.8rem] mb-4">
+                                    The world of Tropland{' '}
+                                    <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">lives on social.</span>
+                                </h3>
+                                <p className="font-display font-light text-lg text-ink/60 max-w-md">
+                                    Over a billion content views. Follow the journey on Instagram and Facebook.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap gap-4 flex-shrink-0">
+                                <a
+                                    href="https://instagram.com/troplanduniverse"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-3 px-7 py-4 border border-ink/20 text-ink font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:border-ember-deep hover:text-ember-deep transition-colors duration-300"
+                                >
+                                    <Instagram size={15} />
+                                    Instagram
+                                    <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </a>
+                                <a
+                                    href="https://facebook.com/troplanduniverse"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-3 px-7 py-4 border border-ink/20 text-ink font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:border-ember-deep hover:text-ember-deep transition-colors duration-300"
+                                >
+                                    <Facebook size={15} />
+                                    Facebook
+                                    <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </a>
+                            </div>
                         </div>
-                        <div className="flex gap-3 flex-shrink-0">
-                            <a
-                                href="https://instagram.com/troplanduniverse"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-300"
-                                style={{ background: 'linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1), rgba(252,176,69,0.1))', border: '1px solid rgba(200,100,200,0.3)', color: 'rgba(180,80,180,0.9)' }}
-                            >
-                                <Instagram size={14} />
-                                Instagram
-                                <ArrowUpRight size={12} />
-                            </a>
-                            <a
-                                href="https://facebook.com/troplanduniverse"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2]/15 border border-[#1877F2]/30 text-[#4a9bf5] font-sans font-semibold text-sm hover:bg-[#1877F2]/25 transition-all duration-300"
-                            >
-                                <Facebook size={14} />
-                                Facebook
-                                <ArrowUpRight size={12} />
-                            </a>
-                        </div>
-                    </div>
+                    </Reveal>
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════
-                ACT V — THE INVITATION
+                THE INVITATION
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={secContact.ref as any}
-                className="py-24 md:py-36 bg-brand-cream relative overflow-hidden cream-texture">
-                <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
+            <section className="py-24 md:py-36 bg-ink-2 relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
+
+                    <Reveal>
+                        <SectionTag index="03" label="Enter the Kingdom" className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
 
                         {/* Left: invitation copy */}
                         <div className="lg:col-span-5">
-                            <div className={secContact.fade()}>
-                                <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
-                                    Enter the Kingdom
-                                </p>
-                                <h2 className="font-serif tracking-tight leading-[1] mb-8 text-brand-dark-text"
-                                    style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
+                            <Reveal>
+                                <h2 className="font-display font-extrabold text-[11vw] md:text-[4.4vw] leading-[0.95] tracking-[-0.02em] text-bone uppercase mb-8">
                                     Build with<br />
-                                    <span className="italic text-brand-accent">Tropland.</span>
+                                    <span className="font-edit italic font-light normal-case text-ember tracking-normal">Tropland.</span>
                                 </h2>
-                                <p className="text-brand-muted-light font-sans text-base leading-relaxed mb-10">
+                            </Reveal>
+                            <Reveal delay={0.1}>
+                                <p className="font-display font-light text-lg text-bone/60 leading-relaxed max-w-sm mb-10">
                                     For licensing inquiries, brand partnerships, and creative collaboration.
                                 </p>
-                                <div className="space-y-3">
+                                <div className="space-y-4">
                                     {['Brand partnerships', 'Character licensing', 'Content distribution'].map((item) => (
-                                        <div key={item} className="flex items-center gap-3 text-brand-dark-text/60 font-sans text-[15px]">
-                                            <div className="w-1 h-1 rounded-full shrink-0" style={{ background: 'rgba(232,93,58,0.6)' }} />
+                                        <div key={item} className="flex items-center gap-4 font-mono text-[12px] tracking-[0.18em] uppercase text-bone/55">
+                                            <span className="w-1.5 h-1.5 bg-ember shrink-0" />
                                             {item}
                                         </div>
                                     ))}
                                 </div>
-
-                            </div>
+                            </Reveal>
                         </div>
 
                         {/* Right: form */}
                         <div className="lg:col-span-7">
                             {formStatus === 'success' ? (
-                                <div className={`rounded-2xl bg-brand-dark-text/[0.03] border border-brand-dark-text/[0.07] p-14 text-center ${secContact.fade()}`}
-                                    style={{ transitionDelay: '100ms' }}>
-                                    <CheckCircle size={36} className="text-brand-accent mx-auto mb-5" />
-                                    <h3 className="font-serif text-2xl text-brand-dark-text mb-2">Message received.</h3>
-                                    <p className="text-brand-muted font-sans text-[15px]">We'll be in touch shortly.</p>
-                                </div>
+                                <Reveal>
+                                    <div className="border border-bone/15 p-12 text-center">
+                                        <CheckCircle size={44} className="text-ember mx-auto mb-5" />
+                                        <h3 className="font-display font-bold text-2xl text-bone mb-2">Message received.</h3>
+                                        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-bone/45">
+                                            We'll be in touch shortly
+                                        </p>
+                                    </div>
+                                </Reveal>
                             ) : (
-                                <form onSubmit={handleSubmit}
-                                    className={`space-y-5 ${secContact.fade()}`}
-                                    style={{ transitionDelay: '100ms' }}>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div>
-                                            <label className="block text-[13px] font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
-                                                Name
-                                            </label>
-                                            <input type="text" required value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
-                                                placeholder="Your name" />
+                                <Reveal delay={0.15}>
+                                    <form onSubmit={handleSubmit} className="space-y-10">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                            <div>
+                                                <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                    01 — Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    className={inputClass}
+                                                    placeholder="Your name"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                    02 — Email
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    required
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    className={inputClass}
+                                                    placeholder="Your email"
+                                                />
+                                            </div>
                                         </div>
                                         <div>
-                                            <label className="block text-[13px] font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
-                                                Email
+                                            <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                03 — Message
                                             </label>
-                                            <input type="email" required value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors"
-                                                placeholder="Your email" />
+                                            <textarea
+                                                required
+                                                rows={5}
+                                                value={message}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                className={`${inputClass} resize-none`}
+                                                placeholder="Tell us about your project or inquiry"
+                                            />
                                         </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-sans font-semibold text-brand-dark-text/55 uppercase tracking-[0.15em] mb-2">
-                                            Message
-                                        </label>
-                                        <textarea required rows={6} value={message}
-                                            onChange={(e) => setMessage(e.target.value)}
-                                            className="w-full rounded-xl border border-brand-dark-text/[0.18] bg-brand-dark-text/[0.03] px-5 py-4 text-brand-dark-text font-sans text-[15px] placeholder-brand-dark-text/30 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-dark-text/[0.05] transition-colors resize-none"
-                                            placeholder="Tell us about your project or inquiry" />
-                                    </div>
 
-                                    {formStatus === 'error' && (
-                                        <div className="flex items-center gap-3 rounded-xl border border-red-600/30 bg-red-600/05 px-5 py-3">
-                                            <AlertCircle size={16} className="text-red-500 shrink-0" />
-                                            <p className="text-red-600 font-sans text-sm">
-                                                Something went wrong. Email{' '}
-                                                <a href="mailto:partnerships@troplanduniverse.com"
-                                                    className="underline text-brand-accent">
-                                                    partnerships@troplanduniverse.com
-                                                </a>
-                                            </p>
-                                        </div>
-                                    )}
+                                        {formStatus === 'error' && (
+                                            <div className="flex items-center gap-3 border border-ember/30 px-5 py-3">
+                                                <AlertCircle size={15} className="text-ember" />
+                                                <p className="text-bone/70 font-display text-sm">
+                                                    Something went wrong. Email{' '}
+                                                    <a href="mailto:partnerships@troplanduniverse.com" className="underline text-ember">
+                                                        partnerships@troplanduniverse.com
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        )}
 
-                                    <div className="pt-2">
-                                        <button type="submit" disabled={formStatus === 'submitting'}
-                                            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-[15px] hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_40px_rgba(232,93,58,0.4)]">
-                                            {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
-                                            <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                        </button>
-                                    </div>
-                                </form>
+                                        <MagneticButton>
+                                            <button
+                                                type="submit"
+                                                disabled={formStatus === 'submitting'}
+                                                className="group inline-flex items-center gap-3 px-10 py-5 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {formStatus === 'submitting' ? 'Sending…' : 'Send Message'}
+                                                <Send size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                            </button>
+                                        </MagneticButton>
+                                    </form>
+                                </Reveal>
                             )}
                         </div>
                     </div>

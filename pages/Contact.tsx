@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Send, CheckCircle, AlertCircle, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
-import CometBackground from '../components/CometBackground';
+import { Send, CheckCircle, AlertCircle, Instagram, Facebook, Youtube } from 'lucide-react';
+import SectionTag from '../components/fx/SectionTag';
+import Reveal from '../components/fx/Reveal';
+import MagneticButton from '../components/MagneticButton';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
+const inputClass =
+    'w-full bg-transparent border-b border-bone/20 px-0 py-4 text-bone font-display text-lg placeholder-bone/30 focus:outline-none focus:border-ember transition-colors duration-300';
+
+const socials = [
+    { icon: Instagram, href: 'https://instagram.com/troplanduniverse', label: 'Instagram' },
+    { icon: Facebook, href: 'https://facebook.com/troplanduniverse', label: 'Facebook' },
+    { icon: Youtube, href: 'https://youtube.com/@troplanduniverse', label: 'YouTube' },
+];
+
 const ContactPage: React.FC = () => {
-    const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<FormStatus>('idle');
-
-    useEffect(() => { const t = setTimeout(() => setLoaded(true), 200); return () => clearTimeout(t); }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,11 +36,8 @@ const ContactPage: React.FC = () => {
         } catch { setStatus('error'); }
     };
 
-    const fade = () =>
-        `transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
-
     return (
-        <div className="min-h-screen bg-brand-deep">
+        <div className="min-h-screen bg-ink-2">
             <Helmet>
                 <title>Contact — Tropland Universe™</title>
                 <meta name="description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
@@ -44,130 +49,144 @@ const ContactPage: React.FC = () => {
             {/* ═══════════════════════════════════════════════════════════
                 CONTACT — Split layout: info + form
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-screen flex items-center overflow-hidden">
-                <CometBackground density={3} speed={0.8} />
-                <div className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-brand-accent/12 rounded-full blur-[250px] pointer-events-none"></div>
-                <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-brand-purple/15 rounded-full blur-[200px] pointer-events-none"></div>
-                <div className="absolute top-[40%] left-[30%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none ambient-glow"></div>
+            <section className="relative min-h-screen flex items-center overflow-hidden bg-ink-2">
 
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full py-40">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+                {/* Ember horizon glow */}
+                <div
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full pointer-events-none ambient-glow"
+                    style={{ background: 'radial-gradient(ellipse, rgba(255,77,28,0.07) 0%, transparent 70%)', filter: 'blur(60px)' }}
+                />
+
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10 w-full pt-36 pb-24 md:pt-44 md:pb-32">
+
+                    <Reveal>
+                        <SectionTag index="01" label="Contact" className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
                         {/* Left: Info */}
-                        <div>
-                            <div className={fade()} style={{ transitionDelay: '200ms' }}>
-                                <p className="text-xs font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6">
-                                    Contact
+                        <div className="lg:col-span-5">
+                            <Reveal>
+                                <h1 className="font-display font-extrabold text-[11vw] md:text-[4.4vw] leading-[0.95] tracking-[-0.02em] text-bone uppercase mb-8">
+                                    Let's build<br />
+                                    <span className="font-edit italic font-light normal-case text-ember tracking-normal">something.</span>
+                                </h1>
+                            </Reveal>
+
+                            <Reveal delay={0.1}>
+                                <p className="font-display font-light text-lg text-bone/60 leading-relaxed max-w-sm mb-10">
+                                    For licensing inquiries, brand partnerships, and collaboration opportunities.
                                 </p>
-                            </div>
 
-                            <h1 className={`font-serif text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[0.9] tracking-tight text-white mb-6 ${fade()}`} style={{ transitionDelay: '400ms' }}>
-                                Let's build <span className="italic text-brand-accent">something.</span>
-                            </h1>
-
-                            <p className={`text-lg text-white/50 font-sans font-light leading-relaxed mb-10 max-w-lg ${fade()}`} style={{ transitionDelay: '600ms' }}>
-                                For licensing inquiries, brand partnerships, and collaboration opportunities.
-                            </p>
-
-                            <div className={`space-y-4 mb-10 ${fade()}`} style={{ transitionDelay: '700ms' }}>
-                                <div className="flex items-center gap-3">
-                                    <Mail size={16} className="text-white/45" />
-                                    <a href="mailto:partnerships@troplanduniverse.com" className="text-white/50 hover:text-brand-accent transition-colors font-sans text-sm underline underline-offset-2">
+                                <div className="space-y-3 mb-12">
+                                    <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-bone/40">Direct line</p>
+                                    <a
+                                        href="mailto:partnerships@troplanduniverse.com"
+                                        className="tu-link font-display text-lg md:text-xl text-bone hover:text-ember transition-colors duration-300 inline-block"
+                                    >
                                         partnerships@troplanduniverse.com
                                     </a>
                                 </div>
-                            </div>
 
-                            <div className={`flex items-center gap-3 ${fade()}`} style={{ transitionDelay: '800ms' }}>
-                                {[
-                                    { icon: Instagram, href: 'https://instagram.com/troplanduniverse', label: 'Instagram' },
-                                    { icon: Facebook, href: 'https://facebook.com/troplanduniverse', label: 'Facebook' },
-                                    { icon: Youtube, href: 'https://youtube.com/@troplanduniverse', label: 'YouTube' },
-                                ].map(social => {
-                                    const Icon = social.icon;
-                                    return (
+                                <div className="flex items-center gap-3">
+                                    {socials.map(({ icon: Icon, href, label }) => (
                                         <a
-                                            key={social.label}
-                                            href={social.href}
+                                            key={label}
+                                            href={href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="w-10 h-10 rounded-full glass flex items-center justify-center text-white/50 hover:text-white hover:border-brand-accent/30 transition-all duration-300"
-                                            aria-label={social.label}
+                                            className="w-11 h-11 border border-bone/20 flex items-center justify-center text-bone/55 hover:text-ember hover:border-ember transition-colors duration-300"
+                                            aria-label={label}
                                         >
                                             <Icon size={16} />
                                         </a>
-                                    );
-                                })}
-                            </div>
+                                    ))}
+                                </div>
+                            </Reveal>
                         </div>
 
                         {/* Right: Form */}
-                        <div className={fade()} style={{ transitionDelay: '500ms' }}>
+                        <div className="lg:col-span-7">
                             {status === 'success' ? (
-                                <div className="glass rounded-3xl p-12 text-center">
-                                    <CheckCircle size={48} className="text-green-400 mx-auto mb-4" />
-                                    <h3 className="font-serif text-2xl text-white mb-2">Message sent!</h3>
-                                    <p className="text-white/40 font-sans text-sm">We'll get back to you shortly.</p>
-                                </div>
+                                <Reveal>
+                                    <div className="border border-bone/15 p-12 text-center">
+                                        <CheckCircle size={44} className="text-ember mx-auto mb-5" />
+                                        <h3 className="font-display font-bold text-2xl text-bone mb-2">Message sent!</h3>
+                                        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-bone/45">
+                                            We'll get back to you shortly
+                                        </p>
+                                    </div>
+                                </Reveal>
                             ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Name</label>
-                                            <input
-                                                type="text"
-                                                required
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors"
-                                                placeholder="Your name"
-                                            />
+                                <Reveal delay={0.15}>
+                                    <form onSubmit={handleSubmit} className="space-y-10">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                            <div>
+                                                <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                    01 — Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    className={inputClass}
+                                                    placeholder="Your name"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                    02 — Email
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    required
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    className={inputClass}
+                                                    placeholder="Your email"
+                                                />
+                                            </div>
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Email</label>
-                                            <input
-                                                type="email"
+                                            <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                                                03 — Message
+                                            </label>
+                                            <textarea
                                                 required
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors"
-                                                placeholder="Your email"
+                                                rows={5}
+                                                value={message}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                className={`${inputClass} resize-none`}
+                                                placeholder="Tell us about your project or inquiry"
                                             />
                                         </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-sans font-semibold text-white/55 uppercase tracking-[0.15em] mb-2">Message</label>
-                                        <textarea
-                                            required
-                                            rows={6}
-                                            value={message}
-                                            onChange={(e) => setMessage(e.target.value)}
-                                            className="w-full glass rounded-xl px-5 py-4 text-white font-sans text-sm bg-transparent placeholder-white/45 focus:outline-none focus:border-brand-accent/40 transition-colors resize-none"
-                                            placeholder="Tell us about your project or inquiry"
-                                        />
-                                    </div>
 
-                                    {status === 'error' && (
-                                        <div className="flex items-center gap-3 glass rounded-xl px-5 py-3 border-red-500/20">
-                                            <AlertCircle size={16} className="text-red-400" />
-                                            <p className="text-red-300 font-sans text-sm">
-                                                Something went wrong. Try emailing{' '}
-                                                <a href="mailto:partnerships@troplanduniverse.com" className="underline text-brand-accent">
-                                                    partnerships@troplanduniverse.com
-                                                </a>
-                                            </p>
-                                        </div>
-                                    )}
+                                        {status === 'error' && (
+                                            <div className="flex items-center gap-3 border border-ember/30 px-5 py-3">
+                                                <AlertCircle size={15} className="text-ember" />
+                                                <p className="text-bone/70 font-display text-sm">
+                                                    Something went wrong. Try emailing{' '}
+                                                    <a href="mailto:partnerships@troplanduniverse.com" className="underline text-ember">
+                                                        partnerships@troplanduniverse.com
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        )}
 
-                                    <button
-                                        type="submit"
-                                        disabled={status === 'submitting'}
-                                        className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-sm hover:bg-brand-accent-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
-                                    >
-                                        {status === 'submitting' ? 'Sending...' : 'Send Message'}
-                                        <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                    </button>
-                                </form>
+                                        <MagneticButton>
+                                            <button
+                                                type="submit"
+                                                disabled={status === 'submitting'}
+                                                className="group inline-flex items-center gap-3 px-10 py-5 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {status === 'submitting' ? 'Sending…' : 'Send Message'}
+                                                <Send size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                            </button>
+                                        </MagneticButton>
+                                    </form>
+                                </Reveal>
                             )}
                         </div>
                     </div>

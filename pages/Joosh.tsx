@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, BookOpen, Heart, Leaf, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import CometBackground from '../components/CometBackground';
-import TextReveal from '../components/TextReveal';
+import SectionTag from '../components/fx/SectionTag';
+import Reveal from '../components/fx/Reveal';
+import MagneticButton from '../components/MagneticButton';
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 // ─── Book data ─────────────────────────────────────────────────────────────
 const books = [
@@ -15,7 +19,6 @@ const books = [
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848',
         description:
             'The first title in the series introduces readers to the Tropland Forest and its colorful cast of characters, setting the tone for a story world centered on imagination, kindness, and healthy choices.',
-        accent: 'rgba(232,93,58,0.25)',
     },
     {
         number: 'Book Two',
@@ -25,7 +28,6 @@ const books = [
         url: 'https://www.amazon.com/gp/product/1500736082',
         description:
             'Joosh and friends take their adventures outdoors for a playful day of games, teamwork, and healthy choices. As challenges pop up across the course, the characters learn how good sportsmanship and supportive friendships can turn any day into a win.',
-        accent: 'rgba(120,80,200,0.25)',
     },
     {
         number: 'Book Three',
@@ -35,7 +37,6 @@ const books = [
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/',
         description:
             "The trilogy's final chapter expands the world through food-themed storytelling, bringing Tropland's characters into new moments centered on energy, balance, and everyday habits. With a mix of humor and heart, the story closes the series by reinforcing what Tropland does best.",
-        accent: 'rgba(50,180,120,0.22)',
     },
     {
         number: 'Companion',
@@ -45,7 +46,6 @@ const books = [
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Coloring-Book/dp/0990927083',
         description:
             'A companion title inviting readers and families into the Tropland world through calming, character-inspired designs. Built for creative play and focus, it extends the Tropland Forest aesthetic into an interactive format that complements the original series.',
-        accent: 'rgba(232,93,58,0.22)',
     },
 ];
 
@@ -56,38 +56,22 @@ const themes = [
     { icon: Star, label: 'Family-First', desc: 'Written for young readers but designed to resonate across generations' },
 ];
 
+const heroStats = [
+    { label: '4 Published Titles', sub: 'Trilogy + Companion' },
+    { label: 'Founded 2013', sub: 'Tropland Origin IP' },
+    { label: 'Tropland Forest', sub: 'Original Story World' },
+];
 
-// ─── Utility hook ──────────────────────────────────────────────────────────
-function useFadeIn(threshold = 0.08) {
-    const ref = useRef<HTMLElement>(null);
-    const [visible, setVisible] = useState(false);
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
-        obs.observe(el);
-        return () => obs.disconnect();
-    }, [threshold]);
-    const fade = () =>
-        `transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-    return { ref, visible, fade };
-}
+const fannedBooks = [
+    { src: '/images/jjb-03.png' },
+    { src: '/images/jjb-01.png' },
+    { src: '/images/jjb-02.png' },
+];
 
 // ─── Page ──────────────────────────────────────────────────────────────────
 const JooshPage: React.FC = () => {
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => { const t = setTimeout(() => setLoaded(true), 200); return () => clearTimeout(t); }, []);
-
-    const sec2 = useFadeIn();
-    const sec3 = useFadeIn();
-    const sec4 = useFadeIn();
-    const sec5 = useFadeIn();
-
-    const heroFade = () =>
-        `transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
-
     return (
-        <div className="bg-brand-deep min-h-screen">
+        <div className="bg-ink min-h-screen">
             <Helmet>
                 <title>Joosh's Juice Bar Book Series | Tropland Universe</title>
                 <meta name="description" content="The original Tropland Universe IP — a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
@@ -97,230 +81,227 @@ const JooshPage: React.FC = () => {
             </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
-                HERO — Full-bleed cinematic
+                HERO
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-screen flex items-center overflow-hidden">
-                <CometBackground density={3} speed={0.8} />
-
-                {/* Hero backdrop */}
+            <section className="relative min-h-screen flex items-center overflow-hidden bg-ink">
                 <div className="absolute inset-0">
-                    <img
+                    <motion.img
                         src="/images/joosh-hero.jpg"
                         alt="Joosh's Juice Bar — Tropland Universe"
                         className="w-full h-full object-cover"
                         style={{ objectPosition: 'center 35%' }}
                         aria-hidden="true"
+                        initial={{ scale: 1.06, filter: 'brightness(0.7)' }}
+                        animate={{ scale: 1, filter: 'brightness(1)' }}
+                        transition={{ duration: 2, ease }}
                     />
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
 
-                {/* Gradient overlays */}
-                <div className="absolute inset-0"
-                    style={{ background: 'linear-gradient(135deg, rgba(13,10,26,0.97) 0%, rgba(13,10,26,0.82) 42%, rgba(13,10,26,0.45) 100%)' }} />
-                <div className="absolute inset-0"
-                    style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(232,93,58,0.08) 0%, transparent 65%)' }} />
-                <div className="absolute top-0 right-0 w-3/4 h-3/4 bg-brand-accent/6 rounded-full blur-[200px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-brand-purple/15 rounded-full blur-[180px] pointer-events-none" />
-
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 pt-36 md:pt-36 pb-16 md:pb-24 w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10 pt-36 pb-16 md:pb-24 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
                         {/* Left: Text */}
-                        <div>
-                            {/* Category badges */}
-                            <div className={`flex flex-wrap items-center gap-3 mb-8 ${heroFade()}`} style={{ transitionDelay: '200ms' }}>
-                                <span className="font-sans font-semibold uppercase tracking-wider text-sm px-5 py-2.5 rounded-full border border-white/15 text-white/80 bg-white/5">
+                        <div className="lg:col-span-7">
+                            {/* Category chips */}
+                            <motion.div
+                                className="flex flex-wrap items-center gap-3 mb-8"
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2, duration: 0.9, ease }}
+                            >
+                                <span className="px-4 py-2 border border-white/20 text-white/70 font-mono text-[10px] uppercase tracking-[0.18em]">
                                     Children's Book Series
                                 </span>
-                                <span className="font-sans font-semibold uppercase tracking-wider text-sm px-5 py-2.5 rounded-full border border-brand-accent/20 text-brand-accent bg-brand-accent/10">
+                                <span className="px-4 py-2 bg-ember text-ink font-mono text-[10px] uppercase tracking-[0.18em]">
                                     Est. 2013
                                 </span>
-                            </div>
+                            </motion.div>
 
-                            {/* Title — one line, no period */}
-                            <h1 className={`font-serif leading-[0.95] tracking-tight mb-8 ${heroFade()}`}
-                                style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)', transitionDelay: '320ms', whiteSpace: 'nowrap' }}>
-                                <TextReveal className="text-white inline" delay={0.4} wordDelay={0.06}>
-                                    Joosh's
-                                </TextReveal>
-                                {' '}
-                                <TextReveal className="text-white inline" delay={0.52} wordDelay={0.06}>
-                                    Juice
-                                </TextReveal>
-                                {' '}
-                                <TextReveal className="italic text-brand-accent inline" delay={0.64} wordDelay={0.06}>
-                                    Bar
-                                </TextReveal>
+                            {/* Title */}
+                            <h1 className="mb-8 select-none">
+                                <span className="block overflow-hidden">
+                                    <motion.span
+                                        className="block leading-[0.95] text-[12vw] md:text-[7vw] lg:text-[5.6vw]"
+                                        initial={{ y: '108%' }}
+                                        animate={{ y: 0 }}
+                                        transition={{ delay: 0.3, duration: 1.1, ease }}
+                                    >
+                                        <span className="font-display font-extrabold uppercase text-white tracking-[-0.02em]">Joosh's Juice </span>
+                                        <span className="font-edit italic font-light text-ember">Bar</span>
+                                    </motion.span>
+                                </span>
                             </h1>
 
-                            <p className={`text-xl text-white/70 font-sans leading-relaxed mb-5 max-w-xl ${heroFade()}`} style={{ transitionDelay: '600ms' }}>
-                                The original publishing IP of Tropland Universe™. A children's book series that started it all.
-                            </p>
-                            <p className={`text-xl text-white/70 font-sans leading-relaxed mb-8 max-w-xl ${heroFade()}`} style={{ transitionDelay: '680ms' }}>
-                                First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe, years before the Digital Animal Kingdom reached a billion views.
-                            </p>
+                            <motion.div
+                                initial={{ opacity: 0, y: 22 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.55, duration: 1, ease }}
+                            >
+                                <p className="font-display font-light text-lg md:text-xl text-white/75 leading-relaxed mb-5 max-w-xl">
+                                    The original publishing IP of Tropland Universe™. A children's book series that started it all.
+                                </p>
+                                <p className="font-display font-light text-lg md:text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                                    First introduced in 2013, Joosh's Juice Bar established the characters, tone, and values of the Tropland Universe, years before the Digital Animal Kingdom reached a billion views.
+                                </p>
+                            </motion.div>
 
-                            {/* Stats — larger, more readable */}
-                            <div className={`flex flex-wrap gap-10 mb-12 ${heroFade()}`} style={{ transitionDelay: '740ms' }}>
-                                {[
-                                    { icon: BookOpen, label: '4 Published Titles', sub: 'Trilogy + Companion' },
-                                    { icon: Star, label: 'Founded 2013', sub: 'Tropland Origin IP' },
-                                    { icon: Leaf, label: 'Tropland Forest', sub: 'Original Story World' },
-                                ].map(({ icon: Icon, label, sub }) => (
-                                    <div key={label} className="flex items-center gap-4">
-                                        <div className="w-14 h-14 rounded-xl bg-brand-accent/15 border border-brand-accent/20 flex items-center justify-center flex-shrink-0">
-                                            <Icon size={24} className="text-brand-accent" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white font-sans font-bold text-xl leading-tight">{label}</p>
-                                            <p className="text-white/65 font-sans font-medium text-base mt-1">{sub}</p>
-
-                                        </div>
+                            {/* Stats ledger */}
+                            <motion.div
+                                className="grid grid-cols-3 border-t border-white/15 max-w-2xl"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.8, duration: 1 }}
+                            >
+                                {heroStats.map(({ label, sub }, i) => (
+                                    <div key={label} className={`py-5 pr-4 ${i > 0 ? 'border-l border-white/10 pl-5' : ''}`}>
+                                        <p className="font-display font-bold text-base md:text-lg text-white leading-tight">{label}</p>
+                                        <p className="font-mono text-[10px] text-white/50 uppercase tracking-[0.18em] mt-1.5">{sub}</p>
                                     </div>
                                 ))}
-                            </div>
-
+                            </motion.div>
                         </div>
 
-                        {/* Right: Fanned books — enlarged */}
-                        <div className={`flex justify-center lg:justify-end ${heroFade()}`} style={{ transitionDelay: '300ms' }}>
-                            <div className="relative w-full max-w-lg">
-                                <div className="absolute -inset-16 rounded-3xl bg-brand-accent/30 blur-[90px] opacity-55 pointer-events-none" />
-                                <div className="absolute -inset-8 rounded-3xl bg-brand-purple/20 blur-3xl opacity-40 pointer-events-none" />
-
-                                <div className="relative flex items-end justify-center" style={{ height: '560px' }}>
-                                    {[
-                                        { src: '/images/jjb-03.png', rotate: '-16deg', x: '-65px', z: 1 },
-                                        { src: '/images/jjb-01.png', rotate: '0deg', x: '0px', z: 3 },
-                                        { src: '/images/jjb-02.png', rotate: '16deg', x: '65px', z: 2 },
-                                    ].map((b, i) => (
-                                        <div
-                                            key={i}
-                                            className="absolute bottom-0 rounded-2xl overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.85)] border border-white/10 hover:z-50 transition-all duration-500"
-                                            style={{
-                                                width: '72%',
-                                                aspectRatio: '3/4',
-                                                transform: `rotate(${b.rotate}) translateX(${b.x})`,
-                                                zIndex: b.z,
-                                                transformOrigin: 'center bottom',
-                                            }}
-                                            onMouseEnter={e => {
-                                                const el = e.currentTarget;
-                                                el.style.transform = `rotate(0deg) translateX(${b.x}) translateY(-30px) scale(1.1)`;
-                                                el.style.boxShadow = '0 80px 120px rgba(0,0,0,0.95), 0 0 60px rgba(232,93,58,0.3)';
-                                                el.style.zIndex = '50';
-                                                el.style.borderColor = 'rgba(232,93,58,0.4)';
-                                            }}
-                                            onMouseLeave={e => {
-                                                const el = e.currentTarget;
-                                                el.style.transform = `rotate(${b.rotate}) translateX(${b.x})`;
-                                                el.style.boxShadow = '';
-                                                el.style.zIndex = String(b.z);
-                                                el.style.borderColor = '';
-                                            }}
-                                        >
-                                            <img src={b.src} alt="Joosh's Juice Bar book" className="w-full h-full object-cover" loading="lazy" />
-                                            <div className="absolute inset-0 pointer-events-none"
-                                                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%)' }} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════
-                ORIGIN NARRATIVE — Cream editorial
-            ═══════════════════════════════════════════════════════════ */}
-            <section ref={sec2.ref as any} className="py-24 md:py-36 bg-brand-cream text-brand-dark-text relative overflow-hidden cream-texture">
-                <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-
-                    <p className={`text-sm font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-8 ${sec2.fade()}`}>
-                        Where It All Began
-                    </p>
-
-                    <h2 className={`font-serif mb-12 leading-tight text-brand-dark-text ${sec2.fade()}`}
-                        style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', transitionDelay: '80ms' }}>
-                        The original <span className="italic text-brand-accent">Tropland</span> story.
-                    </h2>
-
-                    <div className={`space-y-8 ${sec2.fade()}`} style={{ transitionDelay: '160ms' }}>
-                        <p className="text-xl md:text-2xl text-brand-dark-text/80 font-sans leading-relaxed max-w-3xl mx-auto">
-                            Joosh's Juice Bar is a children's book series created by Josh Gottsegen, the original narrative foundation of the Tropland Universe. First introduced in 2013, the series uses playful animal characters and imaginative storytelling to explore themes of health, curiosity, and positive habits.
-                        </p>
-                    </div>
-
-                    {/* Theme pillars — enlarged text */}
-                    <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-16 border-t border-brand-border-light ${sec2.fade()}`} style={{ transitionDelay: '280ms' }}>
-                        {themes.map(({ icon: Icon, label, desc }) => (
-                            <div key={label} className="text-left group">
-                                <div className="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/15 flex items-center justify-center mb-5 group-hover:bg-brand-accent/20 transition-colors duration-300">
-                                    <Icon size={22} className="text-brand-accent" />
-                                </div>
-                                <p className="font-sans font-bold text-lg text-brand-dark-text mb-2">{label}</p>
-                                <p className="font-sans text-base text-brand-muted leading-snug">{desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══════════════════════════════════════════════════════════
-                THE BOOKS — Individual cards with 3D tilt covers
-            ═══════════════════════════════════════════════════════════ */}
-            <section id="books" ref={sec3.ref as any} className="py-24 md:py-36 bg-brand-deep relative overflow-hidden">
-                <CometBackground density={2} speed={0.5} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand-purple/10 rounded-full blur-[300px] pointer-events-none" />
-
-                <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-
-                    <div className={`mb-16 ${sec3.fade()}`}>
-                        <p className="text-sm font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-5">
-                            The Collection
-                        </p>
-                        <h2 className="font-serif tracking-tight leading-[1.05] text-white" style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
-                            Four books, <span className="italic text-brand-accent">one forest.</span>
-                        </h2>
-                        <p className="text-xl text-white/60 font-sans mt-5 max-w-2xl leading-relaxed">
-                            Written and produced by Josh Gottsegen, illustrated by Sehreen Shahzad. The foundational story world behind Tropland Universe.
-                        </p>
-                    </div>
-
-                    <div className="space-y-8">
-                        {books.map((book, i) => (
-                            <div
-                                key={book.title}
-                                className={`group glass border-shine rounded-3xl p-8 md:p-10 hover:border-brand-accent/20 transition-all duration-500 ${sec3.fade()}`}
-                                style={{ transitionDelay: `${i * 80}ms` }}
-                            >
-                                <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
-                                    {/* Book cover */}
-                                    <div className={`md:col-span-2 flex justify-center ${i % 2 !== 0 ? 'md:order-2' : ''}`}>
-                                        <div className="relative max-w-[180px] w-full mx-auto">
-                                            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_80px_-10px_rgba(0,0,0,0.8)]" style={{ aspectRatio: '3/4' }}>
-                                                <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
+                        {/* Right: Fanned books */}
+                        <motion.div
+                            className="lg:col-span-5 flex justify-center lg:justify-end"
+                            initial={{ opacity: 0, y: 28 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 1.1, ease }}
+                        >
+                            <div className="relative w-full max-w-md">
+                                <div className="flex items-center justify-center py-8 min-h-[22rem] md:min-h-[26rem]">
+                                    {fannedBooks.map((book, i) => {
+                                        const isCenter = i === 1;
+                                        return (
+                                            <div
+                                                key={book.src}
+                                                className="flex-shrink-0 relative"
+                                                style={{
+                                                    width: '56%',
+                                                    marginLeft: i === 0 ? '0' : '-27%',
+                                                    zIndex: isCenter ? 10 : 5 - i,
+                                                    transform: `rotate(${(i - 1) * 8}deg) translateY(${Math.abs(i - 1) * 14}px)`,
+                                                }}
+                                            >
+                                                <div
+                                                    className="overflow-hidden shadow-[0_24px_48px_rgba(12,11,9,0.6)] relative border border-white/10"
+                                                    style={{ aspectRatio: '3/4' }}
+                                                >
+                                                    <img src={book.src} alt="Joosh's Juice Bar book" className="w-full h-full object-cover" loading="lazy" />
+                                                </div>
                                             </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </motion.div>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══════════════════════════════════════════════════════════
+                ORIGIN NARRATIVE
+            ═══════════════════════════════════════════════════════════ */}
+            <section className="py-24 md:py-36 bg-bone relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12">
+
+                    <Reveal>
+                        <SectionTag index="01" label="Where It All Began" dark={false} className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-24">
+                        <Reveal className="lg:col-span-7">
+                            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-ink text-[10vw] md:text-[4.6vw]">
+                                The original<br />
+                                <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">Tropland</span> story.
+                            </h2>
+                        </Reveal>
+                        <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
+                            <p className="font-display font-light text-lg md:text-xl text-ink/65 leading-relaxed max-w-md">
+                                Joosh's Juice Bar is a children's book series created by Josh Gottsegen, the original narrative foundation of the Tropland Universe. First introduced in 2013, the series uses playful animal characters and imaginative storytelling to explore themes of health, curiosity, and positive habits.
+                            </p>
+                        </Reveal>
+                    </div>
+
+                    {/* Theme pillars */}
+                    <Reveal delay={0.05}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-ink/12 border border-ink/12">
+                            {themes.map(({ icon: Icon, label, desc }, i) => (
+                                <div
+                                    key={label}
+                                    className="group p-7 md:p-8 bg-bone hover:bg-bone-dark/50 transition-colors duration-500"
+                                >
+                                    <div className="flex items-start justify-between mb-7">
+                                        <Icon size={18} className="text-ember-deep" />
+                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ink/35">
+                                            {String(i + 1).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                    <p className="font-display font-bold text-lg text-ink mb-2 tracking-tight">{label}</p>
+                                    <p className="font-display font-light text-[15px] text-ink/55 leading-relaxed">{desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </Reveal>
+                </div>
+            </section>
+
+            {/* ═══════════════════════════════════════════════════════════
+                THE BOOKS
+            ═══════════════════════════════════════════════════════════ */}
+            <section id="books" className="py-24 md:py-36 bg-ink relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
+
+                    <Reveal>
+                        <SectionTag index="02" label="The Collection" className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-20">
+                        <Reveal className="lg:col-span-7">
+                            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone text-[10vw] md:text-[4.6vw]">
+                                Four books,<br />
+                                <span className="font-edit italic font-light normal-case text-ember tracking-normal">one forest.</span>
+                            </h2>
+                        </Reveal>
+                        <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
+                            <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-md">
+                                Written and produced by Josh Gottsegen, illustrated by Sehreen Shahzad. The foundational story world behind Tropland Universe.
+                            </p>
+                        </Reveal>
+                    </div>
+
+                    {/* Book ledger */}
+                    <div className="border-t border-bone/12">
+                        {books.map((book, i) => (
+                            <Reveal key={book.title} delay={0.05}>
+                                <div className="group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center py-10 md:py-14 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500">
+
+                                    {/* Cover */}
+                                    <div className={`md:col-span-3 ${i % 2 !== 0 ? 'md:order-2 md:col-start-10' : ''}`}>
+                                        <div className="tu-frame max-w-[200px] md:max-w-[220px] mx-auto md:mx-0 overflow-hidden border border-bone/10 shadow-[0_24px_48px_rgba(0,0,0,0.5)]" style={{ aspectRatio: '3/4' }}>
+                                            <img src={book.src} alt={book.title} className="w-full h-full object-cover" loading="lazy" />
                                         </div>
                                     </div>
 
                                     {/* Text */}
-                                    <div className={`md:col-span-3 ${i % 2 !== 0 ? 'md:order-1' : ''}`}>
+                                    <div className={`md:col-span-9 ${i % 2 !== 0 ? 'md:order-1 md:col-start-1' : ''}`}>
                                         <div className="flex flex-wrap items-center gap-3 mb-6">
-                                            <span className="font-sans font-bold uppercase tracking-[0.2em] text-sm px-4 py-2 rounded-full border border-brand-accent/25 text-brand-accent bg-brand-accent/10">
+                                            <span className="px-3.5 py-1.5 bg-ember text-ink font-mono text-[10px] uppercase tracking-[0.18em]">
                                                 {book.number}
                                             </span>
-                                            <span className="font-sans font-semibold uppercase tracking-wider text-sm px-4 py-2 rounded-full border border-white/15 text-white/65 bg-white/5">
+                                            <span className="px-3.5 py-1.5 border border-bone/20 text-bone/60 font-mono text-[10px] uppercase tracking-[0.18em]">
                                                 {book.tagline}
                                             </span>
                                         </div>
 
-                                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-tight">
+                                        <h3 className="font-display font-extrabold text-2xl md:text-[2.4rem] text-bone mb-5 leading-[1.05] tracking-tight">
                                             {book.title}
                                         </h3>
 
-                                        <p className="text-white/65 font-sans text-xl leading-relaxed mb-8 max-w-lg">
+                                        <p className="font-display font-light text-[16px] md:text-[17px] text-bone/55 leading-relaxed mb-8 max-w-2xl">
                                             {book.description}
                                         </p>
 
@@ -328,14 +309,14 @@ const JooshPage: React.FC = () => {
                                             href={book.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="group/btn inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_20px_rgba(232,93,58,0.4)]"
+                                            className="group/btn inline-flex items-center gap-3 px-7 py-3.5 border border-bone/25 text-bone font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300"
                                         >
                                             View on Amazon
-                                            <ArrowUpRight size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                            <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </Reveal>
                         ))}
                     </div>
                 </div>
@@ -344,41 +325,45 @@ const JooshPage: React.FC = () => {
             {/* ═══════════════════════════════════════════════════════════
                 LICENSING / BRAND CTA
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={sec4.ref as any} className="py-24 md:py-36 bg-brand-cream text-brand-dark-text relative overflow-hidden cream-texture">
-                <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+            <section className="py-24 md:py-36 bg-bone relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
-                    <p className={`text-sm font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-8 ${sec4.fade()}`}>
-                        For Brands &amp; Licensees
-                    </p>
+                    <Reveal>
+                        <SectionTag index="03" label="For Brands & Licensees" dark={false} className="mb-12 md:mb-16" />
+                    </Reveal>
 
-                    <h2 className={`font-serif mb-10 leading-tight ${sec4.fade()}`}
-                        style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', transitionDelay: '80ms' }}>
-                        Licensing-ready <span className="italic text-brand-accent">IP.</span>
-                    </h2>
-
-                    <div className={`space-y-6 text-xl md:text-2xl text-brand-dark-text/80 font-sans leading-relaxed mb-14 ${sec4.fade()}`} style={{ transitionDelay: '160ms' }}>
-                        <p>
-                            Joosh's Juice Bar is part of the broader Tropland Universe IP, a publishing and media brand trusted by global partners.
-                        </p>
-                    </div>
-
-                    <div className={`flex flex-col sm:flex-row gap-4 justify-center ${sec4.fade()}`} style={{ transitionDelay: '280ms' }}>
-                        <Link
-                            to="/contact"
-                            onClick={() => window.scrollTo(0, 0)}
-                            className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                        >
-                            Partner With Us
-                            <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                        <Link
-                            to="/rockford"
-                            onClick={() => window.scrollTo(0, 0)}
-                            className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-border text-brand-dark-text font-sans font-semibold text-lg hover:opacity-80 transition-all duration-300"
-                        >
-                            Rockford T. Honeypot
-                            <ArrowRight size={18} />
-                        </Link>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+                        <Reveal className="lg:col-span-7">
+                            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-ink text-[10vw] md:text-[4.6vw] mb-8">
+                                Licensing-ready{' '}
+                                <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">IP.</span>
+                            </h2>
+                            <p className="font-display font-light text-lg md:text-xl text-ink/65 leading-relaxed max-w-xl">
+                                Joosh's Juice Bar is part of the broader Tropland Universe IP, a publishing and media brand trusted by global partners.
+                            </p>
+                        </Reveal>
+                        <Reveal className="lg:col-span-5 flex flex-col sm:flex-row sm:flex-wrap lg:justify-end gap-4" delay={0.12}>
+                            <MagneticButton>
+                                <Link
+                                    to="/contact"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ink text-bone font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-deep transition-colors duration-300 whitespace-nowrap"
+                                >
+                                    Partner With Us
+                                    <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </Link>
+                            </MagneticButton>
+                            <MagneticButton>
+                                <Link
+                                    to="/rockford"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-ink/25 text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:border-ember-deep hover:text-ember-deep transition-colors duration-300 whitespace-nowrap"
+                                >
+                                    Rockford T. Honeypot
+                                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </MagneticButton>
+                        </Reveal>
                     </div>
                 </div>
             </section>
@@ -386,37 +371,45 @@ const JooshPage: React.FC = () => {
             {/* ═══════════════════════════════════════════════════════════
                 FOOTER CTA
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={sec5.ref as any} className="py-20 md:py-28 bg-brand-deep text-white relative overflow-hidden">
-                <CometBackground density={2} speed={0.5} />
-                <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
-                    <div className={sec5.fade()}>
-                        <p className="font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-6 text-sm">
-                            The Digital Animal Kingdom
-                        </p>
-                        <h2 className="font-serif leading-[1.05] tracking-tight mb-8 text-white"
-                            style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-                            Explore the rest of the <span className="italic text-brand-accent">Universe.</span>
-                        </h2>
-                        <p className="text-white/55 font-sans text-xl mb-10 max-w-xl mx-auto leading-relaxed">
-                            From a children's juice bar in 2013 to over a billion content views worldwide. The Tropland Universe keeps growing.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link
-                                to="/"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                            >
-                                Back to Home
-                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            <Link
-                                to="/contact"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                            >
-                                Partner With Us
-                            </Link>
-                        </div>
+            <section className="py-24 md:py-32 bg-ink-2 relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
+
+                    <Reveal>
+                        <SectionTag index="04" label="The Digital Animal Kingdom" className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+                        <Reveal className="lg:col-span-7">
+                            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone text-[9.5vw] md:text-[4.2vw] mb-8">
+                                Explore the rest<br />
+                                of the{' '}
+                                <span className="font-edit italic font-light normal-case text-ember tracking-normal">Universe.</span>
+                            </h2>
+                            <p className="font-display font-light text-lg text-bone/60 leading-relaxed max-w-xl">
+                                From a children's juice bar in 2013 to over a billion content views worldwide. The Tropland Universe keeps growing.
+                            </p>
+                        </Reveal>
+                        <Reveal className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-4" delay={0.12}>
+                            <MagneticButton>
+                                <Link
+                                    to="/"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
+                                >
+                                    Back to Home
+                                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </MagneticButton>
+                            <MagneticButton>
+                                <Link
+                                    to="/contact"
+                                    onClick={() => window.scrollTo(0, 0)}
+                                    className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-bone/25 text-bone font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300"
+                                >
+                                    Partner With Us
+                                </Link>
+                            </MagneticButton>
+                        </Reveal>
                     </div>
                 </div>
             </section>
@@ -426,4 +419,3 @@ const JooshPage: React.FC = () => {
 };
 
 export default JooshPage;
-
