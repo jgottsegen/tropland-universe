@@ -70,9 +70,9 @@ const Ventures: React.FC = () => {
                 style={{ aspectRatio: '4/5' }}
               >
                 <img
-                  src="/images/josh-gottsegen.png"
+                  src="/images/josh-lion.jpg"
                   alt="Josh Gottsegen, founder of Tropland Universe"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="tu-frame-meta bg-ink/85 backdrop-blur-md px-4 py-3 flex items-center justify-between">
                   <span className="font-mono text-[10px] tracking-[0.2em] text-bone/70">FOUNDER · CREATIVE DIRECTOR</span>
