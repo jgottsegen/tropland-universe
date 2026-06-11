@@ -11,8 +11,25 @@ export default {
       fontFamily: {
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
         sans: ['"Roboto"', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        edit: ['"Fraunces"', 'Georgia', 'serif'],
+        mono: ['"Spline Sans Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
+        ink: {
+          DEFAULT: '#0C0B09',
+          2: '#14120F',
+          3: '#1D1A16',
+        },
+        bone: {
+          DEFAULT: '#F2EEE5',
+          dark: '#E7E1D4',
+        },
+        ember: {
+          DEFAULT: '#FF4D1C',
+          deep: '#E03E12',
+          soft: '#FF7448',
+        },
         brand: {
           deep: '#0D0A1A',
           purple: '#1B0E36',

@@ -1,12 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Award, Globe, ImageIcon, Zap, Instagram, Facebook } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SectionTag from './fx/SectionTag';
+import ManifestoText from './fx/ManifestoText';
+import Odometer from './fx/Odometer';
+import Reveal from './fx/Reveal';
 
 const metrics = [
-  { end: 5, suffix: '', label: 'Published Books', icon: Award },
-  { end: 265, suffix: 'M', label: 'Single Viral Piece', icon: Zap },
-  { end: 50, suffix: 'K+', label: 'Original Artworks', icon: ImageIcon },
-  { end: 13, suffix: '+', label: 'Years of Tropland Storytelling', icon: Globe },
+  { value: '5', label: 'Published Books' },
+  { value: '267M', label: 'Single Viral Piece' },
+  { value: '50K+', label: 'Original Artworks' },
+  { value: '20+', label: 'Years of Tropland' },
 ];
 
 const galleryRow1 = [
@@ -27,155 +31,94 @@ const galleryRow2 = [
   '/images/gallery/home010-2.jpg',
 ];
 
-function AnimatedMetric({ end, suffix, isVisible }: { end: number; suffix: string; isVisible: boolean }) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!isVisible) return;
-    let current = 0;
-    const step = end / 40;
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, 25);
-    return () => clearInterval(timer);
-  }, [isVisible, end]);
-  return <>{count.toLocaleString()}{suffix}</>;
-}
+const GalleryCell: React.FC<{ src: string }> = ({ src }) => (
+  <div className="tu-frame w-64 md:w-80 h-64 md:h-80 flex-shrink-0 bg-ink-2">
+    <img src={src} alt="Tropland original artwork" className="w-full h-full object-cover" loading="lazy" />
+  </div>
+);
 
 const Portfolio: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.05 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const fade = (delay: number) =>
-    `transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-
   return (
-    <section id="universe" ref={sectionRef} className="relative bg-brand-cream py-24 md:py-36">
+    <section id="universe" className="relative bg-bone py-24 md:py-36 overflow-hidden">
+      <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <Reveal>
+          <SectionTag index="01" label="The Universe" dark={false} className="mb-12 md:mb-16" />
+        </Reveal>
 
-        <div className={fade(0)} style={{ transitionDelay: '0ms' }}>
-          <p className="text-[13px] font-sans font-semibold tracking-[0.3em] uppercase text-brand-accent mb-4">
-            Tropland Universe™
+        {/* Manifesto — words ink in on scroll */}
+        <ManifestoText
+          className="font-display font-medium text-[7.4vw] md:text-[3.4vw] leading-[1.12] tracking-[-0.015em] text-ink max-w-6xl mb-6"
+          text="Tropland began as a children's picture book. Twenty years later, it is a billion-view animal kingdom: original characters, photoreal worlds, and wildlife stories carried by three million followers across fifty countries."
+          accents={['billion-view', 'photoreal', 'original']}
+        />
+
+        <Reveal delay={0.1}>
+          <div className="flex flex-wrap items-center gap-3 mb-16 md:mb-20">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-ink text-bone font-mono text-[11px] uppercase tracking-[0.18em]">
+              <Award size={12} className="text-ember" />
+              #1 AI Artist Influencer · Feedspot 2025 + 2026
+            </span>
+            <Link
+              to="/licensing"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-ink/20 text-ink font-mono text-[11px] uppercase tracking-[0.18em] hover:border-ember-deep hover:text-ember-deep transition-colors duration-300"
+            >
+              Licensing · All-American Licensing
+              <ArrowUpRight size={11} />
+            </Link>
+          </div>
+        </Reveal>
+
+        {/* Metric ledger */}
+        <Reveal delay={0.05}>
+          <div className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-ink/15 mb-16 md:mb-20">
+            {metrics.map((m, i) => (
+              <div
+                key={m.label}
+                className={`py-7 md:py-9 px-2 md:px-8 ${i > 0 ? 'border-l border-ink/10' : ''} ${i >= 2 ? 'border-t border-ink/10 md:border-t-0' : ''} group hover:bg-ink/[0.03] transition-colors duration-500`}
+              >
+                <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-ink leading-none tracking-tight">
+                  <Odometer value={m.value} />
+                </div>
+                <div className="font-mono text-[10px] md:text-[11px] text-ink/55 uppercase tracking-[0.22em] mt-3">
+                  {m.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+
+      {/* The Field — full-bleed specimen reels */}
+      <div className="tu-marquee-pause">
+        <div className="overflow-hidden mb-3">
+          <div className="animate-marquee flex gap-3 w-max">
+            {[...galleryRow1, ...galleryRow1].map((src, i) => (
+              <GalleryCell key={i} src={src} />
+            ))}
+          </div>
+        </div>
+        <div className="overflow-hidden">
+          <div className="animate-marquee-reverse flex gap-3 w-max">
+            {[...galleryRow2, ...galleryRow2].map((src, i) => (
+              <GalleryCell key={i} src={src} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Record footnote */}
+      <Reveal delay={0.1}>
+        <div className="max-w-[1480px] mx-auto px-6 md:px-12 mt-10 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink/45">
+            Field record
+          </span>
+          <span className="h-px w-10 bg-ink/20 hidden md:block" />
+          <p className="font-display text-[15px] text-ink/75">
+            A single Tropland reel has reached <span className="font-bold text-ink">267 million views</span> across platforms.
           </p>
         </div>
-
-        <h2 className={`font-serif text-5xl sm:text-6xl md:text-[6rem] lg:text-[8rem] leading-[0.9] tracking-tight text-brand-dark-text mb-4 ${fade(1)}`} style={{ transitionDelay: '100ms' }}>
-          The Digital Animal <span className="italic text-brand-purple">Kingdom.</span>
-        </h2>
-
-        <div className={`flex flex-wrap items-center gap-3 mb-12 ${fade(1)}`} style={{ transitionDelay: '150ms' }}>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 text-brand-accent text-[15px] font-sans font-semibold">
-            <Award size={14} />
-            #1 AI Artist Influencer, Feedspot 2025 & 2026
-          </span>
-        </div>
-
-        {/* Description + Metrics */}
-        <div className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 mb-16 ${fade(2)}`} style={{ transitionDelay: '200ms' }}>
-          <div className="lg:col-span-3">
-            <p className="text-xl md:text-2xl text-brand-muted-light font-sans font-light leading-relaxed mb-5">
-              A leading wildlife media brand of the digital era. What started as a publishing IP
-              has grown into a global digital animal kingdom, connecting imagination and
-              nature through books, cinematic AI art, and licensing-ready IP.
-            </p>
-            <p className="text-xl md:text-2xl text-brand-muted font-sans font-light leading-relaxed mb-8">
-              Every image and video is crafted for emotional impact and global brand scalability.
-              Photorealistic wildlife content viewed over a billion times across 50+ countries.
-              Trusted by Adobe, Meta, OpenAI, Topaz Labs, and Kling AI.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="https://instagram.com/troplanduniverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-300"
-                style={{ background: 'linear-gradient(135deg, rgba(131,58,180,0.15), rgba(253,29,29,0.1), rgba(252,176,69,0.1))', border: '1px solid rgba(200,100,200,0.3)', color: 'rgba(180,80,180,0.9)' }}
-              >
-                <Instagram size={14} />
-                Instagram
-                <ArrowUpRight size={12} />
-              </a>
-              <a
-                href="https://facebook.com/troplanduniverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2]/15 border border-[#1877F2]/30 text-[#4a9bf5] font-sans font-semibold text-sm hover:bg-[#1877F2]/25 transition-all duration-300"
-              >
-                <Facebook size={14} />
-                Facebook
-                <ArrowUpRight size={12} />
-              </a>
-              <Link
-                to="/licensing"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent font-sans font-semibold text-sm hover:bg-brand-accent/20 transition-all duration-300"
-              >
-                <Award size={13} />
-                Licensing Inquiries · All-American Licensing
-                <ArrowUpRight size={12} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-2 gap-0 border border-brand-border-light rounded-2xl overflow-hidden bg-white">
-              {metrics.map((m, i) => {
-                const Icon = m.icon;
-                return (
-                  <div
-                    key={m.label}
-                    className={`p-5 md:p-6 ${i < 2 ? 'border-b border-brand-border-light' : ''} ${i % 2 === 0 ? 'border-r border-brand-border-light' : ''}`}
-                  >
-                    <Icon size={14} className="text-brand-accent mb-2" />
-                    <div className="text-3xl md:text-4xl font-serif text-brand-dark-text leading-none mb-1">
-                      <AnimatedMetric end={m.end} suffix={m.suffix} isVisible={isVisible} />
-                    </div>
-                    <div className="text-[13px] font-sans font-semibold text-brand-muted uppercase tracking-[0.15em]">
-                      {m.icon === Globe ? <>Years of <em>Tropland</em><br />Storytelling</> : m.label}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scrolling gallery row 1 */}
-      <div className="overflow-hidden mb-3">
-        <div className="animate-marquee flex gap-3 w-max">
-          {[...galleryRow1, ...galleryRow1].map((src, i) => (
-            <div key={i} className="w-64 md:w-80 h-64 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden">
-              <img src={src} alt="Tropland content" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Scrolling gallery row 2 (reverse) */}
-      <div className="overflow-hidden mb-8">
-        <div className="animate-marquee-reverse flex gap-3 w-max">
-          {[...galleryRow2, ...galleryRow2].map((src, i) => (
-            <div key={i} className="w-64 md:w-80 h-64 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden">
-              <img src={src} alt="Tropland content" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

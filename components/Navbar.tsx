@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Rockford', path: '/rockford' },
-  { label: 'Joosh', path: '/joosh' },
-  { label: 'Licensing', path: '/licensing' },
+  { label: 'Home', path: '/', index: '00' },
+  { label: 'About', path: '/about', index: '01' },
+  { label: 'Rockford', path: '/rockford', index: '02' },
+  { label: 'Joosh', path: '/joosh', index: '03' },
+  { label: 'Licensing', path: '/licensing', index: '04' },
 ];
 
 /* Walk up the DOM from a point and return the luminance (0-1) of the
@@ -55,20 +55,24 @@ const Navbar: React.FC = () => {
 
   const navBg = isScrolled
     ? isLight
-      ? 'bg-white/95 backdrop-blur-xl border-b border-black/[0.07] shadow-[0_2px_20px_rgba(0,0,0,0.07)]'
-      : 'bg-brand-deep/96 backdrop-blur-xl border-b border-white/[0.05] shadow-[0_2px_40px_rgba(0,0,0,0.4)]'
-    : 'bg-gradient-to-b from-black/50 to-transparent';
+      ? 'bg-bone/95 backdrop-blur-xl border-b border-ink/10'
+      : 'bg-ink/90 backdrop-blur-xl border-b border-bone/10'
+    : 'bg-gradient-to-b from-black/55 to-transparent';
+
+  const linkColor = (isActive: boolean) =>
+    isActive
+      ? isLight ? 'text-ink' : 'text-bone'
+      : isLight
+        ? 'text-ink/60 hover:text-ink'
+        : 'text-bone/65 hover:text-bone';
 
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
+        <div className="max-w-[1480px] mx-auto px-6 md:px-12 flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link
-            to="/"
-            className="hover:opacity-80 transition-opacity flex items-center gap-3 group"
-          >
+          <Link to="/" className="hover:opacity-80 transition-opacity flex items-center gap-3 group">
             <img
               src="/images/tropland-logo.png"
               alt="Tropland Universe"
@@ -78,25 +82,20 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-7">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`relative px-4 py-2 text-[15px] font-sans font-medium transition-colors duration-200 rounded-full ${isActive
-                    ? isLight ? 'text-brand-deep' : 'text-white'
-                    : isLight
-                      ? 'text-brand-deep/75 hover:text-brand-deep'
-                      : 'text-white/80 hover:text-white'
-                    }`}
-                  style={isLight ? undefined : { textShadow: '0 1px 6px rgba(0,0,0,0.75), 0 2px 12px rgba(0,0,0,0.5)' }}
+                  className={`group relative flex items-baseline gap-1.5 font-mono text-[12px] uppercase tracking-[0.18em] transition-colors duration-200 ${linkColor(isActive)}`}
+                  style={isLight || isScrolled ? undefined : { textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}
                 >
-                  {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-brand-accent" />
-                  )}
+                  <span className={`text-[9px] ${isActive ? 'text-ember' : isLight ? 'text-ink/35' : 'text-bone/35'} group-hover:text-ember transition-colors`}>
+                    {item.index}
+                  </span>
+                  <span className="tu-link">{item.label}</span>
                 </Link>
               );
             })}
@@ -106,15 +105,14 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-4">
             <Link
               to="/contact"
-              className="hidden md:inline-flex text-[15px] font-sans font-semibold px-5 py-2.5 rounded-full bg-brand-accent text-white hover:bg-brand-accent-hover transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,93,58,0.35)]"
+              className="hidden md:inline-flex items-center gap-2 font-display font-bold text-[13px] uppercase tracking-[0.08em] px-5 py-2.5 bg-ember text-ink hover:bg-ember-soft transition-colors duration-200"
             >
               Partner With Us
             </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 transition-colors ${isLight ? 'text-brand-deep/60 hover:text-brand-deep' : 'text-white/70 hover:text-white'
-                }`}
+              className={`md:hidden p-2 transition-colors ${isLight ? 'text-ink/70 hover:text-ink' : 'text-bone/70 hover:text-bone'}`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -124,33 +122,34 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-brand-deep backdrop-blur-xl md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}>
-        <div className="flex flex-col h-full pt-24 px-8 pb-10">
-          <nav className="flex flex-col gap-1 flex-1">
+      <div className={`fixed inset-0 z-40 bg-ink md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex flex-col h-full pt-28 px-8 pb-10">
+          <nav className="flex flex-col flex-1">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`text-4xl font-serif tracking-tight py-3 transition-colors ${isActive ? 'text-white' : 'text-white/55 hover:text-white'
-                    }`}
+                  className={`flex items-baseline gap-4 py-4 border-b border-bone/10 transition-colors ${isActive ? 'text-bone' : 'text-bone/50 hover:text-bone'}`}
                 >
-                  {item.label}
-                  {isActive && <span className="inline-block ml-3 w-1.5 h-1.5 rounded-full bg-brand-accent align-middle" />}
+                  <span className="font-mono text-[11px] text-ember">{item.index}</span>
+                  <span className="font-display font-extrabold text-3xl uppercase tracking-tight">
+                    {item.label}
+                  </span>
+                  {isActive && <ArrowRight size={18} className="text-ember ml-auto" />}
                 </Link>
               );
             })}
           </nav>
-          <div className="space-y-4">
+          <div className="space-y-5">
             <Link
               to="/contact"
-              className="flex items-center justify-center px-8 py-4 rounded-full bg-brand-accent text-white font-sans font-semibold text-base hover:bg-brand-accent-hover transition-colors"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-ember text-ink font-display font-bold text-base uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors"
             >
               Partner With Us
             </Link>
-            <p className="text-center text-xs font-sans text-white/15 uppercase tracking-[0.3em]">
+            <p className="text-center font-mono text-[10px] text-bone/30 uppercase tracking-[0.3em]">
               The Digital Animal Kingdom
             </p>
           </div>

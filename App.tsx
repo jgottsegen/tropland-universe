@@ -36,7 +36,8 @@ const AppLayout: React.FC = () => {
   const isPortal = PORTAL_PATHS.some(p => location.pathname.startsWith(p));
 
   return (
-    <div className="min-h-screen font-sans text-brand-text bg-brand-deep flex flex-col">
+    <div className="min-h-screen font-sans text-brand-text bg-ink flex flex-col">
+      {!isPortal && <div className="tu-grain" aria-hidden="true" />}
       {!isPortal && <Navbar />}
 
       <div className="flex-grow">
