@@ -115,8 +115,7 @@ const LicensingPage: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.9, ease }}
                     >
-                        <span className="w-10 h-px bg-ember" />
-                        <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
+                                      <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
                             Licensing &amp; Partnerships
                         </span>
                     </motion.div>

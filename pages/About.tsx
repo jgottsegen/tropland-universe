@@ -87,8 +87,7 @@ const AboutPage: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.9, ease }}
                     >
-                        <span className="w-10 h-px bg-ember" />
-                        <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
+                                      <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
                             Est. 2013 · Los Angeles
                         </span>
                     </motion.div>
@@ -397,7 +396,7 @@ const AboutPage: React.FC = () => {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div>
                                                 <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                    01 — Name
+                                                    01 · Name
                                                 </label>
                                                 <input
                                                     type="text"
@@ -410,7 +409,7 @@ const AboutPage: React.FC = () => {
                                             </div>
                                             <div>
                                                 <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                    02 — Email
+                                                    02 · Email
                                                 </label>
                                                 <input
                                                     type="email"
@@ -424,7 +423,7 @@ const AboutPage: React.FC = () => {
                                         </div>
                                         <div>
                                             <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                03 — Message
+                                                03 · Message
                                             </label>
                                             <textarea
                                                 required
