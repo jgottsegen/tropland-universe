@@ -12,7 +12,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
-    { value: '1B+', label: 'Content Views Worldwide' },
+    { value: '1.3B+', label: 'Content Views Worldwide' },
     { value: '#1', label: 'AI Art Influencer 2025 & 2026' },
     { value: '~40M', label: 'Monthly Social Impressions' },
     { value: '50K+', label: 'Image & Video Library' },
