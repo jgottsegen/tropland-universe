@@ -1,27 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'motion/react';
 import { ArrowUpRight, Globe, Tv, ShoppingBag, Gamepad2, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SectionTag from '../components/fx/SectionTag';
+import Reveal from '../components/fx/Reveal';
+import Odometer from '../components/fx/Odometer';
+import MagneticButton from '../components/MagneticButton';
 
-// ─── Utility hook ──────────────────────────────────────────────────────────
-function useFadeIn(threshold = 0.08) {
-    const ref = useRef<HTMLElement>(null);
-    const [visible, setVisible] = useState(false);
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
-        obs.observe(el);
-        return () => obs.disconnect();
-    }, [threshold]);
-    const fade = () =>
-        `transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-    return { ref, visible, fade };
-}
+const ease = [0.16, 1, 0.3, 1] as const;
 
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
-    { value: '1B+', label: 'Content Views Worldwide' },
+    { value: '1.3B+', label: 'Content Views Worldwide' },
     { value: '#1', label: 'AI Art Influencer 2025 & 2026' },
     { value: '~40M', label: 'Monthly Social Impressions' },
     { value: '50K+', label: 'Image & Video Library' },
@@ -35,6 +26,13 @@ const categories = [
     { icon: Tv, label: 'Digital & Entertainment', desc: 'Streaming, gaming integrations, and AR/VR experiences' },
     { icon: Globe, label: 'Home & Living', desc: 'Stationery, drinkware, wall art, and décor' },
     { icon: Star, label: 'Health & Wellness', desc: 'Wellness-oriented products aligned with brand values' },
+];
+
+const pillars = [
+    { label: 'Wholly Owned IP', desc: 'All characters, stories, and visual assets are original and creator-owned' },
+    { label: 'Proven Global Audience', desc: 'Ranked #1 AI Art Influencer with a worldwide fanbase across all platforms' },
+    { label: 'Multi-Format Ready', desc: 'Publishing, social, video, and digital assets available for activation' },
+    { label: 'Values-Aligned', desc: 'Family-friendly, wellness-focused, and conservation-positive brand positioning' },
 ];
 
 // ─── Scrolling background row images ───────────────────────────────────────
@@ -58,16 +56,8 @@ const row2 = [
 
 // ─── Page ──────────────────────────────────────────────────────────────────
 const LicensingPage: React.FC = () => {
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => { const t = setTimeout(() => setLoaded(true), 200); return () => clearTimeout(t); }, []);
-
-    const sec2 = useFadeIn();
-
-    const introFade = () =>
-        `transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
-
     return (
-        <div className="bg-brand-deep min-h-screen">
+        <div className="bg-ink min-h-screen">
             <Helmet>
                 <title>Licensing — Tropland Universe</title>
                 <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, ~40M monthly impressions. Represented by All-American Licensing." />
@@ -77,215 +67,278 @@ const LicensingPage: React.FC = () => {
             </Helmet>
 
             {/* ═══════════════════════════════════════════════════════════
-                SECTION 1 — Scrolling image background + glass overlay
+                SECTION 1 — Scrolling image background + editorial overlay
             ═══════════════════════════════════════════════════════════ */}
-            <section className="relative min-h-screen flex items-center overflow-hidden">
+            <section className="relative min-h-screen flex items-center overflow-hidden bg-ink">
 
                 {/* Scrolling image background */}
-                <div className="absolute inset-0 flex flex-col justify-center gap-2 pointer-events-none">
+                <div className="absolute inset-0 flex flex-col justify-center gap-3 pointer-events-none">
                     {/* Row 1 — scrolls left */}
                     <div className="flex-1 overflow-hidden flex items-center">
                         <div
-                            className="flex gap-2 h-[90%]"
+                            className="flex gap-3 h-[90%]"
                             style={{
                                 width: 'max-content',
                                 animation: 'scrollL 60s linear infinite',
                             }}
                         >
                             {[...row1, ...row1].map((src, i) => (
-                                <img key={i} src={src} alt="" className="h-full w-auto min-w-[340px] object-cover rounded-sm" />
+                                <img key={i} src={src} alt="" className="h-full w-auto min-w-[340px] object-cover" />
                             ))}
                         </div>
                     </div>
                     {/* Row 2 — scrolls right */}
                     <div className="flex-1 overflow-hidden flex items-center">
                         <div
-                            className="flex gap-2 h-[90%]"
+                            className="flex gap-3 h-[90%]"
                             style={{
                                 width: 'max-content',
                                 animation: 'scrollR 75s linear infinite',
                             }}
                         >
                             {[...row2, ...row2].map((src, i) => (
-                                <img key={i} src={src} alt="" className="h-full w-auto min-w-[340px] object-cover rounded-sm" />
+                                <img key={i} src={src} alt="" className="h-full w-auto min-w-[340px] object-cover" />
                             ))}
                         </div>
                     </div>
                 </div>
 
                 {/* Dim overlay */}
-                <div className="absolute inset-0" style={{ background: 'rgba(13,10,26,0.88)' }} />
-
-                {/* Gradient warmth */}
-                <div className="absolute inset-0"
-                    style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(232,93,58,0.06) 0%, transparent 60%)' }} />
+                <div className="absolute inset-0 bg-ink/90" />
 
                 {/* Content */}
-                <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 py-32 md:py-40 text-center w-full">
+                <div className="relative z-10 max-w-[1480px] mx-auto px-6 md:px-12 py-32 md:py-40 w-full">
 
-                    <p className={`text-sm font-sans font-bold uppercase tracking-[0.3em] text-brand-accent mb-8 ${introFade()}`}
-                        style={{ transitionDelay: '200ms' }}>
-                        Licensing &amp; Partnerships
-                    </p>
+                    <motion.div
+                        className="flex items-center gap-4 mb-8"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.9, ease }}
+                    >
+                        <span className="w-10 h-px bg-ember" />
+                        <span className="font-mono text-[11px] md:text-xs tracking-[0.32em] uppercase text-ember">
+                            Licensing &amp; Partnerships
+                        </span>
+                    </motion.div>
 
-                    <h1 className={`font-serif leading-[1.05] tracking-tight text-white mb-8 ${introFade()}`}
-                        style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)', transitionDelay: '320ms' }}>
-                        Bring Tropland to <span className="italic text-brand-accent">your brand.</span>
+                    <h1 className="mb-8 select-none">
+                        <span className="block overflow-hidden">
+                            <motion.span
+                                className="block font-display font-extrabold uppercase text-white tracking-[-0.02em] leading-[0.95] text-[11vw] md:text-[6.4vw] lg:text-[5.4vw]"
+                                initial={{ y: '108%' }}
+                                animate={{ y: 0 }}
+                                transition={{ delay: 0.3, duration: 1.1, ease }}
+                            >
+                                Bring Tropland
+                            </motion.span>
+                        </span>
+                        <span className="block overflow-hidden">
+                            <motion.span
+                                className="block leading-[1] text-[10vw] md:text-[5.6vw] lg:text-[4.8vw]"
+                                initial={{ y: '108%' }}
+                                animate={{ y: 0 }}
+                                transition={{ delay: 0.45, duration: 1.1, ease }}
+                            >
+                                <span className="font-display font-extrabold uppercase text-white tracking-[-0.02em]">to </span>
+                                <span className="font-edit italic font-light text-ember">your brand.</span>
+                            </motion.span>
+                        </span>
                     </h1>
 
-                    <p className={`text-xl text-white/60 font-sans leading-relaxed max-w-3xl mx-auto mb-6 ${introFade()}`}
-                        style={{ transitionDelay: '480ms' }}>
-                        Tropland Universe™ is a character-driven wildlife media property with over a billion content views,
-                        a 50K+ image and video library, and a global audience that spans all ages.
-                    </p>
+                    <motion.div
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-14 max-w-5xl"
+                        initial={{ opacity: 0, y: 22 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.65, duration: 1, ease }}
+                    >
+                        <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
+                            Tropland Universe™ is a character-driven wildlife media property with over a billion content views,
+                            a 50K+ image and video library, and a global audience that spans all ages.
+                        </p>
+                        <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
+                            Licensing is managed exclusively by All-American Licensing,
+                            representing the property across consumer products, publishing, digital media, and entertainment worldwide.
+                        </p>
+                    </motion.div>
 
-                    <p className={`text-xl text-white/60 font-sans leading-relaxed max-w-2xl mx-auto mb-16 ${introFade()}`}
-                        style={{ transitionDelay: '560ms' }}>
-                        Licensing is managed exclusively by All-American Licensing,
-                        representing the property across consumer products, publishing, digital media, and entertainment worldwide.
-                    </p>
-
-                    {/* Key stats row */}
-                    <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 ${introFade()}`} style={{ transitionDelay: '640ms' }}>
-                        {stats.map(s => (
-                            <div key={s.label} className="glass rounded-2xl p-6 md:p-8 text-center border-shine">
-                                <p className="font-serif text-brand-accent mb-2" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-                                    {s.value}
-                                </p>
-                                <p className="font-sans text-white/65 text-base font-medium leading-snug">
+                    {/* Key stats ledger */}
+                    <motion.div
+                        className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-white/15 mb-14"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.85, duration: 1 }}
+                    >
+                        {stats.map((s, i) => (
+                            <div
+                                key={s.label}
+                                className={`py-6 md:py-8 px-2 md:px-8 ${i > 0 ? 'border-l border-white/10' : ''} ${i >= 2 ? 'border-t border-white/10 md:border-t-0' : ''}`}
+                            >
+                                <div className="font-display font-extrabold text-3xl md:text-[2.8rem] text-white leading-none tracking-tight">
+                                    <Odometer value={s.value} />
+                                </div>
+                                <div className="font-mono text-[10px] md:text-[11px] text-white/50 uppercase tracking-[0.18em] mt-3">
                                     {s.label}
-                                </p>
+                                </div>
                             </div>
                         ))}
-                    </div>
+                    </motion.div>
 
                     {/* CTA buttons */}
-                    <div className={`flex flex-col sm:flex-row gap-4 justify-center ${introFade()}`} style={{ transitionDelay: '720ms' }}>
-                        <Link
-                            to="/contact"
-                            onClick={() => window.scrollTo(0, 0)}
-                            className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:bg-brand-accent-hover transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.4)]"
-                        >
-                            Inquire About Licensing
-                            <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </Link>
-                        <a
-                            href="https://www.aalmg.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-white/20 text-white font-sans font-semibold text-lg hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-                        >
-                            Visit All-American Licensing
-                            <ArrowUpRight size={16} />
-                        </a>
-                    </div>
+                    <motion.div
+                        className="flex flex-col sm:flex-row gap-4"
+                        initial={{ opacity: 0, y: 22 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1, duration: 1, ease }}
+                    >
+                        <MagneticButton>
+                            <Link
+                                to="/contact"
+                                onClick={() => window.scrollTo(0, 0)}
+                                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
+                            >
+                                Inquire About Licensing
+                                <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </Link>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <a
+                                href="https://www.aalmg.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300"
+                            >
+                                Visit All-American Licensing
+                                <ArrowUpRight size={14} />
+                            </a>
+                        </MagneticButton>
+                    </motion.div>
 
-                    <p className={`text-white/40 font-sans text-sm text-center mt-8 ${introFade()}`} style={{ transitionDelay: '760ms' }}>
+                    <motion.p
+                        className="font-mono text-[11px] tracking-[0.18em] uppercase text-white/40 mt-10"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.15, duration: 1 }}
+                    >
                         Current licensees:{' '}
-                        <a href="https://licensing.troplanduniverse.com" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors underline">
+                        <a href="https://licensing.troplanduniverse.com" target="_blank" rel="noopener noreferrer" className="tu-link text-white/65 hover:text-ember transition-colors duration-300">
                             Access the Licensee Portal
                         </a>
-                    </p>
+                    </motion.p>
 
                 </div>
             </section>
 
             {/* ═══════════════════════════════════════════════════════════
-                SECTION 2 — Cream editorial: categories + opportunity
+                SECTION 2 — Bone editorial: categories + opportunity
             ═══════════════════════════════════════════════════════════ */}
-            <section ref={sec2.ref as any} className="py-24 md:py-36 bg-brand-cream text-brand-dark-text relative overflow-hidden cream-texture">
-                <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <section className="py-24 md:py-36 bg-bone relative overflow-hidden">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
-                    <div className="text-center mb-20">
-                        <p className={`text-sm font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-8 ${sec2.fade()}`}>
-                            The Opportunity
-                        </p>
-                        <h2 className={`font-serif leading-tight text-brand-dark-text mb-8 ${sec2.fade()}`}
-                            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', transitionDelay: '80ms' }}>
-                            A world of characters <span className="italic text-brand-accent">ready for product.</span>
-                        </h2>
-                        <p className={`text-xl md:text-2xl text-brand-dark-text/75 font-sans leading-relaxed max-w-3xl mx-auto ${sec2.fade()}`}
-                            style={{ transitionDelay: '160ms' }}>
-                            From the Tropland Forest to the Digital Animal Kingdom, our IP spans original children's books,
-                            a globally ranked social media presence, and a character roster built for merchandise, media, and experiential activations.
-                        </p>
+                    <Reveal>
+                        <SectionTag index="01" label="The Opportunity" dark={false} className="mb-12 md:mb-16" />
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-24">
+                        <Reveal className="lg:col-span-7">
+                            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-ink text-[9.5vw] md:text-[4.2vw]">
+                                A world of characters<br />
+                                <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">ready for product.</span>
+                            </h2>
+                        </Reveal>
+                        <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
+                            <p className="font-display font-light text-lg md:text-xl text-ink/65 leading-relaxed max-w-md">
+                                From the Tropland Forest to the Digital Animal Kingdom, our IP spans original children's books,
+                                a globally ranked social media presence, and a character roster built for merchandise, media, and experiential activations.
+                            </p>
+                        </Reveal>
                     </div>
 
                     {/* Product Categories Grid */}
-                    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 ${sec2.fade()}`} style={{ transitionDelay: '240ms' }}>
-                        {categories.map(({ icon: Icon, label, desc }) => (
-                            <div key={label} className="group bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-brand-border-light/50 hover:border-brand-accent/30 hover:shadow-lg transition-all duration-300">
-                                <div className="w-14 h-14 rounded-xl bg-brand-accent/10 border border-brand-accent/15 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition-colors duration-300">
-                                    <Icon size={26} className="text-brand-accent" />
+                    <Reveal delay={0.05}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/12 border border-ink/12 mb-16 md:mb-24">
+                            {categories.map(({ icon: Icon, label, desc }, i) => (
+                                <div key={label} className="group bg-bone hover:bg-bone-dark/50 transition-colors duration-500 p-8 md:p-9">
+                                    <div className="flex items-start justify-between mb-8">
+                                        <Icon size={20} className="text-ember-deep" />
+                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ink/35">
+                                            {String(i + 1).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                    <h3 className="font-display font-bold text-xl text-ink mb-3 tracking-tight">{label}</h3>
+                                    <p className="font-display font-light text-[15px] text-ink/55 leading-relaxed">{desc}</p>
                                 </div>
-                                <h3 className="font-sans font-bold text-xl text-brand-dark-text mb-3">{label}</h3>
-                                <p className="font-sans text-base text-brand-muted leading-relaxed">{desc}</p>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    </Reveal>
 
                     {/* Brand pillars */}
-                    <div className={`bg-white/50 backdrop-blur-sm rounded-3xl p-10 md:p-14 border border-brand-border-light/40 mb-16 ${sec2.fade()}`} style={{ transitionDelay: '320ms' }}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div>
-                                <p className="text-sm font-sans font-bold uppercase tracking-[0.25em] text-brand-accent mb-5">Why Tropland</p>
-                                <h3 className="font-serif text-3xl md:text-4xl leading-tight text-brand-dark-text mb-6">
-                                    Original IP. Global reach. <span className="italic text-brand-accent">Values-driven.</span>
-                                </h3>
-                                <p className="font-sans text-lg text-brand-dark-text/75 leading-relaxed mb-6">
-                                    Tropland Universe™ is built on a foundation of original storytelling, beginning with published
-                                    children's books in 2013 and evolving into a billion-view digital brand. Every character,
-                                    narrative, and visual asset is wholly owned by OneLight Studios.
-                                </p>
-                                <p className="font-sans text-lg text-brand-dark-text/75 leading-relaxed">
-                                    The brand's core themes of wildlife conservation, family, wellness, and curiosity
-                                    position it naturally for family-friendly product lines across all major retail categories.
-                                </p>
-                            </div>
-                            <div className="space-y-5">
-                                {[
-                                    { label: 'Wholly Owned IP', desc: 'All characters, stories, and visual assets are original and creator-owned' },
-                                    { label: 'Proven Global Audience', desc: 'Ranked #1 AI Art Influencer with a worldwide fanbase across all platforms' },
-                                    { label: 'Multi-Format Ready', desc: 'Publishing, social, video, and digital assets available for activation' },
-                                    { label: 'Values-Aligned', desc: 'Family-friendly, wellness-focused, and conservation-positive brand positioning' },
-                                ].map(item => (
-                                    <div key={item.label} className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-brand-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <div className="w-2.5 h-2.5 rounded-full bg-brand-accent" />
+                    <Reveal delay={0.05}>
+                        <div className="border border-ink/15 bg-bone-dark/40 p-8 md:p-14 mb-16 md:mb-24">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                <div>
+                                    <p className="font-mono text-[11px] tracking-[0.3em] uppercase text-ember-deep mb-5">Why Tropland</p>
+                                    <h3 className="font-display font-extrabold uppercase tracking-[-0.02em] text-2xl md:text-[2.2rem] leading-[1.05] text-ink mb-6">
+                                        Original IP. Global reach.{' '}
+                                        <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">Values-driven.</span>
+                                    </h3>
+                                    <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed mb-6">
+                                        Tropland Universe™ is built on a foundation of original storytelling, beginning with published
+                                        children's books in 2013 and evolving into a billion-view digital brand. Every character,
+                                        narrative, and visual asset is wholly owned by OneLight Studios.
+                                    </p>
+                                    <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed">
+                                        The brand's core themes of wildlife conservation, family, wellness, and curiosity
+                                        position it naturally for family-friendly product lines across all major retail categories.
+                                    </p>
+                                </div>
+                                <div className="space-y-0 border-t border-ink/10">
+                                    {pillars.map((item, i) => (
+                                        <div key={item.label} className="flex items-start gap-5 py-5 border-b border-ink/10">
+                                            <span className="font-mono text-[11px] tracking-[0.2em] text-ember-deep pt-1">
+                                                {String(i + 1).padStart(2, '0')}
+                                            </span>
+                                            <div>
+                                                <p className="font-display font-bold text-[17px] text-ink tracking-tight">{item.label}</p>
+                                                <p className="font-display font-light text-[15px] text-ink/55 leading-snug mt-1">{item.desc}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="font-sans font-bold text-lg text-brand-dark-text">{item.label}</p>
-                                            <p className="font-sans text-base text-brand-muted leading-snug mt-1">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
 
                     {/* Contact CTA */}
-                    <div className={`text-center ${sec2.fade()}`} style={{ transitionDelay: '400ms' }}>
-                        <p className="font-sans text-xl text-brand-dark-text/70 mb-8 leading-relaxed max-w-2xl mx-auto">
-                            For licensing inquiries, contact <strong className="text-brand-dark-text font-semibold">All-American Licensing</strong> or
-                            reach out to our partnerships team directly.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link
-                                to="/contact"
-                                onClick={() => window.scrollTo(0, 0)}
-                                className="group inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand-accent text-white font-sans font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,93,58,0.3)]"
-                            >
-                                Contact Partnerships
-                                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </Link>
-                            <a
-                                href="mailto:partnerships@troplanduniverse.com"
-                                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full border border-brand-dark-text/20 text-brand-dark-text font-sans font-semibold text-lg hover:bg-brand-dark-text/5 hover:border-brand-dark-text/40 transition-all duration-300"
-                            >
-                                partnerships@troplanduniverse.com
-                            </a>
+                    <Reveal delay={0.05}>
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+                            <div className="lg:col-span-6">
+                                <p className="font-display font-light text-lg md:text-xl text-ink/65 leading-relaxed max-w-xl">
+                                    For licensing inquiries, contact <strong className="text-ink font-medium">All-American Licensing</strong> or
+                                    reach out to our partnerships team directly.
+                                </p>
+                            </div>
+                            <div className="lg:col-span-6 flex flex-col sm:flex-row lg:justify-end gap-4">
+                                <MagneticButton>
+                                    <Link
+                                        to="/contact"
+                                        onClick={() => window.scrollTo(0, 0)}
+                                        className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ink text-bone font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-deep transition-colors duration-300"
+                                    >
+                                        Contact Partnerships
+                                        <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    </Link>
+                                </MagneticButton>
+                                <MagneticButton>
+                                    <a
+                                        href="mailto:partnerships@troplanduniverse.com"
+                                        className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-ink/25 text-ink font-display font-bold text-[14px] uppercase tracking-[0.06em] hover:border-ember-deep hover:text-ember-deep transition-colors duration-300"
+                                    >
+                                        partnerships@troplanduniverse.com
+                                    </a>
+                                </MagneticButton>
+                            </div>
                         </div>
-                    </div>
+                    </Reveal>
 
                 </div>
             </section>
