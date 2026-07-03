@@ -12,6 +12,7 @@ import LicensingPage from './pages/Licensing';
 import LicensingLogin from './pages/LicensingLogin';
 import TroplandLibrary from './pages/TroplandLibrary';
 import ProtectedRoute from './components/ProtectedRoute';
+import SmoothScroll from './components/fx/SmoothScroll';
 
 const PORTAL_PATHS = ['/tropland-licensing', '/tropland-licensing/login'];
 
@@ -66,7 +67,9 @@ const AppLayout: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <AppLayout />
+      <SmoothScroll>
+        <AppLayout />
+      </SmoothScroll>
       <Analytics />
     </Router>
   );

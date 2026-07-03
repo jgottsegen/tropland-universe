@@ -14,9 +14,8 @@ body {
   overflow-x: hidden;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Native smooth scroll removed — Lenis (components/fx/SmoothScroll) owns scrolling.
+   Reduced-motion and touch devices fall back to default native scrolling. */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -389,6 +388,29 @@ html {
 .tu-outline-type:hover {
   color: rgba(255, 77, 28, 0.95);
   -webkit-text-stroke-color: rgba(255, 77, 28, 0);
+}
+
+/* Field reel rail (TU·03) */
+.tu-reel-rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tu-reel-rail::-webkit-scrollbar {
+  display: none;
+}
+.tu-reel-card {
+  aspect-ratio: 9 / 16;
+  height: min(64vh, 560px);
+  cursor: grab;
+}
+.tu-reel-card:active {
+  cursor: grabbing;
+}
+.tu-reel-card video {
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tu-reel-card:hover video {
+  transform: scale(1.04);
 }
 
 /* Intro reveal */

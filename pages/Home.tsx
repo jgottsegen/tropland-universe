@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Portfolio from '../components/Portfolio';
 import FlightSequence from '../components/FlightSequence';
+import FieldReels from '../components/FieldReels';
 import Pipeline from '../components/Pipeline';
 import Ventures from '../components/Ventures';
 import Services from '../components/Services';
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
                 <Hero />
                 <Portfolio />
                 <FlightSequence />
+                <FieldReels />
                 <Pipeline />
                 <Ventures />
                 <Services />

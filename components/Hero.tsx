@@ -22,11 +22,13 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [motionOk, setMotionOk] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
+    setMotionOk(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -40,19 +42,37 @@ const Hero: React.FC = () => {
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-ink">
 
-      {/* Background image with slow parallax */}
+      {/* Background footage with slow parallax */}
       <div
         className="absolute inset-0 w-full h-[118%] -top-[9%]"
         style={isMobile ? undefined : { transform: `translateY(${scrollY * 0.28}px)` }}
       >
-        <motion.img
-          src="/images/hero-lion.png"
-          alt="Tropland Universe lion"
-          className="w-full h-full object-cover object-center"
-          initial={{ scale: 1.08, filter: 'brightness(0.7)' }}
+        <motion.div
+          className="w-full h-full"
+          initial={{ scale: 1.08, filter: 'brightness(0.6)' }}
           animate={{ scale: 1, filter: 'brightness(1)' }}
           transition={{ duration: 2.2, ease }}
-        />
+        >
+          {motionOk ? (
+            <video
+              className="w-full h-full object-cover object-center"
+              src="/video/hero-montage.mp4"
+              poster="/video/hero-poster.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-label="Tropland Universe reel: a lion crossing the savanna, a leopard on a circus tightrope, the showman atop a giraffe"
+            />
+          ) : (
+            <img
+              src="/video/hero-poster.jpg"
+              alt="Tropland Universe lion crossing the savanna"
+              className="w-full h-full object-cover object-center"
+            />
+          )}
+        </motion.div>
       </div>
 
       {/* Cinematic grades */}
