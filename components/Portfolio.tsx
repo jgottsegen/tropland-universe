@@ -7,9 +7,11 @@ import Odometer from './fx/Odometer';
 import Reveal from './fx/Reveal';
 
 const metrics = [
-  { value: '5', label: 'Published Books' },
+  { value: '3M+', label: 'Social Followers' },
+  { value: '50+', label: 'Countries Reached' },
+  { value: '#1', label: 'AI Artist · Feedspot 2026' },
   { value: '267M', label: 'Single Viral Piece' },
-  { value: '50K+', label: 'Original Artworks' },
+  { value: '5', label: 'Published Books' },
   { value: '20+', label: 'Years of Tropland' },
 ];
 
@@ -71,11 +73,11 @@ const Portfolio: React.FC = () => {
 
         {/* Metric ledger */}
         <Reveal delay={0.05}>
-          <div className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-ink/15 mb-16 md:mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 border-t border-b border-ink/15 mb-16 md:mb-20">
             {metrics.map((m, i) => (
               <div
                 key={m.label}
-                className={`py-7 md:py-9 px-2 md:px-8 ${i > 0 ? 'border-l border-ink/10' : ''} ${i >= 2 ? 'border-t border-ink/10 md:border-t-0' : ''} group hover:bg-ink/[0.03] transition-colors duration-500`}
+                className={`py-7 md:py-9 px-2 md:px-8 ${i % 2 === 1 ? 'border-l border-ink/10' : ''} ${i % 3 !== 0 ? 'md:border-l md:border-ink/10' : 'md:border-l-0'} ${i >= 2 ? 'border-t border-ink/10' : ''} ${i >= 3 ? 'md:border-t md:border-ink/10' : 'md:border-t-0'} group hover:bg-ink/[0.03] transition-colors duration-500`}
               >
                 <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-ink leading-none tracking-tight">
                   <Odometer value={m.value} />

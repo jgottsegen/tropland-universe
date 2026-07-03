@@ -10,12 +10,7 @@ const partners = [
 ];
 const partnersTriple = [...partners, ...partners, ...partners];
 
-const stats = [
-  { value: '1.3B+', label: 'Content Views' },
-  { value: '3M+', label: 'Social Followers' },
-  { value: '50+', label: 'Countries Reached' },
-  { value: '#1', label: 'AI Artist · Feedspot 2026' },
-];
+// One number owns the entrance; the rest live in the section-01 ledger.
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -132,36 +127,34 @@ const Hero: React.FC = () => {
             </MagneticButton>
             <MagneticButton>
               <a
-                href="#contact"
+                href="#field"
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300 backdrop-blur-sm"
               >
-                Partner With Us
+                Watch the Reels
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </MagneticButton>
           </motion.div>
         </div>
 
-        {/* Data strip */}
+        {/* Data strip — one number, full confidence */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 border-t border-white/15"
+          className="flex items-end justify-between gap-6 border-t border-white/15 py-5 md:py-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.15, duration: 1 }}
         >
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`py-5 md:py-6 pr-4 ${i > 0 ? 'md:border-l md:border-white/10 md:pl-8' : ''} ${i % 2 === 1 ? 'border-l border-white/10 pl-6 md:pl-8' : ''}`}
-            >
-              <div className="font-display font-extrabold text-3xl md:text-[2.6rem] text-white leading-none tracking-tight">
-                <Odometer value={stat.value} />
-              </div>
-              <div className="font-mono text-[10px] md:text-[11px] text-white/50 uppercase tracking-[0.22em] mt-2.5">
-                {stat.label}
-              </div>
+          <div>
+            <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-white leading-none tracking-tight">
+              <Odometer value="1.3B+" />
             </div>
-          ))}
+            <div className="font-mono text-[10px] md:text-[11px] text-white/50 uppercase tracking-[0.22em] mt-2.5">
+              Content Views · And Counting
+            </div>
+          </div>
+          <span className="hidden md:block font-mono text-[10px] tracking-[0.22em] uppercase text-white/35 pb-1">
+            One original universe
+          </span>
         </motion.div>
       </div>
 

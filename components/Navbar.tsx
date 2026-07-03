@@ -71,8 +71,16 @@ const Navbar: React.FC = () => {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
         <div className="max-w-[1480px] mx-auto px-6 md:px-12 flex items-center justify-between h-20">
 
-          {/* Logo */}
-          <Link to="/" className="hover:opacity-80 transition-opacity flex items-center gap-3 group">
+          {/* Logo — on the homepage entrance the hero lockup IS the mark, so the
+              nav wordmark stays out of its way until scroll (one voice per viewport) */}
+          <Link
+            to="/"
+            className={`hover:opacity-80 flex items-center gap-3 group transition-opacity duration-500 ${
+              location.pathname === '/' && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+            aria-hidden={location.pathname === '/' && !isScrolled}
+            tabIndex={location.pathname === '/' && !isScrolled ? -1 : undefined}
+          >
             <img
               src="/images/tropland-logo.png"
               alt="Tropland Universe"
