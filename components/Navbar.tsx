@@ -84,13 +84,13 @@ const Navbar: React.FC = () => {
             <img
               src="/images/tropland-logo.png"
               alt="Tropland Universe"
-              className="h-9 transition-all duration-300 group-hover:scale-[1.03]"
+              className="h-9 w-auto max-w-none flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
               style={{ filter: isLight ? 'brightness(0)' : undefined }}
             />
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-7">
+          {/* Desktop nav — full rail needs lg width; tablet keeps the hamburger */}
+          <div className="hidden lg:flex items-center gap-7">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -113,14 +113,14 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-4">
             <Link
               to="/contact"
-              className="hidden md:inline-flex items-center gap-2 font-display font-bold text-[13px] uppercase tracking-[0.08em] px-5 py-2.5 bg-ember text-ink hover:bg-ember-soft transition-colors duration-200"
+              className="hidden xl:inline-flex items-center gap-2 whitespace-nowrap font-display font-bold text-[13px] uppercase tracking-[0.08em] px-5 py-2.5 bg-ember text-ink hover:bg-ember-soft transition-colors duration-200"
             >
               Partner With Us
             </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 transition-colors ${isLight ? 'text-ink/70 hover:text-ink' : 'text-bone/70 hover:text-bone'}`}
+              className={`lg:hidden p-2 transition-colors ${isLight ? 'text-ink/70 hover:text-ink' : 'text-bone/70 hover:text-bone'}`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-ink md:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`fixed inset-0 z-40 bg-ink lg:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="flex flex-col h-full pt-28 px-8 pb-10">
           <nav className="flex flex-col flex-1">
             {navItems.map((item) => {
