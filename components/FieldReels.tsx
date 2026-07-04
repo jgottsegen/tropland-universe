@@ -9,13 +9,14 @@ import Reveal from './fx/Reveal';
  * of the audience the numbers come from.
  */
 // Sequenced as one universe expanding: the kingdom first, then the big top.
-const reels = [
+// A null src renders a reserved slot (footage incoming from Josh).
+const reels: { src: string | null; title: string; meta: string }[] = [
   { src: '/video/reel-temple.mp4', title: 'The Temple Walk', meta: 'LION · CITY OF GOLD' },
   { src: '/video/reel-snow.mp4', title: 'First Snow', meta: 'LION · WINTER FIELD' },
-  { src: '/video/reel-river.mp4', title: 'The Living Painting', meta: 'WATERCOLOR WORLD' },
+  { src: null, title: 'Reserved', meta: 'NEW FIELD FOOTAGE' },
   { src: '/video/reel-leopard.mp4', title: 'The Tightrope', meta: 'BIG TOP SERIES' },
   { src: '/video/reel-elephant.mp4', title: 'The Reveal', meta: 'BIG TOP SERIES · CROWD POV' },
-  { src: '/video/reel-giraffe.mp4', title: 'The Showman', meta: 'BIG TOP SERIES · FINALE' },
+  { src: '/video/reel-transformation.mp4', title: 'The Transformation', meta: 'BIG TOP SERIES · FINALE' },
 ];
 
 const ReelCard: React.FC<{ src: string; title: string; meta: string }> = ({ src, title, meta }) => {
@@ -120,9 +121,28 @@ const FieldReels: React.FC = () => {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
       >
-        {reels.map((reel) => (
-          <ReelCard key={reel.src} {...reel} />
-        ))}
+        {reels.map((reel, i) =>
+          reel.src ? (
+            <ReelCard key={reel.src} src={reel.src} title={reel.title} meta={reel.meta} />
+          ) : (
+            <figure
+              key={`slot-${i}`}
+              className="tu-reel-card tu-ticks flex-shrink-0 snap-start bg-ink-2 border border-bone/15 relative flex flex-col items-center justify-center gap-4 text-bone/40"
+            >
+              <span className="flex items-center gap-2 font-mono text-[9px] tracking-[0.2em] uppercase text-bone/45">
+                <span className="w-1.5 h-1.5 rounded-full bg-ember animate-pulse" />
+                In production
+              </span>
+              <span className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone/70 text-2xl text-center">
+                Next<br />
+                <span className="font-edit italic font-light normal-case text-ember tracking-normal">drop.</span>
+              </span>
+              <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-bone/35">
+                {reel.meta}
+              </span>
+            </figure>
+          )
+        )}
 
         {/* The rail ends in a door, not a fade */}
         <a
