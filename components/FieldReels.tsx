@@ -13,7 +13,7 @@ import Reveal from './fx/Reveal';
 const reels: { src: string | null; title: string; meta: string }[] = [
   { src: '/video/reel-temple.mp4', title: 'The Temple Walk', meta: 'LION · CITY OF GOLD' },
   { src: '/video/reel-snow.mp4', title: 'First Snow', meta: 'LION · WINTER FIELD' },
-  { src: null, title: 'Reserved', meta: 'NEW FIELD FOOTAGE' },
+  { src: '/video/reel-everynight.mp4', title: 'Every Night', meta: 'LION COUPLE · 267M VIEWS' },
   { src: '/video/reel-leopard.mp4', title: 'The Tightrope', meta: 'BIG TOP SERIES' },
   { src: '/video/reel-elephant.mp4', title: 'The Reveal', meta: 'BIG TOP SERIES · CROWD POV' },
   { src: '/video/reel-transformation.mp4', title: 'The Transformation', meta: 'BIG TOP SERIES · FINALE' },
