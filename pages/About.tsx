@@ -56,9 +56,9 @@ const AboutPage: React.FC = () => {
         <div className="min-h-screen bg-ink">
             <Helmet>
                 <title>About Tropland Universe</title>
-                <meta name="description" content="The story behind Tropland Universe — 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta name="description" content="The story behind Tropland Universe: 13 years of original IP, from children's books to a global digital wildlife brand." />
                 <meta property="og:title" content="About Tropland Universe" />
-                <meta property="og:description" content="The story behind Tropland Universe — 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta property="og:description" content="The story behind Tropland Universe: 13 years of original IP, from children's books to a global digital wildlife brand." />
                 <meta property="og:url" content="https://troplanduniverse.com/about" />
             </Helmet>
 
@@ -242,7 +242,7 @@ const AboutPage: React.FC = () => {
                                         <span className="font-edit italic font-light text-ember">Written First.</span>
                                     </h3>
                                     <p className="font-display font-light text-[15px] md:text-base text-bone/55 leading-relaxed max-w-lg">
-                                        It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book — original characters, original world, built from scratch. <span className="text-bone/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-ember font-medium">2022</span>, Tropland went AI-native. By <span className="text-ember font-medium">2026</span>, it became the Digital Animal Kingdom.
+                                        It started with a rainforest and a story. The Joosh's Juice Bar series launched the Tropland mythology across three illustrated volumes plus a coloring book: original characters, original world, built from scratch. <span className="text-bone/85 font-medium">The Adventures of Rockford T. Honeypot</span> followed in 2016, an Amazon #1 bestselling novel that deepened the ecosystem. In <span className="text-ember font-medium">2022</span>, Tropland went AI-native. By <span className="text-ember font-medium">2026</span>, it became the Digital Animal Kingdom.
                                     </p>
                                 </div>
                             </div>

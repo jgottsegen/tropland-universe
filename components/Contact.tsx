@@ -7,7 +7,10 @@ import MagneticButton from './MagneticButton';
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 const inputClass =
-  'w-full bg-transparent border-b border-bone/20 px-0 py-4 text-bone font-display text-lg placeholder-bone/30 focus:outline-none focus:border-ember transition-colors duration-300';
+  'w-full bg-transparent border-b border-bone/20 px-0 py-4 text-bone font-display text-lg placeholder-bone/30 caret-ember focus:outline-none focus:border-ember transition-colors duration-300';
+
+const labelClass =
+  'block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 group-focus-within:text-ember transition-colors duration-300 mb-1';
 
 const Contact: React.FC = () => {
   const [name, setName] = useState('');
@@ -96,8 +99,8 @@ const Contact: React.FC = () => {
               <Reveal delay={0.15}>
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-10">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div>
-                      <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                    <div className="group">
+                      <label className={labelClass}>
                         01 · Name
                       </label>
                       <input
@@ -109,8 +112,8 @@ const Contact: React.FC = () => {
                         placeholder="Your name"
                       />
                     </div>
-                    <div>
-                      <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                    <div className="group">
+                      <label className={labelClass}>
                         02 · Email
                       </label>
                       <input
@@ -123,8 +126,8 @@ const Contact: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <div>
-                    <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
+                  <div className="group">
+                    <label className={labelClass}>
                       03 · Message
                     </label>
                     <textarea

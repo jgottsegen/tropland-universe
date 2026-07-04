@@ -35,7 +35,7 @@ const galleryRow2 = [
 
 const GalleryCell: React.FC<{ src: string }> = ({ src }) => (
   <div className="tu-frame w-64 md:w-80 h-64 md:h-80 flex-shrink-0 bg-ink-2">
-    <img src={src} alt="Tropland original artwork" className="w-full h-full object-cover" loading="lazy" />
+    <img src={src} alt="Tropland original artwork" className="w-full h-full object-cover" loading="lazy" decoding="async" />
   </div>
 );
 

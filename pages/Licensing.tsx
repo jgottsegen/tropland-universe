@@ -59,9 +59,9 @@ const LicensingPage: React.FC = () => {
     return (
         <div className="bg-ink min-h-screen">
             <Helmet>
-                <title>Licensing — Tropland Universe</title>
+                <title>Licensing · Tropland Universe</title>
                 <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, ~40M monthly impressions. Represented by All-American Licensing." />
-                <meta property="og:title" content="Licensing — Tropland Universe" />
+                <meta property="og:title" content="Licensing · Tropland Universe" />
                 <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, ~40M monthly impressions. Represented by All-American Licensing." />
                 <meta property="og:url" content="https://troplanduniverse.com/licensing" />
             </Helmet>

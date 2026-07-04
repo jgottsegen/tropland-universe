@@ -180,7 +180,7 @@ const RockfordPage: React.FC = () => {
                                 >
                                     <img
                                         src="/images/rth.png"
-                                        alt="The Adventures of Rockford T. Honeypot — Book Cover"
+                                        alt="The Adventures of Rockford T. Honeypot · Book Cover"
                                         className="w-full h-full object-cover"
                                     />
                                 </div>

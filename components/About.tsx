@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import SectionTag from './fx/SectionTag';
 import Reveal from './fx/Reveal';
 import MagneticButton from './MagneticButton';
@@ -55,8 +55,10 @@ const About: React.FC = () => {
         <div className="border-t border-bone/12 mb-16">
           {offers.map((offer, i) => (
             <Reveal key={offer.title} delay={i * 0.08}>
-              <div
-                className="group grid grid-cols-12 gap-4 items-center py-8 md:py-10 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500 px-2 md:px-6"
+              <a
+                href="#contact"
+                aria-label={`${offer.title}: start the conversation`}
+                className="group grid grid-cols-12 gap-4 items-center py-8 md:py-10 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500 px-2 md:px-6 cursor-pointer"
               >
                 <span className="col-span-2 md:col-span-1 font-mono text-[11px] tracking-[0.2em] text-ember">
                   {offer.index}
@@ -67,12 +69,16 @@ const About: React.FC = () => {
                 <p className="col-span-12 col-start-3 md:col-span-5 md:col-start-6 font-display font-light text-[15px] text-bone/55 leading-relaxed max-w-lg">
                   {offer.desc}
                 </p>
-                <div className="hidden md:flex md:col-span-2 justify-end">
+                <div className="hidden md:flex md:col-span-2 items-center justify-end gap-3">
                   <span className="font-mono text-[10px] tracking-[0.18em] text-bone/35 group-hover:text-ember transition-colors duration-300">
                     {offer.readout}
                   </span>
+                  <ArrowUpRight
+                    size={14}
+                    className="text-ember opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
+                  />
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>

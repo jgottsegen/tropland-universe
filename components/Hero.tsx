@@ -43,6 +43,8 @@ const Hero: React.FC = () => {
         <motion.img
           src="/images/hero-lion.png"
           alt="Tropland Universe lion"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center"
           initial={{ scale: 1.08, filter: 'brightness(0.7)' }}
           animate={{ scale: 1, filter: 'brightness(1)' }}

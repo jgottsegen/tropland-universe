@@ -74,9 +74,9 @@ const JooshPage: React.FC = () => {
         <div className="bg-ink min-h-screen">
             <Helmet>
                 <title>Joosh's Juice Bar Book Series | Tropland Universe</title>
-                <meta name="description" content="The original Tropland Universe IP — a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
+                <meta name="description" content="The original Tropland Universe IP: a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
                 <meta property="og:title" content="Joosh's Juice Bar Book Series | Tropland Universe" />
-                <meta property="og:description" content="The original Tropland Universe IP — a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
+                <meta property="og:description" content="The original Tropland Universe IP: a children's wellness book series established in 2013. 4 published titles by Josh Gottsegen." />
                 <meta property="og:url" content="https://troplanduniverse.com/joosh" />
             </Helmet>
 
@@ -87,7 +87,7 @@ const JooshPage: React.FC = () => {
                 <div className="absolute inset-0">
                     <motion.img
                         src="/images/joosh-hero.jpg"
-                        alt="Joosh's Juice Bar — Tropland Universe"
+                        alt="Joosh's Juice Bar · Tropland Universe"
                         className="w-full h-full object-cover"
                         style={{ objectPosition: 'center 35%' }}
                         aria-hidden="true"

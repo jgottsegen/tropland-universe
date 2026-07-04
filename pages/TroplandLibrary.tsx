@@ -29,9 +29,9 @@ const assetSections: AssetSection[] = [
         description: 'High-resolution character art approved for licensed use.',
         icon: BookOpen,
         items: [
-            { label: 'Rockford T. Honeypot — Character Pack', type: 'ZIP', comingSoon: true },
-            { label: 'Joosh & Friends — Character Pack', type: 'ZIP', comingSoon: true },
-            { label: 'Digital Animal Kingdom — Key Characters', type: 'ZIP', comingSoon: true },
+            { label: 'Rockford T. Honeypot · Character Pack', type: 'ZIP', comingSoon: true },
+            { label: 'Joosh & Friends · Character Pack', type: 'ZIP', comingSoon: true },
+            { label: 'Digital Animal Kingdom · Key Characters', type: 'ZIP', comingSoon: true },
             { label: 'Secondary Character Library', type: 'ZIP', comingSoon: true },
         ],
     },

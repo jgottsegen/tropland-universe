@@ -39,6 +39,31 @@ body {
   color: #0C0B09;
 }
 
+/* Keyboard focus: visible, on-brand, never on mouse clicks */
+:focus-visible {
+  outline: 2px solid #FF4D1C;
+  outline-offset: 3px;
+}
+
+/* Reduced motion: still the ambient layers (grain, glows, floats, marquees).
+   Lenis and per-component motion already check the same media query. */
+@media (prefers-reduced-motion: reduce) {
+  .tu-grain,
+  .ambient-glow,
+  .img-float,
+  .img-float-2,
+  .img-float-3,
+  .ghost-pulse,
+  .ghost-cross,
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-marquee-slow,
+  .border-shine::before,
+  .border-shine-light::before {
+    animation: none !important;
+  }
+}
+
 /* Glassmorphism utility */
 .glass {
   background: rgba(255, 255, 255, 0.05);
