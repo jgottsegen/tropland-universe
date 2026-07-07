@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
             <img
               src="/images/tropland-logo.png"
               alt="Tropland Universe"
-              className="h-9 w-auto max-w-none flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
+              className="h-9 w-auto max-w-[calc(100vw-140px)] object-contain object-left lg:max-w-none flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
               style={{ filter: isLight ? 'brightness(0)' : undefined }}
             />
           </Link>

@@ -48,6 +48,7 @@ const ReelCard: React.FC<{ src: string; title: string; meta: string }> = ({ src,
         ref={videoRef}
         className="w-full h-full object-cover"
         src={src}
+        poster={src.replace(/\.mp4$/, '-poster.jpg')}
         muted
         loop
         playsInline
