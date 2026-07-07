@@ -11,12 +11,13 @@ import Reveal from './fx/Reveal';
 // Sequenced as one universe expanding: the kingdom first, then the big top.
 // A null src renders a reserved slot (footage incoming from Josh).
 const reels: { src: string | null; title: string; meta: string }[] = [
-  { src: '/video/reel-temple.mp4', title: 'The Temple Walk', meta: 'LION · CITY OF GOLD' },
-  { src: '/video/reel-snow.mp4', title: 'First Snow', meta: 'LION · WINTER FIELD' },
-  { src: '/video/reel-everynight.mp4', title: 'Every Night', meta: 'LION COUPLE · 267M VIEWS' },
-  { src: '/video/reel-leopard.mp4', title: 'The Tightrope', meta: 'BIG TOP SERIES' },
   { src: '/video/reel-elephant.mp4', title: 'The Reveal', meta: 'BIG TOP SERIES · CROWD POV' },
+  { src: '/video/reel-wakeup.mp4', title: 'Lion Wake Up Call', meta: 'LION COUPLE · 267M VIEWS' },
   { src: '/video/reel-transformation.mp4', title: 'The Transformation', meta: 'BIG TOP SERIES · FINALE' },
+  { src: '/video/reel-temple.mp4', title: 'The Temple Walk', meta: 'LION · CITY OF GOLD' },
+  { src: '/video/reel-alarm.mp4', title: 'The Alarm Clock', meta: 'JAGUAR & CAPUCHIN · CANOPY' },
+  { src: '/video/reel-pond.mp4', title: 'The Watering Hole', meta: 'LION · GOLDEN HOUR' },
+  { src: '/video/reel-snowday.mp4', title: 'Snow Day', meta: 'GORILLAS · SNOWFALL' },
 ];
 
 const ReelCard: React.FC<{ src: string; title: string; meta: string }> = ({ src, title, meta }) => {
