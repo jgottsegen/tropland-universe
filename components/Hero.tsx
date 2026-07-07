@@ -109,7 +109,7 @@ const Hero: React.FC = () => {
             transition={{ delay: 0.8, duration: 1, ease }}
           >
             Cinema-grade wildlife storytelling, built at the frontier of AI.
-            One original universe, <span className="font-edit italic text-white">1.3 billion views</span> and counting.
+            One original universe, <span className="font-edit italic text-white">1.5 billion views</span> and counting.
           </motion.p>
 
           <motion.div
@@ -148,7 +148,7 @@ const Hero: React.FC = () => {
         >
           <div>
             <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-white leading-none tracking-tight">
-              <Odometer value="1.3B+" />
+              <Odometer value="1.5B+" />
             </div>
             <div className="font-mono text-[10px] md:text-[11px] text-white/50 uppercase tracking-[0.22em] mt-2.5">
               Content Views · And Counting

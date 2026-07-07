@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
           </span>
           <span className="h-px w-10 bg-ink/20 hidden md:block" />
           <p className="font-display text-[15px] text-ink/75">
-            A single Tropland reel has reached <span className="font-bold text-ink">267 million views</span> across platforms.
+            Four Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms.
           </p>
         </div>
       </Reveal>

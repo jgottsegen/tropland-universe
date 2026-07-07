@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               EST. 2013 · LOS ANGELES, CA
             </span>
             <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-ember/80">
-              1.3B+ VIEWS · 3M+ FOLLOWERS · 50+ COUNTRIES
+              1.5B+ VIEWS · 3M+ FOLLOWERS · 50+ COUNTRIES
             </span>
           </div>
         </div>
