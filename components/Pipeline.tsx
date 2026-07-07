@@ -79,14 +79,9 @@ const Pipeline: React.FC = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: i * 0.12, ease }}
             >
-              <div className="flex items-start justify-between">
-                <span className="font-mono text-[11px] tracking-[0.2em] text-ember">
-                  {stage.id}·{String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="font-mono text-[10px] tracking-[0.18em] text-bone/40 group-hover:text-bone/70 transition-colors duration-300">
-                  {stage.readout}
-                </span>
-              </div>
+              <span className="font-mono text-[10px] tracking-[0.18em] text-bone/40 group-hover:text-bone/70 transition-colors duration-300">
+                {stage.readout}
+              </span>
               <div>
                 <h3 className="font-display font-bold text-2xl md:text-[1.7rem] text-bone mb-3 tracking-tight">
                   {stage.name}

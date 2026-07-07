@@ -3,11 +3,11 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Home', path: '/', index: '00' },
-  { label: 'About', path: '/about', index: '01' },
-  { label: 'Rockford', path: '/rockford', index: '02' },
-  { label: 'Joosh', path: '/joosh', index: '03' },
-  { label: 'Licensing', path: '/licensing', index: '04' },
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Rockford', path: '/rockford' },
+  { label: 'Joosh', path: '/joosh' },
+  { label: 'Licensing', path: '/licensing' },
 ];
 
 /* Walk up the DOM from a point and return the luminance (0-1) of the
@@ -100,9 +100,6 @@ const Navbar: React.FC = () => {
                   className={`group relative flex items-baseline gap-1.5 font-mono text-[12px] uppercase tracking-[0.18em] transition-colors duration-200 ${linkColor(isActive)}`}
                   style={isLight || isScrolled ? undefined : { textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}
                 >
-                  <span className={`text-[9px] ${isActive ? 'text-ember' : isLight ? 'text-ink/35' : 'text-bone/35'} group-hover:text-ember transition-colors`}>
-                    {item.index}
-                  </span>
                   <span className="tu-link">{item.label}</span>
                 </Link>
               );
@@ -141,7 +138,6 @@ const Navbar: React.FC = () => {
                   to={item.path}
                   className={`flex items-baseline gap-4 py-4 border-b border-bone/10 transition-colors ${isActive ? 'text-bone' : 'text-bone/50 hover:text-bone'}`}
                 >
-                  <span className="font-mono text-[11px] text-ember">{item.index}</span>
                   <span className="font-display font-extrabold text-3xl uppercase tracking-tight">
                     {item.label}
                   </span>

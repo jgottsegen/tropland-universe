@@ -124,7 +124,7 @@ const ContactPage: React.FC = () => {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div>
                                                 <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                    01 · Name
+                                                    Name
                                                 </label>
                                                 <input
                                                     type="text"
@@ -137,7 +137,7 @@ const ContactPage: React.FC = () => {
                                             </div>
                                             <div>
                                                 <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                    02 · Email
+                                                    Email
                                                 </label>
                                                 <input
                                                     type="email"
@@ -151,7 +151,7 @@ const ContactPage: React.FC = () => {
                                         </div>
                                         <div>
                                             <label className="block font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45 mb-1">
-                                                03 · Message
+                                                Message
                                             </label>
                                             <textarea
                                                 required

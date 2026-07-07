@@ -89,8 +89,7 @@ const FlightSequence: React.FC = () => {
       {/* Top rail */}
       <div className="absolute top-0 left-0 right-0 pt-24 px-6 md:px-12 flex items-start justify-between">
         <div className="flex items-center gap-4">
-          <span className="font-mono text-[11px] tracking-[0.22em] text-ember">TU·02</span>
-          <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-white/60">The Flight</span>
+          <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-ember">The Flight</span>
         </div>
         <span className="hidden md:block font-mono text-[11px] tracking-[0.18em] text-white/60 tabular-nums">
           TC {timecode}

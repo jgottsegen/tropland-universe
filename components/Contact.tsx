@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="group">
                       <label className={labelClass}>
-                        01 · Name
+                        Name
                       </label>
                       <input
                         type="text"
@@ -114,7 +114,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div className="group">
                       <label className={labelClass}>
-                        02 · Email
+                        Email
                       </label>
                       <input
                         type="email"
@@ -128,7 +128,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="group">
                     <label className={labelClass}>
-                      03 · Message
+                      Message
                     </label>
                     <textarea
                       required

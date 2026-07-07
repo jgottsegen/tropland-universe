@@ -81,7 +81,7 @@ const Ventures: React.FC = () => {
               </div>
               {/* Caption rail */}
               <div className="flex items-center justify-between mt-3">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35 uppercase">Fig. 05 · The operator</span>
+                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35 uppercase">The operator</span>
                 <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35">EST. 2003</span>
               </div>
             </div>

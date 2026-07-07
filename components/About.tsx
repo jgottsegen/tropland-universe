@@ -6,19 +6,16 @@ import MagneticButton from './MagneticButton';
 
 const offers = [
   {
-    index: '01',
     title: 'Brand Partnerships',
     desc: 'Co-branded content and campaigns with leading tech, entertainment, and consumer brands. Paid campaigns delivered for Adobe and Meta.',
     readout: 'MODE · CAMPAIGN',
   },
   {
-    index: '02',
     title: 'Licensing',
     desc: 'Represented by All-American Licensing. Character IP ready for apparel, lifestyle, home décor, publishing, and media.',
     readout: 'MODE · LICENSE',
   },
   {
-    index: '03',
     title: 'Global Distribution',
     desc: '1.5 billion cumulative views across 50+ countries. A proven audience engine across every key global market.',
     readout: 'MODE · REACH',
@@ -60,13 +57,10 @@ const About: React.FC = () => {
                 aria-label={`${offer.title}: start the conversation`}
                 className="group grid grid-cols-12 gap-4 items-center py-8 md:py-10 border-b border-bone/12 hover:bg-bone/[0.03] transition-colors duration-500 px-2 md:px-6 cursor-pointer"
               >
-                <span className="col-span-2 md:col-span-1 font-mono text-[11px] tracking-[0.2em] text-ember">
-                  {offer.index}
-                </span>
-                <h3 className="col-span-10 md:col-span-4 font-display font-bold text-2xl md:text-[2rem] text-bone tracking-tight group-hover:translate-x-2 transition-transform duration-500">
+                <h3 className="col-span-12 md:col-span-4 font-display font-bold text-2xl md:text-[2rem] text-bone tracking-tight group-hover:translate-x-2 transition-transform duration-500">
                   {offer.title}
                 </h3>
-                <p className="col-span-12 col-start-3 md:col-span-5 md:col-start-6 font-display font-light text-[15px] text-bone/55 leading-relaxed max-w-lg">
+                <p className="col-span-12 md:col-span-5 md:col-start-6 font-display font-light text-[15px] text-bone/55 leading-relaxed max-w-lg">
                   {offer.desc}
                 </p>
                 <div className="hidden md:flex md:col-span-2 items-center justify-end gap-3">
