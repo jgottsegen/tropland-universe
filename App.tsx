@@ -20,6 +20,28 @@ const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
 const PORTAL_PATHS = ['/tropland-licensing', '/tropland-licensing/login'];
 
+/* Deep links like /#kingdom (the IG bio) land before React has rendered the
+   target, and the nav's scroll reset stomps the browser's native jump.
+   Retry until the section exists and stays put. */
+const ScrollToHash: React.FC = () => {
+  const location = useLocation();
+  React.useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const attempt = () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const settled = el && Math.abs(el.getBoundingClientRect().top) < 80;
+      if (!settled && ++tries < 8) timer = setTimeout(attempt, 400);
+    };
+    timer = setTimeout(attempt, 250);
+    return () => clearTimeout(timer);
+  }, [location.pathname, location.hash]);
+  return null;
+};
+
 /* ── 404 Page ──────────────────────────────────────────────── */
 const NotFound: React.FC = () => (
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-6">
@@ -44,6 +66,7 @@ const AppLayout: React.FC = () => {
     <div className="min-h-screen font-sans text-brand-text bg-ink flex flex-col">
       {!isPortal && <div className="tu-grain" aria-hidden="true" />}
       {!isPortal && <Navbar />}
+      <ScrollToHash />
 
       <div className="flex-grow">
         <Suspense fallback={<div className="min-h-screen bg-ink" aria-hidden="true" />}>
