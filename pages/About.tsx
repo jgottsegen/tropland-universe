@@ -266,7 +266,7 @@ const AboutPage: React.FC = () => {
                                 src: '/images/chapter3.png',
                                 alt: 'The Kingdom – Tropland Universe',
                                 title: 'The Kingdom',
-                                body: 'Over a billion views. Licensed by All-American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.',
+                                body: '1.5 billion views. Licensed by All-American Licensing. Major brand partnerships. The rainforest becomes the Digital Animal Kingdom.',
                             },
                         ].map((ch, i) => (
                             <Reveal key={ch.year} delay={0.05 + i * 0.08}>
@@ -313,7 +313,7 @@ const AboutPage: React.FC = () => {
                                     <span className="font-edit italic font-light normal-case text-ember-deep tracking-normal">lives on social.</span>
                                 </h3>
                                 <p className="font-display font-light text-lg text-ink/60 max-w-md">
-                                    Over a billion content views. Follow the journey on Instagram and Facebook.
+                                    1.5 billion content views. Follow the journey on Instagram and Facebook.
                                 </p>
                             </div>
                             <div className="flex flex-wrap gap-4 flex-shrink-0">

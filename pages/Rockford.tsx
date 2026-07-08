@@ -25,23 +25,19 @@ const quickStats = [
     { icon: Star, label: 'Tropland', sub: 'Origin Story' },
 ];
 
+// Curated on the CD pass 7/7: one featured voice, four supporting. The other
+// ~75 five-star reviews live in the chip count, not on the wall.
+const featuredReview = {
+    quote: 'Holy Moses! Awesome adventure story for young readers and a great lesson in never giving up for everyone!',
+    source: 'Dr. Jan Pol',
+    sub: "NatGeo Wild's The Incredible Dr. Pol",
+};
+
 const reviews = [
-    { quote: '"When the book is good, you keep reading until the very last sentence. Now that’s a good book!"', source: 'This Worthy Life' },
-    { quote: '"The world building was one of my favourite parts of this book—Josh Gottsegen definitely had a great vision."', source: 'Queens Book Asylum' },
-    { quote: '"This whimsical tale captures the spirit of adventure and the joy of discovery."', source: 'Ben Spark' },
-    { quote: '"This easy reading but fast-paced book earns a place in your family\'s book collection and I know you\'ll love it as much as we did."', source: 'Dangerous Cupcake' },
-    { quote: '"Gottsegen has created a very empathetic novel that strives to teach its target audience values of love, compassion, understanding, and forgiveness."', source: 'The Cactus Chronicles' },
-    { quote: '"A wonderful book that, honestly... captivated me completely."', source: 'Los Tweens and Teens' },
-    { quote: '"An epic story of a chipmunk who discovered meaning and purpose while pursuing his ambitious dreams to change the forest forever."', source: 'Queen Thrifty' },
-    { quote: '"The timeless classic story of the underdog hero persevering through obstacles to change his life and those he loves is depicted beautifully in this adventure story."', source: 'Goodreads' },
-    { quote: '"Holy Moses! Awesome adventure story for young readers and a great lesson in never giving up for everyone!"', source: 'Dr. Jan Pol', sub: "NatGeo Wild's The Incredible Dr. Pol" },
-    { quote: '"Rockford\'s stories introduce a menagerie of vibrant one-of-a-kind characters who are perfectly suited for older children, with gentle lessons to be learned from every interaction... Parents waiting for their children to be old enough for The Hobbit or Redwall will find this the perfect stopgap, with plenty of thrills as well as moral quandaries, somber loss, and emotional growth."', source: 'BookLife Reviews' },
-    { quote: '"Creativity knows no bounds within this whimsical story."', source: 'Onlinebookclub' },
-    { quote: '"Heart-touching and soul-warming, The Adventures of Rockford T. Honeypot provide kids the sweetness of the sought-after adventure with a relatable, adorable protagonist. A wonderful inspirational book to share with the fantasy-loving middle school reader!"', source: 'Dr. Gabby Wild', sub: 'Veterinarian · NatGeo Kids Educator · Animal Jam' },
-    { quote: '"An old-fashioned, relentlessly charming middle-grade rags-to-riches animal tale."', source: 'Reedsy Reviews' },
+    { quote: '"Parents waiting for their children to be old enough for The Hobbit or Redwall will find this the perfect stopgap, with plenty of thrills as well as moral quandaries, somber loss, and emotional growth."', source: 'BookLife Reviews' },
     { quote: '"Grab your favorite nuts or snacks before going on an amazing journey. Gottsegen has earned my admiration for creating such a remarkable story. The Adventures of Rockford T. Honeypot will become a treasured book for children and adults."', source: 'Readers Favorite', sub: 'Official 5 Stars Seal' },
-    { quote: '"Without stinting the action, Gottsegen delivers a powerful message about the importance of being brave, honest, and true to oneself."', source: 'BookLife Reviews' },
-    { quote: '"From the very first chapter, we were all hooked! Rockford T. Honeypot quickly became our favorite book."', source: 'Tessa Smith' },
+    { quote: '"An old-fashioned, relentlessly charming middle-grade rags-to-riches animal tale."', source: 'Reedsy Reviews' },
+    { quote: '"Heart-touching and soul-warming... A wonderful inspirational book to share with the fantasy-loving middle school reader!"', source: 'Dr. Gabby Wild', sub: 'Veterinarian · NatGeo Kids Educator · Animal Jam' },
 ];
 
 const RockfordPage: React.FC = () => {
@@ -248,6 +244,11 @@ const RockfordPage: React.FC = () => {
                     </div>
 
                     {/* Character grid */}
+                    <Reveal>
+                        <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-bone/40 mb-5">
+                            Origin-era character art · the world as the novel first drew it
+                        </p>
+                    </Reveal>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                         {characters.map((char, i) => (
                             <Reveal key={char.src} delay={(i % 4) * 0.06}>
@@ -260,12 +261,9 @@ const RockfordPage: React.FC = () => {
                                             loading="lazy"
                                         />
                                     </div>
-                                    <div className="flex items-center justify-between mt-3">
+                                    <div className="mt-3">
                                         <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-bone/70">
                                             {char.name}
-                                        </span>
-                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ember/70">
-                                            {String(i + 1).padStart(2, '0')}
                                         </span>
                                     </div>
                                 </div>
@@ -304,30 +302,42 @@ const RockfordPage: React.FC = () => {
                         </Reveal>
                     </div>
 
+                    {/* Featured voice — the one name with television-grade recognition */}
+                    <Reveal delay={0.08}>
+                        <blockquote className="border-y border-ink/15 py-12 md:py-16 mb-12 md:mb-16">
+                            <p className="font-edit italic font-light text-[7vw] md:text-[2.9vw] leading-[1.15] text-ink max-w-5xl mb-8">
+                                “{featuredReview.quote}”
+                            </p>
+                            <footer>
+                                <p className="font-mono text-[12px] tracking-[0.18em] uppercase text-ember-deep">
+                                    {featuredReview.source}
+                                </p>
+                                <p className="font-mono text-[10px] tracking-[0.12em] text-ink/45 mt-1">
+                                    {featuredReview.sub}
+                                </p>
+                            </footer>
+                        </blockquote>
+                    </Reveal>
+
                     <Reveal delay={0.1}>
-                        <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {reviews.map((review, i) => (
                                 <div
                                     key={`${review.source}-${i}`}
-                                    className="break-inside-avoid border border-ink/12 bg-bone-dark/40 hover:bg-bone-dark/70 transition-colors duration-500 p-7 mb-4"
+                                    className="border border-ink/12 bg-bone-dark/40 hover:bg-bone-dark/70 transition-colors duration-500 p-7 flex flex-col justify-between"
                                 >
                                     <p className="font-display font-light text-[16px] text-ink/80 leading-relaxed mb-6">
                                         {review.quote}
                                     </p>
-                                    <div className="flex items-baseline justify-between gap-4 border-t border-ink/10 pt-4">
-                                        <div>
-                                            <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-ink/75">
-                                                {review.source}
+                                    <div className="border-t border-ink/10 pt-4">
+                                        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-ink/75">
+                                            {review.source}
+                                        </p>
+                                        {review.sub && (
+                                            <p className="font-mono text-[10px] tracking-[0.12em] text-ink/45 mt-1">
+                                                {review.sub}
                                             </p>
-                                            {review.sub && (
-                                                <p className="font-mono text-[10px] tracking-[0.12em] text-ink/45 mt-1">
-                                                    {review.sub}
-                                                </p>
-                                            )}
-                                        </div>
-                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ember-deep/70">
-                                            {String(i + 1).padStart(2, '0')}
-                                        </span>
+                                        )}
                                     </div>
                                 </div>
                             ))}

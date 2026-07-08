@@ -234,11 +234,8 @@ const JooshPage: React.FC = () => {
                                     key={label}
                                     className="group p-7 md:p-8 bg-bone hover:bg-bone-dark/50 transition-colors duration-500"
                                 >
-                                    <div className="flex items-start justify-between mb-7">
+                                    <div className="mb-7">
                                         <Icon size={18} className="text-ember-deep" />
-                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ink/35">
-                                            {String(i + 1).padStart(2, '0')}
-                                        </span>
                                     </div>
                                     <p className="font-display font-bold text-lg text-ink mb-2 tracking-tight">{label}</p>
                                     <p className="font-display font-light text-[15px] text-ink/55 leading-relaxed">{desc}</p>
@@ -386,7 +383,7 @@ const JooshPage: React.FC = () => {
                                 <span className="font-edit italic font-light normal-case text-ember tracking-normal">Universe.</span>
                             </h2>
                             <p className="font-display font-light text-lg text-bone/60 leading-relaxed max-w-xl">
-                                From a children's juice bar in 2013 to over a billion content views worldwide. The Tropland Universe keeps growing.
+                                From a children's juice bar in 2013 to 1.5 billion content views worldwide. The Tropland Universe keeps growing.
                             </p>
                         </Reveal>
                         <Reveal className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-4" delay={0.12}>

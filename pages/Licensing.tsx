@@ -151,7 +151,7 @@ const LicensingPage: React.FC = () => {
                         transition={{ delay: 0.65, duration: 1, ease }}
                     >
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
-                            Tropland Universe™ is a character-driven wildlife media property with over a billion content views,
+                            Tropland Universe™ is a character-driven wildlife media property with 1.5 billion content views,
                             a 50K+ image and video library, and a global audience that spans all ages.
                         </p>
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
@@ -257,11 +257,8 @@ const LicensingPage: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/12 border border-ink/12 mb-16 md:mb-24">
                             {categories.map(({ icon: Icon, label, desc }, i) => (
                                 <div key={label} className="group bg-bone hover:bg-bone-dark/50 transition-colors duration-500 p-8 md:p-9">
-                                    <div className="flex items-start justify-between mb-8">
+                                    <div className="mb-8">
                                         <Icon size={20} className="text-ember-deep" />
-                                        <span className="font-mono text-[10px] tracking-[0.2em] text-ink/35">
-                                            {String(i + 1).padStart(2, '0')}
-                                        </span>
                                     </div>
                                     <h3 className="font-display font-bold text-xl text-ink mb-3 tracking-tight">{label}</h3>
                                     <p className="font-display font-light text-[15px] text-ink/55 leading-relaxed">{desc}</p>
@@ -292,10 +289,7 @@ const LicensingPage: React.FC = () => {
                                 </div>
                                 <div className="space-y-0 border-t border-ink/10">
                                     {pillars.map((item, i) => (
-                                        <div key={item.label} className="flex items-start gap-5 py-5 border-b border-ink/10">
-                                            <span className="font-mono text-[11px] tracking-[0.2em] text-ember-deep pt-1">
-                                                {String(i + 1).padStart(2, '0')}
-                                            </span>
+                                        <div key={item.label} className="py-5 border-b border-ink/10">
                                             <div>
                                                 <p className="font-display font-bold text-[17px] text-ink tracking-tight">{item.label}</p>
                                                 <p className="font-display font-light text-[15px] text-ink/55 leading-snug mt-1">{item.desc}</p>

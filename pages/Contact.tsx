@@ -57,10 +57,10 @@ const ContactPage: React.FC = () => {
                     style={{ background: 'radial-gradient(ellipse, rgba(255,77,28,0.07) 0%, transparent 70%)', filter: 'blur(60px)' }}
                 />
 
-                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10 w-full pt-36 pb-24 md:pt-44 md:pb-32">
+                <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10 w-full pt-28 pb-20 md:pt-32 md:pb-24">
 
                     <Reveal>
-                        <SectionTag index="01" label="Contact" className="mb-12 md:mb-16" />
+                        <SectionTag index="01" label="Contact" className="mb-8 md:mb-10" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
