@@ -88,14 +88,38 @@ const JoinKingdom: React.FC = () => {
                   </a>
                 ))}
               </div>
-              <a
-                href="/wallpapers/tropland-wallpaper-pack.zip"
-                onClick={() => track('wallpaper_pack_download')}
-                className="inline-flex items-center gap-3 px-8 py-4 border border-bone/25 text-bone font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300"
-              >
-                <Download size={15} />
-                Download all six
-              </a>
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="/wallpapers/tropland-wallpaper-pack.zip"
+                  onClick={() => track('wallpaper_pack_download')}
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-bone/25 text-bone font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300"
+                >
+                  <Download size={15} />
+                  Download all six
+                </a>
+              </div>
+
+              {/* The next rung: world-first, never "support the creator" */}
+              <div className="mt-12 border-t border-bone/10 pt-10 max-w-2xl">
+                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ember mb-3">
+                  This was a taste
+                </p>
+                <p className="font-display font-light text-lg text-bone/70 leading-relaxed mb-6">
+                  The Inner Kingdom drops a new wallpaper pack every week,
+                  keeps the Lost Acts the feed never sees, and votes on which
+                  Circus act goes public next.
+                </p>
+                <a
+                  href="https://patreon.com/troplanduniverse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track('patreon_click', { source: 'kingdom_success' })}
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-ember text-ink font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
+                >
+                  Enter the Inner Kingdom
+                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
           </Reveal>
         ) : (

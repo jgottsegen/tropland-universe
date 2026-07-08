@@ -57,6 +57,14 @@ const Footer: React.FC = () => {
                   </a>
                 );
               })}
+              <a
+                href="https://patreon.com/troplanduniverse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 px-4 flex items-center font-mono text-[10px] uppercase tracking-[0.18em] text-bone/45 hover:text-ink border border-bone/15 hover:border-ember hover:bg-ember transition-all duration-300"
+              >
+                Patreon
+              </a>
             </div>
           </div>
 
