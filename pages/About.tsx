@@ -20,9 +20,9 @@ const chapters = [
 ];
 
 const chapterBooks = [
-    { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Blue Banana Berry" },
-    { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: Snack Book" },
-    { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: Tee Off" },
+    { src: '/images/jjb-01.png', alt: "Joosh's Juice Bar: Snackbook Adventures" },
+    { src: '/images/jjb-02.png', alt: "Joosh's Juice Bar: The Tropland Tee-Off" },
+    { src: '/images/jjb-03.png', alt: "Joosh's Juice Bar: The Blue Banana Berry Adventures" },
     { src: '/images/rth.png', alt: 'Rockford T. Honeypot' },
 ];
 
@@ -56,9 +56,9 @@ const AboutPage: React.FC = () => {
         <div className="min-h-screen bg-ink">
             <Helmet>
                 <title>About Tropland Universe</title>
-                <meta name="description" content="The story behind Tropland Universe: 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta name="description" content="The story behind Tropland Universe: 20+ years of original IP, from children's books to a global digital wildlife brand." />
                 <meta property="og:title" content="About Tropland Universe" />
-                <meta property="og:description" content="The story behind Tropland Universe: 13 years of original IP, from children's books to a global digital wildlife brand." />
+                <meta property="og:description" content="The story behind Tropland Universe: 20+ years of original IP, from children's books to a global digital wildlife brand." />
                 <meta property="og:url" content="https://troplanduniverse.com/about" />
             </Helmet>
 

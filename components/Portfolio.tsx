@@ -9,7 +9,7 @@ import Reveal from './fx/Reveal';
 const metrics = [
   { value: '3M+', label: 'Social Followers' },
   { value: '50+', label: 'Countries Reached' },
-  { value: '#1', label: 'AI Artist · Feedspot 2026' },
+  { value: '#1', label: 'AI Artist Influencer · Feedspot 2025 + 2026' },
   { value: '267M', label: 'Single Viral Piece' },
   { value: '5', label: 'Published Books' },
   { value: '20+', label: 'Years of Tropland' },
@@ -51,8 +51,8 @@ const Portfolio: React.FC = () => {
         {/* Manifesto — words ink in on scroll */}
         <ManifestoText
           className="font-display font-medium text-[7.4vw] md:text-[3.4vw] leading-[1.12] tracking-[-0.015em] text-ink max-w-6xl mb-6"
-          text="Tropland began as a children's picture book. Twenty years later, it is a billion-view animal kingdom: original characters, photoreal worlds, and wildlife stories carried by three million followers across fifty countries."
-          accents={['billion-view', 'photoreal', 'original']}
+          text="Tropland began as a children's picture book. Twenty years later, it is a 1.5-billion-view animal kingdom: original characters, photoreal worlds, and wildlife stories carried by three million followers across fifty countries."
+          accents={['1.5-billion-view', 'photoreal', 'original']}
         />
 
         <Reveal delay={0.1}>

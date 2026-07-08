@@ -43,7 +43,7 @@ const Ventures: React.FC = () => {
                   IndyCar, Ferrari, and the Vatican Museums.
                 </p>
                 <p>
-                  He built Tropland from a children's picture book into a billion-view global
+                  He built Tropland from a children's picture book into a 1.5-billion-view global
                   IP by treating artificial intelligence as a creative instrument, not a
                   gimmick, and by building original worlds instead of borrowing existing ones.
                 </p>
@@ -82,7 +82,7 @@ const Ventures: React.FC = () => {
               {/* Caption rail */}
               <div className="flex items-center justify-between mt-3">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35 uppercase">The operator</span>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35">EST. 2003</span>
+                <span className="font-mono text-[10px] tracking-[0.2em] text-bone/35">EST. 2013</span>
               </div>
             </div>
           </Reveal>

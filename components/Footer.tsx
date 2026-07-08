@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
               Work With Us
             </p>
             <p className="text-bone/40 font-display font-light text-[15px] leading-relaxed mb-5 max-w-xs">
-              Licensing inquiries, brand partnerships, and collaboration opportunities.
+              Partnerships and licensing inquiries, answered by the founder.
             </p>
             <a
               href="mailto:partnerships@troplanduniverse.com"

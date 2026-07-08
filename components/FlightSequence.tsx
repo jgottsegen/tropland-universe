@@ -133,7 +133,7 @@ const FlightSequence: React.FC = () => {
           </div>
 
           <span className="font-mono text-[9px] tracking-[0.2em] text-white/35 uppercase">
-            One seamless generated take · Reef to the artist's table
+            One unbroken generated take · Reef to the artist's table
           </span>
         </div>
       </div>

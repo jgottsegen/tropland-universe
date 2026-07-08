@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Tropland Universe™ | The Digital Animal Kingdom</title>
+                <title>Tropland Universe | The Digital Animal Kingdom</title>
                 <meta name="description" content="Cinema-grade wildlife storytelling built at the frontier of AI. 1.5B+ content views, original books, and licensing-ready IP by Josh Gottsegen." />
                 <meta property="og:title" content="Tropland Universe™ | The Digital Animal Kingdom" />
                 <meta property="og:description" content="Cinema-grade wildlife storytelling built at the frontier of AI. 1.5B+ content views, original books, and licensing-ready IP by Josh Gottsegen." />

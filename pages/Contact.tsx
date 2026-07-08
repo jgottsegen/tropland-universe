@@ -39,10 +39,10 @@ const ContactPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-ink-2">
             <Helmet>
-                <title>Contact · Tropland Universe™</title>
-                <meta name="description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
+                <title>Contact · Tropland Universe</title>
+                <meta name="description" content="Partner with Tropland Universe on licensing, brand campaigns, and content collaborations. Direct line to the studio." />
                 <meta property="og:title" content="Contact · Tropland Universe™" />
-                <meta property="og:description" content="Get in touch for licensing inquiries, brand partnerships, and collaboration opportunities." />
+                <meta property="og:description" content="Partner with Tropland Universe on licensing, brand campaigns, and content collaborations. Direct line to the studio." />
                 <meta property="og:url" content="https://troplanduniverse.com/contact" />
             </Helmet>
 

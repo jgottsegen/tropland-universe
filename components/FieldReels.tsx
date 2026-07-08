@@ -107,7 +107,7 @@ const FieldReels: React.FC = () => {
           <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
             <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-md">
               Vertical-native, story-first, and one beat past what a camera
-              could ever catch. This is the format behind the billion views,
+              could ever catch. This is the format behind the 1.5 billion views,
               playing exactly as the audience sees it.
             </p>
           </Reveal>

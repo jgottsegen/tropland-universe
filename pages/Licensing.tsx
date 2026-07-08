@@ -13,7 +13,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
     { value: '1.5B+', label: 'Content Views Worldwide' },
-    { value: '#1', label: 'AI Art Influencer 2025 & 2026' },
+    { value: '#1', label: 'AI Artist Influencer · Feedspot 2025 + 2026' },
     { value: '~40M', label: 'Monthly Social Impressions' },
     { value: '50K+', label: 'Image & Video Library' },
 ];
@@ -30,7 +30,7 @@ const categories = [
 
 const pillars = [
     { label: 'Wholly Owned IP', desc: 'All characters, stories, and visual assets are original and creator-owned' },
-    { label: 'Proven Global Audience', desc: 'Ranked #1 AI Art Influencer with a worldwide fanbase across all platforms' },
+    { label: 'Proven Global Audience', desc: 'Ranked #1 AI Artist Influencer with a worldwide fanbase across all platforms' },
     { label: 'Multi-Format Ready', desc: 'Publishing, social, video, and digital assets available for activation' },
     { label: 'Values-Aligned', desc: 'Family-friendly, wellness-focused, and conservation-positive brand positioning' },
 ];
@@ -279,7 +279,7 @@ const LicensingPage: React.FC = () => {
                                     </h3>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed mb-6">
                                         Tropland Universe™ is built on a foundation of original storytelling, beginning with published
-                                        children's books in 2013 and evolving into a billion-view digital brand. Every character,
+                                        children's books in 2013 and evolving into a 1.5-billion-view digital brand. Every character,
                                         narrative, and visual asset is wholly owned by OneLight Studios.
                                     </p>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed">
