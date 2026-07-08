@@ -123,6 +123,26 @@ const FieldReels: React.FC = () => {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
       >
+        {/* The rail opens with the door: most visitors never drag to the end */}
+        <a
+          href="https://instagram.com/troplanduniverse"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tu-reel-card tu-ticks text-bone/50 flex-shrink-0 snap-start bg-ink-2 border border-bone/15 relative group flex flex-col items-center justify-center gap-6 px-8 text-center hover:border-ember transition-colors duration-500"
+        >
+          <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-bone/45">
+            The feed never sleeps
+          </span>
+          <span className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone text-3xl md:text-4xl">
+            Follow the<br />
+            <span className="font-edit italic font-light normal-case text-ember tracking-normal">universe.</span>
+          </span>
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] uppercase text-bone/60 group-hover:text-ember transition-colors duration-300">
+            @troplanduniverse
+            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </span>
+        </a>
+
         {reels.map((reel, i) =>
           reel.src ? (
             <ReelCard key={reel.src} src={reel.src} title={reel.title} meta={reel.meta} />
@@ -146,25 +166,6 @@ const FieldReels: React.FC = () => {
           )
         )}
 
-        {/* The rail ends in a door, not a fade */}
-        <a
-          href="https://instagram.com/troplanduniverse"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tu-reel-card tu-ticks text-bone/50 flex-shrink-0 snap-start bg-ink-2 border border-bone/15 relative group flex flex-col items-center justify-center gap-6 px-8 text-center hover:border-ember transition-colors duration-500"
-        >
-          <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-bone/45">
-            The feed never sleeps
-          </span>
-          <span className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.95] text-bone text-3xl md:text-4xl">
-            Follow the<br />
-            <span className="font-edit italic font-light normal-case text-ember tracking-normal">universe.</span>
-          </span>
-          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.2em] uppercase text-bone/60 group-hover:text-ember transition-colors duration-300">
-            @troplanduniverse
-            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </span>
-        </a>
         <span className="flex-shrink-0 w-2" aria-hidden="true" />
       </div>
 
