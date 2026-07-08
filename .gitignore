@@ -27,3 +27,5 @@ dist-ssr
 .vercel
 brand-style-guide.md
 .gstack/
+.claude/worktrees/
+.playwright-mcp/
