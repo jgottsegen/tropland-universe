@@ -5,6 +5,7 @@ import Portfolio from '../components/Portfolio';
 import FlightSequence from '../components/FlightSequence';
 import QuoteBand from '../components/QuoteBand';
 import FieldReels from '../components/FieldReels';
+import JoinKingdom from '../components/JoinKingdom';
 import Pipeline from '../components/Pipeline';
 import Ventures from '../components/Ventures';
 import Services from '../components/Services';
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
                 <FlightSequence />
                 <QuoteBand />
                 <FieldReels />
+                <JoinKingdom />
                 <Pipeline />
                 <Ventures />
                 <Services />

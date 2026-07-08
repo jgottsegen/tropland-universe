@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { track } from '@vercel/analytics';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -110,6 +111,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-4">
             <Link
               to="/contact"
+              onClick={() => track('partner_cta_nav')}
               className="hidden xl:inline-flex items-center gap-2 whitespace-nowrap font-display font-bold text-[13px] uppercase tracking-[0.08em] px-5 py-2.5 bg-ember text-ink hover:bg-ember-soft transition-colors duration-200"
             >
               Partner With Us

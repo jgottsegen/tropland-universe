@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { track } from '@vercel/analytics';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import SectionTag from './fx/SectionTag';
 import Reveal from './fx/Reveal';
@@ -23,13 +24,14 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const response = await fetch('https://formsubmit.co/ajax/partnerships@troplanduniverse.com', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, message, _subject: `New Tropland inquiry from ${name}` }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, source: 'Home Section' }),
       });
       if (response.ok) {
         setStatus('success');
+        track('contact_submit', { source: 'home' });
         setName('');
         setEmail('');
         setMessage('');

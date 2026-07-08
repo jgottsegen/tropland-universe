@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { track } from '@vercel/analytics';
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import MagneticButton from './MagneticButton';
@@ -121,6 +122,7 @@ const Hero: React.FC = () => {
             <MagneticButton>
               <a
                 href="#universe"
+                onClick={() => track('hero_enter_universe')}
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-ember text-ink font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
               >
                 Enter the Universe
@@ -130,6 +132,7 @@ const Hero: React.FC = () => {
             <MagneticButton>
               <a
                 href="#field"
+                onClick={() => track('hero_watch_reels')}
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/25 text-white font-display font-bold text-[15px] uppercase tracking-[0.08em] hover:border-ember hover:text-ember transition-colors duration-300 backdrop-blur-sm"
               >
                 Watch the Reels
