@@ -134,7 +134,7 @@ const AboutPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
                     <Reveal>
-                        <SectionTag index="01" label="The Mythology" dark={false} className="mb-12 md:mb-16" />
+                        <SectionTag label="The Mythology" dark={false} className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -181,7 +181,7 @@ const AboutPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
                     <Reveal>
-                        <SectionTag index="02" label="Origin" className="mb-12 md:mb-16" />
+                        <SectionTag label="Origin" className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <Reveal>
@@ -350,7 +350,7 @@ const AboutPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
                     <Reveal>
-                        <SectionTag index="03" label="Enter the Kingdom" className="mb-12 md:mb-16" />
+                        <SectionTag label="Enter the Kingdom" className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">

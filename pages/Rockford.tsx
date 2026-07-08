@@ -194,7 +194,7 @@ const RockfordPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
                     <Reveal>
-                        <SectionTag index="01" label="About the Book" dark={false} className="mb-12 md:mb-16" />
+                        <SectionTag label="About the Book" dark={false} className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -226,7 +226,7 @@ const RockfordPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
                     <Reveal>
-                        <SectionTag index="02" label="The World of Rockford" className="mb-12 md:mb-16" />
+                        <SectionTag label="The World of Rockford" className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 md:mb-20">
@@ -281,7 +281,7 @@ const RockfordPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
                     <Reveal>
-                        <SectionTag index="03" label="The Record" dark={false} className="mb-12 md:mb-16" />
+                        <SectionTag label="The Record" dark={false} className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="mb-14 md:mb-20">
@@ -353,7 +353,7 @@ const RockfordPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12 relative z-10">
 
                     <Reveal>
-                        <SectionTag index="04" label="Own the Origin" className="mb-12 md:mb-16" />
+                        <SectionTag label="Own the Origin" className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">

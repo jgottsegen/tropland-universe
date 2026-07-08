@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef, type CSSProperties } from "react";
 import { animate } from "motion/react";
 
 function cn(...classes: (string | undefined | null | false)[]): string {
@@ -147,7 +147,7 @@ const GlowingEffect = memo(
                         "--glowingeffect-border-width": `${borderWidth}px`,
                         "--repeating-conic-gradient-times": "5",
                         "--gradient": brandGradient,
-                    } as React.CSSProperties}
+                    } as CSSProperties}
                     className={cn(
                         "pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity",
                         glow && "opacity-100",

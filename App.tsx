@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import AboutPage from './pages/About';
-import RockfordPage from './pages/Rockford';
-import JooshPage from './pages/Joosh';
-import ContactPage from './pages/Contact';
-import LicensingPage from './pages/Licensing';
-import LicensingLogin from './pages/LicensingLogin';
-import TroplandLibrary from './pages/TroplandLibrary';
-import ProtectedRoute from './components/ProtectedRoute';
 import SmoothScroll from './components/fx/SmoothScroll';
+
+// Home stays eager (it is the LCP path). Every other route loads on demand,
+// which keeps three.js (About's forest scene) out of the main bundle.
+const AboutPage = lazy(() => import('./pages/About'));
+const RockfordPage = lazy(() => import('./pages/Rockford'));
+const JooshPage = lazy(() => import('./pages/Joosh'));
+const ContactPage = lazy(() => import('./pages/Contact'));
+const LicensingPage = lazy(() => import('./pages/Licensing'));
+const LicensingLogin = lazy(() => import('./pages/LicensingLogin'));
+const TroplandLibrary = lazy(() => import('./pages/TroplandLibrary'));
+// Portal-only: keeps the supabase client out of the main bundle
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
 const PORTAL_PATHS = ['/tropland-licensing', '/tropland-licensing/login'];
 
@@ -42,6 +46,7 @@ const AppLayout: React.FC = () => {
       {!isPortal && <Navbar />}
 
       <div className="flex-grow">
+        <Suspense fallback={<div className="min-h-screen bg-ink" aria-hidden="true" />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
@@ -57,6 +62,7 @@ const AppLayout: React.FC = () => {
           } />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
       </div>
 
       {!isPortal && <Footer />}

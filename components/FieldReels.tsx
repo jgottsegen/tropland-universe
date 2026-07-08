@@ -94,7 +94,7 @@ const FieldReels: React.FC = () => {
     <section id="field" className="relative bg-ink py-24 md:py-36 overflow-hidden">
       <div className="max-w-[1480px] mx-auto px-6 md:px-12">
         <Reveal>
-          <SectionTag index="03" label="The Field" className="mb-12 md:mb-16" />
+          <SectionTag label="The Field" className="mb-12 md:mb-16" />
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 md:mb-20">

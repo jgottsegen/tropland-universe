@@ -26,3 +26,4 @@ dist-ssr
 *.sw?
 .vercel
 brand-style-guide.md
+.gstack/

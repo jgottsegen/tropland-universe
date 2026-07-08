@@ -287,7 +287,6 @@ export const ForestScene: React.FC = () => (
         camera={{ position: [0, 5, 14], fov: 58 }}
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         dpr={[1, 1.5]}
-        style={{ width: '100%', height: '100%' }}
     >
         <Scene />
     </Canvas>

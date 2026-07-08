@@ -234,7 +234,7 @@ const LicensingPage: React.FC = () => {
                 <div className="max-w-[1480px] mx-auto px-6 md:px-12">
 
                     <Reveal>
-                        <SectionTag index="01" label="The Opportunity" dark={false} className="mb-12 md:mb-16" />
+                        <SectionTag label="The Opportunity" dark={false} className="mb-12 md:mb-16" />
                     </Reveal>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 md:mb-24">
