@@ -91,6 +91,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 </html>`,
     });
 
+    // Signup ping to the studio; fire-and-forget so it never blocks the fan.
+    resend.emails
+      .send({
+        from: 'Tropland Universe <noreply@troplanduniverse.com>',
+        to: 'partnerships@troplanduniverse.com',
+        subject: `New Kingdom member: ${email}`,
+        text: `${email} joined the Tropland Kingdom list.\n\nFull list: https://resend.com/audiences`,
+      })
+      .catch(() => {});
+
     return res.status(200).json({ ok: true });
   } catch (err) {
     // Duplicate contacts are a success from the visitor's point of view.
