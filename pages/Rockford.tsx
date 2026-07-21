@@ -211,7 +211,7 @@ const RockfordPage: React.FC = () => {
                                     Set deep within the Tropland Universe, <span className="font-edit italic">The Adventures of Rockford T. Honeypot</span> is a fantasy adventure novel that established the narrative foundation of the broader franchise.
                                 </p>
                                 <p className="font-display font-light text-[17px] md:text-lg text-ink/60 leading-relaxed">
-                                    The story follows Rockford as he navigates a structured animal society with its own rules, hierarchies, and conflicts. This novel was written entirely by Josh Gottsegen, years before artificial intelligence entered the creative mainstream. Since its release, the book reached #1 on Amazon and laid the narrative architecture that now underpins a 1.5-billion-view digital franchise.
+                                    The story follows Rockford as he navigates a structured animal society with its own rules, hierarchies, and conflicts. This novel was written entirely by Josh Gottsegen, years before artificial intelligence entered the creative mainstream. Since its release, the book reached #1 on Amazon and laid the narrative architecture that now underpins a 2-billion-view digital franchise.
                                 </p>
                             </div>
                         </Reveal>

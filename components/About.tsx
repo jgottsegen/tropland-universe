@@ -17,7 +17,7 @@ const offers = [
   },
   {
     title: 'Global Distribution',
-    desc: '1.5 billion cumulative views across 50+ countries. A proven audience engine across every key global market.',
+    desc: '2 billion cumulative views across 50+ countries. A proven audience engine across every key global market.',
     readout: 'MODE · REACH',
   },
 ];

@@ -12,7 +12,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
-    { value: '1.5B+', label: 'Content Views Worldwide' },
+    { value: '2B+', label: 'Content Views Worldwide' },
     { value: '#1', label: 'AI Artist Influencer · Feedspot 2025 + 2026' },
     { value: '~40M', label: 'Monthly Social Impressions' },
     { value: '50K+', label: 'Image & Video Library' },
@@ -151,7 +151,7 @@ const LicensingPage: React.FC = () => {
                         transition={{ delay: 0.65, duration: 1, ease }}
                     >
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
-                            Tropland Universe™ is a character-driven wildlife media property with 1.5 billion content views,
+                            Tropland Universe™ is a character-driven wildlife media property with 2 billion content views,
                             a 50K+ image and video library, and a global audience that spans all ages.
                         </p>
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
@@ -279,7 +279,7 @@ const LicensingPage: React.FC = () => {
                                     </h3>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed mb-6">
                                         Tropland Universe™ is built on a foundation of original storytelling, beginning with published
-                                        children's books in 2013 and evolving into a 1.5-billion-view digital brand. Every character,
+                                        children's books in 2013 and evolving into a 2-billion-view digital brand. Every character,
                                         narrative, and visual asset is wholly owned by OneLight Studios.
                                     </p>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed">
