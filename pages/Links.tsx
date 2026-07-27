@@ -6,57 +6,54 @@ import { track } from '@vercel/analytics';
 /**
  * /links — the Instagram bio destination.
  *
- * THE THESIS: the photograph is the hero, not an avatar.
+ * v3. Josh saw v2 live inside the Instagram in-app browser and called the
+ * crop: the banner was cutting the top of his head off. He was right, and
+ * the cause is structural rather than a bad number. The source is a portrait
+ * selfie with two subjects side by side and a lot of headroom, so ANY
+ * fixed-height full-bleed band has to guess where to cut it, and the in-app
+ * browser (chrome top and bottom) squeezes the viewport enough that the
+ * guess lands on foreheads. Retuning the crop would have moved the failure,
+ * not removed it.
  *
- * The most distinctive thing Josh owns is a picture of himself cheek to
- * cheek with a lion, and the entire brand runs on the "is this real?"
- * question that picture provokes. Rendering it as a 112px circle was the
- * template answer — it turned the strongest asset on the page into a
- * profile pic. It now bleeds edge to edge across the top and dissolves into
- * the ink through a gradient, with the lockup set into the dissolve. That
- * is the one place this page spends its boldness; everything below it stays
- * quiet on purpose.
+ * So the photograph appears twice, and neither instance can crop badly:
  *
- * WHAT WAS CUT, and why (Josh's bar: must not read as AI slop, must survive
- * a talent agency, a large brand, and a fan):
- *   - Generic outline icons. A globe standing for "website" and a picture
- *     frame standing for "wallpapers" are stock-template vocabulary and the
- *     loudest tell on the page. Type carries the rows now.
- *   - The solid full-width orange button. That is the Linktree default with
- *     a brand color swapped in. YouTube keeps its priority through an ember
- *     rule and ember type, which is hierarchy without a slab.
- *   - Soft 12px radii. The Tropland site is built on sharp frames and
- *     hairlines; the rows now match it at 3px.
- *   - Centered labels with a phantom spacer holding the balance. Rows are
- *     left-aligned and read as an editorial index.
+ *   1. THE PORTRAIT. A circle, framed on a square that holds both faces with
+ *      headroom, so the composition is fixed regardless of viewport. Josh's
+ *      instinct ("maybe a circle like all socials") is also the right read on
+ *      convention: a round portrait is the universal this-is-a-real-account
+ *      signal, and every buyer and fan parses it in one glance.
+ *   2. THE FIELD. The same photo at 48px, blurred to nothing, scaled to fill
+ *      the page behind everything. It carries the picture's colour, gold
+ *      against cold blue, across the whole surface with no edge that can crop
+ *      badly. Costs 1.5KB, which matters on a majority-India mobile audience.
  *
- * STRUCTURE is still Linktree, measured off a live linktr.ee profile at
- * 375x812 rather than recalled: one screen, no scroll, a single stacked
- * column of full-width tap targets, ~347px content width.
+ * A bare circle on ink is Linktree's default, so it does not stay bare: an
+ * ember halo sits behind it and breathes on a six-second cycle. That is the
+ * page's one ambient motion and the only thing that moves by itself.
  *
- * ORDER is Josh's, verbatim, and YouTube leads for a reason: the channel
- * sits at 31 of the 4,000 valid public watch hours YPP requires and Shorts
- * time is excluded by name, so a human choosing to watch long-form is the
- * single behavior this page exists to cause.
+ * ICONS, reconsidered. v2 stripped every icon because a globe standing for
+ * "website" and a picture frame standing for "wallpapers" are stock
+ * vocabulary. That reasoning holds for concepts and fails for brands: the
+ * YouTube, Facebook and Instagram marks are not decoration, they are the
+ * fastest recognition available, and this audience is majority non-English.
+ * So the three platform rows carry their real marks and the three Tropland
+ * rows carry none. The asymmetry is the point: platforms get their logo,
+ * Tropland gets its typography.
  *
- * Wallpapers point at /#kingdom rather than carrying a form. The email
- * capture is the only thing on the site that converts a viewer into
- * something we own, and one tap keeps it reachable without spending the
- * vertical space a form costs. Patreon is deliberately absent: it lives on
- * the /#kingdom success screen, after capture, because a cold paid ask to a
- * majority-India audience taxes the funnel this page feeds.
+ * MICRO-INTERACTIONS, one system rather than scattered effects:
+ *   - Entrance: portrait, then lockup, then rows at 55ms intervals, all on
+ *     the site's own easing curve. One orchestrated move.
+ *   - Press: rows sink 1.5% under the finger. Touch has no hover, and a page
+ *     that never acknowledges a tap feels dead on a phone.
+ *   - Hover: border warms, chevron slides.
+ *   - Every one of them is disabled under prefers-reduced-motion.
  *
- * NO SCROLL is enforced, not hoped for: min-h-100svh with m-auto, which
- * centers when there is room and never pushes content out of reach when
- * there isn't. svh rather than vh because mobile browser chrome makes vh
- * taller than the visible area. The height variants exist because a
- * landscape phone at 740x360 clipped the header off the top and the last
- * row off the bottom.
- *
- * noindex is deliberate: one intended referrer, no site chrome, and a
- * five-link page should never compete with the homepage on brand queries.
- * The meta below is the belt; robots.txt is the braces, because
- * react-helmet-async does not reliably apply under React 19.
+ * UNCHANGED from v2 and deliberate: Josh's link order verbatim; one screen,
+ * no scroll; YouTube featured because the channel sits at 31 of the 4,000
+ * valid public watch hours and Shorts are excluded by name; wallpapers point
+ * at /#kingdom so the email funnel survives; Patreon absent because a cold
+ * paid ask belongs after capture, not before; Contact boxed with the address
+ * visible; noindex.
  */
 
 interface Item {
@@ -65,17 +62,38 @@ interface Item {
   event: string;
   internal?: boolean;
   featured?: boolean;
+  mark?: React.ReactNode;
 }
 
+/* Real platform marks. Recognition, not decoration — the reason the generic
+   concept-icons were cut and these are not. */
+const YouTubeMark = (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-[18px] w-[18px]">
+    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.5 15.6V8.4l6.3 3.6-6.3 3.6Z" />
+  </svg>
+);
+
+const FacebookMark = (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-[18px] w-[18px]">
+    <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z" />
+  </svg>
+);
+
+const InstagramMark = (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-[18px] w-[18px]">
+    <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.9 5.9 0 0 0 .63 4.14c-.3.76-.5 1.64-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z" />
+  </svg>
+);
+
 const items: Item[] = [
-  { label: 'YouTube', href: 'https://www.youtube.com/@troplanduniverse', event: 'links_youtube', featured: true },
-  { label: 'Facebook', href: 'https://facebook.com/troplanduniverse', event: 'links_facebook' },
-  { label: 'Instagram', href: 'https://instagram.com/troplanduniverse', event: 'links_instagram' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@troplanduniverse', event: 'links_youtube', featured: true, mark: YouTubeMark },
+  { label: 'Facebook', href: 'https://facebook.com/troplanduniverse', event: 'links_facebook', mark: FacebookMark },
+  { label: 'Instagram', href: 'https://instagram.com/troplanduniverse', event: 'links_instagram', mark: InstagramMark },
   { label: 'Website', href: '/', event: 'links_site', internal: true },
   { label: 'Free Wallpapers', href: '/#kingdom', event: 'links_wallpapers', internal: true },
 ];
 
-/* A hairline chevron. Thinner than any icon-set default, which is the point. */
+/* Hairline chevron, thinner than any icon-set default. */
 const Chevron: React.FC = () => (
   <svg
     width="13"
@@ -83,14 +101,53 @@ const Chevron: React.FC = () => (
     viewBox="0 0 13 13"
     fill="none"
     aria-hidden="true"
-    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
   >
     <path d="M3 1.5L8.5 6.5L3 11.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square" />
   </svg>
 );
 
-const Links: React.FC = () => (
-  <main className="relative flex min-h-[100svh] bg-ink text-bone">
+/* The entrance is one sequence, so the delays live in one place. */
+const rise = (delayMs: number): React.CSSProperties => ({ animationDelay: `${delayMs}ms` });
+const RISE = 'animate-rise motion-reduce:animate-none motion-reduce:opacity-100';
+
+/**
+ * Keeps the portrait playing. Three things stop a muted autoplay loop in the
+ * wild and none of them throw: React can emit the <video> without the `muted`
+ * ATTRIBUTE present at first paint, which is exactly what iOS checks before it
+ * allows autoplay; browsers pause video in a backgrounded tab and do not always
+ * resume it; and an in-app browser (which is how nearly all of this traffic
+ * arrives) can reject the initial play() outright.
+ *
+ * So: force muted on the element itself, ask it to play, and ask again whenever
+ * the tab comes back. Every failure is swallowed on purpose — if it never
+ * plays, the poster is still there and the page looks exactly as it did
+ * before the loop existed. This is the signature element on a page 1.3M
+ * people can reach; it should not depend on a default behaving.
+ */
+const useKeepPlaying = () => {
+  const ref = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.muted = true;
+    const play = () => { void el.play().catch(() => {}); };
+    play();
+    const onVisible = () => { if (document.visibilityState === 'visible') play(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => document.removeEventListener('visibilitychange', onVisible);
+  }, []);
+
+  return ref;
+};
+
+const Links: React.FC = () => {
+  const portraitRef = useKeepPlaying();
+
+  return (
+  <main className="relative flex min-h-[100svh] overflow-hidden bg-ink text-bone">
+
     <Helmet>
       <title>Tropland Universe | Links</title>
       <meta name="robots" content="noindex" />
@@ -102,82 +159,106 @@ const Links: React.FC = () => (
       <meta property="og:url" content="https://troplanduniverse.com/links" />
     </Helmet>
 
-    {/* The house grain. AppLayout skips it on bare-render paths, so the page
-        carries its own or it reads as a different site. */}
+    {/* ── The field. A 48px thumbnail blown up and blurred: the photograph's
+        colour with no edge that can crop badly. 1.5KB. ─────────────────── */}
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <img
+        src="/images/josh-lion-ambient.jpg"
+        alt=""
+        className="h-full w-full scale-125 object-cover opacity-[0.62] blur-[56px]"
+      />
+      {/* Lighter at the top where the portrait sits, solid ink by the bottom
+          so the rows keep their contrast. The field is atmosphere, never a
+          surface anything has to be read against. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/35 via-ink/75 to-ink" />
+    </div>
+
     <div className="tu-grain" aria-hidden="true" />
 
-    {/* Top-anchored, not centered. The hero has to bleed off the top edge of
-        the screen or the dissolve reads as a gap rather than a decision.
-        Slack falls at the bottom, below the last row, where it is invisible. */}
-    <div className="mx-auto w-full max-w-[400px] self-start pb-7 short:pb-5 tiny:pb-1">
+    <div className="relative z-10 m-auto flex w-full max-w-[400px] flex-col items-center px-[18px] py-8 short:py-5 tiny:py-3">
 
-      {/* ── The hero. Bleeds to the column edges, dissolves into the ink. ── */}
-      <header className="relative tiny:hidden">
-        {/* Fluid height, not a fixed one. Fixed pixels meant a 200px band on
-            an iPhone SE and a 375px square on a Pro Max, so the page looked
-            top-heavy on one and balanced on the other. 42svh keeps the same
-            proportion on every screen; the 400px cap stops it dominating a
-            desktop window. Square source so any crop stays on the faces. */}
-        <img
-          src="/images/josh-lion-hero.jpg"
-          alt="Josh Gottsegen beside a lion of the Tropland Universe"
-          width={900}
-          height={900}
-          className="h-[min(38svh,380px)] w-full object-cover object-center"
-        />
-        {/* Two stops, not three: a long fade doing the work of a scrim. */}
+      {/* ── The portrait ──────────────────────────────────────────────── */}
+      <div className={`relative tiny:hidden ${RISE}`} style={rise(0)}>
+        {/* Halo. The page's one ambient motion, six seconds a cycle, so it
+            registers as atmosphere rather than as an animation. */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/40 to-ink"
           aria-hidden="true"
+          className="absolute -inset-5 animate-halo-breathe rounded-full bg-ember/25 blur-2xl motion-reduce:animate-none"
         />
+        {/* The living portrait. The brand's whole engine is "is this real?",
+            and a still photograph is the one format that cannot ask it. The
+            lion breathes and blinks; Josh holds. Nobody else's link page can
+            do this, which is the entire reason it is here.
 
-        <div className="absolute inset-x-0 bottom-0 px-[18px] pb-3">
-          <p className="font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember">
-            The Digital Animal Kingdom
-          </p>
-          <h1 className="mt-2 font-display text-[32px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone short:text-[27px]">
-            Tropland{' '}
-            <span className="font-edit text-[34px] font-light normal-case italic tracking-normal text-ember short:text-[29px]">
-              Universe
-            </span>
-          </h1>
-        </div>
-      </header>
+            Shipped as a <video> whose POSTER is the still, so the page is
+            never waiting on it: the frame paints immediately, the loop takes
+            over when it has arrived, and if the file is missing or the
+            connection gives up, what remains is exactly the still we had
+            before. muted + playsInline are required for iOS autoplay.
 
-      {/* Landscape has no room for the hero, so the lockup stands alone. */}
-      <div className="hidden px-[18px] pt-5 tiny:block">
-        <p className="font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember">
-          The Digital Animal Kingdom
-        </p>
-        <h1 className="mt-1.5 font-display text-[24px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone">
-          Tropland{' '}
-          <span className="font-edit text-[26px] font-light normal-case italic tracking-normal text-ember">
-            Universe
-          </span>
-        </h1>
+            The clip is Josh's own, shot to loop: first and last frames match,
+            so there is no visible seam. 440x440 at CRF 30 is 310KB, which is
+            the right trade for a 136px circle on India and Brazil mobile
+            data, and the poster is frame 0 of this exact encode rather than a
+            separate crop, so nothing jumps when the loop takes over. */}
+        <video
+          ref={portraitRef}
+          src="/video/josh-lion-loop.mp4"
+          poster="/images/josh-lion-portrait.jpg"
+          width={440}
+          height={440}
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          aria-label="Josh Gottsegen beside a lion of the Tropland Universe"
+          className="relative h-[136px] w-[136px] rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] short:h-[104px] short:w-[104px]"
+        />
       </div>
+
+      {/* ── The lockup ────────────────────────────────────────────────── */}
+      <p
+        className={`mt-6 text-center font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember short:mt-4 tiny:mt-0 ${RISE}`}
+        style={rise(90)}
+      >
+        The Digital Animal Kingdom
+      </p>
+      <h1
+        className={`mt-2.5 text-center font-display text-[31px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone short:mt-2 short:text-[26px] tiny:text-[22px] ${RISE}`}
+        style={rise(150)}
+      >
+        Tropland{' '}
+        <span className="font-edit text-[33px] font-light normal-case italic tracking-normal text-ember short:text-[28px] tiny:text-[24px]">
+          Universe
+        </span>
+      </h1>
 
       {/* ── The index ─────────────────────────────────────────────────── */}
       <nav
         aria-label="Tropland Universe links"
-        className="mt-6 flex flex-col gap-[10px] px-[14px] short:mt-5 short:gap-2 tiny:mt-4 tiny:gap-1.5"
+        className="mt-7 flex w-full flex-col gap-[10px] short:mt-5 short:gap-2 tiny:mt-4 tiny:gap-1.5"
       >
-        {items.map((item) => {
+        {items.map((item, i) => {
           const base =
-            'group flex h-[58px] w-full items-center justify-between rounded-[3px] border px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 short:h-[50px] tiny:h-[36px] tiny:text-[12px]';
+            'group flex h-[58px] w-full items-center gap-3.5 rounded-[3px] border px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.985] motion-reduce:active:scale-100 short:h-[50px] tiny:h-[36px] tiny:text-[12px]';
           const skin = item.featured
             ? 'border-ember/55 text-ember hover:bg-ember hover:text-ink hover:border-ember'
-            : 'border-bone/15 text-bone hover:border-bone/50 hover:bg-ink-2';
+            : 'border-bone/15 text-bone hover:border-bone/45 hover:bg-bone/[0.04]';
 
           const inner = (
             <>
-              <span>{item.label}</span>
+              {item.mark && <span className="shrink-0">{item.mark}</span>}
+              <span className="flex-1">{item.label}</span>
               <Chevron />
             </>
           );
 
+          const cls = `${base} ${skin} ${RISE}`;
+          const style = rise(220 + i * 55);
+
           return item.internal ? (
-            <Link key={item.label} to={item.href} onClick={() => track(item.event)} className={`${base} ${skin}`}>
+            <Link key={item.label} to={item.href} onClick={() => track(item.event)} className={cls} style={style}>
               {inner}
             </Link>
           ) : (
@@ -187,7 +268,8 @@ const Links: React.FC = () => (
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track(item.event)}
-              className={`${base} ${skin}`}
+              className={cls}
+              style={style}
             >
               {inner}
             </a>
@@ -195,33 +277,13 @@ const Links: React.FC = () => (
         })}
       </nav>
 
-      {/* ── The business door ──────────────────────────────────────────
-          Boxed, like the five above. It was unboxed for one pass on a
-          hierarchy argument, and that was wrong twice over: a single
-          borderless row under five bordered ones reads as a footer, and
-          footers get skipped by exactly the person this exists for. It also
-          reads as an oversight rather than a decision, which is the failure
-          mode this page is being held to.
-
-          It says "Contact", not "Brands & Partnerships". The narrower name
-          quietly turned away the buyer Josh is actually chasing right now:
-          an agency reading "Brands & Partnerships" files it as the
-          sponsorship inbox and moves on, while representation, studios and
-          press have no obvious door at all. "Contact" is the word every one
-          of them looks for, and it costs nothing.
-
-          The address is visible rather than hidden behind a mailto. A buyer
-          who wants to reach out from a desktop, or forward it to a colleague,
-          needs to SEE it. A live address on the page is also the cheapest
-          credibility signal there is. The tier below still reads as a
-          different kind of thing, but through the hairline and the mono
-          address, not by removing the affordance. */}
-      <div className="mt-5 px-[14px] short:mt-4 tiny:mt-3">
-        <div className="mb-3 h-px w-full bg-bone/10 short:mb-2.5" />
+      {/* ── The business door ─────────────────────────────────────────── */}
+      <div className={`mt-5 w-full short:mt-4 tiny:mt-2 ${RISE}`} style={rise(220 + items.length * 55)}>
+        <div className="mb-3 h-px w-full bg-bone/10 short:mb-2.5 tiny:mb-2" />
         <a
           href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"
           onClick={() => track('links_contact')}
-          className="group flex h-[62px] w-full items-center justify-between rounded-[3px] border border-bone/15 px-5 transition-colors duration-300 hover:border-bone/50 hover:bg-ink-2 short:h-[54px] tiny:h-[46px]"
+          className="group flex h-[62px] w-full items-center justify-between rounded-[3px] border border-bone/15 px-5 transition-[color,background-color,border-color,transform] duration-300 hover:border-bone/45 hover:bg-bone/[0.04] active:scale-[0.985] motion-reduce:active:scale-100 short:h-[54px] tiny:h-[44px]"
         >
           <span className="min-w-0">
             <span className="block font-display text-[13px] font-bold uppercase tracking-[0.12em] text-bone tiny:text-[12px]">
@@ -236,6 +298,7 @@ const Links: React.FC = () => (
       </div>
     </div>
   </main>
-);
+  );
+};
 
 export default Links;
