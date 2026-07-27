@@ -2,4 +2,13 @@ User-agent: *
 Allow: /
 Disallow: /tropland-licensing/
 
+# The IG bio destination. One intended referrer, no site chrome, and a
+# five-link page should never compete with the homepage on brand queries.
+# The page also carries a noindex meta, but that is rendered by
+# react-helmet-async, which does not apply in dev under React 19 and is
+# therefore not something to depend on alone. robots.txt is static and served
+# by the edge, so it holds regardless.
+Disallow: /links
+Disallow: /l
+
 Sitemap: https://troplanduniverse.com/sitemap.xml
