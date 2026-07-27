@@ -2,101 +2,92 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { track } from '@vercel/analytics';
-import { Youtube, Facebook, Instagram, Globe, Image as ImageIcon } from 'lucide-react';
 
 /**
  * /links — the Instagram bio destination.
  *
- * Structure is Linktree, measured off a live linktr.ee profile at 375x812
- * rather than recalled: container ~347px (14px gutters), round avatar,
- * handle at 24px/600, full-width buttons ~64px tall stacked equal-weight
- * with centered labels.
+ * THE THESIS: the photograph is the hero, not an avatar.
  *
- * Skin is Tropland, per Josh 2026-07-26 ("page should follow tropland
- * branding a little"). What that means concretely, taken from the live site
- * rather than invented: ink ground, the grain overlay every other page
- * carries, a Spline Sans Mono eyebrow at 0.28em tracking (the SectionTag
- * treatment), and the house lockup — Bricolage Grotesque extrabold uppercase
- * with a single Fraunces italic ember word. Buttons keep Linktree's shape,
- * because that is the format Josh asked for, but take the site's uppercase
- * tracked label voice.
+ * The most distinctive thing Josh owns is a picture of himself cheek to
+ * cheek with a lion, and the entire brand runs on the "is this real?"
+ * question that picture provokes. Rendering it as a 112px circle was the
+ * template answer — it turned the strongest asset on the page into a
+ * profile pic. It now bleeds edge to edge across the top and dissolves into
+ * the ink through a gradient, with the lockup set into the dissolve. That
+ * is the one place this page spends its boldness; everything below it stays
+ * quiet on purpose.
  *
- * The avatar is Josh with the lion, his pick. That is the "visibility as
- * JOSH, not just Tropland" edge doing real work: the bio destination for
- * 1.3M followers now has a face on it instead of a logo.
+ * WHAT WAS CUT, and why (Josh's bar: must not read as AI slop, must survive
+ * a talent agency, a large brand, and a fan):
+ *   - Generic outline icons. A globe standing for "website" and a picture
+ *     frame standing for "wallpapers" are stock-template vocabulary and the
+ *     loudest tell on the page. Type carries the rows now.
+ *   - The solid full-width orange button. That is the Linktree default with
+ *     a brand color swapped in. YouTube keeps its priority through an ember
+ *     rule and ember type, which is hierarchy without a slab.
+ *   - Soft 12px radii. The Tropland site is built on sharp frames and
+ *     hairlines; the rows now match it at 3px.
+ *   - Centered labels with a phantom spacer holding the balance. Rows are
+ *     left-aligned and read as an editorial index.
  *
- * HARD REQUIREMENT: one screen, no scroll. min-h-100svh with m-auto rather
- * than a fixed height with overflow hidden — m-auto centers when there is
- * room and never pushes content out of reach when there isn't. svh, not vh:
- * mobile browser chrome makes vh taller than the visible area and would
- * reintroduce the exact scroll this page is not allowed to have. The short/
- * tiny height variants exist because a landscape phone at 740x360 clipped
- * the avatar off the top and the last button off the bottom.
+ * STRUCTURE is still Linktree, measured off a live linktr.ee profile at
+ * 375x812 rather than recalled: one screen, no scroll, a single stacked
+ * column of full-width tap targets, ~347px content width.
  *
- * YouTube is the one filled button (Linktree calls it a featured link, so it
- * costs nothing structurally). The channel sits at 31 of the 4,000 valid
- * public watch hours YPP requires and Shorts time is excluded by name, so a
- * human choosing to watch long-form is the single behavior this page exists
- * to cause.
+ * ORDER is Josh's, verbatim, and YouTube leads for a reason: the channel
+ * sits at 31 of the 4,000 valid public watch hours YPP requires and Shorts
+ * time is excluded by name, so a human choosing to watch long-form is the
+ * single behavior this page exists to cause.
  *
- * Wallpapers point at /#kingdom instead of carrying a form. The email
+ * Wallpapers point at /#kingdom rather than carrying a form. The email
  * capture is the only thing on the site that converts a viewer into
  * something we own, and one tap keeps it reachable without spending the
- * vertical space a form costs. Patreon deliberately does NOT appear here: it
- * lives on the /#kingdom success screen, after capture, because a cold paid
- * ask to a majority-India audience taxes the funnel this page feeds.
+ * vertical space a form costs. Patreon is deliberately absent: it lives on
+ * the /#kingdom success screen, after capture, because a cold paid ask to a
+ * majority-India audience taxes the funnel this page feeds.
  *
- * noindex is deliberate. One intended referrer (the IG bio), no site chrome,
- * and a five-link page should never compete with the homepage on brand
- * queries. It was dropped once by accident; this comment is why it stays.
+ * NO SCROLL is enforced, not hoped for: min-h-100svh with m-auto, which
+ * centers when there is room and never pushes content out of reach when
+ * there isn't. svh rather than vh because mobile browser chrome makes vh
+ * taller than the visible area. The height variants exist because a
+ * landscape phone at 740x360 clipped the header off the top and the last
+ * row off the bottom.
  *
- * Copy stays plain. India and Brazil are the two largest audience blocs.
+ * noindex is deliberate: one intended referrer, no site chrome, and a
+ * five-link page should never compete with the homepage on brand queries.
+ * The meta below is the belt; robots.txt is the braces, because
+ * react-helmet-async does not reliably apply under React 19.
  */
 
 interface Item {
   label: string;
   href: string;
   event: string;
-  icon: React.ReactNode;
   internal?: boolean;
   featured?: boolean;
 }
 
 const items: Item[] = [
-  {
-    label: 'YouTube',
-    href: 'https://www.youtube.com/@troplanduniverse',
-    event: 'links_youtube',
-    icon: <Youtube size={19} />,
-    featured: true,
-  },
-  {
-    label: 'Facebook',
-    href: 'https://facebook.com/troplanduniverse',
-    event: 'links_facebook',
-    icon: <Facebook size={19} />,
-  },
-  {
-    label: 'Instagram',
-    href: 'https://instagram.com/troplanduniverse',
-    event: 'links_instagram',
-    icon: <Instagram size={19} />,
-  },
-  {
-    label: 'Website',
-    href: '/',
-    event: 'links_site',
-    icon: <Globe size={19} />,
-    internal: true,
-  },
-  {
-    label: 'Free Wallpapers',
-    href: '/#kingdom',
-    event: 'links_wallpapers',
-    icon: <ImageIcon size={19} />,
-    internal: true,
-  },
+  { label: 'YouTube', href: 'https://www.youtube.com/@troplanduniverse', event: 'links_youtube', featured: true },
+  { label: 'Facebook', href: 'https://facebook.com/troplanduniverse', event: 'links_facebook' },
+  { label: 'Instagram', href: 'https://instagram.com/troplanduniverse', event: 'links_instagram' },
+  { label: 'Website', href: '/', event: 'links_site', internal: true },
+  { label: 'Free Wallpapers', href: '/#kingdom', event: 'links_wallpapers', internal: true },
 ];
+
+/* A hairline chevron. Thinner than any icon-set default, which is the point. */
+const Chevron: React.FC = () => (
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 13 13"
+    fill="none"
+    aria-hidden="true"
+    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+  >
+    <path d="M3 1.5L8.5 6.5L3 11.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square" />
+  </svg>
+);
 
 const Links: React.FC = () => (
   <main className="relative flex min-h-[100svh] bg-ink text-bone">
@@ -115,58 +106,78 @@ const Links: React.FC = () => (
         carries its own or it reads as a different site. */}
     <div className="tu-grain" aria-hidden="true" />
 
-    {/* m-auto rather than justify-center: centers when there is room, never
-        pushes content out of reach when there isn't. */}
-    <div className="m-auto flex w-full max-w-[400px] flex-col items-center px-[14px] py-6 short:py-4">
+    {/* Top-anchored, not centered. The hero has to bleed off the top edge of
+        the screen or the dissolve reads as a gap rather than a decision.
+        Slack falls at the bottom, below the last row, where it is invisible. */}
+    <div className="mx-auto w-full max-w-[400px] self-start pb-7 short:pb-5">
 
-      <img
-        src="/images/josh-lion-avatar.jpg"
-        alt="Josh Gottsegen with a lion of the Tropland Universe"
-        width={112}
-        height={112}
-        className="h-28 w-28 shrink-0 rounded-full border border-ember/40 object-cover short:h-[72px] short:w-[72px] tiny:hidden"
-      />
+      {/* ── The hero. Bleeds to the column edges, dissolves into the ink. ── */}
+      <header className="relative tiny:hidden">
+        {/* Fluid height, not a fixed one. Fixed pixels meant a 200px band on
+            an iPhone SE and a 375px square on a Pro Max, so the page looked
+            top-heavy on one and balanced on the other. 42svh keeps the same
+            proportion on every screen; the 400px cap stops it dominating a
+            desktop window. Square source so any crop stays on the faces. */}
+        <img
+          src="/images/josh-lion-hero.jpg"
+          alt="Josh Gottsegen beside a lion of the Tropland Universe"
+          width={900}
+          height={900}
+          className="h-[min(42svh,400px)] w-full object-cover object-center"
+        />
+        {/* Two stops, not three: a long fade doing the work of a scrim. */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/40 to-ink"
+          aria-hidden="true"
+        />
 
-      {/* SectionTag treatment: mono, 0.28em, ember */}
-      <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-ember short:mt-3">
-        The Digital Animal Kingdom
-      </p>
+        <div className="absolute inset-x-0 bottom-0 px-[18px] pb-3">
+          <p className="font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember">
+            The Digital Animal Kingdom
+          </p>
+          <h1 className="mt-2 font-display text-[32px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone short:text-[27px]">
+            Tropland{' '}
+            <span className="font-edit text-[34px] font-light normal-case italic tracking-normal text-ember short:text-[29px]">
+              Universe
+            </span>
+          </h1>
+        </div>
+      </header>
 
-      {/* House lockup: Bricolage extrabold uppercase + one Fraunces italic word */}
-      <h1 className="mt-2 text-center font-display text-[30px] font-extrabold uppercase leading-[0.95] tracking-[-0.02em] text-bone short:text-[25px] tiny:mt-0">
-        Tropland{' '}
-        <span className="font-edit text-[32px] font-light normal-case italic tracking-normal text-ember short:text-[27px]">
-          Universe
-        </span>
-      </h1>
+      {/* Landscape has no room for the hero, so the lockup stands alone. */}
+      <div className="hidden px-[18px] pt-5 tiny:block">
+        <p className="font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember">
+          The Digital Animal Kingdom
+        </p>
+        <h1 className="mt-1.5 font-display text-[24px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone">
+          Tropland{' '}
+          <span className="font-edit text-[26px] font-light normal-case italic tracking-normal text-ember">
+            Universe
+          </span>
+        </h1>
+      </div>
 
+      {/* ── The index ─────────────────────────────────────────────────── */}
       <nav
         aria-label="Tropland Universe links"
-        className="mt-7 flex w-full flex-col gap-3 short:mt-5 short:gap-2"
+        className="mt-6 flex flex-col gap-[10px] px-[14px] short:mt-5 short:gap-2 tiny:mt-4 tiny:gap-1.5"
       >
         {items.map((item) => {
           const base =
-            'group flex h-[60px] w-full items-center gap-3 rounded-xl px-5 font-display text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 short:h-[50px] tiny:h-[44px] tiny:text-[12px]';
+            'group flex h-[58px] w-full items-center justify-between rounded-[3px] border px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 short:h-[50px] tiny:h-[42px] tiny:text-[12px]';
           const skin = item.featured
-            ? 'bg-ember text-ink hover:bg-ember-soft'
-            : 'border border-bone/20 text-bone hover:border-ember hover:text-ember';
+            ? 'border-ember/55 text-ember hover:bg-ember hover:text-ink hover:border-ember'
+            : 'border-bone/15 text-bone hover:border-bone/50 hover:bg-ink-2';
 
           const inner = (
             <>
-              <span className="shrink-0 opacity-90">{item.icon}</span>
-              <span className="flex-1 text-center">{item.label}</span>
-              {/* Mirrors the icon so the label sits truly centered */}
-              <span className="w-[19px] shrink-0" aria-hidden="true" />
+              <span>{item.label}</span>
+              <Chevron />
             </>
           );
 
           return item.internal ? (
-            <Link
-              key={item.label}
-              to={item.href}
-              onClick={() => track(item.event)}
-              className={`${base} ${skin}`}
-            >
+            <Link key={item.label} to={item.href} onClick={() => track(item.event)} className={`${base} ${skin}`}>
               {inner}
             </Link>
           ) : (
