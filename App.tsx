@@ -15,10 +15,18 @@ const ContactPage = lazy(() => import('./pages/Contact'));
 const LicensingPage = lazy(() => import('./pages/Licensing'));
 const LicensingLogin = lazy(() => import('./pages/LicensingLogin'));
 const TroplandLibrary = lazy(() => import('./pages/TroplandLibrary'));
+const LinksPage = lazy(() => import('./pages/Links'));
 // Portal-only: keeps the supabase client out of the main bundle
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
-const PORTAL_PATHS = ['/tropland-licensing', '/tropland-licensing/login'];
+/* Paths that render WITHOUT the site nav + footer.
+   /links is the Instagram bio destination: a phone-first page whose whole job
+   is to send taps to YouTube and the email list. Site chrome on it is just
+   competing links, so it gets the same bare treatment as the portal.
+   PREFIX matches here; the short alias /l must be EXACT, because a prefix
+   match on '/l' would also swallow /licensing. */
+const PORTAL_PREFIXES = ['/tropland-licensing', '/tropland-licensing/login', '/links'];
+const BARE_PATHS = new Set(['/l']);
 
 /* Deep links like /#kingdom (the IG bio) land before React has rendered the
    target, and the nav's scroll reset stomps the browser's native jump.
@@ -60,7 +68,9 @@ const NotFound: React.FC = () => (
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
-  const isPortal = PORTAL_PATHS.some(p => location.pathname.startsWith(p));
+  const isPortal =
+    PORTAL_PREFIXES.some(p => location.pathname.startsWith(p)) ||
+    BARE_PATHS.has(location.pathname);
 
   return (
     <div className="min-h-screen font-sans text-brand-text bg-ink flex flex-col">
@@ -76,6 +86,9 @@ const AppLayout: React.FC = () => {
           <Route path="/rockford" element={<RockfordPage />} />
           <Route path="/joosh" element={<JooshPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/links" element={<LinksPage />} />
+          {/* Short alias so the IG bio can read troplanduniverse.com/l */}
+          <Route path="/l" element={<LinksPage />} />
           <Route path="/licensing" element={<LicensingPage />} />
           <Route path="/tropland-licensing/login" element={<LicensingLogin />} />
           <Route path="/tropland-licensing" element={
