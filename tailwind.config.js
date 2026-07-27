@@ -8,6 +8,13 @@ export default {
   ],
   theme: {
     extend: {
+      /* Height-based variants. /links has to fit one screen with no scroll,
+         so it needs to compress on short viewports (landscape phones) rather
+         than clip. Tailwind ships width breakpoints only; these are raw. */
+      screens: {
+        short: { raw: '(max-height: 640px)' },
+        tiny: { raw: '(max-height: 460px)' },
+      },
       fontFamily: {
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
         sans: ['"Roboto"', 'system-ui', 'sans-serif'],
