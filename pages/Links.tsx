@@ -85,12 +85,33 @@ const InstagramMark = (
   </svg>
 );
 
+/**
+ * Ordered by what a tap is WORTH, not by audience size. Almost everyone who
+ * lands here arrived from the Instagram bio, so the ranking is: what does
+ * this visitor do next that Josh cannot already get from them?
+ *
+ *   1. YouTube — the only tap that changes a business outcome. 31 of the
+ *      4,000 valid public watch hours, Shorts excluded by name. Low subs is
+ *      the REASON it leads, not an argument against: a bio link exists to
+ *      redistribute attention to where the marginal follower is worth most.
+ *   2. Free Wallpapers — the email list is the only audience he owns rather
+ *      than rents. Second-highest value per tap, and the only one no
+ *      platform can switch off.
+ *   3. Website — the world, and the door a brand or agency actually walks
+ *      through.
+ *   4. Facebook — a real cross-platform add for an Instagram arrival, but
+ *      its distribution collapsed ~8x against its own baseline, so a
+ *      follower there is worth less than one on YouTube.
+ *   5. Instagram — last on purpose. For the median visitor it sends them
+ *      back where they came from. It earns its slot only for the traffic
+ *      that arrives from anywhere else: a brand, an email, a deck.
+ */
 const items: Item[] = [
   { label: 'YouTube', href: 'https://www.youtube.com/@troplanduniverse', event: 'links_youtube', featured: true, mark: YouTubeMark },
+  { label: 'Free Wallpapers', href: '/#kingdom', event: 'links_wallpapers', internal: true },
+  { label: 'Website', href: '/', event: 'links_site', internal: true },
   { label: 'Facebook', href: 'https://facebook.com/troplanduniverse', event: 'links_facebook', mark: FacebookMark },
   { label: 'Instagram', href: 'https://instagram.com/troplanduniverse', event: 'links_instagram', mark: InstagramMark },
-  { label: 'Website', href: '/', event: 'links_site', internal: true },
-  { label: 'Free Wallpapers', href: '/#kingdom', event: 'links_wallpapers', internal: true },
 ];
 
 /* Hairline chevron, thinner than any icon-set default. */
