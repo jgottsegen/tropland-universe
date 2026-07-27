@@ -109,7 +109,7 @@ const Links: React.FC = () => (
     {/* Top-anchored, not centered. The hero has to bleed off the top edge of
         the screen or the dissolve reads as a gap rather than a decision.
         Slack falls at the bottom, below the last row, where it is invisible. */}
-    <div className="mx-auto w-full max-w-[400px] self-start pb-7 short:pb-5 tiny:pb-3">
+    <div className="mx-auto w-full max-w-[400px] self-start pb-7 short:pb-5 tiny:pb-1">
 
       {/* ── The hero. Bleeds to the column edges, dissolves into the ink. ── */}
       <header className="relative tiny:hidden">
@@ -164,7 +164,7 @@ const Links: React.FC = () => (
       >
         {items.map((item) => {
           const base =
-            'group flex h-[58px] w-full items-center justify-between rounded-[3px] border px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 short:h-[50px] tiny:h-[38px] tiny:text-[12px]';
+            'group flex h-[58px] w-full items-center justify-between rounded-[3px] border px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 short:h-[50px] tiny:h-[36px] tiny:text-[12px]';
           const skin = item.featured
             ? 'border-ember/55 text-ember hover:bg-ember hover:text-ink hover:border-ember'
             : 'border-bone/15 text-bone hover:border-bone/50 hover:bg-ink-2';
@@ -196,20 +196,41 @@ const Links: React.FC = () => (
       </nav>
 
       {/* ── The business door ──────────────────────────────────────────
-          Quieter than the five on purpose. Fans are almost all of this
-          traffic and the five above are for them; an agency or a brand only
-          needs this to exist and to be unmistakable when they look for it.
-          Giving it equal weight would spend fan attention on a door 99% of
-          them will never open. The subject line is prefilled so the inbox
-          sorts itself. */}
-      <div className="mt-6 px-[14px] short:mt-5 tiny:mt-4">
-        <div className="h-px w-full bg-bone/10" />
+          Boxed, like the five above. It was unboxed for one pass on a
+          hierarchy argument, and that was wrong twice over: a single
+          borderless row under five bordered ones reads as a footer, and
+          footers get skipped by exactly the person this exists for. It also
+          reads as an oversight rather than a decision, which is the failure
+          mode this page is being held to.
+
+          It says "Contact", not "Brands & Partnerships". The narrower name
+          quietly turned away the buyer Josh is actually chasing right now:
+          an agency reading "Brands & Partnerships" files it as the
+          sponsorship inbox and moves on, while representation, studios and
+          press have no obvious door at all. "Contact" is the word every one
+          of them looks for, and it costs nothing.
+
+          The address is visible rather than hidden behind a mailto. A buyer
+          who wants to reach out from a desktop, or forward it to a colleague,
+          needs to SEE it. A live address on the page is also the cheapest
+          credibility signal there is. The tier below still reads as a
+          different kind of thing, but through the hairline and the mono
+          address, not by removing the affordance. */}
+      <div className="mt-5 px-[14px] short:mt-4 tiny:mt-3">
+        <div className="mb-3 h-px w-full bg-bone/10 short:mb-2.5" />
         <a
           href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"
           onClick={() => track('links_contact')}
-          className="group flex h-[52px] w-full items-center justify-between font-display text-[12px] font-bold uppercase tracking-[0.14em] text-bone/55 transition-colors duration-300 hover:text-ember short:h-[46px] tiny:h-[36px]"
+          className="group flex h-[62px] w-full items-center justify-between rounded-[3px] border border-bone/15 px-5 transition-colors duration-300 hover:border-bone/50 hover:bg-ink-2 short:h-[54px] tiny:h-[46px]"
         >
-          <span>Brands &amp; Partnerships</span>
+          <span className="min-w-0">
+            <span className="block font-display text-[13px] font-bold uppercase tracking-[0.12em] text-bone tiny:text-[12px]">
+              Contact
+            </span>
+            <span className="mt-1 block truncate font-mono text-[10.5px] lowercase tracking-[0.02em] text-bone/45 transition-colors duration-300 group-hover:text-ember tiny:text-[9.5px]">
+              partnerships@troplanduniverse.com
+            </span>
+          </span>
           <Chevron />
         </a>
       </div>
