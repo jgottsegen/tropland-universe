@@ -111,7 +111,41 @@ const Chevron: React.FC = () => (
 const rise = (delayMs: number): React.CSSProperties => ({ animationDelay: `${delayMs}ms` });
 const RISE = 'animate-rise motion-reduce:animate-none motion-reduce:opacity-100';
 
-const Links: React.FC = () => (
+/**
+ * Keeps the portrait playing. Three things stop a muted autoplay loop in the
+ * wild and none of them throw: React can emit the <video> without the `muted`
+ * ATTRIBUTE present at first paint, which is exactly what iOS checks before it
+ * allows autoplay; browsers pause video in a backgrounded tab and do not always
+ * resume it; and an in-app browser (which is how nearly all of this traffic
+ * arrives) can reject the initial play() outright.
+ *
+ * So: force muted on the element itself, ask it to play, and ask again whenever
+ * the tab comes back. Every failure is swallowed on purpose — if it never
+ * plays, the poster is still there and the page looks exactly as it did
+ * before the loop existed. This is the signature element on a page 1.3M
+ * people can reach; it should not depend on a default behaving.
+ */
+const useKeepPlaying = () => {
+  const ref = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.muted = true;
+    const play = () => { void el.play().catch(() => {}); };
+    play();
+    const onVisible = () => { if (document.visibilityState === 'visible') play(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => document.removeEventListener('visibilitychange', onVisible);
+  }, []);
+
+  return ref;
+};
+
+const Links: React.FC = () => {
+  const portraitRef = useKeepPlaying();
+
+  return (
   <main className="relative flex min-h-[100svh] overflow-hidden bg-ink text-bone">
 
     <Helmet>
@@ -151,11 +185,34 @@ const Links: React.FC = () => (
           aria-hidden="true"
           className="absolute -inset-5 animate-halo-breathe rounded-full bg-ember/25 blur-2xl motion-reduce:animate-none"
         />
-        <img
-          src="/images/josh-lion-portrait.jpg"
-          alt="Josh Gottsegen beside a lion of the Tropland Universe"
-          width={640}
-          height={640}
+        {/* The living portrait. The brand's whole engine is "is this real?",
+            and a still photograph is the one format that cannot ask it. The
+            lion breathes and blinks; Josh holds. Nobody else's link page can
+            do this, which is the entire reason it is here.
+
+            Shipped as a <video> whose POSTER is the still, so the page is
+            never waiting on it: the frame paints immediately, the loop takes
+            over when it has arrived, and if the file is missing or the
+            connection gives up, what remains is exactly the still we had
+            before. muted + playsInline are required for iOS autoplay.
+
+            The clip is Josh's own, shot to loop: first and last frames match,
+            so there is no visible seam. 440x440 at CRF 30 is 310KB, which is
+            the right trade for a 136px circle on India and Brazil mobile
+            data, and the poster is frame 0 of this exact encode rather than a
+            separate crop, so nothing jumps when the loop takes over. */}
+        <video
+          ref={portraitRef}
+          src="/video/josh-lion-loop.mp4"
+          poster="/images/josh-lion-portrait.jpg"
+          width={440}
+          height={440}
+          autoPlay
+          muted
+          loop
+          playsInline
+          disablePictureInPicture
+          aria-label="Josh Gottsegen beside a lion of the Tropland Universe"
           className="relative h-[136px] w-[136px] rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] short:h-[104px] short:w-[104px]"
         />
       </div>
@@ -241,6 +298,7 @@ const Links: React.FC = () => (
       </div>
     </div>
   </main>
-);
+  );
+};
 
 export default Links;
