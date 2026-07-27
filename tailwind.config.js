@@ -60,6 +60,11 @@ export default {
         'marquee-reverse': 'marqueeReverse 35s linear infinite',
         'marquee-slow': 'marquee 60s linear infinite',
         'border-shine': 'borderShine 3s linear infinite',
+        /* /links entrance. Shorter travel and the site's own easing curve
+           (the one Reveal uses), so the sequence reads as one orchestrated
+           move rather than a pile of separate effects. */
+        rise: 'rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'halo-breathe': 'haloBreathe 6s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -81,6 +86,14 @@ export default {
         borderShine: {
           '0%': { '--shine-angle': '0deg' },
           '100%': { '--shine-angle': '360deg' },
+        },
+        rise: {
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        haloBreathe: {
+          '0%, 100%': { opacity: '0.45', transform: 'scale(1)' },
+          '50%': { opacity: '0.75', transform: 'scale(1.06)' },
         },
       }
     }
