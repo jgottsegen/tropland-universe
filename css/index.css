@@ -457,9 +457,14 @@ body {
 
    Implemented as a clipped gradient rather than an overlay so it inherits the
    text's own colour and cannot smear the glyph edges. */
+/* Runs LEFT TO RIGHT, the direction of the gesture it is asking for. The
+   values look inverted and are not: a percentage background-position resolves
+   against (container - image), which is NEGATIVE whenever background-size is
+   larger than the element, so the sign flips and a rising percentage walks the
+   band backwards. First cut swept right-to-left and Josh spotted it. */
 @keyframes tuSlideShimmer {
-  0%   { background-position: -180% 0; }
-  100% { background-position: 280% 0; }
+  0%   { background-position: 280% 0; }
+  100% { background-position: -180% 0; }
 }
 .tu-shimmer {
   background: linear-gradient(

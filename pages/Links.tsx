@@ -553,18 +553,64 @@ const Links: React.FC = () => {
       <meta property="og:url" content="https://troplanduniverse.com/links" />
     </Helmet>
 
-    {/* ── The field. A 48px thumbnail blown up and blurred: the photograph's
-        colour with no edge that can crop badly. 1.5KB. ─────────────────── */}
+    {/* ── The field ──────────────────────────────────────────────────────
+        Four layers, because one flat wash is what made this read cheap. The
+        blurred photograph was carrying the whole background alone and a single
+        orange-to-black gradient is the most generic surface on the web.
+
+        What replaces it is LIGHT rather than colour. The circus is the live
+        lane, so the page is lit like a tent: one hard source above, everything
+        falling away into black at the edges. That does two things a gradient
+        cannot. It gives the portrait a reason to be bright, so it reads as lit
+        instead of pasted onto a background. And it puts the darkest part of
+        the page at the rim, which is where the eye stops looking.
+
+        Over the top sits a woven thread at very low opacity. This is the part
+        that actually sells "premium": expensive print surfaces are never
+        perfectly smooth, and a surface with grain in it reads as a material
+        while a pure gradient reads as a screen. It costs nothing, no image,
+        no request, just two repeating gradients a degree or two off-axis so
+        they never form a visible moiré.
+
+        Scoped to /links deliberately (Josh, 2026-07-28). ────────────────── */}
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* The photograph, now far back: colour temperature only, no shape. */}
       <img
         src="/images/josh-lion-ambient.jpg"
         alt=""
-        className="h-full w-full scale-125 object-cover opacity-[0.62] blur-[56px]"
+        className="h-full w-full scale-125 object-cover opacity-[0.30] blur-[78px] saturate-[1.25]"
       />
-      {/* Lighter at the top where the portrait sits, solid ink by the bottom
-          so the rows keep their contrast. The field is atmosphere, never a
-          surface anything has to be read against. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/35 via-ink/75 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/45 via-ink/[0.82] to-ink/[0.97]" />
+
+      {/* The source. Warm, high, and wide enough that its falloff is the
+          gradient rather than a visible disc. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(120% 62% at 50% -6%, rgba(255,196,140,0.20) 0%, rgba(255,150,80,0.07) 34%, rgba(0,0,0,0) 66%), radial-gradient(70% 44% at 50% 4%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0) 60%)',
+        }}
+      />
+
+      {/* The weave. Two threads a few degrees apart so they cross instead of
+          banding, one catching light and one holding shadow. */}
+      <div
+        className="absolute inset-0 opacity-50"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(48deg, rgba(255,255,255,0.030) 0px, rgba(255,255,255,0.030) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 4px), repeating-linear-gradient(-42deg, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 5px)',
+        }}
+      />
+
+      {/* The rim. Last, so it darkens everything above it including the weave,
+          which is what keeps the corners from looking textured-but-flat. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(110% 78% at 50% 34%, rgba(0,0,0,0) 32%, rgba(0,0,0,0.55) 74%, rgba(0,0,0,0.90) 100%)',
+        }}
+      />
     </div>
 
     <div className="tu-grain" aria-hidden="true" />
