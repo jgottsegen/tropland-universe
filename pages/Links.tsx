@@ -247,7 +247,7 @@ const WALLPAPERS = [
  */
 const UNLOCK_AT = 0.82;
 
-const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void }> = ({ style, onDone }) => {
+const KingdomCapture: React.FC<{ style: React.CSSProperties; onUnlock: () => void; onDone: () => void }> = ({ style, onUnlock, onDone }) => {
   const [phase, setPhase] = React.useState<'locked' | 'open' | 'done'>('locked');
   const [armed, setArmed] = React.useState(false);
   const [email, setEmail] = React.useState('');
@@ -286,6 +286,7 @@ const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void 
   const unlock = () => {
     moveTo(travel());
     setArmed(true);
+    onUnlock();
     /* The morph gets 300ms to itself. The first cut fired the panel at 160 and
        it covered the lion before the cross-fade had resolved, so the payoff of
        the whole gesture, the lock BECOMING the brand, was never actually seen.
@@ -392,7 +393,7 @@ const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void 
           into. Sized to the TALLER of the two so the rows underneath never
           shift by a pixel during the reveal. A layout jump mid-animation is
           the single thing that makes a custom control read as homemade. */}
-      <div className="relative h-[84px] w-full short:h-[74px] tiny:h-[64px]">
+      <div className="relative h-[108px] w-full short:h-[94px] tiny:h-[80px]">
 
       {/* ── The lock ───────────────────────────────────────────────────── */}
       <div
@@ -500,12 +501,23 @@ const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void 
             : 'pointer-events-none -translate-y-5 scale-y-[0.82] opacity-0'
         }`}
       >
+        {/* "Where should they go?" put the ASK first, which is the one thing
+            this moment cannot do. They just slid a lock to get wallpapers; if
+            the next screen opens with a request it reads as a toll, and a toll
+            after a promise is worse than a plain form, because a plain form
+            never promised anything.
+
+            So the win is stated first and in the past tense. The wallpapers
+            are already unlocked, already theirs; the field is a delivery
+            address, not a price. The ask itself moves into the placeholder,
+            where it costs no vertical space and sits exactly where the thumb
+            is already going. */}
         <p
-          className={`mb-1.5 text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember transition-opacity duration-300 short:mb-1 ${
+          className={`mb-1.5 text-center font-display text-[11px] font-bold uppercase tracking-[0.22em] text-ember transition-opacity duration-300 short:mb-1 ${
             phase === 'open' ? 'opacity-100 delay-150' : 'opacity-0'
           }`}
         >
-          {failed ? 'That did not go through, try again' : "Where should they go?"}
+          {failed ? 'That did not send, try again' : 'Wallpapers unlocked'}
         </p>
         <div className="flex h-[58px] w-full items-center rounded-[3px] border border-ember/55 pl-5 pr-1.5 transition-colors duration-300 focus-within:border-ember short:h-[50px] tiny:h-[42px]">
           <input
@@ -515,7 +527,7 @@ const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void 
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="your email"
+            placeholder="where should we send them?"
             autoComplete="email"
             className="h-full min-w-0 flex-1 bg-transparent font-display text-[13px] tracking-[0.04em] text-bone placeholder-bone/35 focus:outline-none tiny:text-[12px]"
           />
@@ -527,6 +539,16 @@ const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void 
             {sending ? '...' : 'Send'}
           </button>
         </div>
+        {/* The line that answers the question nobody types. Plain enough to
+            survive a non-native read, and it is the site's existing promise
+            rather than a new one. */}
+        <p
+          className={`mt-2 text-center font-display text-[9.5px] font-light uppercase tracking-[0.16em] text-bone/35 transition-opacity duration-300 short:mt-1.5 ${
+            phase === 'open' ? 'opacity-100 delay-300' : 'opacity-0'
+          }`}
+        >
+          No spam. Unsubscribe anytime.
+        </p>
       </form>
       </div>
     </div>
@@ -538,6 +560,9 @@ const Links: React.FC = () => {
   /* Once they have converted the grid needs the height the rows were using,
      and the rows have done their job. Back-tap restores them. */
   const [converted, setConverted] = React.useState(false);
+  /* The portrait yields its height the moment the lock opens, not when the
+     send lands, because that is when the panel needs the room. */
+  const [unlocked, setUnlocked] = React.useState(false);
 
   return (
   <main className="relative flex min-h-[100svh] overflow-hidden bg-ink text-bone">
@@ -653,13 +678,13 @@ const Links: React.FC = () => {
           playsInline
           disablePictureInPicture
           aria-label="Josh Gottsegen beside a lion of the Tropland Universe"
-          className={`relative rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] transition-[height,width] duration-500 short:h-[104px] short:w-[104px] ${converted ? 'h-[96px] w-[96px]' : 'h-[136px] w-[136px]'}`}
+          className={`relative rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] transition-[height,width] duration-500 short:h-[104px] short:w-[104px] ${unlocked || converted ? 'h-[96px] w-[96px]' : 'h-[136px] w-[136px]'}`}
         />
       </div>
 
       {/* ── The lockup ────────────────────────────────────────────────── */}
       <p
-        className={`text-center font-display text-[10px] font-bold uppercase tracking-[0.28em] text-ember short:mt-4 tiny:mt-0 ${converted ? 'mt-4' : 'mt-6'} ${RISE}`}
+        className={`text-center font-display text-[10px] font-bold uppercase tracking-[0.28em] text-ember short:mt-4 tiny:mt-0 ${unlocked || converted ? 'mt-4' : 'mt-6'} ${RISE}`}
         style={rise(90)}
       >
         The Digital Animal Kingdom
@@ -676,7 +701,7 @@ const Links: React.FC = () => {
 
       {/* ── The capture, first ────────────────────────────────────────── */}
       <div className={`w-full short:mt-5 tiny:mt-4 ${converted ? 'mt-5' : 'mt-7'}`}>
-        <KingdomCapture style={rise(220)} onDone={() => setConverted(true)} />
+        <KingdomCapture style={rise(220)} onUnlock={() => setUnlocked(true)} onDone={() => setConverted(true)} />
       </div>
 
       {/* ── The index ─────────────────────────────────────────────────── */}
