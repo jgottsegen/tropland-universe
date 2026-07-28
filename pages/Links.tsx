@@ -117,7 +117,6 @@ const InstagramMark = (
  *      came from. It earns its slot for arrivals from a brand, an email, a deck.
  */
 const items: Item[] = [
-  { label: 'Free Wallpapers', href: '/#kingdom', event: 'links_wallpapers', internal: true, featured: true },
   { label: 'Website', href: '/', event: 'links_site', internal: true },
   { label: 'YouTube', href: 'https://www.youtube.com/@troplanduniverse', event: 'links_youtube', mark: YouTubeMark },
   { label: 'Facebook', href: 'https://facebook.com/troplanduniverse', event: 'links_facebook', mark: FacebookMark },
@@ -171,6 +170,93 @@ const useKeepPlaying = () => {
   }, []);
 
   return ref;
+};
+
+/**
+ * The capture, promoted out from behind a tap.
+ *
+ * It used to be the "Free Wallpapers" row, an ember button whose only job was
+ * to carry someone to /#kingdom and the form waiting there. Every other row on
+ * this page hands traffic to a platform Josh rents. This is the only one that
+ * builds something he owns, so it stops being a door and becomes the thing
+ * itself.
+ *
+ * Deliberately a ROW, not a section. One line of value, one field, one button,
+ * inside the same 58px chassis as everything below it. The moment it grows a
+ * headline and a paragraph this page turns back into the scrolling landing
+ * page that was already rejected once. It replaces a row rather than adding
+ * one, so the page still lands inside a single screen.
+ */
+const KingdomCapture: React.FC<{ style: React.CSSProperties }> = ({ style }) => {
+  const [email, setEmail] = React.useState('');
+  const [status, setStatus] = React.useState<'idle' | 'submitting' | 'done' | 'error'>('idle');
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      setStatus(res.ok ? 'done' : 'error');
+      track(res.ok ? 'links_kingdom_signup' : 'links_kingdom_error');
+    } catch {
+      setStatus('error');
+      track('links_kingdom_error');
+    }
+  };
+
+  /* Success stays ON this page. Sending them away to collect the thing they
+     just asked for is the same extra tap this change exists to remove. */
+  if (status === 'done') {
+    return (
+      <div className={`w-full ${RISE}`} style={style}>
+        <p className="mb-1.5 text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember short:mb-1">
+          Check your email too
+        </p>
+        <a
+          href="/wallpapers/tropland-wallpaper-pack.zip"
+          onClick={() => track('links_wallpaper_pack_download')}
+          className="group flex h-[58px] w-full items-center gap-3.5 rounded-[3px] border border-ember/55 bg-ember px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] text-ink transition-transform duration-300 active:scale-[0.985] motion-reduce:active:scale-100 short:h-[50px] tiny:h-[36px] tiny:text-[12px]"
+        >
+          <span className="flex-1">Download all six</span>
+          <Chevron />
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className={`w-full ${RISE}`} style={style}>
+      <label
+        htmlFor="links-email"
+        className="mb-1.5 block text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember short:mb-1"
+      >
+        {status === 'error' ? 'That did not go through, try again' : 'Six free mobile wallpapers'}
+      </label>
+      <div className="flex h-[58px] w-full items-center rounded-[3px] border border-ember/55 pl-5 pr-1.5 transition-colors duration-300 focus-within:border-ember short:h-[50px] tiny:h-[36px]">
+        <input
+          id="links-email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your email"
+          autoComplete="email"
+          className="h-full min-w-0 flex-1 bg-transparent font-display text-[13px] tracking-[0.04em] text-bone placeholder-bone/35 focus:outline-none tiny:text-[12px]"
+        />
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="h-[42px] shrink-0 rounded-[2px] bg-ember px-4 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-ink transition-transform duration-300 active:scale-[0.97] disabled:opacity-60 motion-reduce:active:scale-100 short:h-[38px] tiny:h-[28px] tiny:px-3 tiny:text-[11px]"
+        >
+          {status === 'submitting' ? '...' : 'Get'}
+        </button>
+      </div>
+    </form>
+  );
 };
 
 const Links: React.FC = () => {
@@ -250,7 +336,7 @@ const Links: React.FC = () => {
 
       {/* ── The lockup ────────────────────────────────────────────────── */}
       <p
-        className={`mt-6 text-center font-mono text-[9.5px] uppercase tracking-[0.3em] text-ember short:mt-4 tiny:mt-0 ${RISE}`}
+        className={`mt-6 text-center font-display text-[10px] font-bold uppercase tracking-[0.28em] text-ember short:mt-4 tiny:mt-0 ${RISE}`}
         style={rise(90)}
       >
         The Digital Animal Kingdom
@@ -265,10 +351,15 @@ const Links: React.FC = () => {
         </span>
       </h1>
 
+      {/* ── The capture, first ────────────────────────────────────────── */}
+      <div className="mt-7 w-full short:mt-5 tiny:mt-4">
+        <KingdomCapture style={rise(220)} />
+      </div>
+
       {/* ── The index ─────────────────────────────────────────────────── */}
       <nav
         aria-label="Tropland Universe links"
-        className="mt-7 flex w-full flex-col gap-[10px] short:mt-5 short:gap-2 tiny:mt-4 tiny:gap-1.5"
+        className="mt-[10px] flex w-full flex-col gap-[10px] short:mt-2 short:gap-2 tiny:mt-1.5 tiny:gap-1.5"
       >
         {items.map((item, i) => {
           const base =
@@ -286,7 +377,7 @@ const Links: React.FC = () => {
           );
 
           const cls = `${base} ${skin} ${RISE}`;
-          const style = rise(220 + i * 55);
+          const style = rise(275 + i * 55);
 
           return item.internal ? (
             <Link key={item.label} to={item.href} onClick={() => track(item.event)} className={cls} style={style}>
@@ -309,7 +400,7 @@ const Links: React.FC = () => {
       </nav>
 
       {/* ── The business door ─────────────────────────────────────────── */}
-      <div className={`mt-5 w-full short:mt-4 tiny:mt-2 ${RISE}`} style={rise(220 + items.length * 55)}>
+      <div className={`mt-5 w-full short:mt-4 tiny:mt-2 ${RISE}`} style={rise(275 + items.length * 55)}>
         <div className="mb-3 h-px w-full bg-bone/10 short:mb-2.5 tiny:mb-2" />
         <a
           href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"
@@ -320,7 +411,7 @@ const Links: React.FC = () => {
             <span className="block font-display text-[13px] font-bold uppercase tracking-[0.12em] text-bone tiny:text-[12px]">
               Contact
             </span>
-            <span className="mt-1 block truncate font-mono text-[10.5px] lowercase tracking-[0.02em] text-bone/45 transition-colors duration-300 group-hover:text-ember tiny:text-[9.5px]">
+            <span className="mt-1 block truncate font-display text-[11.5px] font-light lowercase tracking-[0.01em] text-bone/45 transition-colors duration-300 group-hover:text-ember tiny:text-[9.5px]">
               partnerships@troplanduniverse.com
             </span>
           </span>
