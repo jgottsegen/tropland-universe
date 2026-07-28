@@ -57,7 +57,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         </td></tr>
         <tr><td style="padding:0 0 28px 0;">
           <p style="margin:0;font-size:15px;line-height:1.7;color:#B8B2A6;">
-            Six wallpapers from the world's favorite moments: the peace sign, the heart,
+            Six mobile wallpapers from the world's favorite moments: the peace sign, the heart,
             the pride at golden hour, and three from the Circus, including the lion
             in the center ring. Save them straight to your phone.
           </p>

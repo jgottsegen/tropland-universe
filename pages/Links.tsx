@@ -184,7 +184,7 @@ const Links: React.FC = () => {
       <meta name="robots" content="noindex" />
       <meta
         name="description"
-        content="Tropland Universe, The Digital Animal Kingdom. YouTube, Facebook, Instagram, the website, and six free wallpapers."
+        content="Tropland Universe, The Digital Animal Kingdom. YouTube, Facebook, Instagram, the website, and six free mobile wallpapers."
       />
       <meta property="og:title" content="Tropland Universe | Links" />
       <meta property="og:url" content="https://troplanduniverse.com/links" />
