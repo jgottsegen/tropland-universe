@@ -48,12 +48,11 @@ import { track } from '@vercel/analytics';
  *   - Hover: border warms, chevron slides.
  *   - Every one of them is disabled under prefers-reduced-motion.
  *
- * UNCHANGED from v2 and deliberate: Josh's link order verbatim; one screen,
- * no scroll; YouTube featured because the channel sits at 31 of the 4,000
- * valid public watch hours and Shorts are excluded by name; wallpapers point
- * at /#kingdom so the email funnel survives; Patreon absent because a cold
- * paid ask belongs after capture, not before; Contact boxed with the address
- * visible; noindex.
+ * UNCHANGED and deliberate: Josh's link order verbatim; ONE SCREEN, NO SCROLL,
+ * measured in every state including mid-reveal, and the reason v1 was thrown
+ * out; Patreon absent, and as of 2026-07-27 removed site-wide because nothing
+ * is being posted there; Contact boxed with the address visible; noindex.
+ * Mono is gone from this page on Josh's call.
  */
 
 interface Item {
@@ -109,12 +108,25 @@ const InstagramMark = (
  * "digital animal kingdom" page would read as hiding something; a quiet row
  * reads as honest inventory.
  *
- *   1. Free Wallpapers (featured) — the owned audience, the compounding tap.
- *   2. Website — the world, and the door an agency walks through.
- *   3. YouTube — real, present, unemphasized.
- *   4. Facebook — distribution collapsed ~8x against its own baseline.
- *   5. Instagram — last, because it sends the median visitor back where they
+ *   1. Website — the world, and the door an agency walks through.
+ *   2. YouTube — real, present, unemphasized.
+ *   3. Facebook — distribution collapsed ~8x against its own baseline.
+ *   4. Instagram — last, because it sends the median visitor back where they
  *      came from. It earns its slot for arrivals from a brand, an email, a deck.
+ *
+ * v4 (2026-07-28). The Free Wallpapers ROW is gone, because the capture it
+ * pointed at now lives on this page. Every remaining row hands traffic to a
+ * platform Josh rents; the capture is the only one that builds an audience he
+ * owns, so it stopped being a door and became the thing itself, in the slot
+ * the featured row used to hold. It replaces a row rather than adding one, so
+ * the page still lands inside a single screen.
+ *
+ * And it is a GESTURE, not a field. A dormant input is furniture, and a form
+ * under this wordmark answered "is this real?" with "it's a mailing list." So
+ * a chrome padlock slides, the shackle lifts once the throw is past the
+ * threshold, the lock becomes the lion, and only then does anything get asked
+ * for. The email is the reward for effort freely given rather than the price
+ * of the wallpapers.
  */
 const items: Item[] = [
   { label: 'Website', href: '/', event: 'links_site', internal: true },
@@ -187,80 +199,345 @@ const useKeepPlaying = () => {
  * page that was already rejected once. It replaces a row rather than adding
  * one, so the page still lands inside a single screen.
  */
-const KingdomCapture: React.FC<{ style: React.CSSProperties }> = ({ style }) => {
+/* Order matches the pack: the two most recognised images first, then the
+   Circus. Thumbs drive the grid; the full-resolution file is what the tap
+   opens, because that is the one a press-and-hold actually saves. */
+const WALLPAPERS = [
+  { file: 'tropland-peace', label: 'The Peace' },
+  { file: 'tropland-heart', label: 'The Heart' },
+  { file: 'tropland-pride', label: 'The Pride' },
+  { file: 'tropland-center-ring', label: 'Center Ring' },
+  { file: 'tropland-peacock', label: 'The Peacock' },
+  { file: 'tropland-clown', label: 'The Clown' },
+];
+/**
+ * SLIDE TO UNLOCK.
+ *
+ * An email field on a bio page is a form, and a form is the one thing on this
+ * page that looks like every other page. The brand's whole engine is "wait,
+ * is this real?", and the row underneath the wordmark was answering "no, it's
+ * a mailing list."
+ *
+ * So the capture is a gesture before it is a field. The knob is the lion, the
+ * words shimmer the way the 2007 lock screen's did, and nothing is asked for
+ * until the person has physically done something. Three reasons this is more
+ * than decoration:
+ *
+ *   1. It is a COMMITMENT before a cost. Sliding is effort freely given, and
+ *      an email typed after effort is worth more than one typed into a box
+ *      that was just sitting there. The field is the reward for the gesture,
+ *      not the price of the wallpapers.
+ *   2. It cannot be skimmed past. A dormant input is furniture. A shimmering
+ *      track is the only moving thing on the screen besides the portrait.
+ *   3. Everyone already knows how. It is the single most-performed gesture in
+ *      the history of the phone this page is being read on.
+ *
+ * Built for the failure cases, because a gesture that half-works is worse
+ * than the button it replaced:
+ *   - Pointer events, so one code path covers touch, mouse and stylus.
+ *   - touch-action:none on the knob so dragging never scrolls the page under
+ *     the finger, which is what makes home-made sliders feel broken.
+ *   - Released short of the threshold, the knob springs back. Past it, it
+ *     completes on its own. No dead zone where nothing happens.
+ *   - The whole track is also a BUTTON. Keyboard, screen reader, anyone who
+ *     cannot drag, and anyone who simply taps it: all get through. The slide
+ *     is the delight, never the gate.
+ *   - prefers-reduced-motion kills the shimmer and the spring; the track
+ *     still works.
+ */
+const UNLOCK_AT = 0.82;
+
+const KingdomCapture: React.FC<{ style: React.CSSProperties; onDone: () => void }> = ({ style, onDone }) => {
+  const [phase, setPhase] = React.useState<'locked' | 'open' | 'done'>('locked');
+  const [armed, setArmed] = React.useState(false);
   const [email, setEmail] = React.useState('');
-  const [status, setStatus] = React.useState<'idle' | 'submitting' | 'done' | 'error'>('idle');
+  const [sending, setSending] = React.useState(false);
+  const [failed, setFailed] = React.useState(false);
+
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [x, setX] = React.useState(0);
+  const [dragging, setDragging] = React.useState(false);
+  const startX = React.useRef(0);
+  /* Mirrored in a ref because a fast flick can deliver pointermove in the same
+     frame as pointerdown, before React has committed dragging=true, and a move
+     read off stale state is silently dropped. The state copy only drives the
+     transition styling, where a frame late is invisible. */
+  const draggingRef = React.useRef(false);
+  /* Position needs the same treatment for the same reason, and this one is
+     worse: a fast flick can deliver the last pointermove and the pointerup in
+     one batch, so the release handler reads a stale x, decides the throw fell
+     short of the threshold, and springs a completed gesture back to zero. The
+     user did it right and the control said no. */
+  const xRef = React.useRef(0);
+
+  const moveTo = (next: number) => {
+    xRef.current = next;
+    setX(next);
+  };
+
+  /* Knob travel: the track's inner width less the knob and its inset. Measured
+     rather than assumed, because this page has three viewport size bands. */
+  const travel = () => {
+    const el = trackRef.current;
+    return el ? Math.max(el.clientWidth - 54 - 8, 0) : 0;
+  };
+
+  const unlock = () => {
+    moveTo(travel());
+    setArmed(true);
+    /* The morph gets 300ms to itself. The first cut fired the panel at 160 and
+       it covered the lion before the cross-fade had resolved, so the payoff of
+       the whole gesture, the lock BECOMING the brand, was never actually seen.
+       Overlapping is not free when the thing being overlapped is the point.
+       Typing is still live at ~380ms, which is under the threshold where a
+       reveal starts to feel like a wait. */
+    window.setTimeout(() => setPhase('open'), 300);
+    track('links_kingdom_unlock');
+    /* Let the layout settle before focusing, or iOS scrolls the page to chase
+       the caret and the one-screen rule dies on the spot. */
+    window.setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 380);
+  };
+
+  const onDown = (e: React.PointerEvent) => {
+    if (phase !== 'locked') return;
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    startX.current = e.clientX - xRef.current;
+    draggingRef.current = true;
+    setDragging(true);
+  };
+
+  const onMove = (e: React.PointerEvent) => {
+    if (!draggingRef.current || phase !== 'locked') return;
+    moveTo(Math.min(Math.max(e.clientX - startX.current, 0), travel()));
+  };
+
+  const onUp = () => {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    setDragging(false);
+    if (xRef.current >= travel() * UNLOCK_AT) unlock();
+    else moveTo(0);
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('submitting');
+    setSending(true);
+    setFailed(false);
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-      setStatus(res.ok ? 'done' : 'error');
-      track(res.ok ? 'links_kingdom_signup' : 'links_kingdom_error');
+      if (res.ok) {
+        setPhase('done');
+        onDone();
+        track('links_kingdom_signup');
+      } else {
+        setFailed(true);
+        track('links_kingdom_error');
+      }
     } catch {
-      setStatus('error');
+      setFailed(true);
       track('links_kingdom_error');
     }
+    setSending(false);
   };
 
-  /* Success stays ON this page. Sending them away to collect the thing they
-     just asked for is the same extra tap this change exists to remove. */
-  if (status === 'done') {
+  /* The reward. Images, not a zip: a zip is a desktop object, and on the phone
+     this audience actually uses it lands in Files and costs unzip, find, save
+     to Photos, then set. Press-and-hold on a picture is one gesture. */
+  if (phase === 'done') {
     return (
       <div className={`w-full ${RISE}`} style={style}>
-        <p className="mb-1.5 text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember short:mb-1">
-          Check your email too
+        <p className="mb-2.5 text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember short:mb-2">
+          Press and hold to save
         </p>
+        <div className="grid grid-cols-3 gap-2 short:gap-1.5">
+          {WALLPAPERS.map((w) => (
+            <a
+              key={w.file}
+              href={`/wallpapers/${w.file}.jpg`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('links_wallpaper_open', { wallpaper: w.label })}
+              className="block overflow-hidden rounded-[3px] border border-bone/15 transition-colors duration-300 hover:border-ember"
+              style={{ aspectRatio: '9/16' }}
+            >
+              <img
+                src={`/wallpapers/thumbs/${w.file}.jpg`}
+                alt={`Tropland wallpaper: ${w.label}`}
+                className="h-full w-full object-cover"
+              />
+            </a>
+          ))}
+        </div>
         <a
           href="/wallpapers/tropland-wallpaper-pack.zip"
           onClick={() => track('links_wallpaper_pack_download')}
-          className="group flex h-[58px] w-full items-center gap-3.5 rounded-[3px] border border-ember/55 bg-ember px-5 font-display text-[13px] font-bold uppercase tracking-[0.12em] text-ink transition-transform duration-300 active:scale-[0.985] motion-reduce:active:scale-100 short:h-[50px] tiny:h-[36px] tiny:text-[12px]"
+          className="mt-2.5 block text-center font-display text-[10.5px] font-light lowercase tracking-[0.02em] text-bone/40 underline-offset-4 transition-colors duration-300 hover:text-ember hover:underline short:mt-2"
         >
-          <span className="flex-1">Download all six</span>
-          <Chevron />
+          or download all six as a zip
         </a>
       </div>
     );
   }
 
+  const pct = travel() ? x / travel() : 0;
+
   return (
-    <form onSubmit={submit} className={`w-full ${RISE}`} style={style}>
-      <label
-        htmlFor="links-email"
-        className="mb-1.5 block text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember short:mb-1"
+    <div className={`w-full ${RISE}`} style={style}>
+      {/* One stage, fixed height, holding both the lock and the panel it opens
+          into. Sized to the TALLER of the two so the rows underneath never
+          shift by a pixel during the reveal. A layout jump mid-animation is
+          the single thing that makes a custom control read as homemade. */}
+      <div className="relative h-[84px] w-full short:h-[74px] tiny:h-[64px]">
+
+      {/* ── The lock ───────────────────────────────────────────────────── */}
+      <div
+        ref={trackRef}
+        className={`absolute inset-x-0 top-0 h-[62px] overflow-hidden rounded-full border transition-all duration-[280ms] ease-[cubic-bezier(0.4,0,1,1)] short:h-[54px] tiny:h-[46px] ${
+          phase === 'open'
+            ? 'pointer-events-none -translate-y-2 scale-[0.96] border-ember/0 opacity-0'
+            : 'border-ember/45'
+        }`}
+        aria-hidden={phase === 'open'}
       >
-        {status === 'error' ? 'That did not go through, try again' : 'Six free mobile wallpapers'}
-      </label>
-      <div className="flex h-[58px] w-full items-center rounded-[3px] border border-ember/55 pl-5 pr-1.5 transition-colors duration-300 focus-within:border-ember short:h-[50px] tiny:h-[36px]">
-        <input
-          id="links-email"
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your email"
-          autoComplete="email"
-          className="h-full min-w-0 flex-1 bg-transparent font-display text-[13px] tracking-[0.04em] text-bone placeholder-bone/35 focus:outline-none tiny:text-[12px]"
+        {/* Ember fills in behind the knob as it travels, so the gesture has a
+            progress reading and the last third feels inevitable. */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 bg-ember/20"
+          style={{ width: `${pct * 100}%`, transition: dragging ? 'none' : 'width 300ms ease-out' }}
         />
-        <button
-          type="submit"
-          disabled={status === 'submitting'}
-          className="h-[42px] shrink-0 rounded-[2px] bg-ember px-4 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-ink transition-transform duration-300 active:scale-[0.97] disabled:opacity-60 motion-reduce:active:scale-100 short:h-[38px] tiny:h-[28px] tiny:px-3 tiny:text-[11px]"
+
+        <span
+          className={`tu-shimmer pointer-events-none absolute inset-0 flex items-center justify-center pl-10 text-center font-display text-[12.5px] font-bold uppercase tracking-[0.16em] transition-opacity duration-200 tiny:text-[11px] ${
+            pct > 0.12 ? 'opacity-0' : 'opacity-100'
+          }`}
         >
-          {status === 'submitting' ? '...' : 'Get'}
+          Slide for free wallpapers
+        </span>
+
+        {/* The knob is a real button so the whole thing survives a tap, a
+            keyboard, and a screen reader without the drag ever happening. */}
+        <button
+          type="button"
+          onPointerDown={onDown}
+          onPointerMove={onMove}
+          onPointerUp={onUp}
+          onPointerCancel={onUp}
+          onClick={() => { if (!draggingRef.current && xRef.current === 0) unlock(); }}
+          aria-label="Slide to unlock six free mobile wallpapers"
+          className={`absolute left-1 top-1 h-[54px] w-[54px] touch-none select-none overflow-hidden rounded-full border shadow-[0_6px_18px_-4px_rgba(0,0,0,0.85)] transition-colors duration-300 ${armed ? 'border-ember/60' : 'border-bone/30'} active:scale-[0.97] motion-reduce:active:scale-100 short:h-[46px] short:w-[46px] tiny:h-[38px] tiny:w-[38px]`}
+          style={{
+            transform: `translateX(${x}px)`,
+            transition: dragging ? 'none' : 'transform 320ms cubic-bezier(0.22, 1, 0.36, 1)',
+            cursor: 'grab',
+          }}
+        >
+          {/* Two layers in one circle. The lock is what you grab; the lion is
+              what it becomes. Cross-fading them at the end of the travel makes
+              the gesture pay off in the brand rather than in a state change:
+              you did not submit a form, you opened something. */}
+
+          {/* Brushed metal, faked the way real chrome reads: a hard light band
+              across the upper third, a dark roll underneath it, and a second
+              lift at the bottom edge for the bounce light. A flat grey circle
+              would look like a disabled button. */}
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-0 flex items-center justify-center rounded-full transition-[opacity,transform] duration-[260ms] ease-out ${
+              armed ? 'scale-110 opacity-0' : 'scale-100 opacity-100'
+            }`}
+            style={{
+              background:
+                'linear-gradient(145deg,#fdfdfe 0%,#dcdee3 18%,#a8abb3 42%,#7f838c 58%,#c6c9d0 82%,#8f939b 100%)',
+              boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.85), inset 0 -2px 4px rgba(0,0,0,0.35)',
+            }}
+          >
+            {/* The shackle lifts once the throw is past the threshold, so the
+                control tells you it has caught BEFORE you let go. */}
+            <svg viewBox="0 0 24 24" fill="none" className="h-[22px] w-[22px] tiny:h-[17px] tiny:w-[17px]">
+              <path
+                d="M8 10V7.5a4 4 0 0 1 8 0V10"
+                stroke="#4a4d55"
+                strokeWidth="1.9"
+                strokeLinecap="round"
+                style={{
+                  transform: pct > UNLOCK_AT ? 'translateY(-2.5px)' : 'none',
+                  transition: 'transform 220ms cubic-bezier(0.34,1.4,0.64,1)',
+                }}
+              />
+              <rect x="4.75" y="10" width="14.5" height="9.5" rx="2.2" fill="#4a4d55" />
+            </svg>
+          </span>
+
+          <img
+            src="/wallpapers/thumbs/tropland-peace.jpg"
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            className={`pointer-events-none h-full w-full rounded-full object-cover transition-[opacity,transform] duration-[280ms] ease-[cubic-bezier(0.34,1.4,0.64,1)] ${
+              armed ? 'scale-100 opacity-100' : 'scale-[0.72] opacity-0'
+            }`}
+          />
         </button>
       </div>
-    </form>
+
+      {/* ── The box it opens ───────────────────────────────────────────────
+          Drops from behind the lock on a curve that overshoots slightly and
+          settles, so it reads as a panel falling into place rather than a div
+          fading in. 380ms, and the focus call fires at 240 — the keyboard is
+          already rising while this is still settling, which is the whole
+          point. An animation you have to wait out is friction in costume. */}
+      <form
+        onSubmit={submit}
+        style={{ transformOrigin: 'top center' }}
+        className={`absolute inset-x-0 top-0 transition-all duration-[380ms] ease-[cubic-bezier(0.34,1.4,0.64,1)] ${
+          phase === 'open'
+            ? 'translate-y-0 scale-y-100 opacity-100'
+            : 'pointer-events-none -translate-y-5 scale-y-[0.82] opacity-0'
+        }`}
+      >
+        <p
+          className={`mb-1.5 text-center font-display text-[10px] font-bold uppercase tracking-[0.24em] text-ember transition-opacity duration-300 short:mb-1 ${
+            phase === 'open' ? 'opacity-100 delay-150' : 'opacity-0'
+          }`}
+        >
+          {failed ? 'That did not go through, try again' : "Where should they go?"}
+        </p>
+        <div className="flex h-[58px] w-full items-center rounded-[3px] border border-ember/55 pl-5 pr-1.5 transition-colors duration-300 focus-within:border-ember short:h-[50px] tiny:h-[42px]">
+          <input
+            ref={inputRef}
+            id="links-email"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your email"
+            autoComplete="email"
+            className="h-full min-w-0 flex-1 bg-transparent font-display text-[13px] tracking-[0.04em] text-bone placeholder-bone/35 focus:outline-none tiny:text-[12px]"
+          />
+          <button
+            type="submit"
+            disabled={sending}
+            className="h-[42px] shrink-0 rounded-[2px] bg-ember px-4 font-display text-[12px] font-bold uppercase tracking-[0.12em] text-ink transition-transform duration-300 active:scale-[0.97] disabled:opacity-60 motion-reduce:active:scale-100 short:h-[38px] tiny:h-[32px] tiny:px-3 tiny:text-[11px]"
+          >
+            {sending ? '...' : 'Send'}
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
   );
 };
 
 const Links: React.FC = () => {
   const portraitRef = useKeepPlaying();
+  /* Once they have converted the grid needs the height the rows were using,
+     and the rows have done their job. Back-tap restores them. */
+  const [converted, setConverted] = React.useState(false);
 
   return (
   <main className="relative flex min-h-[100svh] overflow-hidden bg-ink text-bone">
@@ -330,13 +607,13 @@ const Links: React.FC = () => {
           playsInline
           disablePictureInPicture
           aria-label="Josh Gottsegen beside a lion of the Tropland Universe"
-          className="relative h-[136px] w-[136px] rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] short:h-[104px] short:w-[104px]"
+          className={`relative rounded-full border border-ember/45 object-cover shadow-[0_18px_50px_-12px_rgba(0,0,0,0.9)] transition-[height,width] duration-500 short:h-[104px] short:w-[104px] ${converted ? 'h-[96px] w-[96px]' : 'h-[136px] w-[136px]'}`}
         />
       </div>
 
       {/* ── The lockup ────────────────────────────────────────────────── */}
       <p
-        className={`mt-6 text-center font-display text-[10px] font-bold uppercase tracking-[0.28em] text-ember short:mt-4 tiny:mt-0 ${RISE}`}
+        className={`text-center font-display text-[10px] font-bold uppercase tracking-[0.28em] text-ember short:mt-4 tiny:mt-0 ${converted ? 'mt-4' : 'mt-6'} ${RISE}`}
         style={rise(90)}
       >
         The Digital Animal Kingdom
@@ -352,11 +629,12 @@ const Links: React.FC = () => {
       </h1>
 
       {/* ── The capture, first ────────────────────────────────────────── */}
-      <div className="mt-7 w-full short:mt-5 tiny:mt-4">
-        <KingdomCapture style={rise(220)} />
+      <div className={`w-full short:mt-5 tiny:mt-4 ${converted ? 'mt-5' : 'mt-7'}`}>
+        <KingdomCapture style={rise(220)} onDone={() => setConverted(true)} />
       </div>
 
       {/* ── The index ─────────────────────────────────────────────────── */}
+      {!converted && (
       <nav
         aria-label="Tropland Universe links"
         className="mt-[10px] flex w-full flex-col gap-[10px] short:mt-2 short:gap-2 tiny:mt-1.5 tiny:gap-1.5"
@@ -398,6 +676,7 @@ const Links: React.FC = () => {
           );
         })}
       </nav>
+      )}
 
       {/* ── The business door ─────────────────────────────────────────── */}
       <div className={`mt-5 w-full short:mt-4 tiny:mt-2 ${RISE}`} style={rise(275 + items.length * 55)}>

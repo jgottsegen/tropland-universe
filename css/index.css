@@ -448,3 +448,40 @@ body {
   100% { opacity: 0; visibility: hidden; }
 }
 
+
+/* ── Slide to unlock ────────────────────────────────────────────────────────
+   The shimmer that made the original iPhone lock screen legible as a GESTURE
+   rather than a label. It sweeps the words, so the eye reads "this moves"
+   before it reads the sentence. Two seconds is slow enough to be ambient and
+   fast enough to catch someone who lands mid-cycle.
+
+   Implemented as a clipped gradient rather than an overlay so it inherits the
+   text's own colour and cannot smear the glyph edges. */
+@keyframes tuSlideShimmer {
+  0%   { background-position: -180% 0; }
+  100% { background-position: 280% 0; }
+}
+.tu-shimmer {
+  background: linear-gradient(
+    100deg,
+    rgba(242, 238, 230, 0.34) 0%,
+    rgba(242, 238, 230, 0.34) 38%,
+    rgba(242, 238, 230, 0.95) 50%,
+    rgba(242, 238, 230, 0.34) 62%,
+    rgba(242, 238, 230, 0.34) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: tuSlideShimmer 2.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tu-shimmer {
+    animation: none;
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: rgba(242, 238, 230, 0.55);
+  }
+}
