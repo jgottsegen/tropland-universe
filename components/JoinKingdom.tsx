@@ -105,26 +105,22 @@ const JoinKingdom: React.FC = () => {
                 </a>
               </div>
 
-              {/* The next rung: world-first, never "support the creator" */}
+              {/*
+                What used to sit here was a Patreon rung promising a weekly
+                wallpaper pack, the Lost Acts, and votes on the next Circus act.
+                None of that is being made, so it was a promise breaking at the
+                one moment the reader is most inclined to believe us. Replaced
+                with the only thing we can actually keep: they are on the list,
+                and the list gets the next pack first. One broadcast fulfils it.
+              */}
               <div className="mt-12 border-t border-bone/10 pt-10 max-w-2xl">
                 <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ember mb-3">
-                  This was a taste
+                  What happens next
                 </p>
-                <p className="font-display font-light text-lg text-bone/70 leading-relaxed mb-6">
-                  The Inner Kingdom drops a new wallpaper pack every week,
-                  keeps the Lost Acts the feed never sees, and votes on which
-                  Circus act goes public next.
+                <p className="font-display font-light text-lg text-bone/70 leading-relaxed">
+                  When the next act drops, the pack that comes with it lands in
+                  your inbox before the feed sees it.
                 </p>
-                <a
-                  href="https://patreon.com/troplanduniverse"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => track('patreon_click', { source: 'kingdom_success' })}
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-ember text-ink font-display font-bold text-[14px] uppercase tracking-[0.08em] hover:bg-ember-soft transition-colors duration-300"
-                >
-                  Enter the Inner Kingdom
-                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-                </a>
               </div>
             </div>
           </Reveal>

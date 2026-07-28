@@ -69,14 +69,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </a>
         </td></tr>
         <tr><td style="padding:28px 0;border-top:1px solid #2A2620;">
-          <p style="margin:0 0 6px 0;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF4D1C;">This was a taste</p>
-          <p style="margin:0 0 16px 0;font-size:14px;line-height:1.7;color:#B8B2A6;">
-            The Inner Kingdom drops a new wallpaper pack every week, keeps the
-            Lost Acts the feed never sees, and votes on which Circus act goes public next.
+          <p style="margin:0 0 6px 0;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#FF4D1C;">What happens next</p>
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#B8B2A6;">
+            When the next act drops, the pack that comes with it lands in your
+            inbox before the feed sees it.
           </p>
-          <a href="https://patreon.com/troplanduniverse" style="display:inline-block;border:1px solid #FF4D1C;color:#FF4D1C;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:12px 24px;">
-            Enter the Inner Kingdom
-          </a>
         </td></tr>
         <tr><td style="padding:24px 0 0 0;border-top:1px solid #2A2620;">
           <p style="margin:0;font-size:12px;line-height:1.7;color:#6E695E;">
