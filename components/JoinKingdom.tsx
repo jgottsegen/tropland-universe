@@ -9,13 +9,19 @@ import Reveal from './fx/Reveal';
  * the one thing a fan can DO: trade an email for the wallpaper pack and
  * first look at new drops. Owned audience is the asset.
  */
+/**
+ * `src` is the full-resolution file: it is what a long-press saves and what
+ * goes in the zip, so it stays phone-native (1290x2796 and up). `thumb` is a
+ * 420px copy used only for the decorative strip shown before signup, so the
+ * idle page does not pull ~4MB of wallpaper to render six postage stamps.
+ */
 const wallpapers = [
-  { src: '/wallpapers/tropland-peace.jpg', label: 'The Peace' },
-  { src: '/wallpapers/tropland-heart.jpg', label: 'The Heart' },
-  { src: '/wallpapers/tropland-the-couple.jpg', label: 'The Couple' },
-  { src: '/wallpapers/tropland-the-roar.jpg', label: 'The Roar' },
-  { src: '/wallpapers/tropland-first-snow.jpg', label: 'First Snow' },
-  { src: '/wallpapers/tropland-calm.jpg', label: 'The Calm' },
+  { src: '/wallpapers/tropland-peace.jpg', thumb: '/wallpapers/thumbs/tropland-peace.jpg', label: 'The Peace' },
+  { src: '/wallpapers/tropland-heart.jpg', thumb: '/wallpapers/thumbs/tropland-heart.jpg', label: 'The Heart' },
+  { src: '/wallpapers/tropland-pride.jpg', thumb: '/wallpapers/thumbs/tropland-pride.jpg', label: 'The Pride' },
+  { src: '/wallpapers/tropland-center-ring.jpg', thumb: '/wallpapers/thumbs/tropland-center-ring.jpg', label: 'Center Ring' },
+  { src: '/wallpapers/tropland-peacock.jpg', thumb: '/wallpapers/thumbs/tropland-peacock.jpg', label: 'The Peacock' },
+  { src: '/wallpapers/tropland-clown.jpg', thumb: '/wallpapers/thumbs/tropland-clown.jpg', label: 'The Clown' },
 ];
 
 type SubStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -131,7 +137,7 @@ const JoinKingdom: React.FC = () => {
               </h2>
               <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-xl">
                 Six free wallpapers from the world's favorite moments: the peace sign,
-                the heart, the couple, the roar. Plus first look at new drops
+                the heart, and three from the Circus. Plus first look at new drops
                 before the feed gets them.
               </p>
             </Reveal>
@@ -178,7 +184,7 @@ const JoinKingdom: React.FC = () => {
               {wallpapers.map((wp) => (
                 <div key={wp.src} className="bg-ink overflow-hidden" style={{ aspectRatio: '9/16' }}>
                   <img
-                    src={wp.src}
+                    src={wp.thumb}
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
