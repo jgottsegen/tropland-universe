@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               EST. 2013 · LOS ANGELES, CA
             </span>
             <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-ember/80">
-              2B+ VIEWS · 3.5M+ FOLLOWERS · 50+ COUNTRIES
+              2B+ VIEWS · 3M+ FOLLOWERS · 50+ COUNTRIES
             </span>
           </div>
         </div>
@@ -124,7 +124,7 @@ const Footer: React.FC = () => {
             <p className="font-mono text-[10px] tracking-[0.12em] text-bone/35">
               © {new Date().getFullYear()} TROPLAND UNIVERSE™ /{' '}
               <a
-                href="http://www.onelightstudios.com"
+                href="https://www.onelightstudios.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ember/80 hover:text-ember transition-colors duration-200"

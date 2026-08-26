@@ -7,9 +7,9 @@ import Odometer from './fx/Odometer';
 import Reveal from './fx/Reveal';
 
 const metrics = [
-  { value: '3.5M+', label: 'Social Followers' },
+  { value: '3M+', label: 'Followers · Instagram + Facebook' },
   { value: '50+', label: 'Countries Reached' },
-  { value: '#1', label: 'AI Artist Influencer · Feedspot 2025 + 2026' },
+  { value: '#1', label: 'AI Artist Influencer · Feedspot 2026' },
   { value: '267M', label: 'Single Viral Piece' },
   { value: '5', label: 'Published Books' },
   { value: '20+', label: 'Years of Tropland' },
@@ -51,15 +51,15 @@ const Portfolio: React.FC = () => {
         {/* Manifesto — words ink in on scroll */}
         <ManifestoText
           className="font-display font-medium text-[7.4vw] md:text-[3.4vw] leading-[1.12] tracking-[-0.015em] text-ink max-w-6xl mb-6"
-          text="Tropland began as a children's picture book. Twenty years later, it is a 2-billion-view animal kingdom: original characters, photoreal worlds, and wildlife stories carried by 3.5 million followers across fifty countries."
-          accents={['2-billion-view', 'photoreal', 'original']}
+          text="Tropland began as a children's picture book. Twenty years later, it is an animal kingdom with billions of views: original characters, photoreal worlds, and wildlife stories carried by more than 3 million followers on Instagram and Facebook, across fifty countries."
+          accents={['billions', 'photoreal', 'original']}
         />
 
         <Reveal delay={0.1}>
           <div className="flex flex-wrap items-center gap-3 mb-16 md:mb-20">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-ink text-bone font-mono text-[11px] uppercase tracking-[0.18em]">
               <Award size={12} className="text-ember" />
-              #1 AI Artist Influencer · Feedspot 2025 + 2026
+              #1 AI Artist Influencer · Feedspot 2026
             </span>
             <Link
               to="/licensing"
@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
           </span>
           <span className="h-px w-10 bg-ink/20 hidden md:block" />
           <p className="font-display text-[15px] text-ink/75">
-            Four Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms.
+            Four Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms. The digital circus series passed <span className="font-bold text-ink">150 million</span> in its first three weeks.
           </p>
         </div>
       </Reveal>

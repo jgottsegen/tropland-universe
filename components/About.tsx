@@ -11,13 +11,18 @@ const offers = [
     readout: 'MODE · CAMPAIGN',
   },
   {
+    title: 'Venues & Screens',
+    desc: 'Finished circus and wildlife acts, licensed for venue screens, pre-shows, and immersive installations. Every act market-tested on a global audience before it reaches a wall.',
+    readout: 'MODE · VENUE',
+  },
+  {
     title: 'Licensing',
     desc: 'Represented by All-American Licensing. Character IP ready for apparel, lifestyle, home décor, publishing, and media.',
     readout: 'MODE · LICENSE',
   },
   {
     title: 'Global Distribution',
-    desc: '2 billion cumulative views across 50+ countries. A proven audience engine across every key global market.',
+    desc: 'Billions of cumulative views across 50+ countries. A proven audience engine across every key global market.',
     readout: 'MODE · REACH',
   },
 ];

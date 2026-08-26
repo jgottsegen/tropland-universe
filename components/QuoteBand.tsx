@@ -11,7 +11,7 @@ const QuoteBand: React.FC = () => (
       <Reveal>
         <p className="font-edit italic font-light text-[7vw] md:text-[3.2vw] leading-[1.15] text-ink text-center max-w-5xl mx-auto">
           One artist. One universe.
-          <span className="text-ember-deep"> 2 billion views and counting.</span>
+          <span className="text-ember-deep"> Billions of views and counting.</span>
         </p>
       </Reveal>
     </div>

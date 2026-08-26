@@ -13,8 +13,8 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
     { value: '2B+', label: 'Content Views Worldwide' },
-    { value: '#1', label: 'AI Artist Influencer · Feedspot 2025 + 2026' },
-    { value: '250M+', label: 'Views \u00b7 Last 30 Days' },
+    { value: '#1', label: 'AI Artist Influencer · Feedspot 2026' },
+    { value: '500M', label: 'Views \u00b7 Last 60 Days' },
     { value: '50K+', label: 'Image & Video Library' },
 ];
 
@@ -60,9 +60,9 @@ const LicensingPage: React.FC = () => {
         <div className="bg-ink min-h-screen">
             <Helmet>
                 <title>Licensing · Tropland Universe</title>
-                <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 250M+ views in the last 30 days. Represented by All-American Licensing." />
+                <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 500M views in the last 60 days. Represented by All-American Licensing." />
                 <meta property="og:title" content="Licensing · Tropland Universe" />
-                <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 250M+ views in the last 30 days. Represented by All-American Licensing." />
+                <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 500M views in the last 60 days. Represented by All-American Licensing." />
                 <meta property="og:url" content="https://troplanduniverse.com/licensing" />
             </Helmet>
 
@@ -151,7 +151,7 @@ const LicensingPage: React.FC = () => {
                         transition={{ delay: 0.65, duration: 1, ease }}
                     >
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">
-                            Tropland Universe™ is a character-driven wildlife media property with 2 billion content views,
+                            Tropland Universe™ is a character-driven wildlife media property with billions of content views,
                             a 50K+ image and video library, and a global audience that spans all ages.
                         </p>
                         <p className="font-display font-light text-lg md:text-xl text-white/70 leading-relaxed">

@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
             transition={{ delay: 0.8, duration: 1, ease }}
           >
             Cinema-grade wildlife storytelling, built at the frontier of AI.
-            One original universe, <span className="font-edit italic text-white">2 billion views</span> and counting.
+            One original universe, <span className="font-edit italic text-white">billions of views</span> and counting.
           </motion.p>
 
           <motion.div
