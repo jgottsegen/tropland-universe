@@ -3,7 +3,6 @@ import { track } from '@vercel/analytics';
 import { motion } from 'motion/react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-import Odometer from './fx/Odometer';
 
 const partners = [
   'Adobe', 'Meta', 'OpenAI', 'Topaz Labs', 'Kling AI', 'SORA',
@@ -151,10 +150,10 @@ const Hero: React.FC = () => {
         >
           <div>
             <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-white leading-none tracking-tight">
-              <Odometer value="2B+" />
+              Billions
             </div>
             <div className="font-mono text-[10px] md:text-[11px] text-white/50 uppercase tracking-[0.22em] mt-2.5">
-              Content Views · And Counting
+              of Content Views · And Counting
             </div>
           </div>
           <span className="hidden md:block font-mono text-[10px] tracking-[0.22em] uppercase text-white/35 pb-1">

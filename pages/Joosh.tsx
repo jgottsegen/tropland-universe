@@ -383,7 +383,7 @@ const JooshPage: React.FC = () => {
                                 <span className="font-edit italic font-light normal-case text-ember tracking-normal">Universe.</span>
                             </h2>
                             <p className="font-display font-light text-lg text-bone/60 leading-relaxed max-w-xl">
-                                From a children's juice bar in 2013 to 2 billion content views worldwide. The Tropland Universe keeps growing.
+                                From a children's juice bar in 2013 to billions of content views worldwide. The Tropland Universe keeps growing.
                             </p>
                         </Reveal>
                         <Reveal className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-4" delay={0.12}>
