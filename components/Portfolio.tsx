@@ -9,9 +9,9 @@ import Reveal from './fx/Reveal';
 const metrics = [
   { value: '3M+', label: 'Followers · Instagram + Facebook' },
   { value: '50+', label: 'Countries Reached' },
-  { value: '#1', label: 'AI Artist Influencer · Feedspot 2026' },
+  { value: '#1', label: 'Digital AI Artist Influencer · Feedspot 2026' },
   { value: '267M', label: 'Single Viral Piece' },
-  { value: '5', label: 'Published Books' },
+  { value: '4', label: 'Published Books' },
   { value: '20+', label: 'Years of Tropland' },
 ];
 
@@ -59,7 +59,7 @@ const Portfolio: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 mb-16 md:mb-20">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-ink text-bone font-mono text-[11px] uppercase tracking-[0.18em]">
               <Award size={12} className="text-ember" />
-              #1 AI Artist Influencer · Feedspot 2026
+              #1 Digital AI Artist Influencer · Feedspot 2026
             </span>
             <Link
               to="/licensing"
@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
           </span>
           <span className="h-px w-10 bg-ink/20 hidden md:block" />
           <p className="font-display text-[15px] text-ink/75">
-            Four Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms. The digital circus series passed <span className="font-bold text-ink">150 million</span> in its first three weeks.
+            Five Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms. The digital circus series passed <span className="font-bold text-ink">150 million</span> in its first three weeks.
           </p>
         </div>
       </Reveal>

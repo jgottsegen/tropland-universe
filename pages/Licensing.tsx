@@ -13,7 +13,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // ─── Stats ─────────────────────────────────────────────────────────────────
 const stats = [
     { value: '2B+', label: 'Content Views Worldwide' },
-    { value: '#1', label: 'AI Artist Influencer · Feedspot 2026' },
+    { value: '#1', label: 'Digital AI Artist Influencer · Feedspot 2026' },
     { value: '500M', label: 'Views \u00b7 Last 60 Days' },
     { value: '50K+', label: 'Image & Video Library' },
 ];
