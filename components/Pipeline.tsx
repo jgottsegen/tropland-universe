@@ -108,8 +108,7 @@ const Pipeline: React.FC = () => {
             </span>
             <span className="h-px w-10 bg-bone/15 hidden md:block" />
             <p className="font-display text-[15px] text-bone/65">
-              Paid campaigns with <span className="text-bone font-medium">Adobe</span> and{' '}
-              <span className="text-bone font-medium">Meta</span> · Creator programs across the leading AI platforms
+              Trusted by <span className="text-bone font-medium">Meta</span>, <span className="text-bone font-medium">Adobe</span>, and <span className="text-bone font-medium">OpenAI</span> to showcase their platforms through original IP · Creator programs across the leading AI platforms
             </p>
           </div>
         </Reveal>

@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
           </span>
           <span className="h-px w-10 bg-ink/20 hidden md:block" />
           <p className="font-display text-[15px] text-ink/75">
-            Five Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms. The digital circus series passed <span className="font-bold text-ink">150 million</span> in its first three weeks.
+            Five Tropland videos have each passed <span className="font-bold text-ink">100 million views</span> across platforms.
           </p>
         </div>
       </Reveal>

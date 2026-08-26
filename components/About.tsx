@@ -7,7 +7,7 @@ import MagneticButton from './MagneticButton';
 const offers = [
   {
     title: 'Brand Partnerships',
-    desc: 'Co-branded content and campaigns with leading tech, entertainment, and consumer brands. Paid campaigns delivered for Adobe and Meta.',
+    desc: 'Co-branded content and campaigns with leading tech, entertainment, and consumer brands. Trusted by Meta, Adobe, and OpenAI to showcase their platforms through original IP.',
     readout: 'MODE · CAMPAIGN',
   },
   {
