@@ -4,8 +4,8 @@ import SectionTag from './fx/SectionTag';
 import Reveal from './fx/Reveal';
 
 const proofs = [
-  { value: '150M+', label: 'Series views · first three weeks' },
-  { value: '100M', label: 'Peacock act · 24 hours' },
+  { value: '500M', label: 'Views · last 60 days' },
+  { value: '5', label: 'Pieces past 100 million views each' },
   { value: 'PETA', label: 'Publicly applauded' },
 ];
 
@@ -26,8 +26,9 @@ const CircusBand: React.FC = () => (
       <Reveal delay={0.12}>
         <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-2xl mt-8">
           Photoreal circus acts with no animals and no cages, performed on screens for a
-          worldwide audience. The comments ask one question: is this real? The acts are
-          finished, proven, and ready to license for venues and screens.
+          worldwide audience. The series passed 150 million views in its first three weeks,
+          and the comments ask one question: is this real? The acts are finished, proven,
+          and ready to license for venues and screens.
         </p>
       </Reveal>
 
