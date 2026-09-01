@@ -11,4 +11,4 @@ Disallow: /tropland-licensing/
 Disallow: /links
 Disallow: /l
 
-Sitemap: https://troplanduniverse.com/sitemap.xml
+Sitemap: https://www.troplanduniverse.com/sitemap.xml
