@@ -14,7 +14,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const stats = [
     { value: 'Billions', label: 'of Content Views Worldwide' },
     { value: '#1', label: 'Digital AI Artist Influencer · Feedspot 2026' },
-    { value: '500M', label: 'Views \u00b7 Last 60 Days' },
+    { value: '400M+', label: 'Views \u00b7 Last 60 Days' },
     { value: '50K+', label: 'Image & Video Library' },
 ];
 
@@ -60,9 +60,9 @@ const LicensingPage: React.FC = () => {
         <div className="bg-ink min-h-screen">
             <Helmet>
                 <title>Licensing · Tropland Universe</title>
-                <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 500M views in the last 60 days. Represented by All-American Licensing." />
+                <meta name="description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 400M+ views in the last 60 days. Represented by All-American Licensing." />
                 <meta property="og:title" content="Licensing · Tropland Universe" />
-                <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 500M views in the last 60 days. Represented by All-American Licensing." />
+                <meta property="og:description" content="License the Tropland Universe™ IP. Character-driven wildlife media with 50K+ assets, 400M+ views in the last 60 days. Represented by All-American Licensing." />
                 <meta property="og:url" content="https://troplanduniverse.com/licensing" />
             </Helmet>
 

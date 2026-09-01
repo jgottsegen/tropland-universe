@@ -4,7 +4,7 @@ import SectionTag from './fx/SectionTag';
 import Reveal from './fx/Reveal';
 
 const proofs = [
-  { value: '500M', label: 'Views · last 60 days' },
+  { value: '400M+', label: 'Views · last 60 days' },
   { value: '5', label: 'Pieces past 100 million views each' },
   { value: 'PETA', label: 'Publicly applauded' },
 ];
