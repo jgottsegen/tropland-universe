@@ -150,10 +150,10 @@ const AboutPage: React.FC = () => {
                             <Reveal delay={0.1}>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl">
                                     <p className="font-display font-light text-[17px] md:text-lg text-ink/70 leading-relaxed">
-                                        Tropland Universe™ is a character-driven wildlife media property unlike anything else in digital entertainment. Founded on original storytelling, it has grown from a children's book series into one of the most-followed AI content properties on earth.
+                                        Tropland Universe™ is a character-driven wildlife media property founded on original storytelling. It has grown from a children's book series into a brand with more than 3 million followers on Instagram and Facebook and billions of views.
                                     </p>
                                     <p className="font-display font-light text-[17px] md:text-lg text-ink/70 leading-relaxed">
-                                        The Tropland Rainforest is not a location. It is a mythology: populated by characters with depth, humor, and wonder, rendered in a cinematic visual language that is wholly its own. What lives here cannot be replicated.
+                                        The Tropland Rainforest is a world of original characters with depth, humor, and wonder, rendered in a cinematic visual language of its own. Josh has written and built it for more than twenty years.
                                     </p>
                                 </div>
                             </Reveal>

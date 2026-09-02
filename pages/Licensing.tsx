@@ -30,7 +30,7 @@ const categories = [
 
 const pillars = [
     { label: 'Wholly Owned IP', desc: 'All characters, stories, and visual assets are original and creator-owned' },
-    { label: 'Proven Global Audience', desc: 'Ranked #1 AI Artist Influencer with a worldwide fanbase across all platforms' },
+    { label: 'Proven Global Audience', desc: 'Ranked the #1 AI Art & Digital Artists creator on Instagram in the United States (Favikon) and the #1 Digital AI Artist Influencer (Feedspot 2026)' },
     { label: 'Multi-Format Ready', desc: 'Publishing, social, video, and digital assets available for activation' },
     { label: 'Values-Aligned', desc: 'Family-friendly, wellness-focused, and conservation-positive brand positioning' },
 ];
@@ -279,7 +279,7 @@ const LicensingPage: React.FC = () => {
                                     </h3>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed mb-6">
                                         Tropland Universe™ is built on a foundation of original storytelling, beginning with published
-                                        children's books in 2013 and evolving into a 2-billion-view digital brand. Every character,
+                                        children's books in 2013 and evolving into a digital brand with billions of views. Every character,
                                         narrative, and visual asset is wholly owned by OneLight Studios.
                                     </p>
                                     <p className="font-display font-light text-[16px] md:text-[17px] text-ink/65 leading-relaxed">

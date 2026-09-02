@@ -38,14 +38,14 @@ const Ventures: React.FC = () => {
                   Founder of Tropland Universe and the creative force behind OneLight Studios.
                 </p>
                 <p>
-                  Twenty-five years across design, film production, and entertainment,
-                  with collaborations spanning Universal Studios, Disney, Fox, IMG, the NFL,
-                  IndyCar, Ferrari, and the Vatican Museums.
+                  Over twenty years across design, film production, and entertainment,
+                  with production work spanning NBCUniversal, Disney, Warner Bros, Sony Pictures,
+                  the NFL, IMG Worldwide, IndyCar, Ferrari, and the Vatican Museums.
                 </p>
                 <p>
-                  He built Tropland from a children's picture book into a 2-billion-view global
-                  IP by treating artificial intelligence as a creative instrument, not a
-                  gimmick, and by building original worlds instead of borrowing existing ones.
+                  He built Tropland from a children's picture book into a global IP with billions
+                  of views by treating artificial intelligence as his creative medium and
+                  building original worlds.
                 </p>
               </div>
             </Reveal>
@@ -56,7 +56,7 @@ const Ventures: React.FC = () => {
                   “AI is my creative medium.”
                 </p>
                 <cite className="not-italic block mt-4 font-mono text-[10px] tracking-[0.22em] uppercase text-bone/45">
-                  Josh Gottsegen · 25 years in entertainment
+                  Josh Gottsegen · 20+ years in entertainment
                 </cite>
               </blockquote>
             </Reveal>

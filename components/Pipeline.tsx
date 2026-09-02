@@ -7,13 +7,13 @@ const stages = [
   {
     id: 'A',
     name: 'Worldbuilding',
-    desc: 'Original characters and story-first IP. Worlds built from scratch, never borrowed.',
+    desc: 'Original characters and story-first IP, built from scratch.',
     readout: 'INPUT · STORY',
   },
   {
     id: 'B',
     name: 'Direction',
-    desc: 'Twenty-five years of film craft: light, lens, and emotion direct every frame.',
+    desc: 'Over twenty years of film craft: light, lens, and emotion direct every frame.',
     readout: 'CRAFT · CINEMA',
   },
   {
@@ -61,7 +61,7 @@ const Pipeline: React.FC = () => {
           </Reveal>
           <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
             <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-md">
-              AI is the medium, not the message. Every Tropland piece runs a
+              AI is the medium. Every Tropland piece runs a
               four-stage pipeline where story and cinematography lead, and the
               models do what cameras can't.
             </p>
