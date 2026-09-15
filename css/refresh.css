@@ -1,0 +1,12 @@
+/* Focused refresh: existing brand palette and type, with a small artwork-to-product link. */
+.peace-spotlight { display:grid; grid-template-columns:150px minmax(0,1fr) auto; align-items:center; gap:32px; border-top:1px solid rgb(12 11 9 / .2); border-bottom:1px solid rgb(12 11 9 / .2); padding:24px 0; color:#0C0B09; }
+.peace-spotlight-image { display:block; overflow:hidden; background:#E7E1D4; }
+.peace-spotlight-image img { display:block; width:100%; height:180px; object-fit:cover; }
+.peace-spotlight-copy { max-width:540px; }
+.peace-spotlight-eyebrow { font:12px/1.5 'Spline Sans Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:#6D4A36; margin-bottom:10px; }
+.peace-spotlight h3 { font:700 clamp(24px,2.5vw,34px)/1.1 'Bricolage Grotesque',sans-serif; letter-spacing:-.025em; margin-bottom:12px; }
+.peace-spotlight-copy > p:last-child { font:400 17px/1.5 'Bricolage Grotesque',sans-serif; color:rgb(12 11 9 / .75); }
+.peace-spotlight-buy { display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:15px 19px; border:1px solid #0C0B09; font:600 15px/1.35 'Bricolage Grotesque',sans-serif; white-space:nowrap; transition:background .2s,color .2s; }
+.peace-spotlight-buy:hover { background:#0C0B09; color:#F2EEE5; }
+@media(max-width:1050px) { .peace-spotlight { grid-template-columns:130px 1fr; gap:16px 24px; } .peace-spotlight-image { grid-row:span 2; } .peace-spotlight-buy { justify-self:start; } }
+@media(max-width:600px) { .peace-spotlight { grid-template-columns:100px minmax(0,1fr); gap:18px; padding:22px 0; } .peace-spotlight-image { grid-row:auto; } .peace-spotlight-image img { height:140px; object-fit:cover; } .peace-spotlight h3 { font-size:23px; margin-bottom:8px; } .peace-spotlight-eyebrow { font-size:10px; letter-spacing:.1em; margin-bottom:6px; } .peace-spotlight-copy > p:last-child { font-size:14px; line-height:1.45; } .peace-spotlight-buy { grid-column:1/-1; justify-self:stretch; } }

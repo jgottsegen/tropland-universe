@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="md:col-span-5">
-            <p className="text-bone/45 font-display font-light text-[15px] leading-relaxed max-w-sm mb-7">
+            <p className="text-bone/65 font-display font-light text-[15px] leading-relaxed max-w-sm mb-7">
               A wildlife media brand built on original characters,
               cinematic AI art, and stories shared around the world.
             </p>
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
 
           {/* Explore */}
           <div className="md:col-span-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-6">
+            <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-bone/65 mb-6">
               Explore
             </p>
             <ul className="space-y-3.5">
@@ -83,13 +83,13 @@ const Footer: React.FC = () => {
                 { label: 'Rockford T. Honeypot', path: '/rockford' },
                 { label: "Joosh's Juice Bar", path: '/joosh' },
                 { label: 'Licensing', path: '/licensing' },
-                { label: 'Peace Lion Tee', path: '/peace' },
+                { label: 'Buy the Peace Lion Tee', path: 'https://www.troplanduniverse.com/peace' },
               ].map(item => (
                 <li key={item.label}>
                   <Link
                     to={item.path}
                     onClick={() => window.scrollTo(0, 0)}
-                    className="tu-link text-bone/50 hover:text-bone font-display text-[15px] transition-colors duration-200"
+                    className="tu-link text-bone/70 hover:text-bone font-display text-[15px] transition-colors duration-200"
                   >
                     {item.label}
                   </Link>
@@ -100,10 +100,10 @@ const Footer: React.FC = () => {
 
           {/* Contact */}
           <div className="md:col-span-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-6">
+            <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-bone/65 mb-6">
               Work With Us
             </p>
-            <p className="text-bone/40 font-display font-light text-[15px] leading-relaxed mb-5 max-w-xs">
+            <p className="text-bone/65 font-display font-light text-[15px] leading-relaxed mb-5 max-w-xs">
               Partnerships and licensing inquiries, answered by the founder.
             </p>
             <a

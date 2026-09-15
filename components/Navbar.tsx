@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Shirt } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -9,7 +9,6 @@ const navItems = [
   { label: 'Rockford', path: '/rockford' },
   { label: 'Joosh', path: '/joosh' },
   { label: 'Licensing', path: '/licensing' },
-  { label: 'Shop', path: '/peace' },
 ];
 
 /* Walk up the DOM from a point and return the luminance (0-1) of the
@@ -55,7 +54,9 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const navBg = isScrolled
+  const useLightNav = isLight && !isMobileMenuOpen;
+
+  const navBg = isMobileMenuOpen ? 'bg-ink border-b border-bone/10' : isScrolled
     ? isLight
       ? 'bg-bone/95 backdrop-blur-xl border-b border-ink/10'
       : 'bg-ink/90 backdrop-blur-xl border-b border-bone/10'
@@ -63,10 +64,10 @@ const Navbar: React.FC = () => {
 
   const linkColor = (isActive: boolean) =>
     isActive
-      ? isLight ? 'text-ink' : 'text-bone'
-      : isLight
-        ? 'text-ink/60 hover:text-ink'
-        : 'text-bone/65 hover:text-bone';
+      ? useLightNav ? 'text-ink' : 'text-bone'
+      : useLightNav
+        ? 'text-ink/75 hover:text-ink'
+        : 'text-bone/80 hover:text-bone';
 
   return (
     <>
@@ -77,30 +78,30 @@ const Navbar: React.FC = () => {
               nav wordmark stays out of its way until scroll (one voice per viewport) */}
           <Link
             to="/"
-            className={`hover:opacity-80 flex items-center gap-3 group transition-opacity duration-500 ${
+            className={`hover:opacity-80 min-w-0 flex items-center gap-3 group transition-opacity duration-500 ${
               location.pathname === '/' && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
             aria-hidden={location.pathname === '/' && !isScrolled}
             tabIndex={location.pathname === '/' && !isScrolled ? -1 : undefined}
           >
             <img
-              src={`/images/brand/tropland-universe-horizontal-${isLight ? 'black' : 'white'}.svg`}
+              src={`/images/brand/tropland-universe-horizontal-${useLightNav ? 'black' : 'white'}.svg`}
               alt="Tropland Universe"
               width={1880}
               height={208.075}
-              className="h-auto w-[220px] sm:w-[260px] max-w-[calc(100vw-112px)] object-contain object-left flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
+              className="h-auto w-[150px] sm:w-[200px] xl:w-[240px] max-w-full object-contain object-left flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
             />
           </Link>
 
           {/* Desktop nav — full rail needs lg width; tablet keeps the hamburger */}
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`group relative flex items-baseline gap-1.5 font-mono text-[12px] uppercase tracking-[0.18em] transition-colors duration-200 ${linkColor(isActive)}`}
+                  className={`group relative flex items-baseline gap-1.5 font-mono text-[13px] uppercase tracking-[0.1em] transition-colors duration-200 ${linkColor(isActive)}`}
                   style={isLight || isScrolled ? undefined : { textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}
                 >
                   <span className="tu-link">{item.label}</span>
@@ -110,7 +111,17 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Right: CTA + mobile toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 ml-3">
+            <Link
+              to="https://www.troplanduniverse.com/peace"
+              aria-label="Shop the Peace Lion Tee"
+              onClick={() => track('peace_shop_nav')}
+              className={`inline-flex items-center gap-2 whitespace-nowrap border px-3 py-2.5 font-display font-semibold text-[13px] transition-colors ${useLightNav ? 'border-ink/30 text-ink hover:bg-ink hover:text-bone' : 'border-white/45 bg-ink/20 text-white hover:bg-bone hover:text-ink'}`}
+            >
+              <Shirt size={16} aria-hidden="true" />
+              <span className="sm:hidden">Shop tee</span>
+              <span className="hidden sm:inline">Shop the tee</span>
+            </Link>
             <Link
               to="/contact"
               onClick={() => track('partner_cta_nav')}
@@ -121,8 +132,10 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 transition-colors ${isLight ? 'text-ink/70 hover:text-ink' : 'text-bone/70 hover:text-bone'}`}
+              className={`lg:hidden p-2 transition-colors ${useLightNav ? 'text-ink/80 hover:text-ink' : 'text-bone/80 hover:text-bone'}`}
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -131,10 +144,10 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-ink lg:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <div className="flex flex-col h-full pt-28 px-8 pb-10">
+      <div id="mobile-navigation" inert={!isMobileMenuOpen} className={`fixed inset-0 z-40 overflow-y-auto bg-ink lg:hidden transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex flex-col min-h-full pt-28 px-8 pb-10">
           <nav className="flex flex-col flex-1">
-            {navItems.map((item) => {
+            {[...navItems, { label: 'Peace Lion Tee', path: 'https://www.troplanduniverse.com/peace' }].map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link

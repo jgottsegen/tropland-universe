@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
+import { motion, useScroll, useTransform, MotionValue, useReducedMotion } from 'motion/react';
 
 const Word: React.FC<{
   word: string;
@@ -7,10 +7,11 @@ const Word: React.FC<{
   range: [number, number];
   accent?: boolean;
 }> = ({ word, progress, range, accent }) => {
-  const opacity = useTransform(progress, range, [0.14, 1]);
+  const reduceMotion = useReducedMotion();
+  const opacity = useTransform(progress, range, [0.65, 1]);
   return (
     <motion.span
-      style={{ opacity }}
+      style={{ opacity: reduceMotion ? 1 : opacity }}
       className={`inline-block mr-[0.27em] ${accent ? 'font-edit italic text-ember-deep' : ''}`}
     >
       {word}

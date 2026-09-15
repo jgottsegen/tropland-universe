@@ -5,6 +5,7 @@ import SectionTag from './fx/SectionTag';
 import ManifestoText from './fx/ManifestoText';
 import Odometer from './fx/Odometer';
 import Reveal from './fx/Reveal';
+import PeaceSpotlight from './PeaceSpotlight';
 
 const metrics = [
   { value: '3M+', label: 'Followers · Instagram + Facebook' },
@@ -50,7 +51,7 @@ const Portfolio: React.FC = () => {
 
         {/* Manifesto — words ink in on scroll */}
         <ManifestoText
-          className="font-display font-medium text-[7.4vw] md:text-[3.4vw] leading-[1.12] tracking-[-0.015em] text-ink max-w-6xl mb-6"
+          className="font-display font-medium text-[7.4vw] md:text-[3.1vw] leading-[1.2] tracking-[-0.015em] text-ink max-w-6xl mb-6"
           text="Tropland began as a children's picture book. Twenty years later, it is an animal kingdom with billions of views: original characters, photoreal worlds, and wildlife stories carried by more than 3 million followers on Instagram and Facebook, across fifty countries."
           accents={['billions', 'photoreal', 'original']}
         />
@@ -82,7 +83,7 @@ const Portfolio: React.FC = () => {
                 <div className="font-display font-extrabold text-4xl md:text-[3.4rem] text-ink leading-none tracking-tight">
                   <Odometer value={m.value} />
                 </div>
-                <div className="font-mono text-[10px] md:text-[11px] text-ink/55 uppercase tracking-[0.22em] mt-3">
+                <div className="font-mono text-[11px] md:text-[12px] text-ink/70 uppercase tracking-[0.14em] mt-3">
                   {m.label}
                 </div>
               </div>
@@ -112,7 +113,7 @@ const Portfolio: React.FC = () => {
       {/* Record footnote */}
       <Reveal delay={0.1}>
         <div className="max-w-[1480px] mx-auto px-6 md:px-12 mt-10 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink/45">
+          <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-ink/65">
             Field record
           </span>
           <span className="h-px w-10 bg-ink/20 hidden md:block" />
@@ -121,6 +122,9 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
       </Reveal>
+      <div className="max-w-[1480px] mx-auto px-6 md:px-12 mt-10 md:mt-14">
+        <PeaceSpotlight />
+      </div>
     </section>
   );
 };
