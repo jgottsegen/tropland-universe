@@ -83,10 +83,11 @@ const Navbar: React.FC = () => {
             tabIndex={location.pathname === '/' && !isScrolled ? -1 : undefined}
           >
             <img
-              src="/images/tropland-logo.png"
+              src={`/images/brand/tropland-universe-horizontal-${isLight ? 'black' : 'white'}.svg`}
               alt="Tropland Universe"
-              className="h-9 w-auto max-w-[calc(100vw-140px)] object-contain object-left lg:max-w-none flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
-              style={{ filter: isLight ? 'brightness(0)' : undefined }}
+              width={1880}
+              height={208.075}
+              className="h-auto w-[220px] sm:w-[260px] max-w-[calc(100vw-112px)] object-contain object-left flex-shrink-0 transition-all duration-300 group-hover:scale-[1.03]"
             />
           </Link>
 

@@ -40,7 +40,7 @@ const LicensingLogin: React.FC = () => {
             <div className="w-full max-w-md relative z-10">
                 {/* Logo */}
                 <div className="text-center mb-10">
-                    <img src="/images/tropland-logo.png" alt="Tropland Universe" className="h-8 mx-auto mb-4" />
+                    <img src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width={1880} height={208.075} className="w-full max-w-[320px] h-auto mx-auto mb-4" />
                     <p className="text-[11px] font-sans font-bold uppercase tracking-[0.35em] text-brand-accent mb-1">
                         Licensee Portal
                     </p>

@@ -689,14 +689,14 @@ const Links: React.FC = () => {
       >
         The Digital Animal Kingdom
       </p>
-      <h1
-        className={`mt-2.5 text-center font-display text-[31px] font-extrabold uppercase leading-[0.92] tracking-[-0.025em] text-bone short:mt-2 short:text-[26px] tiny:text-[22px] ${RISE}`}
-        style={rise(150)}
-      >
-        Tropland{' '}
-        <span className="font-edit text-[33px] font-light normal-case italic tracking-normal text-ember short:text-[28px] tiny:text-[24px]">
-          Universe
-        </span>
+      <h1 className={`mt-2.5 w-full short:mt-2 ${RISE}`} style={rise(150)}>
+        <img
+          src="/images/brand/tropland-universe-horizontal-white.svg"
+          alt="Tropland Universe"
+          width={1880}
+          height={208.075}
+          className="mx-auto w-full max-w-[380px] h-auto"
+        />
       </h1>
 
       {/* ── The capture, first ────────────────────────────────────────── */}

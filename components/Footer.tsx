@@ -10,10 +10,15 @@ const Footer: React.FC = () => {
 
         {/* Giant wordmark */}
         <div className="pt-16 md:pt-20 pb-10 md:pb-14 border-b border-bone/10">
-          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="block w-fit" aria-label="Tropland Universe home">
-            <span className="tu-outline-type font-display font-extrabold uppercase tracking-[-0.02em] leading-[0.85] block text-[12.5vw] select-none">
-              Tropland
-            </span>
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="block w-full" aria-label="Tropland Universe home">
+            <img
+              src="/images/brand/tropland-universe-horizontal-white.svg"
+              alt="Tropland Universe"
+              width={1880}
+              height={208.075}
+              className="block w-full max-w-[1180px] h-auto select-none"
+              loading="lazy"
+            />
           </Link>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mt-6">
             <span className="font-mono text-[10px] tracking-[0.28em] uppercase text-bone/40">

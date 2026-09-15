@@ -63,18 +63,18 @@ const TroplandLibrary: React.FC = () => {
 
             {/* Portal Header */}
             <header className="border-b border-white/[0.06] bg-brand-deep/95 backdrop-blur-sm sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+                <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-4">
-                        <img src="/images/tropland-logo.png" alt="Tropland Universe" className="h-6" />
-                        <div className="w-px h-5 bg-white/15" />
-                        <p className="text-[11px] font-sans font-bold uppercase tracking-[0.3em] text-brand-accent">
+                        <img src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width={1880} height={208.075} className="w-[180px] sm:w-[240px] h-auto" />
+                        <div className="hidden sm:block w-px h-5 bg-white/15" />
+                        <p className="hidden sm:block text-[11px] font-sans font-bold uppercase tracking-[0.3em] text-brand-accent">
                             Licensee Portal
                         </p>
                     </div>
                     <button
                         onClick={handleLogout}
                         disabled={loggingOut}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] text-white/50 hover:text-white hover:border-white/20 font-sans text-sm transition-all duration-300"
+                        className="inline-flex shrink-0 items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] text-white/50 hover:text-white hover:border-white/20 font-sans text-sm transition-all duration-300"
                     >
                         <LogOut size={14} />
                         {loggingOut ? 'Signing out…' : 'Sign Out'}

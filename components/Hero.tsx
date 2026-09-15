@@ -72,31 +72,18 @@ const Hero: React.FC = () => {
           </span>
         </motion.div>
 
-        {/* Display headline */}
-        <h1 className="mb-7 select-none">
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block font-display font-extrabold uppercase text-white tracking-[-0.025em] leading-[0.86] text-[17.5vw] md:text-[11.5vw] lg:text-[10vw]"
-              initial={{ y: '108%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.35, duration: 1.1, ease }}
-            >
-              Tropland
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block leading-[0.92] text-[15vw] md:text-[10vw] lg:text-[8.6vw]"
-              initial={{ y: '108%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.5, duration: 1.1, ease }}
-            >
-              <span className="font-edit italic font-light text-ember" style={{ letterSpacing: '-0.01em' }}>
-                Universe
-              </span>
-              <span className="font-display font-extrabold text-white">.</span>
-            </motion.span>
-          </span>
+        {/* Approved stacked wordmark; outlined artwork preserves the locked lettering. */}
+        <h1 className="mb-7 select-none overflow-hidden">
+          <motion.img
+            src="/images/brand/tropland-universe-stacked-white.svg"
+            alt="Tropland Universe"
+            width={1060}
+            height={324.984}
+            className="block h-auto w-full max-w-[760px] lg:w-[66vw]"
+            initial={{ y: '108%' }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.35, duration: 1.1, ease }}
+          />
         </h1>
 
         {/* Subline + CTAs */}
