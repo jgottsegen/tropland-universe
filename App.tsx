@@ -16,6 +16,7 @@ const LicensingPage = lazy(() => import('./pages/Licensing'));
 const LicensingLogin = lazy(() => import('./pages/LicensingLogin'));
 const TroplandLibrary = lazy(() => import('./pages/TroplandLibrary'));
 const LinksPage = lazy(() => import('./pages/Links'));
+const PeacePage = lazy(() => import('./pages/Peace'));
 // Portal-only: keeps the supabase client out of the main bundle
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
@@ -26,7 +27,7 @@ const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
    PREFIX matches here; the short alias /l must be EXACT, because a prefix
    match on '/l' would also swallow /licensing. */
 const PORTAL_PREFIXES = ['/tropland-licensing', '/tropland-licensing/login', '/links'];
-const BARE_PATHS = new Set(['/l']);
+const BARE_PATHS = new Set(['/l', '/peace', '/peace/']);
 
 /* Deep links like /#kingdom (the IG bio) land before React has rendered the
    target, and the nav's scroll reset stomps the browser's native jump.
@@ -87,6 +88,7 @@ const AppLayout: React.FC = () => {
           <Route path="/joosh" element={<JooshPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/links" element={<LinksPage />} />
+          <Route path="/peace" element={<PeacePage />} />
           {/* Short alias so the IG bio can read troplanduniverse.com/l */}
           <Route path="/l" element={<LinksPage />} />
           <Route path="/licensing" element={<LicensingPage />} />
