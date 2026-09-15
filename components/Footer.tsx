@@ -39,8 +39,8 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="md:col-span-5">
             <p className="text-bone/45 font-display font-light text-[15px] leading-relaxed max-w-sm mb-7">
-              A character-driven wildlife media brand blending original IP,
-              cinematic AI art, and global storytelling.
+              A wildlife media brand built on original characters,
+              cinematic AI art, and stories shared around the world.
             </p>
             <div className="flex items-center gap-2">
               {[
@@ -83,6 +83,7 @@ const Footer: React.FC = () => {
                 { label: 'Rockford T. Honeypot', path: '/rockford' },
                 { label: "Joosh's Juice Bar", path: '/joosh' },
                 { label: 'Licensing', path: '/licensing' },
+                { label: 'Peace Lion Tee', path: '/peace' },
               ].map(item => (
                 <li key={item.label}>
                   <Link

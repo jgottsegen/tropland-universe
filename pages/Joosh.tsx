@@ -18,7 +18,7 @@ const books = [
         tagline: "Children's · Wellness",
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Banana-Adventure/dp/1493546848',
         description:
-            'The first title in the series introduces readers to the Tropland Forest and its colorful cast of characters, setting the tone for a story world centered on imagination, kindness, and healthy choices.',
+            'Meet Joosh and the characters of the Tropland Forest in the first adventure, where imagination, kindness, and healthy choices go together.',
     },
     {
         number: 'Book Two',
@@ -36,7 +36,7 @@ const books = [
         tagline: "Children's · Wellness",
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Snackbook-Adventure/dp/1539538818/',
         description:
-            "The trilogy's final chapter expands the world through food-themed storytelling, bringing Tropland's characters into new moments centered on energy, balance, and everyday habits. With a mix of humor and heart, the story closes the series by reinforcing what Tropland does best.",
+            "The trilogy's final chapter brings Joosh and friends together for a food-themed adventure about energy, balance, and healthy everyday habits.",
     },
     {
         number: 'Companion',
@@ -45,7 +45,7 @@ const books = [
         tagline: 'Activity · Companion',
         url: 'https://www.amazon.com/Jooshs-Juice-Bar-Coloring-Book/dp/0990927083',
         description:
-            'A companion title inviting readers and families into the Tropland world through calming, character-inspired designs. Built for creative play and focus, it extends the Tropland Forest aesthetic into an interactive format that complements the original series.',
+            'A companion coloring book with character-inspired designs from the Tropland Forest. A quiet way for readers and families to spend more time with the world of Joosh.',
     },
 ];
 

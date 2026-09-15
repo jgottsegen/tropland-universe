@@ -120,10 +120,10 @@ const RockfordPage: React.FC = () => {
                                 transition={{ delay: 0.65, duration: 1, ease }}
                             >
                                 <p className="font-display font-light text-lg text-white/75 leading-relaxed mb-5 max-w-xl">
-                                    A fantasy adventure set within the Tropland Universe™. Explore a distinctive animal world built on curiosity, tension, and discovery.
+                                    A fantasy adventure set within the Tropland Universe™, following Rockford through an animal world full of danger and discovery.
                                 </p>
                                 <p className="font-display font-light text-lg text-white/75 leading-relaxed mb-10 max-w-xl">
-                                    Rockford's journey established the modern Tropland ecosystem, laying the foundation for animation, digital media, and long form storytelling.
+                                    Rockford's journey helped shape Tropland Universe and its expansion into animation and digital storytelling.
                                 </p>
                             </motion.div>
 
@@ -208,10 +208,10 @@ const RockfordPage: React.FC = () => {
                         <Reveal className="lg:col-span-6 flex flex-col justify-end" delay={0.12}>
                             <div className="space-y-7 max-w-xl">
                                 <p className="font-display font-light text-lg md:text-xl text-ink/75 leading-relaxed">
-                                    Set deep within the Tropland Universe, <span className="font-edit italic">The Adventures of Rockford T. Honeypot</span> is a fantasy adventure novel that established the narrative foundation of the broader franchise.
+                                    <span className="font-edit italic">The Adventures of Rockford T. Honeypot</span> is one of the original stories behind Tropland Universe.
                                 </p>
                                 <p className="font-display font-light text-[17px] md:text-lg text-ink/60 leading-relaxed">
-                                    The story follows Rockford as he navigates a structured animal society with its own rules, hierarchies, and conflicts. This novel was written entirely by Josh Gottsegen, years before artificial intelligence entered the creative mainstream. Since its release, the book reached #1 on Amazon and laid the narrative architecture that now underpins a 2-billion-view digital franchise.
+                                    Rockford must find his way through an animal society with its own rules, rivalries, and conflicts. Written entirely by Josh Gottsegen, years before his work with AI, the novel reached #1 on Amazon. The book is part of Tropland Universe, whose digital stories have drawn 2 billion views.
                                 </p>
                             </div>
                         </Reveal>

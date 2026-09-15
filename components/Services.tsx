@@ -29,7 +29,7 @@ const Services: React.FC = () => {
             <p className="font-display font-light text-lg md:text-xl text-ink/60 leading-relaxed max-w-md">
               Five published titles spanning adventure fiction and children's
               wellness, written and produced by Josh Gottsegen. These are the
-              foundational story worlds behind Tropland Universe.
+              story worlds where Tropland Universe began.
             </p>
           </Reveal>
         </div>
@@ -57,8 +57,8 @@ const Services: React.FC = () => {
                   The Adventures of<br />Rockford T. <span className="font-edit italic font-light text-ember-deep">Honeypot</span>
                 </h3>
                 <p className="text-ink/60 font-display font-light text-[17px] leading-relaxed mb-8 max-w-lg">
-                  The fantasy-adventure novel that established the first core story world of
-                  the Tropland ecosystem, now in development for animated and digital formats.
+                  The fantasy-adventure novel that helped shape Tropland Universe,
+                  now in development for animated and digital formats.
                 </p>
                 <a
                   href="https://www.amazon.com/Adventures-Rockford-T-Honeypot/dp/0990927075"

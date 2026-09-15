@@ -132,7 +132,7 @@ const JoinKingdom: React.FC = () => {
                 <span className="font-edit italic font-light normal-case text-ember tracking-normal">with you.</span>
               </h2>
               <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-xl">
-                Six free mobile wallpapers from the world's favorite moments: the peace sign,
+                Six free mobile wallpapers featuring Tropland moments: the peace sign,
                 the heart, and three from the Circus. Plus first look at new drops
                 before the feed gets them.
               </p>

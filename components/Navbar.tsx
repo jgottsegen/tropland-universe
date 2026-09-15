@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Rockford', path: '/rockford' },
   { label: 'Joosh', path: '/joosh' },
   { label: 'Licensing', path: '/licensing' },
+  { label: 'Shop', path: '/peace' },
 ];
 
 /* Walk up the DOM from a point and return the luminance (0-1) of the

@@ -247,7 +247,7 @@ const LicensingPage: React.FC = () => {
                         <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
                             <p className="font-display font-light text-lg md:text-xl text-ink/65 leading-relaxed max-w-md">
                                 From the Tropland Forest to the Digital Animal Kingdom, our IP spans original children's books,
-                                a globally ranked social media presence, and a character roster built for merchandise, media, and experiential activations.
+                                a globally ranked social media presence, and characters ready for merchandise, media, and live experiences.
                             </p>
                         </Reveal>
                     </div>

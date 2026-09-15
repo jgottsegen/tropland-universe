@@ -22,7 +22,7 @@ const offers = [
   },
   {
     title: 'Global Distribution',
-    desc: 'Billions of cumulative views across 50+ countries. A proven audience engine across every key global market.',
+    desc: 'Billions of cumulative views, with audiences across 50+ countries.',
     readout: 'MODE · REACH',
   },
 ];
@@ -47,8 +47,8 @@ const About: React.FC = () => {
           <Reveal className="lg:col-span-5 flex flex-col justify-end" delay={0.15}>
             <p className="font-display font-light text-lg md:text-xl text-bone/65 leading-relaxed max-w-md">
               Tropland partners with select brands, studios, and organizations.
-              One proven viral universe, translatable across physical and digital
-              categories.
+              Bring Tropland's characters and audience to products,
+              campaigns, and screens.
             </p>
           </Reveal>
         </div>
