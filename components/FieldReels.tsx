@@ -12,7 +12,7 @@ import Reveal from './fx/Reveal';
 // A null src renders a reserved slot (footage incoming from Josh).
 const reels: { src: string | null; title: string; meta: string }[] = [
   { src: '/video/reel-elephant.mp4', title: 'The Reveal', meta: 'BIG TOP SERIES · CROWD POV' },
-  { src: '/video/reel-wakeup.mp4', title: 'Lion Wake Up Call', meta: 'LION COUPLE · 300M+ VIEWS' },
+  { src: '/video/reel-wakeup.mp4', title: 'Lion Wake Up Call', meta: 'LION COUPLE · 267M+ VIEWS' },
   { src: '/video/reel-transformation.mp4', title: 'The Transformation', meta: 'BIG TOP SERIES · FINALE' },
   { src: '/video/reel-temple.mp4', title: 'The Temple Walk', meta: 'LION · CITY OF GOLD' },
   { src: '/video/reel-alarm.mp4', title: 'The Alarm Clock', meta: 'JAGUAR & CAPUCHIN · CANOPY' },

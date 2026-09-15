@@ -211,7 +211,7 @@ const RockfordPage: React.FC = () => {
                                     <span className="font-edit italic">The Adventures of Rockford T. Honeypot</span> is one of the original stories behind Tropland Universe.
                                 </p>
                                 <p className="font-display font-light text-[17px] md:text-lg text-ink/60 leading-relaxed">
-                                    Rockford must find his way through an animal society with its own rules, rivalries, and conflicts. Written entirely by Josh Gottsegen, years before his work with AI, the novel reached #1 on Amazon. The book is part of Tropland Universe, whose digital stories have drawn 2 billion views.
+                                    Rockford must find his way through an animal society with its own rules, rivalries, and conflicts. Written entirely by Josh Gottsegen, years before his work with AI, the novel reached #1 on Amazon. The book is part of Tropland Universe, whose digital stories have drawn billions of views.
                                 </p>
                             </div>
                         </Reveal>
