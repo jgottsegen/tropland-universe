@@ -20,7 +20,7 @@ export default function Links() {
     const target = event.target instanceof Element ? event.target.closest('a') : null;
     if (!target) return;
     const href = target.getAttribute('href') || '';
-    const name = href.includes('fourthwall') ? 'links_peace_shirt' : href.includes('troplandgallery') ? 'links_artwork' : href.includes('youtube') ? 'links_youtube' : href.includes('instagram') ? 'links_instagram' : href.includes('facebook') ? 'links_facebook' : href.startsWith('mailto:') ? 'links_contact' : 'links_site';
+    const name = (href === '/peace' || href.includes('fourthwall')) ? 'links_peace_shirt' : href.includes('troplandgallery') ? 'links_artwork' : href.includes('youtube') ? 'links_youtube' : href.includes('instagram') ? 'links_instagram' : href.includes('facebook') ? 'links_facebook' : href.startsWith('mailto:') ? 'links_contact' : 'links_site';
     track(name);
   };
   const subscribe = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +43,7 @@ export default function Links() {
 <main className="hub"><header className="brand"><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><div className="tagline"><span>The Digital Animal Kingdom</span></div></header>
 <nav aria-label="Explore Tropland Universe" onClick={trackDestination}>
 <a className="destination main-site" href="https://www.troplanduniverse.com/"><svg className="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg><span className="copy"><strong>Explore Tropland Universe</strong></span><svg className="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
-<a className="destination feature shirt" href="https://josh-wdt-shop.fourthwall.com/products/lion-peace-sign-tee"><svg className="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4c-1 3-7 3-8 0Z"/></svg><span className="copy"><strong>Buy the Peace Shirt</strong></span><svg className="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+<a className="destination feature shirt" href="/peace"><svg className="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3-6 4 3 5 3-2v11h8V10l3 2 3-5-6-4c-1 3-7 3-8 0Z"/></svg><span className="copy"><strong>Buy the Peace Shirt</strong></span><svg className="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
 
 <section className="follow" aria-label="Social channels"><div className="social-buttons">
 <a href="https://www.instagram.com/troplanduniverse/"><svg viewBox="0 0 24 24" aria-hidden="true" style={{ color: '#a08bdd' }}><defs><linearGradient id="social-0" x2="1" y2="1"><stop stop-color="#a08bdd"/><stop offset="1" stop-color="#cf7ca3"/></linearGradient></defs><g stroke="url(#social-0)"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/></g></svg><span>Instagram</span></a>
