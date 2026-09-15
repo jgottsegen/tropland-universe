@@ -72,18 +72,29 @@ const Hero: React.FC = () => {
           </span>
         </motion.div>
 
-        {/* Approved stacked wordmark; outlined artwork preserves the locked lettering. */}
+        {/* Keep the approved artwork intact; the separate trademark travels with it. */}
         <h1 className="mb-7 select-none overflow-hidden">
-          <motion.img
-            src="/images/brand/tropland-universe-stacked-white.svg"
-            alt="Tropland Universe"
-            width={1060}
-            height={324.984}
-            className="block h-auto w-full max-w-[760px] lg:w-[66vw]"
+          <motion.span
+            className="relative block w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-[760px] lg:w-[66vw]"
             initial={{ y: '108%' }}
             animate={{ y: 0 }}
             transition={{ delay: 0.35, duration: 1.1, ease }}
-          />
+          >
+            <img
+              src="/images/brand/tropland-universe-stacked-white.svg"
+              alt="Tropland Universe"
+              width={1060}
+              height={324.984}
+              className="block h-auto w-full"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute left-full top-0 ml-1.5 text-white leading-none"
+              style={{ fontFamily: 'Arial, sans-serif', fontSize: 'clamp(16px, 3vw, 40px)' }}
+            >
+              ™
+            </span>
+          </motion.span>
         </h1>
 
         {/* Subline + CTAs */}
