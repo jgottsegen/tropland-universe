@@ -39,14 +39,14 @@ const pillars = [
 const row1 = [
     '/images/licensing-bg-1.png',
     '/images/hero-lion.png',
-    '/images/licensing-bg-3.jpg',
+    '/images/licensing-bg-3-2026-09.svg',
     '/images/trop-forest.png',
     '/images/licensing-bg-2.png',
     '/images/rocky-rockford.png',
 ];
 
 const row2 = [
-    '/images/licensing-bg-3.jpg',
+    '/images/licensing-bg-3-2026-09.svg',
     '/images/licensing-bg-2.png',
     '/images/hero-lion.png',
     '/images/rocky-apple.png',
