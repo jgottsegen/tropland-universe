@@ -11,7 +11,7 @@ const metrics = [
   { value: '3M+', label: 'Followers · Instagram + Facebook' },
   { value: '50+', label: 'Countries Reached' },
   { value: '#1', label: 'Digital AI Artist Influencer · Feedspot 2026' },
-  { value: '267M', label: 'Single Viral Piece' },
+  { value: '300M+', label: 'Single Viral Piece' },
   { value: '4', label: 'Published Books' },
   { value: '20+', label: 'Years of Tropland' },
 ];

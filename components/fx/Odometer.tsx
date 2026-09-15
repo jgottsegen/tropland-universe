@@ -21,7 +21,7 @@ const Digit: React.FC<{ value: number; play: boolean; delay: number }> = ({ valu
 );
 
 interface OdometerProps {
-  /** e.g. "1.3B+", "3M+", "50+", "267M" */
+  /** e.g. "1.3B+", "3M+", "50+", "300M+" */
   value: string;
   className?: string;
 }
