@@ -11,3 +11,42 @@
 @media(prefers-reduced-motion:reduce){.peace-page *{transition:none!important;scroll-behavior:auto!important}}
 
 .peace-gallery-bottom{display:block}.peace-thumbnails{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.peace-thumbnails button{width:100%;height:auto;aspect-ratio:3/4;min-width:0}.peace-thumbnails img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}.peace-gallery-bottom>p{text-align:left;margin:9px 0 0}.peace-gallery-bottom>p br{display:none}
+
+/* Peace campaign refresh: carry the forest, cream and gold art direction into shopping. */
+.peace-page{--forest:#142c20;--forest-light:#244432;--ivory:#f7f2e7;--gold:#e3bd70}
+.peace-header{border-bottom:1px solid #e3bd7038;padding-top:23px;padding-bottom:23px}
+.peace-hero{gap:3.5%;padding-top:36px;align-items:start}
+.peace-image-wrap{background:radial-gradient(ellipse at 65% 20%,#fffdf6,#eee5d3);border:1px solid #d7cbb44d}
+.peace-shirt-image{mix-blend-mode:normal}
+.peace-image-label{letter-spacing:.14em}
+.peace-product{padding:34px 32px;background:radial-gradient(ellipse at 0 0,#2a4430 0,transparent 70%),var(--forest);color:var(--ivory);box-shadow:0 18px 50px #142c2010;align-self:stretch}
+.peace-product .peace-eyebrow{color:#dbc18b;font-size:10px;letter-spacing:.18em}
+.peace-product h1{font-size:clamp(22px,2.2vw,30px);font-weight:400;letter-spacing:-.025em;margin:15px 0 20px}
+.peace-product .peace-headline{font-size:clamp(34px,3.4vw,49px);color:var(--gold);line-height:1.08}
+.peace-product .peace-headline em{color:#fff5d5}
+.peace-product .peace-price{margin-top:24px;color:#fff7e4}
+.peace-product .peace-description{color:#dedfd2;font-size:15px}
+.peace-product .peace-benefits{color:#d0d7c6;gap:6px 14px}
+.peace-product .peace-benefits li::before{color:var(--gold)}
+.peace-product .peace-price>span,.peace-product .peace-price small,.peace-product legend strong{color:#c8d2c4}
+.peace-product .peace-size-guide{color:#f0dfb8;border-color:#baa67b}
+.peace-product .peace-swatch-list button[aria-pressed=true]{border-color:var(--gold)}
+.peace-product .peace-swatch-list button>span:first-child{box-shadow:inset 0 0 0 1px #ffffff30}
+.peace-product .peace-size-list button{border-color:#82947c;color:#f7f2e7}
+.peace-product .peace-size-list button[aria-pressed=true]{background:#f7efd9;border-color:#f7efd9;color:#183123}
+.peace-product .peace-size-list button:hover:not(:disabled){border-color:var(--gold)}
+.peace-product .peace-quantity{border-color:#82947c;color:#d8dfd0}
+.peace-product .peace-quantity select{color:#fff4d9;color-scheme:dark}
+.peace-product .peace-button,.peace-mobile-buy .peace-button{background:var(--gold);border-color:var(--gold);color:#152a1d}
+.peace-product .peace-button:hover:not(:disabled),.peace-mobile-buy .peace-button:hover:not(:disabled){background:#f2ce88;border-color:#f2ce88}
+.peace-product .peace-delivery,.peace-product .peace-trust{color:#cbd3c2}
+.peace-product .peace-form-error{color:#ffd1bf}
+.peace-product button:focus-visible,.peace-product a:focus-visible,.peace-product select:focus-visible{outline-color:#ffe4a7}
+.peace-thumbnails button{background:#fcf9f1;border-color:#d6cdbb}
+.peace-thumbnails button[aria-pressed=true]{border-color:#a7823e}
+.peace-story{background:radial-gradient(ellipse at 10% 40%,#334b30 0,transparent 55%),var(--forest);border-top:1px solid #dcc19040}
+.peace-story-art{filter:drop-shadow(0 10px 24px #0003)}
+.peace-color-grid img{background:#fff}
+.peace-color-grid>button>span{border-color:#d0bb94}
+@media(max-width:1080px) and (min-width:721px){.peace-product{padding:26px 23px}.peace-product .peace-headline{font-size:36px}.peace-hero{grid-template-columns:1fr 1.05fr}.peace-product .peace-benefits{gap:5px 10px}}
+@media(max-width:720px){.peace-header{padding:20px 6%}.peace-hero{padding-top:0}.peace-gallery{padding-bottom:22px}.peace-product{padding:29px 6% 32px}.peace-product h1{font-size:25px;margin:12px 0 17px}.peace-product .peace-headline{font-size:clamp(34px,8.8vw,48px)}.peace-product .peace-headline br{display:block}.peace-product .peace-headline em::before{content:none}.peace-product .peace-price{margin-top:20px}.peace-mobile-buy{background:#142c20;color:#fff5df;border-color:#d6b36b55}.peace-mobile-buy>div>span{color:#cad5c5}.peace-story{padding-top:40px}.peace-gallery-bottom>p{font-size:10px}}
