@@ -12,58 +12,29 @@
 
 .peace-gallery-bottom{display:block}.peace-thumbnails{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.peace-thumbnails button{width:100%;height:auto;aspect-ratio:3/4;min-width:0}.peace-thumbnails img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}.peace-gallery-bottom>p{text-align:left;margin:9px 0 0}.peace-gallery-bottom>p br{display:none}
 
-/* Peace campaign refresh: carry the forest, cream and gold art direction into shopping. */
-.peace-page{--forest:#142c20;--forest-light:#244432;--ivory:#f7f2e7;--gold:#e3bd70}
-.peace-header{border-bottom:1px solid #e3bd7038;padding-top:23px;padding-bottom:23px}
-.peace-hero{gap:3.5%;padding-top:36px;align-items:start}
-.peace-image-wrap{background:radial-gradient(ellipse at 65% 20%,#fffdf6,#eee5d3);border:1px solid #d7cbb44d}
-.peace-shirt-image{mix-blend-mode:normal}
-.peace-image-label{letter-spacing:.14em}
-.peace-product{padding:34px 32px;background:radial-gradient(ellipse at 0 0,#2a4430 0,transparent 70%),var(--forest);color:var(--ivory);box-shadow:0 18px 50px #142c2010;align-self:stretch}
-.peace-product .peace-eyebrow{color:#dbc18b;font-size:10px;letter-spacing:.18em}
-.peace-product h1{font-size:clamp(22px,2.2vw,30px);font-weight:400;letter-spacing:-.025em;margin:15px 0 20px}
-.peace-product .peace-headline{font-size:clamp(34px,3.4vw,49px);color:var(--gold);line-height:1.08}
-.peace-product .peace-headline em{color:#fff5d5}
-.peace-product .peace-price{margin-top:24px;color:#fff7e4}
-.peace-product .peace-description{color:#dedfd2;font-size:15px}
-.peace-product .peace-benefits{color:#d0d7c6;gap:6px 14px}
-.peace-product .peace-benefits li::before{color:var(--gold)}
-.peace-product .peace-price>span,.peace-product .peace-price small,.peace-product legend strong{color:#c8d2c4}
-.peace-product .peace-size-guide{color:#f0dfb8;border-color:#baa67b}
-.peace-product .peace-swatch-list button[aria-pressed=true]{border-color:var(--gold)}
-.peace-product .peace-swatch-list button>span:first-child{box-shadow:inset 0 0 0 1px #ffffff30}
-.peace-product .peace-size-list button{border-color:#82947c;color:#f7f2e7}
-.peace-product .peace-size-list button[aria-pressed=true]{background:#f7efd9;border-color:#f7efd9;color:#183123}
-.peace-product .peace-size-list button:hover:not(:disabled){border-color:var(--gold)}
-.peace-product .peace-quantity{border-color:#82947c;color:#d8dfd0}
-.peace-product .peace-quantity select{color:#fff4d9;color-scheme:dark}
-.peace-product .peace-button,.peace-mobile-buy .peace-button{background:var(--gold);border-color:var(--gold);color:#152a1d}
-.peace-product .peace-button:hover:not(:disabled),.peace-mobile-buy .peace-button:hover:not(:disabled){background:#f2ce88;border-color:#f2ce88}
-.peace-product .peace-delivery,.peace-product .peace-trust{color:#cbd3c2}
-.peace-product .peace-form-error{color:#ffd1bf}
-.peace-product button:focus-visible,.peace-product a:focus-visible,.peace-product select:focus-visible{outline-color:#ffe4a7}
-.peace-thumbnails button{background:#fcf9f1;border-color:#d6cdbb}
-.peace-thumbnails button[aria-pressed=true]{border-color:#a7823e}
-.peace-story{background:radial-gradient(ellipse at 10% 40%,#334b30 0,transparent 55%),var(--forest);border-top:1px solid #dcc19040}
-.peace-story-art{filter:drop-shadow(0 10px 24px #0003)}
-.peace-color-grid img{background:#fff}
-.peace-color-grid>button>span{border-color:#d0bb94}
-@media(max-width:1080px) and (min-width:721px){.peace-product{padding:26px 23px}.peace-product .peace-headline{font-size:36px}.peace-hero{grid-template-columns:1fr 1.05fr}.peace-product .peace-benefits{gap:5px 10px}}
-@media(max-width:720px){.peace-header{padding:20px 6%}.peace-hero{padding-top:0}.peace-gallery{padding-bottom:22px}.peace-product{padding:29px 6% 32px}.peace-product h1{font-size:25px;margin:12px 0 17px}.peace-product .peace-headline{font-size:clamp(34px,8.8vw,48px)}.peace-product .peace-headline br{display:block}.peace-product .peace-headline em::before{content:none}.peace-product .peace-price{margin-top:20px}.peace-mobile-buy{background:#142c20;color:#fff5df;border-color:#d6b36b55}.peace-mobile-buy>div>span{color:#cad5c5}.peace-story{padding-top:40px}.peace-gallery-bottom>p{font-size:10px}}
-
-/* Give phone visitors the campaign first, with the gallery available immediately below. */
-.peace-mobile-intro{display:none}
+/* Restrained product layout. Campaign artwork belongs only in share metadata. */
+.peace-mobile-heading{display:none}
+.peace-gallery-details summary{cursor:pointer;font-size:12px;color:var(--ink);padding:7px 0;text-underline-offset:4px}
+.peace-gallery-details[open] summary{margin-bottom:9px}
+.peace-gallery-bottom>p{font-size:10px;color:var(--muted);margin-top:5px}
+.peace-image-label{display:none}
 @media(max-width:720px){
- .peace-header{padding:17px 6%}.peace-header img{width:215px}
- .peace-mobile-intro{display:block;background:#142c20;color:#f7f2e7}
- .peace-mobile-campaign{display:block}.peace-mobile-campaign img{width:100%;height:auto;aspect-ratio:1734/907}
- .peace-mobile-intro-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 6% 18px;border-top:1px solid #e3bd702b}
- .peace-mobile-intro-bar p{font:italic 21px/1.15 Georgia,serif;color:#f9edcb}
- .peace-mobile-intro-bar a{font-size:12px;color:#f0cc83;text-decoration:none;border-bottom:1px solid #e3bd70;padding:5px 0;white-space:nowrap}
- .peace-mobile-intro-bar a span{margin-left:9px}
- .peace-gallery{padding-top:17px;padding-bottom:18px}
- .peace-image-wrap,.peace-shirt-image,.peace-art-image{height:285px}
- .peace-image-label{font-size:9px;top:11px;left:12px}
- .peace-gallery-bottom>p{margin-top:7px;font-size:10px}
- .peace-thumbnails button{aspect-ratio:1;max-height:48px}
+ .peace-header{padding:18px 6%}.peace-header img{width:215px}
+ .peace-mobile-heading{display:block;padding:26px 6% 14px;text-align:center}
+ .peace-mobile-heading p{font:400 clamp(32px,9vw,40px)/1.08 Georgia,serif;letter-spacing:-.035em;color:var(--forest)}
+ .peace-mobile-heading em{font-weight:400;color:#796331}
+ .peace-gallery{padding:8px 6% 0}
+ .peace-image-wrap,.peace-shirt-image,.peace-art-image{height:300px}
+ .peace-gallery-bottom{display:flex;justify-content:space-between;align-items:start;margin-top:5px;gap:16px}
+ .peace-gallery-details{flex:1;min-width:0}
+ .peace-gallery-bottom>p{max-width:100px;text-align:right;flex-shrink:0}
+ .peace-thumbnails{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+ .peace-product{padding:24px 6% 36px}
+ .peace-product>.peace-eyebrow,.peace-product>.peace-headline{display:none}
+ .peace-product h1{font-size:30px;margin:0 0 8px}
+ .peace-price{margin:0 0 16px;font-size:23px}
+ .peace-description{font-size:14px;line-height:1.55}
+ .peace-benefits{font-size:11px;margin:14px 0 23px;gap:5px 13px}
+ .peace-mobile-buy{display:none}
+ .peace-mobile-buy.is-visible{display:flex}
 }
