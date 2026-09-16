@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/peace",
+      "destination": "/peace.html"
+    },
+    {
+      "source": "/peace/",
+      "destination": "/peace.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

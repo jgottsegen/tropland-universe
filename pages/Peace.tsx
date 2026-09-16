@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import snapshot from '../config/peace-catalog.json';
+import metadata from '../config/peace-metadata.json';
 import '../css/peace.css';
 
 type Variant = {id:string;color:string;size:string;priceCents:number;available:boolean;image:string};
@@ -68,7 +69,27 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
   return()=>lifecycle.abort();
  },[catalog,color,size,qty,isPreview]);
  return <div className="peace-page">
-  <Helmet><title>Peace Lion Tee | Tropland Universe</title><meta name="description" content="A little wild. A lot of peace. Shop the signed Peace Lion Tee on AS Colour combed cotton, in ten colors. Choose your color and fit."/><meta name="robots" content={reviewMode?"noindex, nofollow":"index, follow"}/><link rel="canonical" href="https://www.troplanduniverse.com/peace"/></Helmet>
+  <Helmet>
+   <title>{metadata.title}</title>
+   <meta name="description" content={metadata.description}/>
+   <meta name="robots" content={reviewMode?"noindex, nofollow":"index, follow"}/>
+   <link rel="canonical" href={metadata.url}/>
+   <meta property="og:site_name" content="Tropland Universe™"/>
+   <meta property="og:type" content="website"/>
+   <meta property="og:title" content={metadata.title}/>
+   <meta property="og:description" content={metadata.description}/>
+   <meta property="og:url" content={metadata.url}/>
+   <meta property="og:image" content={metadata.image}/>
+   <meta property="og:image:width" content={String(metadata.imageWidth)}/>
+   <meta property="og:image:height" content={String(metadata.imageHeight)}/>
+   <meta property="og:image:alt" content={metadata.imageAlt}/>
+   <meta name="twitter:card" content="summary_large_image"/>
+   <meta name="twitter:site" content="@troplanduniverse"/>
+   <meta name="twitter:title" content={metadata.title}/>
+   <meta name="twitter:description" content={metadata.description}/>
+   <meta name="twitter:image" content={metadata.image}/>
+   <meta name="twitter:image:alt" content={metadata.imageAlt}/>
+  </Helmet>
   <a className="peace-skip" href="#peace-main">Skip to shirt</a>
   {reviewMode&&<div className="peace-review-note">Review preview <span>Explore colors, sizes and checkout. Purchases are not enabled.</span></div>}
   <header className="peace-header"><a href="https://www.troplanduniverse.com/" aria-label="Tropland Universe home"><img src={`${assetBase}tropland-horizontal-white.svg`} alt="Tropland Universe" width="310" height="53"/></a><span>The Digital Animal Kingdom</span><a className="peace-header-link" href="#peace-buy">Find your color <span aria-hidden="true">↘</span></a></header>
