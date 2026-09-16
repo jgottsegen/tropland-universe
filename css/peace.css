@@ -50,3 +50,20 @@
 .peace-color-grid>button>span{border-color:#d0bb94}
 @media(max-width:1080px) and (min-width:721px){.peace-product{padding:26px 23px}.peace-product .peace-headline{font-size:36px}.peace-hero{grid-template-columns:1fr 1.05fr}.peace-product .peace-benefits{gap:5px 10px}}
 @media(max-width:720px){.peace-header{padding:20px 6%}.peace-hero{padding-top:0}.peace-gallery{padding-bottom:22px}.peace-product{padding:29px 6% 32px}.peace-product h1{font-size:25px;margin:12px 0 17px}.peace-product .peace-headline{font-size:clamp(34px,8.8vw,48px)}.peace-product .peace-headline br{display:block}.peace-product .peace-headline em::before{content:none}.peace-product .peace-price{margin-top:20px}.peace-mobile-buy{background:#142c20;color:#fff5df;border-color:#d6b36b55}.peace-mobile-buy>div>span{color:#cad5c5}.peace-story{padding-top:40px}.peace-gallery-bottom>p{font-size:10px}}
+
+/* Give phone visitors the campaign first, with the gallery available immediately below. */
+.peace-mobile-intro{display:none}
+@media(max-width:720px){
+ .peace-header{padding:17px 6%}.peace-header img{width:215px}
+ .peace-mobile-intro{display:block;background:#142c20;color:#f7f2e7}
+ .peace-mobile-campaign{display:block}.peace-mobile-campaign img{width:100%;height:auto;aspect-ratio:1734/907}
+ .peace-mobile-intro-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 6% 18px;border-top:1px solid #e3bd702b}
+ .peace-mobile-intro-bar p{font:italic 21px/1.15 Georgia,serif;color:#f9edcb}
+ .peace-mobile-intro-bar a{font-size:12px;color:#f0cc83;text-decoration:none;border-bottom:1px solid #e3bd70;padding:5px 0;white-space:nowrap}
+ .peace-mobile-intro-bar a span{margin-left:9px}
+ .peace-gallery{padding-top:17px;padding-bottom:18px}
+ .peace-image-wrap,.peace-shirt-image,.peace-art-image{height:285px}
+ .peace-image-label{font-size:9px;top:11px;left:12px}
+ .peace-gallery-bottom>p{margin-top:7px;font-size:10px}
+ .peace-thumbnails button{aspect-ratio:1;max-height:48px}
+}
