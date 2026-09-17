@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/build-peace-metadata.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:tracking": "node --experimental-strip-types --test tests/peace-tracking.test.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

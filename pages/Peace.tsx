@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import snapshot from '../config/peace-catalog.json';
 import metadata from '../config/peace-metadata.json';
+import PeaceAdsPrivacy, {hasPrivacySignal} from '../components/PeaceAdsPrivacy';
+import {checkoutWithAttribution} from '../lib/peace-tracking';
 import '../css/peace.css';
 
 type Variant = {id:string;color:string;size:string;priceCents:number;available:boolean;image:string};
@@ -13,6 +15,8 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
  const [catalog,setCatalog]=useState<Catalog>(snapshot);
  const [color,setColor]=useState('Black'); const [size,setSize]=useState('');
  const [view,setView]=useState<'shirt'|'detail'>('shirt'); const [imageIndex,setImageIndex]=useState(0); const [qty,setQty]=useState(1);
+ const adsAllowed=useRef(false);
+ const setAdsAllowed=useCallback((allowed:boolean)=>{adsAllowed.current=allowed;},[]);
  const [busy,setBusy]=useState(false); const [error,setError]=useState('');
  const [liveState,setLiveState]=useState<'loading'|'ready'|'error'>(reviewMode?'ready':'loading');
  const [unit,setUnit]=useState<'in'|'cm'>('in');
@@ -55,8 +59,8 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
   try{
    const response=await fetch('/api/peace-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({variantId:selected.id,quantity:qty,expectedPriceCents:selected.priceCents})});
    const data=await response.json();if(!response.ok)throw new Error(data.error||'Unable to open checkout.');
-   const url=new URL(data.url);if(url.origin!=='https://checkout.troplanduniverse.com'||url.pathname!=='/cart/checkout')throw new Error('Unexpected checkout destination.');
-   window.location.assign(url.href);
+   const destination=checkoutWithAttribution(data.url,window.location.href,adsAllowed.current&&!hasPrivacySignal());
+   window.location.assign(destination);
   }catch(e){setError(e instanceof Error?e.message:'Unable to open checkout. Please try again.');setBusy(false);}
  }
  useEffect(()=>{
@@ -125,7 +129,7 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
    <section className="peace-color-story" aria-labelledby="peace-color-title"><div className="peace-section-heading"><div><p className="peace-eyebrow">Make it yours</p><h2 id="peace-color-title">Same peace. Your color.</h2></div><span>{catalog.colors.length} ways to wear it</span></div><div className="peace-color-grid">{['Black','White','Army'].filter(name=>catalog.colors.some(c=>c.name===name)).map(name=><button type="button" key={name} onClick={()=>{chooseColor(name);document.getElementById('peace-buy')?.scrollIntoView({behavior:'smooth'});}}><img src={reviewMode?`${assetBase}mockup-${name.toLowerCase()}.jpg`:catalog.colors.find(c=>c.name===name)?.image} alt={`Peace Lion Tee in ${name}`} loading="lazy" width="720" height="960"/><span>{name}<span aria-hidden="true">↗︎</span></span></button>)}</div></section>
    <section className="peace-faq" aria-labelledby="peace-faq-title"><div><p className="peace-eyebrow">The details</p><h2 id="peace-faq-title">Good to know.</h2></div><div><details open><summary>How does it fit?</summary><p>The AS Colour 5001T has a regular, unisex fit, with a crew neck and side-seamed construction. Compare the garment measurements with a tee you already like. <button type="button" onClick={()=>sizeDialog.current?.showModal()}>Open the size guide</button>.</p></details><details><summary>What is the shirt made from?</summary><p>100% combed cotton in the listed colors, with 5.3 oz fabric. It is pre-shrunk, with a ribbed collar and double-needle stitching at the sleeves and hem.</p></details><details><summary>How is the artwork printed?</summary><p>The lion and curved signature are printed directly onto the garment using DTG printing. The mockup changes when you choose a color, so you can see the design against your selected shirt.</p></details><details><summary>When will my shirt arrive?</summary><p>Each shirt is made to order. Shipping choices, charges and the delivery estimate for your address are shown at checkout before you pay.</p></details></div></section>
   </main>
-  <footer className="peace-footer"><img src={`${assetBase}tropland-horizontal-white.svg`} alt="Tropland Universe" width="270" height="46"/><span>The Digital Animal Kingdom</span><a href="https://www.troplanduniverse.com/">Explore the universe ↗︎</a></footer>
+  <footer className="peace-footer"><img src={`${assetBase}tropland-horizontal-white.svg`} alt="Tropland Universe" width="270" height="46"/><span>The Digital Animal Kingdom</span><a href="https://www.troplanduniverse.com/">Explore the universe ↗︎</a><PeaceAdsPrivacy reviewMode={reviewMode} priceCents={liveState==='ready'?fromPrice:undefined} onConsent={setAdsAllowed}/></footer>
   <div className={`peace-mobile-buy${showStickyBuy?' is-visible':''}`}><div><strong>{money(price*qty)}</strong><span>{color}{size?` / ${size}`:' / Choose a size'}</span></div><button type="button" className="peace-button" disabled={busy||liveState==='loading'||checkoutPending} onClick={buy}>{busy?'Opening…':checkoutPending?'Opening soon':'Get yours'} <span aria-hidden="true">↗︎</span></button></div>
   <dialog className="peace-dialog" ref={sizeDialog} aria-labelledby="peace-size-title"><button className="peace-close" type="button" aria-label="Close size guide" onClick={()=>sizeDialog.current?.close()}>×</button><p className="peace-eyebrow">AS Colour 5001T</p><h2 id="peace-size-title">Find your fit.</h2><p>Measure a tee you already love, laid flat. Compare its length and width below.</p><div className="peace-unit-toggle"><button type="button" aria-pressed={unit==='in'} onClick={()=>setUnit('in')}>Inches</button><button type="button" aria-pressed={unit==='cm'} onClick={()=>setUnit('cm')}>Centimeters</button></div><table><thead><tr><th>Size</th><th>Length ({unit})</th><th>Width ({unit})</th></tr></thead><tbody>{guide.map(([s,l,w])=><tr key={s}><th>{s}</th><td>{unit==='in'?l:(Number(l)*2.54).toFixed(1)}</td><td>{unit==='in'?w:(Number(w)*2.54).toFixed(1)}</td></tr>)}</tbody></table><p className="peace-size-note">XS is available, but Fourthwall’s current size guide does not list its measurements. Garment measurements may vary by up to 2 in / 5 cm.</p><p className="peace-size-note"><strong>Length:</strong> highest point beside the collar to the hem.<br/><strong>Width:</strong> straight across, from underarm seam to underarm seam.</p></dialog>
   <dialog className="peace-dialog" ref={checkoutDialog} aria-labelledby="peace-checkout-title"><button className="peace-close" type="button" aria-label="Close checkout preview" onClick={()=>checkoutDialog.current?.close()}>×</button><p className="peace-eyebrow">Review preview</p><h2 id="peace-checkout-title">Your Peace Lion.</h2><div className="peace-order-preview"><img src={image} alt={`${color} shirt`} width="110" height="147"/><div><strong>Peace Lion Tee</strong><p>{color} / {size}<br/>Quantity {qty}</p><strong>{money(price*qty)} USD</strong></div></div><p>The selected shirt is ready for the checkout connection. No order has been placed.</p><p className="peace-checkout-address">Planned checkout<br/><strong>checkout.troplanduniverse.com</strong></p><p className="peace-size-note">Purchases open after the branded checkout domain and shop launch are confirmed. Shipping and taxes are calculated there.</p><button type="button" className="peace-button" onClick={()=>checkoutDialog.current?.close()}>Back to the shirt</button></dialog>

@@ -38,3 +38,16 @@
  .peace-mobile-buy{display:none}
  .peace-mobile-buy.is-visible{display:flex}
 }
+
+/* Optional page-only ad measurement; independent of product controls. */
+.peace-privacy-link{background:none;border:0;color:inherit;font:inherit;font-size:12px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.peace-privacy-panel{position:fixed;z-index:8;right:20px;bottom:20px;width:360px;max-width:calc(100vw - 32px);background:#f9f7ef;color:#173c32;border:1px solid #b9c1ae;border-radius:8px;padding:18px;box-shadow:0 8px 30px #102d2420;text-align:left}
+.peace-privacy-panel h2{font:600 17px/1.3 Arial,sans-serif;margin:0 0 8px}
+.peace-privacy-panel p{font:400 13px/1.45 Arial,sans-serif;margin:0 0 10px}
+.peace-privacy-panel .peace-privacy-note{font-size:11px;color:#4d5c50}
+.peace-privacy-panel a{font:inherit;color:inherit;text-decoration:underline}
+.peace-privacy-actions{display:flex;gap:10px}
+.peace-privacy-actions button{flex:1;min-height:44px;border:1px solid #173c32;border-radius:4px;background:transparent;color:#173c32;font:600 13px Arial,sans-serif;cursor:pointer}
+.peace-privacy-actions button:hover{background:#e9eadf}
+.peace-privacy-actions button:focus-visible,.peace-privacy-link:focus-visible{outline:3px solid #a67e22;outline-offset:3px}
+@media(max-width:720px){.peace-privacy-panel{right:16px;bottom:max(16px,env(safe-area-inset-bottom));padding:14px;width:calc(100vw - 32px)}.peace-page:has(.peace-mobile-buy.is-visible) .peace-privacy-panel{bottom:calc(90px + env(safe-area-inset-bottom))}}
