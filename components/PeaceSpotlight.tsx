@@ -10,9 +10,9 @@ const PeaceSpotlight: React.FC = () => (
       <img src="/images/peace/mockup-black.jpg" alt="Black Peace Lion Tee with the original gold lion artwork" width={720} height={960} loading="lazy" />
     </Link>
     <div className="peace-spotlight-copy">
-      <p className="peace-spotlight-eyebrow">Wear the artwork</p>
+      <p className="peace-spotlight-eyebrow">STRONG ENOUGH TO CHOOSE PEACE</p>
       <h3 id="peace-spotlight-title">The Peace Lion Tee</h3>
-      <p>The signed lion illustration, on a cotton tee in ten colors.</p>
+      <p>The strength of a lion. The choice of peace. Original signed artwork on a cotton tee in ten colors.</p>
     </div>
     <Link to="https://www.troplanduniverse.com/peace" className="peace-spotlight-buy" onClick={() => track('peace_artwork_shirt_buy')}>
       Shop the Peace Lion Tee <ArrowUpRight size={17} aria-hidden="true" />

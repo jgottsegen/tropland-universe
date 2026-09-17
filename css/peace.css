@@ -51,3 +51,7 @@
 .peace-privacy-actions button:hover{background:#e9eadf}
 .peace-privacy-actions button:focus-visible,.peace-privacy-link:focus-visible{outline:3px solid #a67e22;outline-offset:3px}
 @media(max-width:720px){.peace-privacy-panel{right:16px;bottom:max(16px,env(safe-area-inset-bottom));padding:14px;width:calc(100vw - 32px)}.peace-page:has(.peace-mobile-buy.is-visible) .peace-privacy-panel{bottom:calc(90px + env(safe-area-inset-bottom))}}
+
+/* Campaign message: keep the full statement balanced on narrow screens. */
+.peace-headline{font-size:clamp(25px,2.35vw,35px);line-height:1.16}
+@media(max-width:720px){.peace-mobile-heading p{font-size:clamp(25px,7.2vw,32px);line-height:1.16;letter-spacing:-.03em}}
