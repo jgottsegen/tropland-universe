@@ -14,8 +14,6 @@
 
 /* Restrained product layout. Campaign artwork belongs only in share metadata. */
 .peace-mobile-heading{display:none}
-.peace-gallery-details summary{cursor:pointer;font-size:12px;color:var(--ink);padding:7px 0;text-underline-offset:4px}
-.peace-gallery-details[open] summary{margin-bottom:9px}
 .peace-gallery-bottom>p{font-size:10px;color:var(--muted);margin-top:5px}
 .peace-image-label{display:none}
 @media(max-width:720px){
@@ -25,10 +23,9 @@
  .peace-mobile-heading em{font-weight:400;color:#796331}
  .peace-gallery{padding:8px 6% 0}
  .peace-image-wrap,.peace-shirt-image,.peace-art-image{height:300px}
- .peace-gallery-bottom{display:flex;justify-content:space-between;align-items:start;margin-top:5px;gap:16px}
- .peace-gallery-details{flex:1;min-width:0}
- .peace-gallery-bottom>p{max-width:100px;text-align:right;flex-shrink:0}
- .peace-thumbnails{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+ .peace-gallery-bottom{display:block;margin-top:10px}
+ .peace-gallery-bottom>p{text-align:left;margin-top:8px}
+ .peace-thumbnails{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.peace-thumbnails button{min-height:44px}
  .peace-product{padding:24px 6% 36px}
  .peace-product>.peace-eyebrow,.peace-product>.peace-headline{display:none}
  .peace-product h1{font-size:30px;margin:0 0 8px}
