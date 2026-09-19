@@ -13,7 +13,7 @@ const guide=[['S',28,18.5],['M',29.5,20.5],['L',31,22.25],['XL',32.25,24],['2XL'
 
 export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{reviewMode?:boolean;assetBase?:string}) {
  const [catalog,setCatalog]=useState<Catalog>(snapshot);
- const [color,setColor]=useState('Black'); const [size,setSize]=useState('');
+ const [color,setColor]=useState('Petrol Blue'); const [size,setSize]=useState('');
  const [view,setView]=useState<'shirt'|'detail'>('shirt'); const [imageIndex,setImageIndex]=useState(0); const [qty,setQty]=useState(1);
  const adsAllowed=useRef(false);
  const setAdsAllowed=useCallback((allowed:boolean)=>{adsAllowed.current=allowed;},[]);
