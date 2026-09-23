@@ -77,3 +77,25 @@ test('StrictMode cleanup before the script loads does not lose allowed events', 
   assert.equal(h.scripts.length,1);
   assert.deepEqual(h.events().map((a:any[])=>a[2]),['PageView','ViewContent']);
 });
+
+import {recordPeaceFunnel} from '../lib/peace-funnel.ts';
+const selection = {color:'Petrol Blue',size:'M',quantity:2,priceCents:2499,source:'mobile' as const};
+test('funnel tracking isolates QA and does not send URL, click IDs or extra fields', () => {
+ const events: any[]=[];
+ recordPeaceFunnel((...args)=>events.push(args),'checkout_redirect',{...selection,email:'private'} as any,'https://www.troplanduniverse.com/peace?utm_source=qa&fbclid=secret&email=private');
+ assert.deepEqual(events,[['qa_peace_checkout_redirect',{color:'Petrol Blue',size:'M',quantity:2,value:49.98,currency:'USD',source:'mobile'}]]);
+});
+test('measurement failure cannot interrupt checkout; preview and review do not count', () => {
+ assert.doesNotThrow(()=>recordPeaceFunnel(()=>{throw Error('blocked')},'checkout_click',selection,'https://www.troplanduniverse.com/peace'));
+ const sink=()=>assert.fail('Preview must not send');
+ recordPeaceFunnel(sink,'checkout_click',selection,'http://localhost:5173/peace');
+ recordPeaceFunnel(sink,'checkout_click',selection,'https://preview.vercel.app/peace');
+ recordPeaceFunnel(sink,'checkout_click',selection,'https://www.troplanduniverse.com/peace',true);
+});
+test('missing size and checkout errors remain distinguishable from checkout redirects', () => {
+ const events: any[]=[];
+ recordPeaceFunnel((...args)=>events.push(args),'checkout_error',{...selection,size:'',reason:'size_required'},'https://www.troplanduniverse.com/peace');
+ assert.equal(events[0][0],'peace_checkout_error');
+ assert.equal(events[0][1].size,'unselected');
+ assert.equal(events[0][1].reason,'size_required');
+});

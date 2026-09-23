@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import {track} from '@vercel/analytics';
+import {recordPeaceFunnel, type PeaceFunnelEvent} from '../lib/peace-funnel';
 import { Helmet } from 'react-helmet-async';
 import snapshot from '../config/peace-catalog.json';
 import metadata from '../config/peace-metadata.json';
@@ -23,10 +25,10 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
  const sizeDialog=useRef<HTMLDialogElement>(null),checkoutDialog=useRef<HTMLDialogElement>(null);
  const sizeGroup=useRef<HTMLFieldSetElement>(null);
  const purchaseControls=useRef<HTMLDivElement>(null);
- const [showStickyBuy,setShowStickyBuy]=useState(false);
+ const [showStickyBuy,setShowStickyBuy]=useState(true);
  useEffect(()=>{
-  const controls=purchaseControls.current;if(!controls)return;
-  const observer=new IntersectionObserver(([entry])=>setShowStickyBuy(entry.boundingClientRect.bottom<0),{threshold:0});
+  const controls=purchaseControls.current;if(!controls||!('IntersectionObserver' in window))return;
+  const observer=new IntersectionObserver(([entry])=>setShowStickyBuy(!entry.isIntersecting),{threshold:0,rootMargin:'0px 0px -100px 0px'});
   observer.observe(controls);return()=>observer.disconnect();
  },[]);
  const selected=catalog.variants.find(v=>v.color===color&&v.size===size);
@@ -48,20 +50,25 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
   }).catch(e=>{if(e.name!=='AbortError')setLiveState('error');});
   return()=>controller.abort();
  },[reviewMode]);
- const chooseColor=(next:string)=>{setColor(next);setView('shirt');setImageIndex(0);setError('');if(size&&!catalog.variants.some(v=>v.color===next&&v.size===size&&v.available))setSize('');};
- async function buy(){
-  if(!size||!selected){setError('Choose your size to continue.');sizeGroup.current?.scrollIntoView({behavior:'smooth',block:'center'});sizeGroup.current?.querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();return;}
-  if(!selected.available){setError('This size and color is unavailable. Please choose another.');return;}
-  if(liveState==='error'){setError('We couldn’t confirm current availability. Please reload and try again.');return;}
+ const record=(event:PeaceFunnelEvent,source:'product'|'mobile'='product',extra:Partial<Parameters<typeof recordPeaceFunnel>[2]>={})=>recordPeaceFunnel(track,event,{color,size,quantity:qty,priceCents:price,source,...extra},window.location.href,reviewMode);
+ const focusSizes=()=>{sizeGroup.current?.scrollIntoView({behavior:'smooth',block:'center'});sizeGroup.current?.querySelector<HTMLButtonElement>('.peace-size-list button:not(:disabled)')?.focus({preventScroll:true});};
+ const chooseColor=(next:string)=>{record('select_color','product',{color:next});setColor(next);setView('shirt');setImageIndex(0);setError('');if(size&&!catalog.variants.some(v=>v.color===next&&v.size===size&&v.available))setSize('');};
+ async function buy(source:'product'|'mobile'='product'){
+  if(busy||liveState==='loading')return;
+  record('checkout_click',source);
+  if(!size||!selected){record('checkout_error',source,{reason:'size_required'});setError('Choose your size to continue.');focusSizes();return;}
+  if(!selected.available){record('checkout_error',source,{reason:'unavailable'});setError('This size and color is unavailable. Please choose another.');return;}
+  if(liveState==='error'){record('checkout_error',source,{reason:'catalog_unavailable'});setError('We couldn’t confirm current availability. Please reload and try again.');return;}
   if(isPreview){checkoutDialog.current?.showModal();return;}
-  if(catalog.checkoutEnabled!==true){setError('Checkout is opening soon. Please check back shortly.');return;}
+  if(catalog.checkoutEnabled!==true){record('checkout_error',source,{reason:'checkout_disabled'});setError('Checkout is opening soon. Please check back shortly.');return;}
   setBusy(true);setError('');
   try{
    const response=await fetch('/api/peace-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({variantId:selected.id,quantity:qty,expectedPriceCents:selected.priceCents})});
    const data=await response.json();if(!response.ok)throw new Error(data.error||'Unable to open checkout.');
    const destination=checkoutWithAttribution(data.url,window.location.href,adsAllowed.current&&!hasPrivacySignal());
+   record('checkout_redirect',source);
    window.location.assign(destination);
-  }catch(e){setError(e instanceof Error?e.message:'Unable to open checkout. Please try again.');setBusy(false);}
+  }catch(e){record('checkout_error',source,{reason:'request_failed'});setError(e instanceof Error?e.message:'Unable to open checkout. Please try again.');setBusy(false);}
  }
  useEffect(()=>{
   const context=(document as any).modelContext;if(!context?.registerTool)return;
@@ -119,8 +126,8 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
      <p className="peace-description">The strength of a lion. The choice of peace. Original golden artwork and a subtle artist’s signature on a combed cotton tee.</p>
      <ul className="peace-benefits"><li>100% combed cotton</li><li>Regular unisex fit</li><li>5.3 oz fabric</li></ul>
      <fieldset className="peace-colors"><legend>Color <strong>{color}</strong></legend><div className="peace-swatch-list">{catalog.colors.map(c=><button type="button" key={c.name} title={c.name} aria-label={c.name} aria-pressed={color===c.name} onClick={()=>chooseColor(c.name)} style={{'--swatch':c.swatch} as React.CSSProperties}><span/>{color===c.name&&<span className="peace-selected-dot"/>}</button>)}</div></fieldset>
-     <fieldset className="peace-sizes" ref={sizeGroup}><legend>Size <strong>{size||'Select your size'}</strong></legend><button className="peace-size-guide" type="button" onClick={()=>sizeDialog.current?.showModal()}>Size guide</button><div className="peace-size-list">{catalog.sizes.map(s=>{const available=catalog.variants.some(v=>v.color===color&&v.size===s&&v.available);return <button type="button" key={s} disabled={!available} aria-pressed={size===s} aria-label={`Size ${s}${available?'':' unavailable'}`} onClick={()=>{setSize(s);setError('');}}>{s}</button>;})}</div></fieldset>
-     <div className="peace-buy-row" ref={purchaseControls}><label className="peace-quantity">Qty<select aria-label="Quantity" value={qty} onChange={e=>setQty(Number(e.target.value))}>{Array.from({length:10},(_,i)=><option key={i+1} value={i+1}>{i+1}</option>)}</select></label><button type="button" className="peace-button" onClick={buy} disabled={busy||liveState==='loading'||checkoutPending}>{busy?'Opening checkout…':liveState==='loading'?'Checking availability…':checkoutPending?'Checkout opening soon':`Buy the Peace Lion${size?` · ${money(price*qty)}`:''}`}<span aria-hidden="true">↗︎</span></button></div>
+     <fieldset className="peace-sizes" ref={sizeGroup}><legend>Size <strong>{size||'Select your size'}</strong></legend><button className="peace-size-guide" type="button" onClick={()=>sizeDialog.current?.showModal()}>Size guide</button><div className="peace-size-list">{catalog.sizes.map(s=>{const available=catalog.variants.some(v=>v.color===color&&v.size===s&&v.available);return <button type="button" key={s} disabled={!available} aria-pressed={size===s} aria-label={`Size ${s}${available?'':' unavailable'}`} onClick={()=>{record('select_size','product',{size:s});setSize(s);setError('');}}>{s}</button>;})}</div></fieldset>
+     <div className="peace-buy-row" ref={purchaseControls}><label className="peace-quantity">Qty<select aria-label="Quantity" value={qty} onChange={e=>setQty(Number(e.target.value))}>{Array.from({length:10},(_,i)=><option key={i+1} value={i+1}>{i+1}</option>)}</select></label><button type="button" className="peace-button" onClick={()=>buy('product')} disabled={busy||liveState==='loading'||checkoutPending}>{busy?'Opening checkout…':liveState==='loading'?'Checking availability…':checkoutPending?'Checkout opening soon':`Buy the Peace Lion${size?` · ${money(price*qty)}`:''}`}<span aria-hidden="true">↗︎</span></button></div>
      <p className="peace-form-error" role="alert">{error||(liveState==='error'?'Current options could not be refreshed. Reload before ordering.':'')}</p>
      <p className="peace-delivery">{checkoutPending&&<>Checkout is being connected. Please check back shortly.<br/></>}Made to order. Shipping and taxes calculated at checkout.</p><div className="peace-trust"><span>Secure checkout</span><span>Made to order</span></div>
     </div>
@@ -130,7 +137,7 @@ export default function Peace({reviewMode=false,assetBase='/images/peace/'}:{rev
    <section className="peace-faq" aria-labelledby="peace-faq-title"><div><p className="peace-eyebrow">The details</p><h2 id="peace-faq-title">Good to know.</h2></div><div><details open><summary>How does it fit?</summary><p>The AS Colour 5001T has a regular, unisex fit, with a crew neck and side-seamed construction. Compare the garment measurements with a tee you already like. <button type="button" onClick={()=>sizeDialog.current?.showModal()}>Open the size guide</button>.</p></details><details><summary>What is the shirt made from?</summary><p>100% combed cotton in the listed colors, with 5.3 oz fabric. It is pre-shrunk, with a ribbed collar and double-needle stitching at the sleeves and hem.</p></details><details><summary>How is the artwork printed?</summary><p>The lion and curved signature are printed directly onto the garment using DTG printing. The mockup changes when you choose a color, so you can see the design against your selected shirt.</p></details><details><summary>When will my shirt arrive?</summary><p>Each shirt is made to order. Shipping choices, charges and the delivery estimate for your address are shown at checkout before you pay.</p></details></div></section>
   </main>
   <footer className="peace-footer"><img src={`${assetBase}tropland-horizontal-white.svg`} alt="Tropland Universe" width="270" height="46"/><span>The Digital Animal Kingdom</span><a href="https://www.troplanduniverse.com/">Explore the universe ↗︎</a><PeaceAdsPrivacy reviewMode={reviewMode} priceCents={liveState==='ready'?fromPrice:undefined} onConsent={setAdsAllowed}/></footer>
-  <div className={`peace-mobile-buy${showStickyBuy?' is-visible':''}`}><div><strong>{money(price*qty)}</strong><span>{color}{size?` / ${size}`:' / Choose a size'}</span></div><button type="button" className="peace-button" disabled={busy||liveState==='loading'||checkoutPending} onClick={buy}>{busy?'Opening…':checkoutPending?'Opening soon':'Get yours'} <span aria-hidden="true">↗︎</span></button></div>
+  <div className={`peace-mobile-buy${showStickyBuy?' is-visible':''}`}><div><strong>{!size&&'From '}{money(price*qty)}</strong><span>{color}{size?` / ${size}`:' / Choose a size'}</span></div><button type="button" className="peace-button" disabled={busy||liveState==='loading'||checkoutPending} onClick={()=>{if(!size){record('choose_size','mobile');focusSizes();}else void buy('mobile');}}>{busy?'Opening…':liveState==='loading'?'Loading…':checkoutPending?'Opening soon':size?'Checkout':'Choose size'} <span aria-hidden="true">↗︎</span></button></div>
   <dialog className="peace-dialog" ref={sizeDialog} aria-labelledby="peace-size-title"><button className="peace-close" type="button" aria-label="Close size guide" onClick={()=>sizeDialog.current?.close()}>×</button><p className="peace-eyebrow">AS Colour 5001T</p><h2 id="peace-size-title">Find your fit.</h2><p>Measure a tee you already love, laid flat. Compare its length and width below.</p><div className="peace-unit-toggle"><button type="button" aria-pressed={unit==='in'} onClick={()=>setUnit('in')}>Inches</button><button type="button" aria-pressed={unit==='cm'} onClick={()=>setUnit('cm')}>Centimeters</button></div><table><thead><tr><th>Size</th><th>Length ({unit})</th><th>Width ({unit})</th></tr></thead><tbody>{guide.map(([s,l,w])=><tr key={s}><th>{s}</th><td>{unit==='in'?l:(Number(l)*2.54).toFixed(1)}</td><td>{unit==='in'?w:(Number(w)*2.54).toFixed(1)}</td></tr>)}</tbody></table><p className="peace-size-note">XS is available, but Fourthwall’s current size guide does not list its measurements. Garment measurements may vary by up to 2 in / 5 cm.</p><p className="peace-size-note"><strong>Length:</strong> highest point beside the collar to the hem.<br/><strong>Width:</strong> straight across, from underarm seam to underarm seam.</p></dialog>
   <dialog className="peace-dialog" ref={checkoutDialog} aria-labelledby="peace-checkout-title"><button className="peace-close" type="button" aria-label="Close checkout preview" onClick={()=>checkoutDialog.current?.close()}>×</button><p className="peace-eyebrow">Review preview</p><h2 id="peace-checkout-title">Your Peace Lion.</h2><div className="peace-order-preview"><img src={image} alt={`${color} shirt`} width="110" height="147"/><div><strong>Peace Lion Tee</strong><p>{color} / {size}<br/>Quantity {qty}</p><strong>{money(price*qty)} USD</strong></div></div><p>The selected shirt is ready for the checkout connection. No order has been placed.</p><p className="peace-checkout-address">Planned checkout<br/><strong>checkout.troplanduniverse.com</strong></p><p className="peace-size-note">Purchases open after the branded checkout domain and shop launch are confirmed. Shipping and taxes are calculated there.</p><button type="button" className="peace-button" onClick={()=>checkoutDialog.current?.close()}>Back to the shirt</button></dialog>
  </div>;
