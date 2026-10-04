@@ -13,7 +13,7 @@ const inputClass =
 const socials = [
     { icon: Instagram, href: 'https://instagram.com/troplanduniverse', label: 'Instagram' },
     { icon: Facebook, href: 'https://facebook.com/troplanduniverse', label: 'Facebook' },
-    { icon: Youtube, href: 'https://youtube.com/@troplanduniverse', label: 'YouTube' },
+    { icon: Youtube, href: 'https://www.youtube.com/@TroplandClips', label: 'YouTube' },
 ];
 
 const ContactPage: React.FC = () => {
