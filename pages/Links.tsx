@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { track } from '@vercel/analytics';
 import './Links.css';
@@ -11,6 +11,25 @@ const wallpapers = [
 
 export default function Links() {
   const dialog = useRef<HTMLDialogElement>(null);
+  const windowRef = useRef<HTMLElement>(null);
+  const brandRef = useRef<HTMLElement>(null);
+  /* Pin the lion's fingertips a fixed gap under the tagline on every phone:
+     the image is 120% of the column width, and the fingertips sit 35% down the image. */
+  useLayoutEffect(() => {
+    const place = () => {
+      const win = windowRef.current, brand = brandRef.current;
+      if (!win || !brand) return;
+      const image = win.querySelector<HTMLImageElement>('.hero img');
+      const imageHeight = image ? image.clientWidth * (1951 / 900) : win.clientWidth * 1.2 * (1951 / 900);
+      const brandBottom = brand.getBoundingClientRect().bottom - win.getBoundingClientRect().top;
+      /* claw tips sit 34.5% down the image; keep them 30px under the tagline */
+      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 30 - imageHeight * 0.345)}px`);
+    };
+    place();
+    const observer = new ResizeObserver(place);
+    if (windowRef.current) observer.observe(windowRef.current);
+    return () => observer.disconnect();
+  }, []);
   const [email, setEmail] = useState('');
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -46,9 +65,9 @@ export default function Links() {
   };
   return <div className="links-page">
     <Helmet><title>Tropland Universe | Links</title><meta name="description" content="Follow Tropland Universe on Instagram, Facebook, YouTube and X, visit the kingdom, buy the Peace Tee and art prints, and get free wallpapers." /><meta name="robots" content="noindex,follow" /><meta name="theme-color" content="#0b1f19" /><link rel="canonical" href="https://www.troplanduniverse.com/links" /></Helmet>
-    <main className="window">
+    <main className="window" ref={windowRef}>
       <div className="hero" aria-hidden="true"><img src="/images/links/hero-peace.jpg" alt="" width="900" height="1951" fetchPriority="high" /></div>
-      <header className="brand"><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><p className="tagline">The Digital Animal Kingdom</p></header>
+      <header className="brand" ref={brandRef}><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><p className="tagline">The Digital Animal Kingdom</p></header>
       <nav className="sheet" aria-label="Follow Tropland Universe" onClick={trackDestination}>
         <p className="follow">Follow the Kingdom</p>
         <div className="grid">
