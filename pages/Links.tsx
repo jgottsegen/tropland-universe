@@ -13,21 +13,24 @@ export default function Links() {
   const dialog = useRef<HTMLDialogElement>(null);
   const windowRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   /* Pin the lion's fingertips a fixed gap under the tagline on every phone:
      the image is 120% of the column width, and the fingertips sit 35% down the image. */
   useLayoutEffect(() => {
     const place = () => {
       const win = windowRef.current, brand = brandRef.current;
       if (!win || !brand) return;
-      const image = win.querySelector<HTMLImageElement>('.hero img');
-      const imageHeight = image ? image.clientWidth * (1951 / 900) : win.clientWidth * 1.2 * (1951 / 900);
+      const media = videoRef.current;
+      const mediaHeight = (media ? media.clientWidth : win.clientWidth * 1.2) * (1560 / 720);
       const brandBottom = brand.getBoundingClientRect().bottom - win.getBoundingClientRect().top;
-      /* claw tips sit 34.5% down the image; keep them 30px under the tagline */
-      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 30 - imageHeight * 0.345)}px`);
+      /* claw tips sit 31% down the video frame; keep them 30px under the tagline */
+      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 30 - mediaHeight * 0.31)}px`);
     };
     place();
     const observer = new ResizeObserver(place);
     if (windowRef.current) observer.observe(windowRef.current);
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (still.matches) videoRef.current?.pause();
     return () => observer.disconnect();
   }, []);
   const [email, setEmail] = useState('');
@@ -66,7 +69,7 @@ export default function Links() {
   return <div className="links-page">
     <Helmet><title>Tropland Universe | Links</title><meta name="description" content="Follow Tropland Universe on Instagram, Facebook, YouTube and X, visit the kingdom, buy the Peace Tee and art prints, and get free wallpapers." /><meta name="robots" content="noindex,follow" /><meta name="theme-color" content="#0b1f19" /><link rel="canonical" href="https://www.troplanduniverse.com/links" /></Helmet>
     <main className="window" ref={windowRef}>
-      <div className="hero" aria-hidden="true"><img src="/images/links/hero-peace.jpg" alt="" width="900" height="1951" fetchPriority="high" /></div>
+      <div className="hero" aria-hidden="true"><video ref={videoRef} className="hero-media" autoPlay muted loop playsInline preload="auto" poster="/images/links/hero-lion-poster.jpg" width="720" height="1560"><source src="/images/links/hero-lion.webm" type="video/webm" /><source src="/images/links/hero-lion.mp4" type="video/mp4" /></video></div>
       <header className="brand" ref={brandRef}><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><p className="tagline">The Digital Animal Kingdom</p></header>
       <nav className="sheet" aria-label="Follow Tropland Universe" onClick={trackDestination}>
         <p className="follow">Follow the Kingdom</p>
