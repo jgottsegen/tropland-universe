@@ -9,14 +9,6 @@ const wallpapers = [
   ['tropland-peacock', 'The Peacock'], ['tropland-clown', 'The Clown'],
 ];
 
-/* The Peace Paw: a drawn glyph, not a photo. Two fingers up, the palm, the folded knuckles. */
-const PeacePaw = () => <svg viewBox="0 0 24 24" aria-hidden="true" className="paw">
-  <rect x="6.2" y="2.6" width="3.8" height="11.5" rx="1.9" transform="rotate(-14 8.1 8.3)" />
-  <rect x="12.4" y="2.6" width="3.8" height="11.5" rx="1.9" transform="rotate(14 14.3 8.3)" />
-  <path d="M7.2 12.6c-2.4.4-3.9 2.1-3.9 4.3 0 2.6 2.3 4.5 5.4 4.5h5.6c3.3 0 5.6-1.9 5.6-4.5 0-1.9-1.1-3.4-2.9-4" />
-  <path d="M16.9 13.9h1.6a1.4 1.4 0 0 1 0 2.8h-1M17.2 16.7h1.1a1.3 1.3 0 0 1 0 2.6" />
-</svg>;
-
 export default function Links() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [email, setEmail] = useState('');
@@ -64,7 +56,7 @@ export default function Links() {
           <a className="glass fb" href="https://www.facebook.com/troplanduniverse/"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 22v-9h3l.5-4H14V7c0-1.2.5-2 2-2h2V1.5c-.8-.2-1.8-.3-3-.3-3 0-5 1.8-5 5V9H7v4h3v9Z" fill="currentColor" stroke="none" /></svg></i><span><b>Facebook</b><small>Tropland Universe</small></span></a>
           <a className="glass yt" href="https://www.youtube.com/@TroplandClips" aria-label="YouTube: TroplandClips"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" /><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none" /></svg></i><span><b>YouTube</b><small>@TroplandClips</small></span></a>
           <a className="glass x" href="https://x.com/joshgottsegen"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" /></svg></i><span><b>X</b><small>@joshgottsegen</small></span></a>
-          <a className="glass web" href="https://www.troplanduniverse.com/"><i><PeacePaw /></i><span><b>Website</b><small>Visit the Kingdom</small></span></a>
+          <a className="glass web" href="https://www.troplanduniverse.com/"><i className="art"><img src="/images/links/paw-icon.png" alt="" width="124" height="124" /></i><span><b>Website</b><small>Visit the Kingdom</small></span></a>
           <a className="glass mail" href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></i><span><b>Contact</b><small>partnerships@</small></span></a>
         </div>
         <p className="shop"><a href="/peace">Peace Tee</a><span>·</span><a href="https://troplandgallery.com">Art Prints</a><span>·</span><button type="button" className="gold" onClick={openWallpapers} aria-haspopup="dialog">Free Wallpapers</button></p>
