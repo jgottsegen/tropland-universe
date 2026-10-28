@@ -26,12 +26,16 @@ export default function Links() {
       const gridTop = (grid ? grid.getBoundingClientRect().top : winBox.bottom - 280) - winBox.top;
       /* In the video frame the claw tips sit 31.5% down and the chin 72% down.
          Claws 24px under the tagline, chin just above the buttons, never wider than 120% of the column. */
-      const fitHeight = (gridTop - 8 - (brandBottom + 24)) / (0.72 - 0.315);
+      const gap = win.clientHeight <= 700 ? 14 : 24;
+      const fitHeight = (gridTop - 8 - (brandBottom + gap)) / (0.72 - 0.315);
       /* never narrower than the screen, never wider than 120% */
-      const height = Math.max(win.clientWidth * (1560 / 720), Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
+      const sized = Math.max(win.clientWidth * (1560 / 720), Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
+      /* the frame must reach the bottom of the screen: no bare strip under the footer */
+      const toBottom = (win.clientHeight - (brandBottom + gap)) / (1 - 0.315);
+      const height = Math.max(sized, toBottom);
       win.style.setProperty('--hero-w', `${Math.round(height * (720 / 1560))}px`);
       win.style.setProperty('--hero-h', `${Math.round(height)}px`);
-      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 24 - height * 0.315)}px`);
+      win.style.setProperty('--hero-top', `${Math.round(brandBottom + gap - height * 0.315)}px`);
     };
     place();
     const observer = new ResizeObserver(place);
@@ -86,7 +90,7 @@ export default function Links() {
           <a className="glass yt" href="https://www.youtube.com/@TroplandClips" aria-label="YouTube: TroplandClips"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" /><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none" /></svg></i><span><b>YouTube</b><small>@TroplandClips</small></span></a>
           <a className="glass x" href="https://x.com/joshgottsegen"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20" /></svg></i><span><b>X</b><small>@joshgottsegen</small></span></a>
           <a className="glass web" href="https://www.troplanduniverse.com/"><i className="art"><img src="/images/links/paw-icon.png" alt="" width="124" height="124" /></i><span><b>Website</b><small>Visit the Kingdom</small></span></a>
-          <a className="glass mail" href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></i><span><b>Contact</b><small>partnerships@</small></span></a>
+          <a className="glass mail" href="mailto:partnerships@troplanduniverse.com?subject=Partnership%20inquiry"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></i><span><b>Contact</b><small>Partnerships</small></span></a>
         </div>
         <p className="shop"><a href="/peace">Peace Tee</a><span>·</span><a href="https://troplandgallery.com">Art Prints</a><span>·</span><button type="button" className="gold" onClick={openWallpapers} aria-haspopup="dialog">Free Wallpapers</button></p>
       </nav>
