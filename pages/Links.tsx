@@ -29,11 +29,11 @@ export default function Links() {
       const gap = win.clientHeight <= 700 ? 14 : 24;
       const fitHeight = (gridTop - 8 - (brandBottom + gap)) / (0.72 - 0.315);
       /* never narrower than the screen, never wider than 120% */
-      const sized = Math.max(win.clientWidth * (1560 / 720), Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
+      const sized = Math.max(win.clientWidth * (1280 / 720), Math.min(fitHeight, win.clientWidth * 1.2 * (1280 / 720)));
       /* the frame must reach the bottom of the screen: no bare strip under the footer */
       const toBottom = (win.clientHeight - (brandBottom + gap)) / (1 - 0.315);
       const height = Math.max(sized, toBottom);
-      win.style.setProperty('--hero-w', `${Math.round(height * (720 / 1560))}px`);
+      win.style.setProperty('--hero-w', `${Math.round(height * (720 / 1280))}px`);
       win.style.setProperty('--hero-h', `${Math.round(height)}px`);
       win.style.setProperty('--hero-top', `${Math.round(brandBottom + gap - height * 0.315)}px`);
     };
@@ -80,7 +80,7 @@ export default function Links() {
   return <div className="links-page">
     <Helmet><title>Tropland Universe | Links</title><meta name="description" content="Follow Tropland Universe on Instagram, Facebook, YouTube and X, visit the kingdom, buy the Peace Tee and art prints, and get free wallpapers." /><meta name="robots" content="noindex,follow" /><meta name="theme-color" content="#0b1f19" /><link rel="canonical" href="https://www.troplanduniverse.com/links" /></Helmet>
     <main className="window" ref={windowRef}>
-      <div className="hero" aria-hidden="true"><video ref={videoRef} className="hero-media" autoPlay muted loop playsInline preload="auto" poster="/images/links/hero-lion-poster.jpg" width="720" height="1560"><source src="/images/links/hero-lion.webm" type="video/webm" /><source src="/images/links/hero-lion.mp4" type="video/mp4" /></video></div>
+      <div className="hero" aria-hidden="true"><video ref={videoRef} className="hero-media" autoPlay muted loop playsInline preload="auto" poster="/images/links/hero-lion-v2-poster.jpg" width="720" height="1280"><source src="/images/links/hero-lion-v2.webm" type="video/webm" /><source src="/images/links/hero-lion-v2.mp4" type="video/mp4" /></video></div>
       <header className="brand" ref={brandRef}><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><p className="tagline">The Digital Animal Kingdom</p></header>
       <nav className="sheet" aria-label="Follow Tropland Universe" onClick={trackDestination}>
         <p className="follow">Follow the Kingdom</p>
