@@ -80,7 +80,7 @@ export default function Links() {
   return <div className="links-page">
     <Helmet><title>Tropland Universe | Links</title><meta name="description" content="Follow Tropland Universe on Instagram, Facebook, YouTube and X, visit the kingdom, buy the Peace Tee and art prints, and get free wallpapers." /><meta name="robots" content="noindex,follow" /><meta name="theme-color" content="#0b1f19" /><link rel="canonical" href="https://www.troplanduniverse.com/links" /></Helmet>
     <main className="window" ref={windowRef}>
-      <div className="hero" aria-hidden="true"><video ref={videoRef} className="hero-media" autoPlay muted loop playsInline preload="auto" poster="/images/links/hero-lion-v2-poster.jpg" width="720" height="1280"><source src="/images/links/hero-lion-v2.webm" type="video/webm" /><source src="/images/links/hero-lion-v2.mp4" type="video/mp4" /></video></div>
+      <div className="hero" aria-hidden="true"><video ref={videoRef} className="hero-media" autoPlay muted loop playsInline preload="auto" poster="/images/links/hero-lion-v3-poster.jpg" width="720" height="1280"><source src="/images/links/hero-lion-v3.webm" type="video/webm" /><source src="/images/links/hero-lion-v3.mp4" type="video/mp4" /></video></div>
       <header className="brand" ref={brandRef}><img className="wordmark" src="/images/brand/tropland-universe-horizontal-white.svg" alt="Tropland Universe" width="1880" height="208" /><p className="tagline">The Digital Animal Kingdom</p></header>
       <nav className="sheet" aria-label="Follow Tropland Universe" onClick={trackDestination}>
         <p className="follow">Follow the Kingdom</p>
