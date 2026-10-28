@@ -27,8 +27,10 @@ export default function Links() {
       /* In the video frame the claw tips sit 31.5% down and the chin 72% down.
          Claws 24px under the tagline, chin just above the buttons, never wider than 120% of the column. */
       const fitHeight = (gridTop - 8 - (brandBottom + 24)) / (0.72 - 0.315);
-      const height = Math.max(320, Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
+      /* never narrower than the screen, never wider than 120% */
+      const height = Math.max(win.clientWidth * (1560 / 720), Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
       win.style.setProperty('--hero-w', `${Math.round(height * (720 / 1560))}px`);
+      win.style.setProperty('--hero-h', `${Math.round(height)}px`);
       win.style.setProperty('--hero-top', `${Math.round(brandBottom + 24 - height * 0.315)}px`);
     };
     place();
