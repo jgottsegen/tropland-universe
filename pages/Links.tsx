@@ -20,11 +20,16 @@ export default function Links() {
     const place = () => {
       const win = windowRef.current, brand = brandRef.current;
       if (!win || !brand) return;
-      const media = videoRef.current;
-      const mediaHeight = (media ? media.clientWidth : win.clientWidth * 1.2) * (1560 / 720);
-      const brandBottom = brand.getBoundingClientRect().bottom - win.getBoundingClientRect().top;
-      /* claw tips sit 31% down the video frame; keep them 30px under the tagline */
-      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 30 - mediaHeight * 0.31)}px`);
+      const winBox = win.getBoundingClientRect();
+      const brandBottom = brand.getBoundingClientRect().bottom - winBox.top;
+      const grid = win.querySelector<HTMLElement>('.grid');
+      const gridTop = (grid ? grid.getBoundingClientRect().top : winBox.bottom - 280) - winBox.top;
+      /* In the video frame the claw tips sit 31.5% down and the chin 72% down.
+         Claws 24px under the tagline, chin just above the buttons, never wider than 120% of the column. */
+      const fitHeight = (gridTop - 8 - (brandBottom + 24)) / (0.72 - 0.315);
+      const height = Math.max(320, Math.min(fitHeight, win.clientWidth * 1.2 * (1560 / 720)));
+      win.style.setProperty('--hero-w', `${Math.round(height * (720 / 1560))}px`);
+      win.style.setProperty('--hero-top', `${Math.round(brandBottom + 24 - height * 0.315)}px`);
     };
     place();
     const observer = new ResizeObserver(place);
